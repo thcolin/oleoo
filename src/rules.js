@@ -1,4 +1,4 @@
-module.exports = {
+const Rules = {
   source: {
     CAM: [
       'cam',
@@ -268,3 +268,5 @@ module.exports = {
     ]
   }
 }
+
+module.exports = Rules

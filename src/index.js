@@ -1,9 +1,12 @@
-const Tags = require('./tags.js')
-const attributes = ['language', 'source', 'encoding', 'resolution', 'dub'] // missing 'year', 'flags' (multi), 'type', 'group' and 'title'
+const Rules = require('./rules.js')
+const properties = ['language', 'source', 'encoding', 'resolution', 'dub'] // missing 'year', 'flags' (multi), 'type', 'group' and 'title'
 
 class Release {
   constructor(name, strict = true, defaults = {}) {
-    defaults = Object.assign({language: 'MULTi', resolution: 'SD'}, defaults)
+    defaults = Object.assign({
+      language: 'MULTi',
+      resolution: 'SD'
+    }, defaults)
 
     const cleaned = this.clean(name)
     let waste = cleaned
@@ -11,11 +14,11 @@ class Release {
     this.original = name
     this.cleaned = cleaned
 
-    attributes.map(key => {
-      const result = this.parse(key, waste)
+    properties.map(property => {
+      const result = this.parse(property, waste)
 
-      if (result.match || defaults[key]) {
-        this[key] = result.match || defaults[key]
+      if (result.match || defaults[property]) {
+        this[property] = result.match || defaults[property]
       }
 
       waste = result.waste
@@ -26,19 +29,20 @@ class Release {
     return name.replace(/[\[\]\(\)\;\:\!\s\\]+/g, '.')
   }
 
-  parse(key, name) {
-    const tag = Tags[key]
-    const keys = Object.keys(tag)
-    for (let i = 0; i < keys.length; i++) {
-      const currentTag = keys[i]
-      const patterns = (Array.isArray(tag[currentTag]) ? tag[currentTag] : [tag[currentTag]])
+  parse(property, name) {
+    const rule = Rules[property]
+    const tags = Object.keys(rule)
+
+    for (let i = 0; i < tags.length; i++) {
+      const tag = tags[i]
+      const patterns = (Array.isArray(rule[tag]) ? rule[tag] : [rule[tag]])
 
       for (let j = 0; j < patterns.length; j++) {
         const regex = new RegExp('[\.|\-]' + patterns[j] + '([\.|\-]|$)', 'i')
 
         if (name.match(regex)) {
           return {
-            match: currentTag,
+            match: tag,
             waste: name.replace(regex, '$1')
           }
         }
