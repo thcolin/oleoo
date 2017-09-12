@@ -1,0 +1,25 @@
+{
+  "name": "scene-release-parser",
+  "version": "0.0.1",
+  "description": "Parse scene release name, return object with title, tags and flags",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thcolin/scene-release-parser-js.git"
+  },
+  "keywords": [
+    "scene",
+    "release",
+    "warez",
+    "torrent"
+  ],
+  "author": "thcolin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thcolin/scene-release-parser-js/issues"
+  },
+  "homepage": "https://github.com/thcolin/scene-release-parser-js#readme"
+}
