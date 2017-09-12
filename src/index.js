@@ -1,20 +1,18 @@
-const tags = require('./tags.js')
+const Tags = require('./tags.js')
+const attributes = ['language', 'source', 'encoding', 'resolution', 'dub'] // missing 'year', 'flags' (multi), 'type', 'group' and 'title'
 
 class Release {
   constructor(name, strict = true, defaults = {}) {
-    defaults.language = (defaults.language || 'MULTi')
-    defaults.resolution = (defaults.resolution || 'SD')
+    defaults = Object.assign({language: 'MULTi', resolution: 'SD'}, defaults)
 
-    var cleaned = this.clean(name)
-    var waste = cleaned
-    var attributes = ['language', 'source', 'encoding', 'resolution', 'dub'] // missing 'year', 'flags' (multi), 'type', 'group' and 'title'
+    const cleaned = this.clean(name)
+    let waste = cleaned
 
     this.original = name
     this.cleaned = cleaned
 
     attributes.map(key => {
-      console.log(key, waste)
-      var result = this.parse(key, waste)
+      const result = this.parse(key, waste)
 
       if (result.match || defaults[key]) {
         this[key] = result.match || defaults[key]
@@ -25,23 +23,22 @@ class Release {
   }
 
   clean(name) {
-    return name
-      .replace(/[\[\]\(\)\;\:\!]+/g, ' ')
-      .replace(/[\s]+/g, ' ')
-      .replace(/ /g, '.')
+    return name.replace(/[\[\]\(\)\;\:\!\s\\]+/g, '.')
   }
 
   parse(key, name) {
-    for (var i = 0; i < Object.keys(tags[key]).length; i++) {
-      var tag = Object.keys(tags[key])[i]
-      var patterns = (Array.isArray(tags[key][tag]) ? tags[key][tag] : [tags[key][tag]])
+    const tag = Tags[key]
+    const keys = Object.keys(tag)
+    for (let i = 0; i < keys.length; i++) {
+      const currentTag = keys[i]
+      const patterns = (Array.isArray(tag[currentTag]) ? tag[currentTag] : [tag[currentTag]])
 
-      for (var j = 0; j < patterns.length; j++) {
-        var regex = new RegExp('[\.|\-]' + patterns[j] + '([\.|\-]|$)', 'i')
+      for (let j = 0; j < patterns.length; j++) {
+        const regex = new RegExp('[\.|\-]' + patterns[j] + '([\.|\-]|$)', 'i')
 
         if (name.match(regex)) {
           return {
-            match: tag,
+            match: currentTag,
             waste: name.replace(regex, '$1')
           }
         }

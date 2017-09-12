@@ -7,3 +7,5 @@ if (process.argv.length < 3) {
 
 var release = new Release(process.argv[2])
 console.log('[Release]', release)
+
+console.log(JSON.stringify(release))
