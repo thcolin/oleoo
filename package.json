@@ -4,7 +4,7 @@
   "description": "Parse scene release name, return object with title, tags and flags",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node tests/test.js"
   },
   "repository": {
     "type": "git",
