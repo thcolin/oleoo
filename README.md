@@ -1,4 +1,4 @@
-# scene-release-parser
+# scene-release-parser 🎟💸☠️️
 
 Only one class exported, `Release`: constructor will try to extract all the tags from the release name, remaining parts will construct the title of the media (movie or tv show).
 
@@ -114,6 +114,9 @@ console.log(release.year) // 2017 (current year)
 
 ## TODO
 * Refactor `README` code examples with only object structure
+* `rules` keys should be quoted
+* implement `toString`
+* `release.guess()` should return a clone of `this`
 * `release.guess().resolution` should consider `release.source`
 * Add `boolean flags` for `release.toString()`
   * implement option in `release.generate()` too

@@ -1,28 +1,73 @@
 const Rules = require('./rules.js')
-const properties = ['language', 'source', 'encoding', 'resolution', 'dub', 'year', 'flags'] // missing 'type', 'group' and 'title'
+const properties = [
+  'language',
+  'source',
+  'encoding',
+  'resolution',
+  'dub',
+  'year',
+  'flags',
+  'season',
+  'episode',
+  'type',
+  'group'
+]
 
 class Release {
   constructor(name, strict = true, defaults = {}) {
     defaults = Object.assign({
       language: 'MULTi',
-      resolution: 'SD'
+      source: null,
+      resolution: 'SD',
+      dub: null,
+      year: null,
+      flags: null,
+      season: null,
+      episode: null,
+      group: null
     }, defaults)
 
     const cleaned = this.clean(name)
+
+    let words = cleaned.split('.')
     let waste = cleaned
+    let handicap = []
 
     this.original = name
-    this.cleaned = cleaned
 
     properties.map(property => {
       const result = this.parse(property, waste, (property === 'flags'))
 
-      if (result.match || defaults[property]) {
-        this[property] = result.match || defaults[property]
-      }
-
       waste = result.waste
+      handicap = handicap.concat([!result.match && defaults[property] && property])
+
+      this[property] = result.match || defaults[property]
     })
+
+    this.title = waste
+      .replace(/\.?\-\./, '.') // normalize spaces in dots
+      .replace(/\(.*?\)/, '') // (year)
+      .replace(/\.+/, '.')
+      .split('.')
+      .filter((word, position) => word === words[position])
+      .join(' ')
+      .toLowerCase()
+      .replace(/(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g, s => s.toUpperCase()) // ucwords
+
+    this.score = properties
+      .filter(property => !['episode', 'season', 'type'].includes(property))
+      .filter(property => !handicap.includes(property))
+      .filter(property => this[property])
+      .length
+
+    let valid = !!['resolution', 'source', 'dub', 'encoding']
+      .filter(property => !handicap.includes(property))
+      .filter(property => this[property])
+      .length
+
+    if (strict && !valid) {
+      throw new Error('"' + this.original + '" does\'t follow scene release naming rules')
+    }
   }
 
   clean(name) {
@@ -36,7 +81,7 @@ class Release {
     }
 
     switch (property) {
-      case 'year':
+      case 'year': {
         const regex = /[\.|\-](\d{4})([\.|\-])?/
         const matches = name.match(regex)
 
@@ -46,7 +91,52 @@ class Release {
         }
 
         break
-      default:
+      }
+
+      case 'group': {
+        const regex = /\-([a-zA-Z0-9_\.]+)$/
+        const matches = name.match(regex)
+
+        if (matches !== null) {
+          result.match = (matches[1].length > 12 ? matches[1].replace(/[_\.].+?$/, '') : matches[1])
+          result.waste = name.replace(regex, '')
+        }
+
+        break
+      }
+
+      case 'season': {
+        const regex = /[\.\-]S(\d+)[\.\-]?(E(\d+))?([\.\-])/i
+        const matches = name.match(regex)
+
+        if (matches !== null) {
+          result.match = parseInt(matches[1])
+        }
+
+        break
+      }
+
+      case 'episode': {
+        const regex = /[\.\-]S(\d+)[\.\-]?(E(\d+))([\.\-])/i
+        const matches = name.match(regex)
+
+        if (matches !== null) {
+          result.match = parseInt(matches[3])
+        }
+
+        break
+      }
+
+      case 'type': {
+        const regex = /[\.\-]S\d+[\.\-]?(E\d+)?([\.\-])/i
+
+        result.match = (name.match(regex) ? 'tvshow' : 'movie')
+        result.waste = name.replace(regex, '$2')
+
+        break
+      }
+
+      default: {
         const rule = Rules[property]
         const tags = Object.keys(rule)
 
@@ -69,6 +159,7 @@ class Release {
             break
           }
         }
+      }
     }
 
     return result

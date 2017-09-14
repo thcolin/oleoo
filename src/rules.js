@@ -132,6 +132,7 @@ const Rules = {
     ]
   },
   language: {
+    MULTI: 'multi',
     FRENCH: [
       'french',
       'français',
@@ -195,7 +196,6 @@ const Rules = {
     UKRAINIAN: 'ukrainian',
     VIETNAMESE: 'vietnamese',
     WELSH: 'welsh',
-    MULTI: 'multi',
     VO: 'vo'
   },
   flags: {
