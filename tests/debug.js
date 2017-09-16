@@ -7,5 +7,5 @@ if (process.argv.length < 3) {
 
 var release = new Release(process.argv[2], process.argv[3] === '--strict')
 
-console.log('[Release]', release)
-console.log(JSON.stringify(release))
+console.log('[Release]', release.toString())
+console.log(JSON.stringify(release, null, 2))

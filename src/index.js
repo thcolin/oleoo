@@ -16,9 +16,9 @@ const properties = [
 class Release {
   constructor(name, strict = true, defaults = {}) {
     defaults = Object.assign({
-      language: 'MULTi',
+      language: 'VO',
       source: null,
-      resolution: 'SD',
+      resolution: null,
       dub: null,
       year: null,
       flags: null,
@@ -45,14 +45,14 @@ class Release {
     })
 
     this.title = waste
-      .replace(/\.?\-\./, '.') // normalize spaces in dots
-      .replace(/\(.*?\)/, '') // (year)
       .replace(/\.+/, '.')
       .split('.')
       .filter((word, position) => word === words[position])
       .join(' ')
       .toLowerCase()
       .replace(/(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g, s => s.toUpperCase()) // ucwords
+
+    this.generated = this.toString()
 
     this.score = properties
       .filter(property => !['episode', 'season', 'type'].includes(property))
@@ -68,6 +68,27 @@ class Release {
     if (strict && !valid) {
       throw new Error('"' + this.original + '" does\'t follow scene release naming rules')
     }
+  }
+
+  toString(){
+    return this.title
+      .split(' ')
+      .concat([
+        this.year,
+        [
+          (this.season ? 'S' + pad(this.season) : null),
+          (this.episode ? 'E' + pad(this.episode) : null)
+        ]
+        .join(''),
+        (this.language !== 'VO' && this.language),
+        (this.resolution !== 'SD' && this.resolution),
+        this.source,
+        this.encoding,
+        this.dub
+      ])
+      .filter(property => property)
+      .join('.')
+      .concat('-' + (this.group || 'NOTEAM'))
   }
 
   clean(name) {
@@ -164,6 +185,10 @@ class Release {
 
     return result
   }
+}
+
+function pad(number) {
+  return (number < 10 ? '0' : '') + number
 }
 
 module.exports = Release
