@@ -15,48 +15,33 @@ Easiest way to start using the lib is to instantiating a new `Release` object wi
 const Release = require('scene-release-parser')
 
 // Optionals arguments
-var strict = true // if no tags found, it will throw an exception
-var defaults = [] // defaults values for : language, resolution and year
+const strict = true // if no tags found, it will throw an exception
+const defaults = {} // defaults values for : language, resolution and year
 
-var release = new Release('Mr.Robot.S01E05.PROPER.VOSTFR.720p.WEB-DL.DD5.1.H264-ARK01', strict, defaults)
+const release = new Release('Arrow.S03E01.FASTSUB.VOSTFR.HDTV.x264-ADDiCTiON', strict, defaults)
+console.log(release)
 
-// TYPE
-console.log(release.type) // tvshow
-
-// TITLE
-console.log(release.title) // Mr Robot
-
-// LANGUAGE
-console.log(release.language) // VOSTFR
-
-// YEAR
-console.log(release.year) // null (no tag in the release name)
-console.log(release.guess().year) // 2015 (year of the system)
-
-// RESOLUTION
-console.log(release.resolution) // 720p
-
-// SOURCE
-console.log(release.source) // WEB
-
-// DUB
-console.log(release.dub) // null (no tag in the release name)
-
-// ENCODING
-console.log(release.encoding) // h264
-
-// GROUP
-console.log(release.group) // ARK01
-
-// FLAGS
-console.log(release.flags) // [PROPER, DD5.1]
-
-// SCORE
-console.log(release.score()) // 7 (bigger is better, max : 7)
-
-// ONLY TVSHOW
-console.log(release.season) // 1
-console.log(release.episode) // 5
+/*
+{
+  original: 'Arrow.S03E01.FASTSUB.VOSTFR.HDTV.x264-ADDiCTiON',
+  language: 'VOSTFR',
+  source: 'HDTV',
+  encoding: 'x264',
+  resolution: null,
+  dub: null,
+  year: null,
+  flags: [
+    'FASTSUB'
+  ],
+  season: 3,
+  episode: 1,
+  type: 'tvshow',
+  group: 'ADDiCTiON',
+  title: 'Arrow',
+  generated: 'Arrow.S03E01.VOSTFR.HDTV.x264-ADDiCTiON',
+  score: 5, // bigger is better, max : 8
+}
+*/
 ```
 
 ## Guess
@@ -65,33 +50,32 @@ Unknown informations of a current `Release` can be guessed :
 ```js
 const Release = require('scene-release-parser')
 
-var release = new Release('Bataille a Seattle BDRip', false, [
+const release = new Release('Bataille a Seattle BDRip', false, [
   'language': 'FRENCH' // default to 'VO'
 ])
 
-// LANGUAGE
-console.log(release.language) // null
-console.log(release.guess().language) // FRENCH
+const clone = release.guess()
+console.log(clone)
 
-// RESOLUTION
-console.log(release.resolution) // null
-console.log(release.guess().resolution) // SD
-
-// YEAR
-console.log(release.year) // null
-console.log(release.guess().year) // 2017 (current year)
-
-// Will set guessed values to the Release
-release = release.guess()
-
-// LANGUAGE
-console.log(release.language) // FRENCH
-
-// RESOLUTION
-console.log(release.resolution) // SD
-
-// YEAR
-console.log(release.year) // 2017 (current year)
+/*
+{
+  original: 'Bataille a Seattle BDRip',
+  language: 'FRENCH',
+  source: 'BDRip',
+  encoding: null,
+  resolution: 'SD', // based on this.source
+  dub: null,
+  year: '2017', // year of the system
+  flags: null,
+  season: null,
+  episode: null,
+  type: 'movie',
+  group: null,
+  title: 'Bataille A Seattle',
+  generated: 'Bataille.A.Seattle.FRENCH.BDRip-NOTEAM',
+  score: 1
+}
+*/
 ```
 
 ## Results :
@@ -109,13 +93,10 @@ console.log(release.year) // 2017 (current year)
 ## Bugs
 | Original | Generated |
 | -------- | --------- |
-| The Shawshank Redemption (1994) MULTi (VFQ-VO-VFF) 1080p BluRay x264-PopHD  (Les Évadés) | The.Shawshank.1994.MULTI.1080p.BLURAY.x264-NOTEAM |
 | La ligne Verte (1999) MULTi-VF2 [1080p] BluRay x264-PopHD (The Green Mile) | La.Ligne.1999.MULTI.1080p.BLURAY.x264-PopHD |
 
 ## TODO
-* Refactor `README` code examples with only object structure
 * `rules` keys should be quoted
 * Add `boolean flags` for `release.toString()`
   * implement option in `release.generate()` too
   * if `true` will add `release.flags` to generated release name
-<!-- * Up to date ! -->
