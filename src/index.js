@@ -103,7 +103,7 @@ class Release {
       clone.year = (new Date()).getFullYear()
     }
 
-    if (!clone.resolution) {
+    if (!clone.resolution) {
       clone.resolution = ['BDSCR', 'BLURAY'].includes(clone.source) ? '1080p' : 'SD'
     }
 
