@@ -96,7 +96,6 @@ console.log(clone)
 | La ligne Verte (1999) MULTi-VF2 [1080p] BluRay x264-PopHD (The Green Mile) | La.Ligne.1999.MULTI.1080p.BLURAY.x264-PopHD |
 
 ## TODO
-* `rules` keys should be quoted
 * Add `boolean flags` for `release.toString()`
   * implement option in `release.generate()` too
   * if `true` will add `release.flags` to generated release name

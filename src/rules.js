@@ -1,6 +1,6 @@
 const Rules = {
   source: {
-    CAM: [
+    'CAM': [
       'cam',
       'camrip',
       'cam-rip',
@@ -8,11 +8,11 @@ const Rules = {
       'telesync',
       'pdvd'
     ],
-    TC: [
+    'TC': [
       'tc',
       'telecine'
     ],
-    SCREENER: [
+    'SCREENER': [
       'dvdscr',
       'dvd-scr',
       'dvdscreener',
@@ -20,20 +20,20 @@ const Rules = {
       'scr',
       'DDC'
     ],
-    R5: [
+    'R5': [
       'r5'
     ],
-    DVDRip: [
+    'DVDRip': [
       'dvdrip',
       'dvd-rip'
     ],
-    BDRip: [
+    'BDRip': [
       'bdrip',
       'bd-rip',
       'brrip',
       'br-rip'
     ],
-    HDRip: [
+    'HDRip': [
       'hdrip',
       'hdlight',
       'mhd',
@@ -57,19 +57,19 @@ const Rules = {
       'dvd-9',
       'r6-dvd'
     ],
-    BLURAY: [
+    'BLURAY': [
       'bluray',
       'blu-ray',
       'bdr'
     ],
-    BDSCR: [
+    'BDSCR': [
       'bluray-scr',
       'bdscr',
     ],
-    PDTV: [
+    'PDTV': [
       'pdtv'
     ],
-    SDTV: [
+    'SDTV': [
       'sdtv',
       'dsr',
       'dsrip',
@@ -77,34 +77,34 @@ const Rules = {
       'dthrip',
       'dvbrip'
     ],
-    HDTV: [
+    'HDTV': [
       'hdtv',
       'hdtvrip',
       'hdtv-rip'
     ]
   },
   encoding: {
-    DivX: [
+    'DivX': [
       'divx'
     ],
-    XviD: [
+    'XviD': [
       'xvid'
     ],
-    x264: [
+    'x264': [
       'x264',
       'x.264'
     ],
-    x265: [
+    'x265': [
       'x265',
       'x.265'
     ],
-    h264: [
+    'h264': [
       'h264',
       'h.264'
     ]
   },
   resolution: {
-    SD: [
+    'SD': [
       'sd'
     ],
     '720p': [
@@ -115,144 +115,144 @@ const Rules = {
     ]
   },
   dub: {
-    DUBBED: [
+    'DUBBED': [
       'dubbed'
     ],
-    AC3: [
+    'AC3': [
       'ac3.dubbed',
       'ac3'
     ],
-    LD: [
+    'LD': [
       'ld',
       'licrodubbed',
       'licro-dubbed'
     ],
-    MD: [
+    'MD': [
       'md',
       'microdubbed',
       'micro-dubbed'
     ]
   },
   language: {
-    MULTI: 'multi',
-    FRENCH: [
+    'MULTI': 'multi',
+    'FRENCH': [
       'french',
       'français',
       'francais',
       'fr'
     ],
-    TRUEFRENCH: [
+    'TRUEFRENCH': [
       'truefrench',
       'vff'
     ],
-    VFQ: 'vfq',
-    VOSTFR: [
+    'VFQ': 'vfq',
+    'VOSTFR': [
       'stfr',
       'vostfr'
     ],
-    PERSIAN: 'persian',
-    AMHARIC: 'amharic',
-    ARABIC: 'arabic',
-    CAMBODIAN: 'cambodian',
-    CHINESE: 'chinise',
-    CREOLE: 'creole',
-    DANISH: 'danish',
-    DUTCH: 'dutch',
-    ENGLISH: [
+    'PERSIAN': 'persian',
+    'AMHARIC': 'amharic',
+    'ARABIC': 'arabic',
+    'CAMBODIAN': 'cambodian',
+    'CHINESE': 'chinise',
+    'CREOLE': 'creole',
+    'DANISH': 'danish',
+    'DUTCH': 'dutch',
+    'ENGLISH': [
       'english',
       'en',
       'voa'
     ],
-    ESTONIAN: 'estonian',
-    FILIPINO: 'filipino',
-    FINNISH: 'finnish',
-    FLEMISH: 'flemish',
-    GERMAN: 'german',
-    GREEK: 'greek',
-    HEBREW: 'hebrew',
-    INDONESIAN: 'indonesian',
-    IRISH: 'irish',
-    ITALIAN: 'italian',
-    JAPANESE: 'japanese',
-    KOREAN: 'korean',
-    LAOTIAN: 'laotian',
-    LATVIAN: 'latvian',
-    LITHUANIAN: 'lithuanian',
-    MALAY: 'malay',
-    MALAYSIAN: 'malaysian',
-    MAORI: 'maori',
-    NORWEGIAN: 'norwegian',
-    PASHTO: 'pashto',
-    POLISH: 'polish',
-    PORTUGUESE: 'portuguese',
-    ROMANIAN: 'romanian',
-    RUSSIAN: 'russian',
-    SPANISH: 'spanish',
-    SWAHILI: 'swahili',
-    SWEDISH: 'swedish',
-    SWISS: 'swiss',
-    TAGALOG: 'tagalog',
-    TAJIK: 'tajik',
-    THAI: 'thai',
-    TURKISH: 'turkish',
-    UKRAINIAN: 'ukrainian',
-    VIETNAMESE: 'vietnamese',
-    WELSH: 'welsh',
-    VO: 'vo'
+    'ESTONIAN': 'estonian',
+    'FILIPINO': 'filipino',
+    'FINNISH': 'finnish',
+    'FLEMISH': 'flemish',
+    'GERMAN': 'german',
+    'GREEK': 'greek',
+    'HEBREW': 'hebrew',
+    'INDONESIAN': 'indonesian',
+    'IRISH': 'irish',
+    'ITALIAN': 'italian',
+    'JAPANESE': 'japanese',
+    'KOREAN': 'korean',
+    'LAOTIAN': 'laotian',
+    'LATVIAN': 'latvian',
+    'LITHUANIAN': 'lithuanian',
+    'MALAY': 'malay',
+    'MALAYSIAN': 'malaysian',
+    'MAORI': 'maori',
+    'NORWEGIAN': 'norwegian',
+    'PASHTO': 'pashto',
+    'POLISH': 'polish',
+    'PORTUGUESE': 'portuguese',
+    'ROMANIAN': 'romanian',
+    'RUSSIAN': 'russian',
+    'SPANISH': 'spanish',
+    'SWAHILI': 'swahili',
+    'SWEDISH': 'swedish',
+    'SWISS': 'swiss',
+    'TAGALOG': 'tagalog',
+    'TAJIK': 'tajik',
+    'THAI': 'thai',
+    'TURKISH': 'turkish',
+    'UKRAINIAN': 'ukrainian',
+    'VIETNAMESE': 'vietnamese',
+    'WELSH': 'welsh',
+    'VO': 'vo'
   },
   flags: {
-    PROPER: 'proper',
-    LIMITED: 'limited',
-    FASTSUB: 'fastsub',
-    SUBFORCED: 'subforced',
-    SUBBED: 'subbed',
-    EXTENDED: 'extended',
-    THEATRICAL: 'theatrical',
-    WORKPRINT: [
+    'PROPER': 'proper',
+    'LIMITED': 'limited',
+    'FASTSUB': 'fastsub',
+    'SUBFORCED': 'subforced',
+    'SUBBED': 'subbed',
+    'EXTENDED': 'extended',
+    'THEATRICAL': 'theatrical',
+    'WORKPRINT': [
       'workprint',
       'wp'
     ],
-    FANSUB: 'fansub',
-    REPACK: 'repack',
-    UNRATED: 'unrated',
-    NFOFIX: 'nfofix',
-    NTSC: 'ntsc',
-    PAL: 'pal',
-    INTERNAL: [
+    'FANSUB': 'fansub',
+    'REPACK': 'repack',
+    'UNRATED': 'unrated',
+    'NFOFIX': 'nfofix',
+    'NTSC': 'ntsc',
+    'PAL': 'pal',
+    'INTERNAL': [
       'internal',
       'int'
     ],
-    FESTIVAL: 'festival',
-    STV: 'stv',
-    RETAIL: 'retails',
-    REMASTERED: 'remastered',
-    RATED: 'rated',
-    CHRONO: 'chrono',
-    UNCUT: 'uncut',
-    UNCENSORED: 'uncensored',
-    COMPLETE: 'complete',
-    UNTOUCHED: 'untouched',
-    DC: 'dc',
-    REMUX: 'remux',
-    DUAL: 'dual',
-    FINAL: 'final',
-    COLORIZED: 'colorized',
-    WS: 'ws',
-    DL: 'dl',
+    'FESTIVAL': 'festival',
+    'STV': 'stv',
+    'RETAIL': 'retails',
+    'REMASTERED': 'remastered',
+    'RATED': 'rated',
+    'CHRONO': 'chrono',
+    'UNCUT': 'uncut',
+    'UNCENSORED': 'uncensored',
+    'COMPLETE': 'complete',
+    'UNTOUCHED': 'untouched',
+    'DC': 'dc',
+    'REMUX': 'remux',
+    'DUAL': 'dual',
+    'FINAL': 'final',
+    'COLORIZED': 'colorized',
+    'WS': 'ws',
+    'DL': 'dl',
     'DOLBY DIGITAL': [
       'dolby digital',
       'dolby.digital'
     ],
-    DTS: 'dts',
-    AAC: 'aac',
+    'DTS': 'dts',
+    'AAC': 'aac',
     'DTS-HD': 'dts-hd',
     'DTS-MA': 'dts-ma',
-    TRUEHD: 'truehd',
+    'TRUEHD': 'truehd',
     '3D': '3d',
-    HSBS: 'hsbs',
-    HOU: 'hou',
-    DOC: 'doc',
-    RERIP: [
+    'HSBS': 'hsbs',
+    'HOU': 'hou',
+    'DOC': 'doc',
+    'RERIP': [
       'rerip',
       're-rip'
     ],
@@ -263,7 +263,7 @@ const Rules = {
       '5.1',
       '5-1'
     ],
-    READNFO: [
+    'READNFO': [
       'read.nfo',
       'read-nfo',
       'readnfo'
