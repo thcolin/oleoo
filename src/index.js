@@ -18,6 +18,7 @@ class Release {
     defaults = Object.assign({
       language: 'VO',
       source: null,
+      encoding: null,
       resolution: null,
       dub: null,
       year: null,
