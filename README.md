@@ -115,8 +115,6 @@ console.log(release.year) // 2017 (current year)
 ## TODO
 * Refactor `README` code examples with only object structure
 * `rules` keys should be quoted
-* `release.guess()` should return a clone of `this`
-* `release.guess().resolution` should consider `release.source`
 * Add `boolean flags` for `release.toString()`
   * implement option in `release.generate()` too
   * if `true` will add `release.flags` to generated release name

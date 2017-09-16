@@ -9,6 +9,17 @@ let name
 while(name = names.shift()) {
   const release = new Release(name)
   data[name] = release
+
+  const clone = release.guess()
+  data[name].guess = {}
+
+  if (!data[name].year) {
+    data[name].guess.year = clone.year
+  }
+
+  if (!data[name].resolution) {
+    data[name].guess.resolution = clone.resolution
+  }
 }
 
 fs.writeFileSync(`${__dirname}/fixtures/releases.json`, JSON.stringify(data, null, 2))

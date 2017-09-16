@@ -16,8 +16,6 @@ const Rules = {
       'dvdscr',
       'dvd-scr',
       'dvdscreener',
-      'bluray-scr',
-      'bdscr',
       'screener',
       'scr',
       'DDC'
@@ -63,6 +61,10 @@ const Rules = {
       'bluray',
       'blu-ray',
       'bdr'
+    ],
+    BDSCR: [
+      'bluray-scr',
+      'bdscr',
     ],
     PDTV: [
       'pdtv'

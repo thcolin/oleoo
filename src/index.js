@@ -95,6 +95,20 @@ class Release {
     return name.replace(/[\[\]\(\)\;\:\!\s\\]+/g, '.')
   }
 
+  guess() {
+    const clone = new Release(this.original)
+
+    if (!clone.year) {
+      clone.year = (new Date()).getFullYear()
+    }
+
+    if (!clone.resolution) {
+      clone.resolution = ['BDSCR', 'BLURAY'].includes(clone.source) ? '1080p' : 'SD'
+    }
+
+    return clone
+  }
+
   parse(property, name, multi = false) {
     const result =  {
       match: null,
