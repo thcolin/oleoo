@@ -111,7 +111,7 @@ class Release {
           result.waste = name.replace(regex, '$2')
         }
 
-        break
+        return result
       }
 
       case 'group': {
@@ -123,7 +123,7 @@ class Release {
           result.waste = name.replace(regex, '')
         }
 
-        break
+        return result
       }
 
       case 'season': {
@@ -134,7 +134,7 @@ class Release {
           result.match = parseInt(matches[1])
         }
 
-        break
+        return result
       }
 
       case 'episode': {
@@ -145,7 +145,7 @@ class Release {
           result.match = parseInt(matches[3])
         }
 
-        break
+        return result
       }
 
       case 'type': {
@@ -154,33 +154,33 @@ class Release {
         result.match = (name.match(regex) ? 'tvshow' : 'movie')
         result.waste = name.replace(regex, '$2')
 
-        break
+        return result
       }
+    }
 
-      default: {
-        const rule = Rules[property]
-        const tags = Object.keys(rule)
+    const rule = Rules[property]
+    const tags = Object.keys(rule)
 
-        for (let i = 0; i < tags.length; i++) {
-          const tag = tags[i]
-          const patterns = (Array.isArray(rule[tag]) ? rule[tag] : [rule[tag]])
+    single:
+    for (let i = 0; i < tags.length; i++) {
+      const tag = tags[i]
+      const patterns = (Array.isArray(rule[tag]) ? rule[tag] : [rule[tag]])
 
-          for (let j = 0; j < patterns.length; j++) {
-            const regex = new RegExp('[\.|\-]' + patterns[j] + '([\.|\-]|$)', 'i')
+      for (let j = 0; j < patterns.length; j++) {
+        const regex = new RegExp('[\.|\-]' + patterns[j] + '([\.|\-]|$)', 'i')
 
-            if (result.waste.match(regex)) {
-              result.match = (multi ? (result.match || []).concat([tag]) : tag)
-              result.waste = result.waste.replace(regex, '$1')
-
-              break
-            }
-          }
+        if (result.waste.match(regex)) {
+          result.match = (multi ? (result.match || []).concat([tag]) : tag)
+          result.waste = result.waste.replace(regex, '$1')
 
           if (!multi && result.match) {
-            break
+            break single
           }
+
+          break
         }
       }
+
     }
 
     return result
