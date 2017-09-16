@@ -1,6 +1,6 @@
 {
   "name": "scene-release-parser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Parse scene release name, return object with title, tags and flags",
   "main": "src/index.js",
   "scripts": {
