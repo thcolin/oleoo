@@ -14,11 +14,13 @@ Easiest way to start using the lib is to instantiating a new `Release` object wi
 ```js
 const Release = require('scene-release-parser')
 
-// Optionals arguments
-const strict = true // if no tags found, it will throw an exception
-const defaults = {} // defaults values for : language, resolution and year
+// options
+const options = {
+  strict: true, // if no main tags found, will throw an exception
+  defaults: {} // defaults values for : language, resolution and year
+}
 
-const release = new Release('Arrow.S03E01.FASTSUB.VOSTFR.HDTV.x264-ADDiCTiON', strict, defaults)
+const release = new Release('Arrow.S03E01.FASTSUB.VOSTFR.HDTV.x264-ADDiCTiON', options)
 console.log(release)
 
 /*
@@ -50,9 +52,12 @@ Unknown informations of a current `Release` can be guessed :
 ```js
 const Release = require('scene-release-parser')
 
-const release = new Release('Bataille a Seattle BDRip', false, [
-  'language': 'FRENCH' // default to 'VO'
-])
+const release = new Release('Bataille a Seattle BDRip', {
+  strict: false,
+  defaults: {
+    'language': 'FRENCH' // default to 'VO'
+  }
+})
 
 const clone = release.guess()
 console.log(clone)

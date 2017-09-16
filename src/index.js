@@ -14,8 +14,8 @@ const properties = [
 ]
 
 class Release {
-  constructor(name, strict = true, defaults = {}) {
-    defaults = Object.assign({
+  constructor(name, options = { strict: true, defaults: {} }) {
+    options.defaults = Object.assign({
       language: 'VO',
       source: null,
       encoding: null,
@@ -26,7 +26,7 @@ class Release {
       season: null,
       episode: null,
       group: null
-    }, defaults)
+    }, options.defaults)
 
     const cleaned = this.clean(name)
 
@@ -40,9 +40,9 @@ class Release {
       const result = this.parse(property, waste, (property === 'flags'))
 
       waste = result.waste
-      handicap = handicap.concat([!result.match && defaults[property] && property])
+      handicap = handicap.concat([!result.match && options.defaults[property] && property])
 
-      this[property] = result.match || defaults[property]
+      this[property] = result.match || options.defaults[property]
     })
 
     this.title = waste
@@ -66,7 +66,7 @@ class Release {
       .filter(property => this[property])
       .length
 
-    if (strict && !valid) {
+    if (options.strict && !valid) {
       throw new Error('"' + this.original + '" does\'t follow scene release naming rules')
     }
   }
