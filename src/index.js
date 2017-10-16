@@ -153,11 +153,11 @@ class Release {
       }
 
       case 'episode': {
-        const regex = /[\.\-]S(\d+)[\.\-]?(E(\d+))([\.\-])/i
+        const regex = /[\.\-]S(\d+)[\.\-]?((?:-?E\d+)+)([\.\-])/i
         const matches = name.match(regex)
 
         if (matches !== null) {
-          result.match = parseInt(matches[3])
+          result.match = matches[2].split(/-?E/i).slice(1).map(Number).sort()
         }
 
         return result
