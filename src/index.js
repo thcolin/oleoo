@@ -8,7 +8,7 @@ const properties = [
   'year',
   'flags',
   'season',
-  'episode',
+  'episodes',
   'type',
   'group'
 ]
@@ -24,7 +24,7 @@ class Release {
       year: null,
       flags: null,
       season: null,
-      episode: null,
+      episodes: null,
       group: null
     }, options.defaults)
 
@@ -53,10 +53,12 @@ class Release {
       .toLowerCase()
       .replace(/(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g, s => s.toUpperCase()) // ucwords
 
+    this.episode = this.episodes && this.episodes.length && (this.episodes.length == 1 ? this.episodes[0] : this.episodes.map(pad).join('-'))
+
     this.generated = this.toString()
 
     this.score = properties
-      .filter(property => !['episode', 'season', 'type'].includes(property))
+      .filter(property => !['episodes', 'season', 'type'].includes(property))
       .filter(property => !handicap.includes(property))
       .filter(property => this[property])
       .length
@@ -78,7 +80,7 @@ class Release {
         this.year,
         [
           (this.season ? 'S' + pad(this.season) : null),
-          (this.episode ? 'E' + pad(this.episode) : null)
+          (this.episodes && this.episodes.length ? 'E' + this.episodes.map(pad).join('E') : null)
         ]
         .join(''),
         (this.language !== 'VO' && this.language),
@@ -142,7 +144,7 @@ class Release {
       }
 
       case 'season': {
-        const regex = /[\.\-]S(\d+)[\.\-]?(E(\d+))?([\.\-])/i
+        const regex = /[\.\-]S(\d+)[\.\-]?((?:-?E\d+)+)([\.\-])/i
         const matches = name.match(regex)
 
         if (matches !== null) {
@@ -152,7 +154,7 @@ class Release {
         return result
       }
 
-      case 'episode': {
+      case 'episodes': {
         const regex = /[\.\-]S(\d+)[\.\-]?((?:-?E\d+)+)([\.\-])/i
         const matches = name.match(regex)
 
@@ -164,7 +166,7 @@ class Release {
       }
 
       case 'type': {
-        const regex = /[\.\-]S\d+[\.\-]?(E\d+)?([\.\-])/i
+        const regex = /[\.\-]S\d+[\.\-]?((?:-?E\d+)+)([\.\-])/i
 
         result.match = (name.match(regex) ? 'tvshow' : 'movie')
         result.waste = name.replace(regex, '$2')
