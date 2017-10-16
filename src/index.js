@@ -144,7 +144,7 @@ class Release {
       }
 
       case 'season': {
-        const regex = /[\.\-]S(\d+)[\.\-]?((?:-?E\d+)+)([\.\-])/i
+        const regex = /[\.\-]S(\d+)[\.\-]?((?:-?E\d+)+)?[\.\-]/i
         const matches = name.match(regex)
 
         if (matches !== null) {
@@ -155,18 +155,18 @@ class Release {
       }
 
       case 'episodes': {
-        const regex = /[\.\-]S(\d+)[\.\-]?((?:-?E\d+)+)([\.\-])/i
+        const regex = /[\.\-]S\d+[\.\-]?((?:-?E\d+)+)[\.\-]/i
         const matches = name.match(regex)
 
         if (matches !== null) {
-          result.match = matches[2].split(/-?E/i).slice(1).map(Number).sort()
+          result.match = matches[1].split(/-?E/i).slice(1).map(Number).sort()
         }
 
         return result
       }
 
       case 'type': {
-        const regex = /[\.\-]S\d+[\.\-]?((?:-?E\d+)+)([\.\-])/i
+        const regex = /[\.\-]S\d+[\.\-]?((?:-?E\d+)+)?([\.\-])/i
 
         result.match = (name.match(regex) ? 'tvshow' : 'movie')
         result.waste = name.replace(regex, '$2')
