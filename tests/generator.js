@@ -1,16 +1,17 @@
-const Release = require('../src/index.js')
+const oleoo = require('../src/index.js')
 const assert = require('assert')
+const path = require('path')
 const fs  = require('fs')
 
-const names = fs.readFileSync(`${__dirname}/fixtures/releases.txt`, 'utf-8').split(/\r?\n/)
+const names = fs.readFileSync(path.join(__dirname, 'fixtures', 'releases.txt'), 'utf-8').split(/\r?\n/)
 const data = {}
 let name
 
 while(name = names.shift()) {
-  const release = new Release(name)
+  const release = oleoo.parse(name)
   data[name] = release
 
-  const clone = release.guess()
+  const clone = oleoo.guess(name)
   data[name].guess = {}
 
   if (!data[name].year) {
@@ -22,4 +23,4 @@ while(name = names.shift()) {
   }
 }
 
-fs.writeFileSync(`${__dirname}/fixtures/releases.json`, JSON.stringify(data, null, 2))
+fs.writeFileSync(path.join(__dirname, 'fixtures', 'releases.json'), JSON.stringify(data, null, 2))

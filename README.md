@@ -1,26 +1,29 @@
-# scene-release-parser 🎟💸☠️️
+# Oleoo 🎟💸☠️️
 
-Only one class exported, `Release`: constructor will try to extract all the tags from the release name, remaining parts will construct the title of the media (movie or tv show).
+Dead simple library trying to extract all the tags from a release name, remaining parts will construct the title of the media (movie or tv show)
+Name is from an old french warez forum [closed in 2008](http://www.01net.com/actualites/oleoo-ferme-sa-section-illegale-de-telechargement-de-films-382090.html) ☠️
 
 ## Installation
 Install with `npm` :
 ```
-npm i -S scene-release-parser
+npm i -S oleoo
 ```
 
-## Example :
-Easiest way to start using the lib is to instantiating a new `Release` object with a scene release name as first argument, it will retrieve all the tags and the name :
+## Example
+Exported object has 2 functions, `parse` and `guess`, both take 2 arguments, a `name` to parse and an `options` object where you can define `defaults` values used as fallbacks and a `strict` boolean (if set to `true` it will throw an error, else it will return limited release)
+
+The `guess` method will "fill the blank" of year (based on current system year) and resolution (based on source)
 
 ```js
-const Release = require('scene-release-parser')
+const oleoo = require('oleoo') // import oleoo from 'oleoo'
 
-// options
-const options = {
+let release
+
+release = oleoo.parse('Arrow.S03E01.FASTSUB.VOSTFR.HDTV.x264-ADDiCTiON', {
   strict: true, // if no main tags found, will throw an exception
   defaults: {} // defaults values for : language, resolution and year
-}
+})
 
-const release = new Release('Arrow.S03E01.FASTSUB.VOSTFR.HDTV.x264-ADDiCTiON', options)
 console.log(release)
 
 /*
@@ -44,23 +47,14 @@ console.log(release)
   score: 5, // bigger is better, max : 8
 }
 */
-```
 
-## Guess
-Unknown informations of a current `Release` can be guessed :
-
-```js
-const Release = require('scene-release-parser')
-
-const release = new Release('Bataille a Seattle BDRip', {
-  strict: false,
+release = oleoo.guess('Bataille a Seattle BDRip', {
   defaults: {
     'language': 'FRENCH' // default to 'VO'
   }
 })
 
-const clone = release.guess()
-console.log(clone)
+console.log(release)
 
 /*
 {

@@ -1,14 +1,14 @@
 {
-  "name": "scene-release-parser",
-  "version": "1.0.2",
-  "description": "Parse scene release name, return object with title, tags and flags",
+  "name": "oleoo",
+  "version": "0.0.1",
+  "description": "🎟💸☠️️ Parse scene release name, return object with title, tags and flags",
   "main": "src/index.js",
   "scripts": {
     "test": "node tests/test.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thcolin/scene-release-parser-js.git"
+    "url": "git+https://github.com/thcolin/oleoo.git"
   },
   "keywords": [
     "scene",
@@ -19,7 +19,7 @@
   "author": "thcolin",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/thcolin/scene-release-parser-js/issues"
+    "url": "https://github.com/thcolin/oleoo/issues"
   },
-  "homepage": "https://github.com/thcolin/scene-release-parser-js#readme"
+  "homepage": "https://github.com/thcolin/oleoo#readme"
 }
