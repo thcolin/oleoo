@@ -1,5 +1,5 @@
 # Oleoo 🎟💸☠️️
-![https://travis-ci.org/thcolin/oleoo](https://travis-ci.org/thcolin/oleoo.svg?branch=master)
+[![travis-ci badge](https://travis-ci.org/thcolin/oleoo.svg?branch=master)](https://travis-ci.org/thcolin/oleoo)
 
 Dead simple library trying to extract all the tags from a release name, remaining parts will construct the title of the media (movie or tv show)
 
