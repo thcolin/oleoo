@@ -1,6 +1,6 @@
 {
   "name": "oleoo",
-  "version": "0.0.1",
+  "version": "1.0.3",
   "description": "🎟💸☠️️ Parse scene release name, return object with title, tags and flags",
   "main": "src/index.js",
   "scripts": {
