@@ -1,7 +1,8 @@
 # Oleoo 🎟💸☠️️
 
 Dead simple library trying to extract all the tags from a release name, remaining parts will construct the title of the media (movie or tv show)
-Name is from an old french warez forum [closed in 2008](http://www.01net.com/actualites/oleoo-ferme-sa-section-illegale-de-telechargement-de-films-382090.html) ☠️
+
+Named from an old french warez forum [closed in 2008](http://www.01net.com/actualites/oleoo-ferme-sa-section-illegale-de-telechargement-de-films-382090.html) ☠️
 
 ## Installation
 Install with `npm` :
@@ -9,7 +10,7 @@ Install with `npm` :
 npm i -S oleoo
 ```
 
-## Example
+## How
 Exported object has 2 functions, `parse` and `guess`, both take 2 arguments, a `name` to parse and an `options` object where you can define `defaults` values used as fallbacks and a `strict` boolean (if set to `true` it will throw an error, else it will return limited release)
 
 The `guess` method will "fill the blank" of year (based on current system year) and resolution (based on source)
@@ -19,6 +20,7 @@ const oleoo = require('oleoo') // import oleoo from 'oleoo'
 
 let release
 
+/* PARSING */
 release = oleoo.parse('Arrow.S03E01.FASTSUB.VOSTFR.HDTV.x264-ADDiCTiON', {
   strict: true, // if no main tags found, will throw an exception
   defaults: {} // defaults values for : language, resolution and year
@@ -48,6 +50,7 @@ console.log(release)
 }
 */
 
+/* GUESSING */
 release = oleoo.guess('Bataille a Seattle BDRip', {
   defaults: {
     'language': 'FRENCH' // default to 'VO'
