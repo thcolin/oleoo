@@ -3026,5 +3026,51 @@
     "generated": "Noah.2014.GERMAN.1080p.BLURAY.x264.LD-HCS",
     "score": 7,
     "guess": {}
+  },
+  "Preacher S01E01 Pilot German DD51 DL 720p AmazonHD x264-TVS": {
+    "original": "Preacher S01E01 Pilot German DD51 DL 720p AmazonHD x264-TVS",
+    "language": "GERMAN",
+    "source": "WEB-DL",
+    "encoding": "x264",
+    "resolution": "720p",
+    "dub": null,
+    "year": null,
+    "flags": [
+      "DL",
+      "DD5.1"
+    ],
+    "season": 1,
+    "episode": 1,
+    "type": "tvshow",
+    "group": "TVS",
+    "title": "Preacher",
+    "generated": "Preacher.S01E01.GERMAN.720p.WEB-DL.x264-TVS",
+    "score": 6,
+    "guess": {
+      "year": 2018
+    }
+  },
+  "Scream S02E01 German DD51 DL 720p NetflixHD x264-TVS": {
+    "original": "Scream S02E01 German DD51 DL 720p NetflixHD x264-TVS",
+    "language": "GERMAN",
+    "source": "WEB-DL",
+    "encoding": "x264",
+    "resolution": "720p",
+    "dub": null,
+    "year": null,
+    "flags": [
+      "DL",
+      "DD5.1"
+    ],
+    "season": 2,
+    "episode": 1,
+    "type": "tvshow",
+    "group": "TVS",
+    "title": "Scream",
+    "generated": "Scream.S02E01.GERMAN.720p.WEB-DL.x264-TVS",
+    "score": 6,
+    "guess": {
+      "year": 2018
+    }
   }
 }
