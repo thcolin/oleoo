@@ -5,6 +5,7 @@ branches:
 node_js:
   - "8"
   - "9"
+  - "10"
 matrix:
   fast_finish: true
 sudo: false

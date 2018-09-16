@@ -9,8 +9,9 @@ const properties = [
   'flags',
   'season',
   'episode',
+  'episodes',
   'type',
-  'group'
+  'group',
 ]
 
 function clean(str) {
@@ -25,32 +26,32 @@ function deduce(property, name, multi = false) {
 
   switch (property) {
     case 'year': {
-      const regex = /[\.|\-](\d{4})([\.|\-])?/
-      const matches = name.match(regex)
+      const regexp = /[\.|\-](\d{4})([\.|\-])?/
+      const matches = name.match(regexp)
 
       if (matches !== null) {
         result.match = matches[1]
-        result.waste = name.replace(regex, '$2')
+        result.waste = name.replace(regexp, '$2')
       }
 
       return result
     }
 
     case 'group': {
-      const regex = /\-([a-zA-Z0-9_\.]+)$/
-      const matches = name.match(regex)
+      const regexp = /\-([a-zA-Z0-9_\.]+)$/
+      const matches = name.match(regexp)
 
       if (matches !== null) {
         result.match = (matches[1].length > 12 ? matches[1].replace(/[_\.].+?$/, '') : matches[1])
-        result.waste = name.replace(regex, '')
+        result.waste = name.replace(regexp, '')
       }
 
       return result
     }
 
     case 'season': {
-      const regex = /[\.\-]S(\d+)[\.\-]?(E(\d+))?([\.\-])/i
-      const matches = name.match(regex)
+      const regexp = /[\.\-]S(\d+)[\.\-]?(?:E\d+)?(?:[\.\-])/i
+      const matches = name.match(regexp)
 
       if (matches !== null) {
         result.match = parseInt(matches[1])
@@ -60,21 +61,50 @@ function deduce(property, name, multi = false) {
     }
 
     case 'episode': {
-      const regex = /[\.\-]S(\d+)[\.\-]?(E(\d+))([\.\-])/i
-      const matches = name.match(regex)
-
-      if (matches !== null) {
-        result.match = parseInt(matches[3])
+      const regexps = {
+        episodes: /[\.\-]S(?:\d+)[\.\-]?((?:-?E(?:\d+))+)(?:[\.\-])/i,
+        episode: /E(\d+)/ig,
       }
+
+      const matches = name.match(regexps.episodes)
+      const match = []
+      let crumbs = []
+
+      while (matches && (crumbs = regexps.episode.exec(matches[1])) !== null) {
+        match.push(crumbs[1])
+      }
+
+      result.match = match.map(Number).sort((a, b) => a - b).reduce((res, episode, index, match) => (
+        match.length === 1 ? episode : match.join('-')
+      ), null)
+
+      return result
+    }
+
+    case 'episodes': {
+      const regexps = {
+        episodes: /[\.\-]S(?:\d+)[\.\-]?((?:-?E(?:\d+))+)(?:[\.\-])/i,
+        episode: /E(\d+)/ig,
+      }
+
+      const matches = name.match(regexps.episodes)
+      const match = []
+      let crumbs = []
+
+      while (matches && (crumbs = regexps.episode.exec(matches[1])) !== null) {
+        match.push(crumbs[1])
+      }
+
+      result.match = match.map(Number).sort((a, b) => a - b)
 
       return result
     }
 
     case 'type': {
-      const regex = /[\.\-]S\d+[\.\-]?(E\d+)?([\.\-])/i
+      const regexp = /[\.\-]S\d+[\.\-]?(?:-?E\d+)*([\.\-])/i
 
-      result.match = (name.match(regex) ? 'tvshow' : 'movie')
-      result.waste = name.replace(regex, '$2')
+      result.match = (name.match(regexp) ? 'tvshow' : 'movie')
+      result.waste = name.replace(regexp, '$1')
 
       return result
     }
@@ -89,11 +119,11 @@ function deduce(property, name, multi = false) {
       const patterns = (Array.isArray(rule[tag]) ? rule[tag] : [rule[tag]])
 
       for (let j = 0; j < patterns.length; j++) {
-        const regex = new RegExp('[\.|\-]' + patterns[j] + '([\.|\-]|$)', 'i')
+        const regexp = new RegExp('[\.|\-]' + patterns[j] + '([\.|\-]|$)', 'i')
 
-        if (result.waste.match(regex)) {
+        if (result.waste.match(regexp)) {
           result.match = (multi ? (result.match || []).concat([tag]) : tag)
-          result.waste = result.waste.replace(regex, '$1')
+          result.waste = result.waste.replace(regexp, '$1')
 
           if (!multi && result.match) {
             break single
@@ -115,7 +145,7 @@ function stringify(release) {
       release.year,
       [
         (release.season ? 'S' + release.season.toString().padStart(2, '0') : null),
-        (release.episode ? 'E' + release.episode.toString().padStart(2, '0') : null)
+        (release.episode ? 'E' + release.episodes.map(episode => episode.toString().padStart(2, '0')).join('-E') : null)
       ]
       .join(''),
       (release.language !== 'VO' && release.language),
@@ -170,7 +200,7 @@ function parse(name, options = { strict: false, defaults: {} }) {
   release.generated = stringify(release)
 
   release.score = properties
-    .filter(property => !['episode', 'season', 'type'].includes(property))
+    .filter(property => !['season', 'episodes', 'episode', 'type'].includes(property))
     .filter(property => !handicap.includes(property))
     .filter(property => release[property])
     .length

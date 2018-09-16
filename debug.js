@@ -1,4 +1,4 @@
-const oleoo = require('../src/index.js')
+const oleoo = require('./src/index.js')
 
 if (process.argv.length < 3) {
   console.log('[Error]', 'Usage: node debug.js "Release.2017.MULTi.1080p.x264.BluRay-TEST"')
