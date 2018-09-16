@@ -160,7 +160,7 @@ function stringify(release, options) {
     .concat('-' + (release.group || 'NOTEAM'))
 }
 
-function parse(name, options = { strict: false, flagged: false, defaults: {} }) {
+function parse(name, options = { strict: false, flagged: true, defaults: {} }) {
   options.defaults = Object.assign(
     properties
       .filter(property => !['type'].includes(property))

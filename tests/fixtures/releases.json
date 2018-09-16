@@ -37,7 +37,7 @@
     "type": "movie",
     "group": null,
     "title": "The Good German",
-    "generated": "The.Good.German.2006.MULTI.DVDRip.h264-NOTEAM",
+    "generated": "The.Good.German.2006.MULTI.DVDRip.h264.AAC-NOTEAM",
     "score": 5,
     "guess": {
       "resolution": "SD"
@@ -82,7 +82,7 @@
     "type": "tvshow",
     "group": "AVS",
     "title": "Fear The Walking Dead",
-    "generated": "Fear.The.Walking.Dead.S03E01-E02.720p.HDTV.x264-AVS",
+    "generated": "Fear.The.Walking.Dead.S03E01-E02.720p.HDTV.x264.PROPER-AVS",
     "score": 5,
     "guess": {
       "year": 2018
@@ -131,7 +131,7 @@
     "type": "tvshow",
     "group": "TVS",
     "title": "Scream",
-    "generated": "Scream.S02E01.GERMAN.720p.WEB-DL.x264-TVS",
+    "generated": "Scream.S02E01.GERMAN.720p.WEB-DL.x264.DL.DD5.1-TVS",
     "score": 6,
     "guess": {
       "year": 2018
@@ -157,7 +157,7 @@
     "type": "tvshow",
     "group": "TVS",
     "title": "Preacher",
-    "generated": "Preacher.S01E01.GERMAN.720p.WEB-DL.x264-TVS",
+    "generated": "Preacher.S01E01.GERMAN.720p.WEB-DL.x264.DL.DD5.1-TVS",
     "score": 6,
     "guess": {
       "year": 2018
@@ -265,7 +265,7 @@
     "type": "tvshow",
     "group": "TVP",
     "title": "Supernatural",
-    "generated": "Supernatural.S09E08.GERMAN.720p.BLURAY.x264.DUBBED-TVP",
+    "generated": "Supernatural.S09E08.GERMAN.720p.BLURAY.x264.DUBBED.DL-TVP",
     "score": 7,
     "guess": {
       "year": 2018
@@ -314,7 +314,7 @@
     "type": "tvshow",
     "group": "FiHTV",
     "title": "Police Ten 7",
-    "generated": "Police.Ten.7.S21E35.720p.HDTV.x264-FiHTV",
+    "generated": "Police.Ten.7.S21E35.720p.HDTV.x264.REPACK-FiHTV",
     "score": 5,
     "guess": {
       "year": 2018
@@ -376,8 +376,8 @@
     "dub": null,
     "year": null,
     "flags": [
-      "DL",
       "3D",
+      "DL",
       "HOU"
     ],
     "season": null,
@@ -386,7 +386,7 @@
     "type": "movie",
     "group": "EXQUiSiTE",
     "title": "Edge Of Tomorrow",
-    "generated": "Edge.Of.Tomorrow.GERMAN.1080p.BLURAY.x264-EXQUiSiTE",
+    "generated": "Edge.Of.Tomorrow.GERMAN.1080p.BLURAY.x264.3D.DL.HOU-EXQUiSiTE",
     "score": 6,
     "guess": {
       "year": 2018
@@ -401,8 +401,8 @@
     "dub": null,
     "year": "1982",
     "flags": [
-      "INTERNAL",
-      "3D"
+      "3D",
+      "INTERNAL"
     ],
     "season": null,
     "episode": null,
@@ -410,7 +410,7 @@
     "type": "movie",
     "group": "MARS",
     "title": "Friday The 13th Part Iii",
-    "generated": "Friday.The.13th.Part.Iii.1982.BDRip.x264-MARS",
+    "generated": "Friday.The.13th.Part.Iii.1982.BDRip.x264.3D.INTERNAL-MARS",
     "score": 5,
     "guess": {
       "resolution": "SD"
@@ -425,8 +425,8 @@
     "dub": null,
     "year": null,
     "flags": [
-      "DL",
       "3D",
+      "DL",
       "HSBS"
     ],
     "season": null,
@@ -435,7 +435,7 @@
     "type": "movie",
     "group": "EXQUiSiTE",
     "title": "Free Birds Esst Uns An Einem Anderen Tag",
-    "generated": "Free.Birds.Esst.Uns.An.Einem.Anderen.Tag.GERMAN.1080p.BLURAY.x264-EXQUiSiTE",
+    "generated": "Free.Birds.Esst.Uns.An.Einem.Anderen.Tag.GERMAN.1080p.BLURAY.x264.3D.DL.HSBS-EXQUiSiTE",
     "score": 6,
     "guess": {
       "year": 2018
@@ -450,8 +450,8 @@
     "dub": null,
     "year": "2013",
     "flags": [
-      "DL",
-      "3D"
+      "3D",
+      "DL"
     ],
     "season": null,
     "episode": null,
@@ -459,7 +459,7 @@
     "type": "movie",
     "group": "PussyFoot",
     "title": "Nurse",
-    "generated": "Nurse.2013.GERMAN.720p.BLURAY.x264-PussyFoot",
+    "generated": "Nurse.2013.GERMAN.720p.BLURAY.x264.3D.DL-PussyFoot",
     "score": 7,
     "guess": {}
   },
@@ -480,7 +480,7 @@
     "type": "movie",
     "group": "LiBRARiANS",
     "title": "Dumb And Dumber",
-    "generated": "Dumb.And.Dumber.1994.BDRip.x264-LiBRARiANS",
+    "generated": "Dumb.And.Dumber.1994.BDRip.x264.INTERNAL-LiBRARiANS",
     "score": 5,
     "guess": {
       "resolution": "SD"
@@ -503,7 +503,7 @@
     "type": "movie",
     "group": "LiBRARiANS",
     "title": "The Mask",
-    "generated": "The.Mask.1994.BDRip.x264-LiBRARiANS",
+    "generated": "The.Mask.1994.BDRip.x264.INTERNAL-LiBRARiANS",
     "score": 5,
     "guess": {
       "resolution": "SD"
@@ -547,7 +547,7 @@
     "type": "movie",
     "group": "LUNETTES",
     "title": "Transformers Dark Of The Moon",
-    "generated": "Transformers.Dark.Of.The.Moon.2011.MULTI.1080p.BLURAY.x264-LUNETTES",
+    "generated": "Transformers.Dark.Of.The.Moon.2011.MULTI.1080p.BLURAY.x264.3D-LUNETTES",
     "score": 7,
     "guess": {}
   },
@@ -569,7 +569,7 @@
     "type": "movie",
     "group": "XORBiTANT",
     "title": "The Rover",
-    "generated": "The.Rover.2014.BLURAY-XORBiTANT",
+    "generated": "The.Rover.2014.BLURAY.COMPLETE.DUAL-XORBiTANT",
     "score": 4,
     "guess": {
       "resolution": "1080p"
@@ -593,7 +593,7 @@
     "type": "movie",
     "group": "SharpHD",
     "title": "Hannah Arendt",
-    "generated": "Hannah.Arendt.2012.BLURAY-SharpHD",
+    "generated": "Hannah.Arendt.2012.BLURAY.COMPLETE.DUAL-SharpHD",
     "score": 4,
     "guess": {
       "resolution": "1080p"
@@ -655,7 +655,7 @@
     "type": "movie",
     "group": "MOViEiT",
     "title": "Anflug Alpha 1",
-    "generated": "Anflug.Alpha.1.1971.GERMAN.DVD-R-MOViEiT",
+    "generated": "Anflug.Alpha.1.1971.GERMAN.DVD-R.PAL.COMPLETE-MOViEiT",
     "score": 5,
     "guess": {
       "resolution": "SD"
@@ -679,7 +679,7 @@
     "type": "movie",
     "group": "MOViEiT",
     "title": "Angriff Der Urzeitmonster",
-    "generated": "Angriff.Der.Urzeitmonster.2006.GERMAN.DVD-R-MOViEiT",
+    "generated": "Angriff.Der.Urzeitmonster.2006.GERMAN.DVD-R.PAL.COMPLETE-MOViEiT",
     "score": 5,
     "guess": {
       "resolution": "SD"
@@ -702,7 +702,7 @@
     "type": "movie",
     "group": "JFKDVD",
     "title": "Mr Peabody And Sherman",
-    "generated": "Mr.Peabody.And.Sherman.2014.DVD-R-JFKDVD",
+    "generated": "Mr.Peabody.And.Sherman.2014.DVD-R.NTSC-JFKDVD",
     "score": 4,
     "guess": {
       "resolution": "SD"
@@ -746,7 +746,7 @@
     "type": "movie",
     "group": "Pleaders",
     "title": "The Purge Anarchy",
-    "generated": "The.Purge.Anarchy.GERMAN.1080p.BLURAY.x264.DUBBED-Pleaders",
+    "generated": "The.Purge.Anarchy.GERMAN.1080p.BLURAY.x264.DUBBED.DL-Pleaders",
     "score": 7,
     "guess": {
       "year": 2018
@@ -769,7 +769,7 @@
     "type": "movie",
     "group": "SOV",
     "title": "22 Jump Street",
-    "generated": "22.Jump.Street.GERMAN.1080p.BLURAY.x264.DUBBED-SOV",
+    "generated": "22.Jump.Street.GERMAN.1080p.BLURAY.x264.DUBBED.DL-SOV",
     "score": 7,
     "guess": {
       "year": 2018
@@ -792,7 +792,7 @@
     "type": "movie",
     "group": "PsO",
     "title": "Tammy Voll Abgefahren",
-    "generated": "Tammy.Voll.Abgefahren.GERMAN.720p.WEB-DL.h264.DUBBED-PsO",
+    "generated": "Tammy.Voll.Abgefahren.GERMAN.720p.WEB-DL.h264.DUBBED.DL-PsO",
     "score": 7,
     "guess": {
       "year": 2018
@@ -874,7 +874,7 @@
     "type": "movie",
     "group": "STFR",
     "title": "Elektra",
-    "generated": "Elektra.2005.TRUEFRENCH.720p.BDRip.h264.AC3-STFR",
+    "generated": "Elektra.2005.TRUEFRENCH.720p.BDRip.h264.AC3.DD5.1-STFR",
     "score": 8,
     "guess": {}
   },
@@ -1078,7 +1078,7 @@
     "type": "movie",
     "group": null,
     "title": "Les 4 Fantastiques",
-    "generated": "Les.4.Fantastiques.2015.TRUEFRENCH.720p.x264-NOTEAM",
+    "generated": "Les.4.Fantastiques.2015.TRUEFRENCH.720p.x264.AAC-NOTEAM",
     "score": 5,
     "guess": {}
   },
@@ -1100,7 +1100,7 @@
     "type": "movie",
     "group": null,
     "title": "Le Prestige",
-    "generated": "Le.Prestige.2006.MULTI.720p.x264-NOTEAM",
+    "generated": "Le.Prestige.2006.MULTI.720p.x264.AAC.DD5.1-NOTEAM",
     "score": 5,
     "guess": {}
   },
@@ -1122,7 +1122,7 @@
     "type": "movie",
     "group": ".CCATS",
     "title": "Le Nouveau Stagiaire -",
-    "generated": "Le.Nouveau.Stagiaire.-.2015.MULTI.1080p.x264-.CCATS",
+    "generated": "Le.Nouveau.Stagiaire.-.2015.MULTI.1080p.x264.AAC.DD5.1-.CCATS",
     "score": 6,
     "guess": {}
   },
@@ -1202,7 +1202,7 @@
     "type": "movie",
     "group": "NIKOo",
     "title": "Lone Survivor",
-    "generated": "Lone.Survivor.2013.VOSTFR.SCREENER.XviD.AC3-NIKOo",
+    "generated": "Lone.Survivor.2013.VOSTFR.SCREENER.XviD.AC3.FANSUB-NIKOo",
     "score": 7,
     "guess": {
       "resolution": "SD"
@@ -1246,7 +1246,7 @@
     "type": "movie",
     "group": "DesTroY",
     "title": "With This Ring",
-    "generated": "With.This.Ring.2015.FRENCH.DVDRip.x264.AC3-DesTroY",
+    "generated": "With.This.Ring.2015.FRENCH.DVDRip.x264.AC3.RERIP-DesTroY",
     "score": 7,
     "guess": {
       "resolution": "SD"
@@ -1332,7 +1332,7 @@
     "type": "movie",
     "group": "DesTroY",
     "title": "White Bird In A Blizzard",
-    "generated": "White.Bird.In.A.Blizzard.2014.FRENCH.DVDRip.XviD.AC3-DesTroY",
+    "generated": "White.Bird.In.A.Blizzard.2014.FRENCH.DVDRip.XviD.AC3.LIMITED-DesTroY",
     "score": 7,
     "guess": {
       "resolution": "SD"
@@ -1376,7 +1376,7 @@
     "type": "tvshow",
     "group": "SEEHD",
     "title": "Marvels Agent Carter",
-    "generated": "Marvels.Agent.Carter.S01.VOSTFR.720p.WEB-DL.h264-SEEHD",
+    "generated": "Marvels.Agent.Carter.S01.VOSTFR.720p.WEB-DL.h264.DD5.1-SEEHD",
     "score": 6,
     "guess": {
       "year": 2018
@@ -1399,7 +1399,7 @@
     "type": "tvshow",
     "group": "DWS",
     "title": "Weeds",
-    "generated": "Weeds.S01.MULTI.720p.BLURAY.x264-DWS",
+    "generated": "Weeds.S01.MULTI.720p.BLURAY.x264.REPACK-DWS",
     "score": 6,
     "guess": {
       "year": 2018
@@ -1424,7 +1424,7 @@
     "type": "tvshow",
     "group": "LTL",
     "title": "Marvels Agent Carter",
-    "generated": "Marvels.Agent.Carter.S01E03.VOSTFR.720p.WEB-DL.h264-LTL",
+    "generated": "Marvels.Agent.Carter.S01E03.VOSTFR.720p.WEB-DL.h264.DD5.1-LTL",
     "score": 6,
     "guess": {
       "year": 2018
@@ -1447,7 +1447,7 @@
     "type": "movie",
     "group": "FUNKY",
     "title": "Water For Elephants",
-    "generated": "Water.For.Elephants.2011.FRENCH.BDRip.x264.AC3-FUNKY",
+    "generated": "Water.For.Elephants.2011.FRENCH.BDRip.x264.AC3.SUBFORCED-FUNKY",
     "score": 7,
     "guess": {
       "resolution": "SD"
@@ -1539,7 +1539,7 @@
     "type": "tvshow",
     "group": "ADDiCTiON",
     "title": "Marvels Agent Carter",
-    "generated": "Marvels.Agent.Carter.S01E01.VOSTFR.720p.HDTV.x264-ADDiCTiON",
+    "generated": "Marvels.Agent.Carter.S01E01.VOSTFR.720p.HDTV.x264.FASTSUB-ADDiCTiON",
     "score": 6,
     "guess": {
       "year": 2018
@@ -1666,7 +1666,7 @@
     "type": "movie",
     "group": "NIKOo",
     "title": "Liberal Arts",
-    "generated": "Liberal.Arts.2012.VOSTFR.BDRip.XviD-NIKOo",
+    "generated": "Liberal.Arts.2012.VOSTFR.BDRip.XviD.FANSUB-NIKOo",
     "score": 6,
     "guess": {
       "resolution": "SD"
@@ -1750,7 +1750,7 @@
     "type": "movie",
     "group": "ATN",
     "title": "La Vie D Adele",
-    "generated": "La.Vie.D.Adele.2013.FRENCH.XviD-ATN",
+    "generated": "La.Vie.D.Adele.2013.FRENCH.XviD.WORKPRINT-ATN",
     "score": 5,
     "guess": {
       "resolution": "SD"
@@ -1773,7 +1773,7 @@
     "type": "movie",
     "group": "FUNKY",
     "title": "The Worlds End",
-    "generated": "The.Worlds.End.2013.FRENCH.BDRip.x264.AC3-FUNKY",
+    "generated": "The.Worlds.End.2013.FRENCH.BDRip.x264.AC3.SUBFORCED-FUNKY",
     "score": 7,
     "guess": {
       "resolution": "SD"
@@ -1860,7 +1860,7 @@
     "type": "movie",
     "group": "FwD",
     "title": "The Ten",
-    "generated": "The.Ten.2011.TRUEFRENCH.DVDRip.XviD-FwD",
+    "generated": "The.Ten.2011.TRUEFRENCH.DVDRip.XviD.SUBFORCED-FwD",
     "score": 6,
     "guess": {
       "resolution": "SD"
@@ -2011,7 +2011,7 @@
     "type": "tvshow",
     "group": "FtDL",
     "title": "The Man In The High Castle",
-    "generated": "The.Man.In.The.High.Castle.S01E01.720p.WEB-DL.x264-FtDL",
+    "generated": "The.Man.In.The.High.Castle.S01E01.720p.WEB-DL.x264.DD5.1-FtDL",
     "score": 5,
     "guess": {
       "year": 2018
@@ -2076,7 +2076,7 @@
     "type": "movie",
     "group": "DesTroY",
     "title": "Horrible Bosses 2",
-    "generated": "Horrible.Bosses.2.2014.FRENCH.BDRip.XviD.AC3-DesTroY",
+    "generated": "Horrible.Bosses.2.2014.FRENCH.BDRip.XviD.AC3.THEATRICAL-DesTroY",
     "score": 7,
     "guess": {
       "resolution": "SD"
@@ -2141,7 +2141,7 @@
     "type": "tvshow",
     "group": "ADDiCTiON",
     "title": "The Last Man On Earth",
-    "generated": "The.Last.Man.On.Earth.S01E01.VOSTFR.HDTV.XviD-ADDiCTiON",
+    "generated": "The.Last.Man.On.Earth.S01E01.VOSTFR.HDTV.XviD.FASTSUB-ADDiCTiON",
     "score": 5,
     "guess": {
       "year": 2018,
@@ -2228,7 +2228,7 @@
     "type": "movie",
     "group": "FUNKY",
     "title": "Hannibal",
-    "generated": "Hannibal.2001.TRUEFRENCH.BDRip.x264.AC3-FUNKY",
+    "generated": "Hannibal.2001.TRUEFRENCH.BDRip.x264.AC3.SUBFORCED-FUNKY",
     "score": 7,
     "guess": {
       "resolution": "SD"
@@ -2272,7 +2272,7 @@
     "type": "movie",
     "group": "KNOB",
     "title": "Green Zone",
-    "generated": "Green.Zone.2010.TRUEFRENCH.DVDRip.XviD-KNOB",
+    "generated": "Green.Zone.2010.TRUEFRENCH.DVDRip.XviD.SUBFORCED-KNOB",
     "score": 6,
     "guess": {
       "resolution": "SD"
@@ -2297,7 +2297,7 @@
     "type": "tvshow",
     "group": "ADDiCTiON",
     "title": "The 100",
-    "generated": "The.100.S01E01.VOSTFR.HDTV.XviD-ADDiCTiON",
+    "generated": "The.100.S01E01.VOSTFR.HDTV.XviD.FASTSUB-ADDiCTiON",
     "score": 5,
     "guess": {
       "year": 2018,
@@ -2364,7 +2364,7 @@
     "type": "movie",
     "group": null,
     "title": "Ted 2",
-    "generated": "Ted.2.2015.FRENCH.720p.WEB-DL.h264-NOTEAM",
+    "generated": "Ted.2.2015.FRENCH.720p.WEB-DL.h264.UNRATED.DD5.1-NOTEAM",
     "score": 6,
     "guess": {}
   },
@@ -2385,7 +2385,7 @@
     "type": "movie",
     "group": "GLUPS",
     "title": "Furious Seven",
-    "generated": "Furious.Seven.2015.TRUEFRENCH.BDRip.x264.AC3-GLUPS",
+    "generated": "Furious.Seven.2015.TRUEFRENCH.BDRip.x264.AC3.EXTENDED-GLUPS",
     "score": 7,
     "guess": {
       "resolution": "SD"
@@ -2427,7 +2427,7 @@
     "type": "movie",
     "group": "GLUPS",
     "title": "Taken 3",
-    "generated": "Taken.3.2014.FRENCH.BDRip.XviD-GLUPS",
+    "generated": "Taken.3.2014.FRENCH.BDRip.XviD.EXTENDED-GLUPS",
     "score": 6,
     "guess": {
       "resolution": "SD"
@@ -2514,7 +2514,7 @@
     "type": "movie",
     "group": "CHARTAIR",
     "title": "Ex Machina",
-    "generated": "Ex.Machina.2015.FRENCH.BDRip.XviD.AC3-CHARTAIR",
+    "generated": "Ex.Machina.2015.FRENCH.BDRip.XviD.AC3.SUBFORCED-CHARTAIR",
     "score": 7,
     "guess": {
       "resolution": "SD"
@@ -2537,7 +2537,7 @@
     "type": "movie",
     "group": null,
     "title": "Exam",
-    "generated": "Exam.2009.FRENCH.DVDRip.XviD-NOTEAM",
+    "generated": "Exam.2009.FRENCH.DVDRip.XviD.LIMITED-NOTEAM",
     "score": 5,
     "guess": {
       "resolution": "SD"
@@ -2604,7 +2604,7 @@
     "type": "movie",
     "group": "SP3CTR3",
     "title": "Enemy",
-    "generated": "Enemy.2013.FRENCH.BDRip.x264.AC3-SP3CTR3",
+    "generated": "Enemy.2013.FRENCH.BDRip.x264.AC3.LIMITED.SUBFORCED-SP3CTR3",
     "score": 7,
     "guess": {
       "resolution": "SD"
@@ -2752,7 +2752,7 @@
     "type": "movie",
     "group": "lanesra13",
     "title": "Shrek Tetralogie",
-    "generated": "Shrek.Tetralogie.TRUEFRENCH.DVDRip.XviD.AC3-lanesra13",
+    "generated": "Shrek.Tetralogie.TRUEFRENCH.DVDRip.XviD.AC3.DD5.1-lanesra13",
     "score": 6,
     "guess": {
       "year": 2018,
@@ -2776,7 +2776,7 @@
     "type": "movie",
     "group": "NODLABS",
     "title": "Drinking Buddies",
-    "generated": "Drinking.Buddies.2013.DVDRip.x264-NODLABS",
+    "generated": "Drinking.Buddies.2013.DVDRip.x264.LIMITED-NODLABS",
     "score": 5,
     "guess": {
       "resolution": "SD"
@@ -2820,7 +2820,7 @@
     "type": "movie",
     "group": "SVR",
     "title": "Dope",
-    "generated": "Dope.2015.FRENCH.BDRip.XviD-SVR",
+    "generated": "Dope.2015.FRENCH.BDRip.XviD.SUBFORCED-SVR",
     "score": 6,
     "guess": {
       "resolution": "SD"
@@ -3010,7 +3010,7 @@
     "type": "movie",
     "group": "FUNKY",
     "title": "Platoon",
-    "generated": "Platoon.1986.FRENCH.BDRip.x264.AC3-FUNKY",
+    "generated": "Platoon.1986.FRENCH.BDRip.x264.AC3.SUBFORCED-FUNKY",
     "score": 7,
     "guess": {
       "resolution": "SD"
@@ -3223,7 +3223,7 @@
     "type": "movie",
     "group": "S.V",
     "title": "Palo Alto",
-    "generated": "Palo.Alto.2013.VOSTFR.BDRip.x264.AC3-S.V",
+    "generated": "Palo.Alto.2013.VOSTFR.BDRip.x264.AC3.LIMITED-S.V",
     "score": 7,
     "guess": {
       "resolution": "SD"
@@ -3267,7 +3267,7 @@
     "type": "movie",
     "group": "ECKOES",
     "title": "Orange Mecanique",
-    "generated": "Orange.Mecanique.MULTI.DVDRip.x264-ECKOES",
+    "generated": "Orange.Mecanique.MULTI.DVDRip.x264.AAC-ECKOES",
     "score": 5,
     "guess": {
       "year": 2018,
@@ -3293,7 +3293,7 @@
     "type": "tvshow",
     "group": "ADDiCTiON",
     "title": "Arrow",
-    "generated": "Arrow.S03E01.VOSTFR.HDTV.x264-ADDiCTiON",
+    "generated": "Arrow.S03E01.VOSTFR.HDTV.x264.FASTSUB-ADDiCTiON",
     "score": 5,
     "guess": {
       "year": 2018,
@@ -3340,7 +3340,7 @@
     "type": "tvshow",
     "group": "ARK01",
     "title": "Mr Robot",
-    "generated": "Mr.Robot.S01.VOSTFR.720p.WEB-DL.h264-ARK01",
+    "generated": "Mr.Robot.S01.VOSTFR.720p.WEB-DL.h264.PROPER.DD5.1-ARK01",
     "score": 6,
     "guess": {
       "year": 2018
