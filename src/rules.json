@@ -1,9 +1,9 @@
 {
   "source": {
     "CAM": [
-      "cam",
       "camrip",
       "cam-rip",
+      "cam",
       "ts",
       "telesync",
       "pdvd"
@@ -52,12 +52,12 @@
       "web"
     ],
     "DVD-R": [
-      "dvd",
       "dvdr",
       "dvd-r",
       "dvd-5",
       "dvd-9",
-      "r6-dvd"
+      "r6-dvd",
+      "dvd"
     ],
     "BLURAY": [
       "bluray",
@@ -80,9 +80,9 @@
       "dvbrip"
     ],
     "HDTV": [
-      "hdtv",
       "hdtvrip",
-      "hdtv-rip"
+      "hdtv-rip",
+      "hdtv"
     ]
   },
   "encoding": {
@@ -136,21 +136,26 @@
     ]
   },
   "language": {
-    "MULTI": "multi",
+    "MULTI": [
+      "multi-vf2",
+      "multi"
+    ],
+    "TRUEFRENCH": [
+      "truefrench",
+      "vff",
+      "vf2"
+    ],
     "FRENCH": [
       "french",
       "français",
       "francais",
-      "fr"
-    ],
-    "TRUEFRENCH": [
-      "truefrench",
-      "vff"
+      "fr",
+      "vf"
     ],
     "VFQ": "vfq",
     "VOSTFR": [
-      "stfr",
-      "vostfr"
+      "vostfr",
+      "stfr"
     ],
     "PERSIAN": "persian",
     "AMHARIC": "amharic",
@@ -243,7 +248,8 @@
     "DL": "dl",
     "DOLBY DIGITAL": [
       "dolby digital",
-      "dolby.digital"
+      "dolby.digital",
+      "dolbydigital"
     ],
     "DTS": "dts",
     "AAC": "aac",

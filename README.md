@@ -86,21 +86,157 @@ console.log(release)
 ## Results :
 | Original | Generated |
 | -------- | --------- |
-| Benjamin Button [x264] [HD 720p] [LUCN] [FR].mp4 | Benjamin.Button.FRENCH.720p.HDRip.x264-NOTEAM.mp4 |
-| Jamais entre amis (2015) [1080p] MULTI (VFQ-VOA) Bluray x264 AC3-PopHD (Sleeping with Other People).mkv | Jamais.Entre.Amis.2015.MULTI.1080p.BLURAY.x264.AC3-PopHD.mkv |
-| La Vie rêvée de Walter Mitty [1080p] MULTi 2013 BluRay x264-Pop (The Secret Life Of Walter Mitty) .mkv | La.Vie.Rêvée.De.Walter.Mitty.2013.MULTI.1080p.BLURAY.x264-Pop.mkv |
-| Le Nouveau Stagiaire (2015) The Intern - Multi 1080p - x264 AAC 5.1 - CCATS.mkv | Le.Nouveau.Stagiaire.2015.MULTI.1080p.x264-CCATS.mkv |
-| Le prestige (2006) (The Prestige) 720p x264 AAC 5.1 MULTI [NOEX].mkv | Le.Prestige.2006.MULTI.720p.x264-NOTEAM.mkv |
-| Les 4 Fantastiques 2015 Truefrench 720p x264 AAC PIXEL.mp4 | Les.4.Fantastiques.2015.TRUEFRENCH.720p.x264-NOTEAM.mp4 |
-| One.For.the.Money.2012.1080p.HDrip.French.x264 (by kimo).mkv | One.For.The.Money.2012.FRENCH.1080p.HDRip.x264-NOTEAM.mkv |
-| Tower Heist [1080p] MULTI 2011 BluRay x264-Pop  .Le casse De Central Park. .mkv | Tower.Heist.2011.MULTI.1080p.BLURAY.x264-Pop.mkv |
-
-## Bugs
-| Original | Generated |
-| -------- | --------- |
-| La ligne Verte (1999) MULTi-VF2 [1080p] BluRay x264-PopHD (The Green Mile) | La.Ligne.1999.MULTI.1080p.BLURAY.x264-PopHD |
-
-## TODO
-* Add `boolean flags` for `release.toString()`
-  * implement option in `release.generate()` too
-  * if `true` will add `release.flags` to generated release name
+| Ugly Americans - S02 STFR 720p.WEB-DL.x264 AC3 MpEbUtCh3r | Ugly.Americans.S02.VOSTFR.720p.WEB-DL.x264.AC3-.MpEbUtCh3r |
+| The.Good.German.2006.DVDRip.MULTI.H264.720x480.AAC.MK2017 | The.Good.German.2006.MULTI.DVDRip.h264-NOTEAM |
+| La ligne Verte (1999) MULTi-VF2 [1080p] BluRay x264-PopHD (The Green Mile) | La.Ligne.Verte.1999.MULTI.1080p.BLURAY.x264-PopHD |
+| Fear.the.Walking.Dead.S03E01-E02.PROPER.720p.HDTV.x264-AVS | Fear.The.Walking.Dead.S03E01-E02.720p.HDTV.x264-AVS |
+| Teenage.Mutant.Ninja.Turtles.2012.S05E11E12E13.720p.WEB-DL.AAC2.0.H264-iT00NZ | Teenage.Mutant.Ninja.Turtles.2012.E11-E12-E13.720p.WEB-DL.h264-iT00NZ |
+| Scream S02E01 German DD51 DL 720p NetflixHD x264-TVS | Scream.S02E01.GERMAN.720p.WEB-DL.x264-TVS |
+| Preacher S01E01 Pilot German DD51 DL 720p AmazonHD x264-TVS | Preacher.S01E01.GERMAN.720p.WEB-DL.x264-TVS |
+| Noah.German.2014.LD.1080p.BluRay.x264-HCS | Noah.2014.GERMAN.1080p.BLURAY.x264.LD-HCS |
+| Snowpiercer.2013.German.AC3.MD.1080p.BluRay.x264-HuNTER | Snowpiercer.2013.GERMAN.1080p.BLURAY.x264.AC3-HuNTER |
+| 2012.AC3.720p.BluRay.x264-XXL | 2012.720p.BLURAY.x264.AC3-XXL |
+| No.Foreigners.Here.100.Percent.British.S01E03.PDTV.x264-C4TV | No.Foreigners.Here.100.Percent.British.S01E03.PDTV.x264-C4TV |
+| Supernatural.S09E08.Endlich.wieder.Jungfrau.GERMAN.DUBBED.DL.720p.BluRay.x264-TVP | Supernatural.S09E08.GERMAN.720p.BLURAY.x264.DUBBED-TVP |
+| Die.Hoehle.der.Loewen.S01E08.German.HDTVRip.x264-SotW | Die.Hoehle.Der.Loewen.S01E08.GERMAN.HDTV.x264-SotW |
+| Police.Ten.7.S21E35.REPACK.720p.HDTV.x264-FiHTV | Police.Ten.7.S21E35.720p.HDTV.x264-FiHTV |
+| Shortland.Street.S23E180.720p.HDTV.x264-FiHTV | Shortland.Street.S23E180.720p.HDTV.x264-FiHTV |
+| Rules.of.Engagement.S05E24.German.DVDRip.x264-iNTENTiON | Rules.Of.Engagement.S05E24.GERMAN.DVDRip.x264-iNTENTiON |
+| Edge.of.Tomorrow.3D.HOU.German.DL.1080p.BluRay.x264-EXQUiSiTE | Edge.Of.Tomorrow.GERMAN.1080p.BLURAY.x264-EXQUiSiTE |
+| Friday.The.13th.Part.III.3D.1982.iNTERNAL.BDRip.x264-MARS | Friday.The.13th.Part.Iii.1982.BDRip.x264-MARS |
+| Free.Birds.Esst.uns.an.einem.anderen.Tag.3D.HSBS.German.DL.1080p.BluRay.x264-EXQUiSiTE | Free.Birds.Esst.Uns.An.Einem.Anderen.Tag.GERMAN.1080p.BLURAY.x264-EXQUiSiTE |
+| Nurse.3D.2013.German.DL.720p.BluRay.x264-PussyFoot | Nurse.2013.GERMAN.720p.BLURAY.x264-PussyFoot |
+| Dumb.And.Dumber.1994.iNTERNAL.BDRip.x264-LiBRARiANS | Dumb.And.Dumber.1994.BDRip.x264-LiBRARiANS |
+| The.Mask.1994.iNTERNAL.BDRip.x264-LiBRARiANS | The.Mask.1994.BDRip.x264-LiBRARiANS |
+| Looters.Tooters.and.Sawn.Off.Shooters.2014.DVDRiP.X264-TASTE | Looters.Tooters.And.Sawn.Off.Shooters.2014.DVDRip.x264-TASTE |
+| Transformers.Dark.Of.The.Moon.2011.3D.MULTi.1080p.BluRay.x264-LUNETTES | Transformers.Dark.Of.The.Moon.2011.MULTI.1080p.BLURAY.x264-LUNETTES |
+| The.Rover.2014.DUAL.COMPLETE.BLURAY-XORBiTANT | The.Rover.2014.BLURAY-XORBiTANT |
+| Hannah.Arendt.2012.DUAL.COMPLETE.BLURAY-SharpHD | Hannah.Arendt.2012.BLURAY-SharpHD |
+| The.Sugarland.Express.1974.MULTi.1080p.BluRay.x264-ULSHD | The.Sugarland.Express.1974.MULTI.1080p.BLURAY.x264-ULSHD |
+| Wer.spinnt.denn.da.Herr.Doktor.1982.German.1080p.BluRay.x264-iFPD | Wer.Spinnt.Denn.Da.Herr.Doktor.1982.GERMAN.1080p.BLURAY.x264-iFPD |
+| Anflug.Alpha.1.German.1971.COMPLETE.PAL.DVDR-MOViEiT | Anflug.Alpha.1.1971.GERMAN.DVD-R-MOViEiT |
+| Angriff.der.Urzeitmonster.German.2006.COMPLETE.PAL.DVDR-MOViEiT | Angriff.Der.Urzeitmonster.2006.GERMAN.DVD-R-MOViEiT |
+| Mr.Peabody.And.Sherman.2014.NTSC.DVDR-JFKDVD | Mr.Peabody.And.Sherman.2014.DVD-R-JFKDVD |
+| Ein.Leben.fuer.den.Tod.German.2010.LD.DVDRip.XviD-KLASSiGER | Ein.Leben.Fuer.Den.Tod.2010.GERMAN.DVDRip.XviD.LD-KLASSiGER |
+| The.Purge.Anarchy.German.DL.AC3.Dubbed.1080p.BluRay.x264-Pleaders | The.Purge.Anarchy.GERMAN.1080p.BLURAY.x264.DUBBED-Pleaders |
+| 22.Jump.Street.GERMAN.DL.AC3.Dubbed.1080p.BluRay.x264-SOV | 22.Jump.Street.GERMAN.1080p.BLURAY.x264.DUBBED-SOV |
+| Tammy.Voll.abgefahren.German.DL.AC3.Dubbed.720p.WebHD.h264-PsO | Tammy.Voll.Abgefahren.GERMAN.720p.WEB-DL.h264.DUBBED-PsO |
+| Faster, Pussycat ! Kill ! Kill !. 1965.Russ Meyer.VOSTFR.Blu-Ray 720p.Liosaa (RU) / Popo | Faster,.Pussycat.Kill.Kill.1965.VOSTFR.720p.BLURAY-NOTEAM |
+| Kiss the blood off my hands - (Norman FOSTER) - 1948 - VOSTFR - Dvdrip-x264 - kerfiche | Kiss.The.Blood.Off.My.Hands.-.Norman.Foster.-.-.1948.VOSTFR.DVDRip.x264-.kerfiche |
+| Scary Movie 1 (2000) - 1080p FR EN x264 ac3 mHDgz | Scary.Movie.1.2000.FRENCH.1080p.x264.AC3-.EN.mHDgz |
+| Elektra 2005 [J.Garner, T.Stamp] BRRIP-H264-720P & AC3-5.1-VFF-STFR [Calinos1] | Elektra.2005.TRUEFRENCH.720p.BDRip.h264.AC3-STFR |
+| Tower Heist [1080p] MULTI 2011 BluRay x264-Pop  .Le casse De Central Park. | Tower.Heist.2011.MULTI.1080p.BLURAY.x264-Pop |
+| Star.Wars.Episode.I.The.Phantom.Menace.1999.MULTi.1080p.BluRay.x264-LOST | Star.Wars.Episode.I.The.Phantom.Menace.1999.MULTI.1080p.BLURAY.x264-LOST |
+| Star Wars Episode 6 Le Retour du Jedi 1983 Truefrench BDrip x264-BBer | Star.Wars.Episode.6.Le.Retour.Du.Jedi.1983.TRUEFRENCH.BDRip.x264-BBer |
+| Star Wars Episode 5 L'Empire contre-attaque 1980 Truefrench BDrip x264-BBer | Star.Wars.Episode.5.L'empire.Contre-Attaque.1980.TRUEFRENCH.BDRip.x264-BBer |
+| Star Wars Episode 4 Un Nouvel espoir 1977 Truefrench BDrip x264-BBer | Star.Wars.Episode.4.Un.Nouvel.Espoir.1977.TRUEFRENCH.BDRip.x264-BBer |
+| Star Wars Episode 3 La Revanche des Sith 2005 Truefrench BDrip x264-BBer | Star.Wars.Episode.3.La.Revanche.Des.Sith.2005.TRUEFRENCH.BDRip.x264-BBer |
+| Star Wars Episode 2 L'Attaque des clones 2002 Truefrench BDrip x264-BBer | Star.Wars.Episode.2.L'attaque.Des.Clones.2002.TRUEFRENCH.BDRip.x264-BBer |
+| Star Wars Episode 1 La Menace fantome 1999 Truefrench BDrip x264-BBer | Star.Wars.Episode.1.La.Menace.Fantome.1999.TRUEFRENCH.BDRip.x264-BBer |
+| One.For.the.Money.2012.1080p.HDrip.French.x264 (by kimo) | One.For.The.Money.2012.FRENCH.1080p.HDRip.x264-NOTEAM |
+| Les 4 Fantastiques 2015 Truefrench 720p x264 AAC PIXEL | Les.4.Fantastiques.2015.TRUEFRENCH.720p.x264-NOTEAM |
+| Le prestige (2006) (The Prestige) 720p x264 AAC 5.1 MULTI [NOEX] | Le.Prestige.2006.MULTI.720p.x264-NOTEAM |
+| Le Nouveau Stagiaire (2015) The Intern - Multi 1080p - x264 AAC 5.1 - CCATS | Le.Nouveau.Stagiaire.-.2015.MULTI.1080p.x264-.CCATS |
+| La Vie revee de Walter Mitty [1080p] MULTi 2013 BluRay x264-Pop (The Secret Life Of Walter Mitty) | La.Vie.Revee.De.Walter.Mitty.2013.MULTI.1080p.BLURAY.x264-Pop |
+| Jamais entre amis (2015) [1080p] MULTI (VFQ-VOA) Bluray x264 AC3-PopHD (Sleeping with Other People) | Jamais.Entre.Amis.2015.MULTI.1080p.BLURAY.x264.AC3-PopHD |
+| Benjamin Button [x264] [HD 720p] [LUCN] [FR] | Benjamin.Button.FRENCH.720p.HDRip.x264-NOTEAM |
+| Lone.Survivor.2013.FANSUB.VOSTFR.DVDSCR.XVID.AC3-NIKOo | Lone.Survivor.2013.VOSTFR.SCREENER.XviD.AC3-NIKOo |
+| Women.In.Trouble.2011.TRUEFRENCH.DVDRiP.XViD-UTT | Women.In.Trouble.2011.TRUEFRENCH.DVDRip.XviD-UTT |
+| With.This.Ring.2015.RERiP.FRENCH.DVDRip.x264.AC3-DesTroY | With.This.Ring.2015.FRENCH.DVDRip.x264.AC3-DesTroY |
+| Mommy.2014.FRENCH.BDRip.x264-PRiDEHD | Mommy.2014.FRENCH.BDRip.x264-PRiDEHD |
+| Wild.Child.2008.TRUEFRENCH.BRRip.XviD.AC3-LiberTeam | Wild.Child.2008.TRUEFRENCH.BDRip.XviD.AC3-LiberTeam |
+| Meet Bill 2012 TRUEFRENCH DvDRiP Xvid-TFTD | Meet.Bill.2012.TRUEFRENCH.DVDRip.XviD-TFTD |
+| White.Bird.In.A.Blizzard.2014.LiMiTED.FRENCH.DVDRip.XviD.AC3-DesTroY | White.Bird.In.A.Blizzard.2014.FRENCH.DVDRip.XviD.AC3-DesTroY |
+| While.Were.Young.2014.FRENCH.BDRip.x264-PRiDEHD | While.Were.Young.2014.FRENCH.BDRip.x264-PRiDEHD |
+| Marvels.Agent.Carter.S01.VOSTFR.720p.WEB-DL.DD5.1.H.264-SEEHD | Marvels.Agent.Carter.S01.VOSTFR.720p.WEB-DL.h264-SEEHD |
+| Weeds.S01.REPACK.MULTI.720p.BluRay.x264-DWS | Weeds.S01.MULTI.720p.BLURAY.x264-DWS |
+| Marvels.Agent.Carter.S01E03.VOSTFR.720p.WEB-DL.DD5.1.H.264-LTL | Marvels.Agent.Carter.S01E03.VOSTFR.720p.WEB-DL.h264-LTL |
+| Water.For.Elephants.2011.FRENCH.SUBFORCED.BRRip.x264.AC3-FUNKY | Water.For.Elephants.2011.FRENCH.BDRip.x264.AC3-FUNKY |
+| Marvels.Agent.Carter.S01E02.VOSTFR.720p.HDTV.x264-LTL | Marvels.Agent.Carter.S01E02.VOSTFR.720p.HDTV.x264-LTL |
+| Marvels.Agent.Carter.S01E01.VOSTFR.720p.HDTV.x264-LTL | Marvels.Agent.Carter.S01E01.VOSTFR.720p.HDTV.x264-LTL |
+| Veronica Mars 2014 TRUEFRENCH BDRip XviD AC3-FrIeNdS | Veronica.Mars.2014.TRUEFRENCH.BDRip.XviD.AC3-FrIeNdS |
+| Marvels.Agent.Carter.S01E01.FASTSUB.VOSTFR.720p.HDTV.x264-ADDiCTiON | Marvels.Agent.Carter.S01E01.VOSTFR.720p.HDTV.x264-ADDiCTiON |
+| Ma.Premiere.Fois.2012.FRENCH.720p.BluRay.x264-CARPEDIEM | Ma.Premiere.Fois.2012.FRENCH.720p.BLURAY.x264-CARPEDIEM |
+| Manhattan.S01E01.FRENCH.HDTV.x264-CaCoLaC | Manhattan.S01E01.FRENCH.HDTV.x264-CaCoLaC |
+| Magic.In.The.Moonlight.2014.FRENCH.BRRip.x264.AC3-DesTroY | Magic.In.The.Moonlight.2014.FRENCH.BDRip.x264.AC3-DesTroY |
+| Un Peu.Beaucoup.Aveuglement.2014.FRENCH.WEB-DL.1080p.x264-SVR | Un.Peu.Beaucoup.Aveuglement.2014.FRENCH.1080p.WEB-DL.x264-SVR |
+| Transformers.Age.Of.Extinction.2014.TRUEFRENCH.DVDRip.x264.AC3-DesTroY | Transformers.Age.Of.Extinction.2014.TRUEFRENCH.DVDRip.x264.AC3-DesTroY |
+| Liberal.Arts.2012.FANSUB.VOSTFR.BRRiP.XviD-NIKOo | Liberal.Arts.2012.VOSTFR.BDRip.XviD-NIKOo |
+| Total.recall.1990.FRENCH.BRRIP.X264.AC3-KENPACHI | Total.Recall.1990.FRENCH.BDRip.x264.AC3-KENPACHI |
+| Les.Gorilles.2014.TRUEFRENCH.WEBRip.XviD-SVR | Les.Gorilles.2014.TRUEFRENCH.WEB-DL.XviD-SVR |
+| Tomorrowland.2015.TRUEFRENCH.720p.WEB-DL.AC3.x264-TonTon | Tomorrowland.2015.TRUEFRENCH.720p.WEB-DL.x264.AC3-TonTon |
+| La.Vie.D.Adele.2013.FRENCH.WORKPRINT.XViD-ATN | La.Vie.D.Adele.2013.FRENCH.XviD-ATN |
+| The.Worlds.End.2013.FRENCH.SUBFORCED.BRRip.x264.AC3-FUNKY | The.Worlds.End.2013.FRENCH.BDRip.x264.AC3-FUNKY |
+| La.Veritable.Histoire.Du.Petit.Chaperon.Rouge.FRENCH.DVDRiP.XviD | La.Veritable.Histoire.Du.Petit.Chaperon.Rouge.FRENCH.DVDRip.XviD-NOTEAM |
+| The.Wind.Rises.2013.FRENCH.BRRip.x264.AC3-DesTroY | The.Wind.Rises.2013.FRENCH.BDRip.x264.AC3-DesTroY |
+| La.Planete.Des.Singes.L'affrontement.TRUEFRENCH.720p.x264.HDLIGHT | La.Planete.Des.Singes.L'affrontement.TRUEFRENCH.720p.HDRip.x264-NOTEAM |
+| The Ten 2011 TRUEFRENCH SUBFORCED DVDRIP XVID-FwD | The.Ten.2011.TRUEFRENCH.DVDRip.XviD-FwD |
+| La.French.2014.FRENCH.BRRip.x264.AC3-DesTroY | La.2014.FRENCH.BDRip.x264.AC3-DesTroY |
+| The Spirit 2009 TRUEFRENCH DVDRiP XViD AC3-FwD | The.Spirit.2009.TRUEFRENCH.DVDRip.XviD.AC3-FwD |
+| Inherent.Vice.2014.FRENCH.BRRip.XviD-DesTroY | Inherent.Vice.2014.FRENCH.BDRip.XviD-DesTroY |
+| The.Maze.Runner.2014.TRUEFRENCH.BDRip.XviD-GLUPS | The.Maze.Runner.2014.TRUEFRENCH.BDRip.XviD-GLUPS |
+| The.Master.2012.FRENCH.BDRiP.XViD-AViTECH | The.Master.2012.FRENCH.BDRip.XviD-AViTECH |
+| How.to.Train.Your.Dragon.2.2014.FRENCH.BDRip.x264-PRiDEHD | How.To.Train.Your.Dragon.2.2014.FRENCH.BDRip.x264-PRiDEHD |
+| The.Man.In.The.High.Castle.S01E01.Pilot.720p.WEBRip.DD5.1.x264-FtDL | The.Man.In.The.High.Castle.S01E01.720p.WEB-DL.x264-FtDL |
+| How.Do.You.Know.2010.TRUEFRENCH.DVDRip.XviD-LiberTeam | How.Do.You.Know.2010.TRUEFRENCH.DVDRip.XviD-LiberTeam |
+| The.Longest.Ride.2015.FRENCH.BDRip.x264-VENUE | The.Longest.Ride.2015.FRENCH.BDRip.x264-VENUE |
+| Horrible.Bosses.2.2014.THEATRICAL.FRENCH.BDRip.XviD.AC3-DesTroY | Horrible.Bosses.2.2014.FRENCH.BDRip.XviD.AC3-DesTroY |
+| The.Longest.Ride.2015.FRENCH.720p.BluRay.x264.AC3-BUITONIO | The.Longest.Ride.2015.FRENCH.720p.BLURAY.x264.AC3-BUITONIO |
+| Hector.and.the.Search.for.Happiness.2014.FRENCH.DVDRiP.XviD.AC3-S.V | Hector.And.The.Search.For.Happiness.2014.FRENCH.DVDRip.XviD.AC3-S.V |
+| The.Last.Man.On.Earth.S01E01.FASTSUB.VOSTFR.HDTV.XviD-ADDiCTiON | The.Last.Man.On.Earth.S01E01.VOSTFR.HDTV.XviD-ADDiCTiON |
+| The.Gambler.2014.FRENCH.BDRip.x264-VENUE | The.Gambler.2014.FRENCH.BDRip.x264-VENUE |
+| HappyThankYouMorePlease.2010.HDRip.AC3 | Happythankyoumoreplease.2010.HDRip.AC3-NOTEAM |
+| The.Drop.2014.FRENCH.BDRip.x264-PRiDEHD | The.Drop.2014.FRENCH.BDRip.x264-PRiDEHD |
+| Hannibal.2001.TRUEFRENCH.SUBFORCED.BRRip.x264.AC3-FUNKY | Hannibal.2001.TRUEFRENCH.BDRip.x264.AC3-FUNKY |
+| The.Angriest.Man.in.Brooklyn.2014.FRENCH.BDRip.x264-PRiDEHD | The.Angriest.Man.In.Brooklyn.2014.FRENCH.BDRip.x264-PRiDEHD |
+| Green.Zone.2010.TRUEFRENCH.SUBFORCED.DVDRIP.XVID-KNOB | Green.Zone.2010.TRUEFRENCH.DVDRip.XviD-KNOB |
+| The.100.S01E01.FASTSUB.VOSTFR.HDTV.XviD-ADDiCTiON | The.100.S01E01.VOSTFR.HDTV.XviD-ADDiCTiON |
+| Gravity.2013.FRENCH.BRRip.XviD.AC3-S.V | Gravity.2013.FRENCH.BDRip.XviD.AC3-S.V |
+| Fury.2014.FRENCH.BDRip.x264-ROUGH | Fury.2014.FRENCH.BDRip.x264-ROUGH |
+| Ted.2.2015.UNRATED.FRENCH.720p.WEB-DL.DD5.1.H264 | Ted.2.2015.FRENCH.720p.WEB-DL.h264-NOTEAM |
+| Furious.Seven.2015.EXTENDED.TRUEFRENCH.BDRip.x264.AC3-GLUPS | Furious.Seven.2015.TRUEFRENCH.BDRip.x264.AC3-GLUPS |
+| Ted.2012.TRUEFRENCH.720p.BluRay.x264.AC3 | Ted.2012.TRUEFRENCH.720p.BLURAY.x264.AC3-NOTEAM |
+| Taken.3.2014.EXTENDED.FRENCH.BDRip.XviD-GLUPS | Taken.3.2014.FRENCH.BDRip.XviD-GLUPS |
+| Fish.Tank.2009.FRENCH.BRRip.x264.AC3-SALEM | Fish.Tank.2009.FRENCH.BDRip.x264.AC3-SALEM |
+| Still.Alice.2014.TRUEFRENCH.BDRip.XviD-DesTroY | Still.Alice.2014.TRUEFRENCH.BDRip.XviD-DesTroY |
+| Factotum.FRENCH.DVDRiP.XviD-ZANBiC | Factotum.FRENCH.DVDRip.XviD-ZANBiC |
+| Ex.Machina.2015.FRENCH.SUBFORCED.BRRip.XviD.AC3-CHARTAIR | Ex.Machina.2015.FRENCH.BDRip.XviD.AC3-CHARTAIR |
+| Exam.2009.LiMiTED.FRENCH.DVDRip.XviD | Exam.2009.FRENCH.DVDRip.XviD-NOTEAM |
+| Eureka.S05.FRENCH.LD.DVDRiP.XViD-EPZ | Eureka.S05.FRENCH.DVDRip.XviD.LD-EPZ |
+| Sous.Les.Jupes.Des.Filles.2014.FRENCH.BDRip.XviD-GLUPS | Sous.Les.Jupes.Des.Filles.2014.FRENCH.BDRip.XviD-GLUPS |
+| Enemy.2013.LIMITED.FRENCH.SUBFORCED.BRRip.x264.AC3-SP3CTR3 | Enemy.2013.FRENCH.BDRip.x264.AC3-SP3CTR3 |
+| Source.Code.2011.FRENCH.BRRip.x264.AC3-FUNKY | Source.Code.2011.FRENCH.BDRip.x264.AC3-FUNKY |
+| Endless Love 2014 FRENCH 720p BluRay x264-CARPEDIEM | Endless.Love.2014.FRENCH.720p.BLURAY.x264-CARPEDIEM |
+| Sin.City.A.Dame.to.Kill.For.2014.FRENCH.BDRip.x264.AC3-GLUPS | Sin.City.A.Dame.To.Kill.For.2014.FRENCH.BDRip.x264.AC3-GLUPS |
+| Eden.Lost.in.Music.2014.FRENCH.BDRip.x264-MELBA | Eden.Lost.In.Music.2014.FRENCH.BDRip.x264-MELBA |
+| Silver.Linings.Playbook.2012.TRUEFRENCH.BDRip.x264.AC3-TKS | Silver.Linings.Playbook.2012.TRUEFRENCH.BDRip.x264.AC3-TKS |
+| Dumb.And.Dumber.FRENCH.BRRip.XviD-LKT | Dumb.And.Dumber.FRENCH.BDRip.XviD-LKT |
+| Shrek.Tetralogie.TRUEFRENCH.DVDRIP.XVID.AC3.5.1-lanesra13 | Shrek.Tetralogie.TRUEFRENCH.DVDRip.XviD.AC3-lanesra13 |
+| Drinking.Buddies.2013.LIMITED.DVDRip.x264-NODLABS | Drinking.Buddies.2013.DVDRip.x264-NODLABS |
+| Serendipity.2001.FRENCH.BRRip.x264.AC3-CHARTAIR | Serendipity.2001.FRENCH.BDRip.x264.AC3-CHARTAIR |
+| Dope.2015.SUBFORCED.FRENCH.BRRip.XviD-SVR | Dope.2015.FRENCH.BDRip.XviD-SVR |
+| Serena.2014.FRENCH.DVDRip.x264-FUTiL | Serena.2014.FRENCH.DVDRip.x264-FUTiL |
+| Rush.2013.FRENCH.BDRip.x264-Thursday16th | Rush.2013.FRENCH.BDRip.x264-Thursday16th |
+| Qu.Est.Ce.Qu.On.a.Fait.au.Bon.Dieu.2014.FRENCH.720p.mHD.x264-ExPLiCiT | Qu.Est.Ce.Qu.On.A.Fait.Au.Bon.Dieu.2014.FRENCH.720p.HDRip.x264-ExPLiCiT |
+| Quand.Harry.Rencontre.Sally.FRENCH.DVDRiP.XviD-Shane | Quand.Harry.Rencontre.Sally.FRENCH.DVDRip.XviD-Shane |
+| Chef.2014.FRENCH.BDRiP.x264-PRiDEHD | Chef.2014.FRENCH.BDRip.x264-PRiDEHD |
+| Pompeii.2014.TRUEFRENCH.BRRip.XviD-DesTroY | Pompeii.2014.TRUEFRENCH.BDRip.XviD-DesTroY |
+| Celeste.and.Jesse.Forever.2012.VOSTFR.BDRiP.XviD-NIKOo | Celeste.And.Jesse.Forever.2012.VOSTFR.BDRip.XviD-NIKOo |
+| Captain.Phillips.2013.FRENCH.DVDRip.x264-TiCKETS | Captain.Phillips.2013.FRENCH.DVDRip.x264-TiCKETS |
+| Platoon.1986.FRENCH.SUBFORCED.BRRip.x264.AC3-FUNKY | Platoon.1986.FRENCH.BDRip.x264.AC3-FUNKY |
+| Pixels.2015.FRENCH.DVDRip.XviD-SVR | Pixels.2015.FRENCH.DVDRip.XviD-SVR |
+| Camp.X-Ray.2014.FRENCH.BDRip.x264-PRiDEHD | Camp.X-Ray.2014.FRENCH.BDRip.x264-PRiDEHD |
+| Pixels.2015.FRENCH.BDRip.x264-VENUE | Pixels.2015.FRENCH.BDRip.x264-VENUE |
+| Blue. Valentine 2010 French DvDRip Xvid-FwD | Blue.2010.FRENCH.DVDRip.XviD-FwD |
+| Pitch.Perfect.2.2015.FRENCH.BDRip.x264-COUAC | Pitch.Perfect.2.2015.FRENCH.BDRip.x264-COUAC |
+| Blended.2014.FRENCH.BRRIP XVID AC3-lecorse | Blended.2014.FRENCH.BDRip.XviD.AC3-lecorse |
+| Big.Eyes.2014.FRENCH.BDRip.XviD-GLUPS | Big.Eyes.2014.FRENCH.BDRip.XviD-GLUPS |
+| Peter.Pan.TRUEFRENCH.DVDRip.XviD.AC3-LiberTeam | Peter.Pan.TRUEFRENCH.DVDRip.XviD.AC3-LiberTeam |
+| Barbecue.2014.FRENCH.DVDRiP.XViD-ARTEFAC | Barbecue.2014.FRENCH.DVDRip.XviD-ARTEFAC |
+| Palo.Alto.2013.LIMITED.VOSTFR.BRRip.x264.AC3-S.V | Palo.Alto.2013.VOSTFR.BDRip.x264.AC3-S.V |
+| Arthur.Newman.2012.FRENCH.BDRip.x264-Ryotox | Arthur.Newman.2012.FRENCH.BDRip.x264-Ryotox |
+| Orange.Mecanique.MULTI.DVDRIP.x264.AAC-ECKOES | Orange.Mecanique.MULTI.DVDRip.x264-ECKOES |
+| Arrow.S03E01.FASTSUB.VOSTFR.HDTV.x264-ADDiCTiON | Arrow.S03E01.VOSTFR.HDTV.x264-ADDiCTiON |
+| Nights.In.Rodanthe.TRUEFRENCH.DVDRip.XviD-UNSKiLLED | Nights.In.Rodanthe.TRUEFRENCH.DVDRip.XviD-UNSKiLLED |
+| Mr.Robot.S01.PROPER.VOSTFR.720p.WEB-DL.DD5.1.H264-ARK01 | Mr.Robot.S01.VOSTFR.720p.WEB-DL.h264-ARK01 |
+| 12.Monkeys.S01E01.FRENCH.HDTV.x264-AZR | 12.Monkeys.S01E01.FRENCH.HDTV.x264-AZR |

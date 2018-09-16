@@ -138,7 +138,7 @@ function deduce(property, name, multi = false) {
   return result
 }
 
-function stringify(release) {
+function stringify(release, options) {
   return release.title
     .split(' ')
     .concat([
@@ -152,14 +152,15 @@ function stringify(release) {
       (release.resolution !== 'SD' && release.resolution),
       release.source,
       release.encoding,
-      release.dub
+      release.dub,
     ])
+    .concat(options.flagged ? release.flags : [])
     .filter(property => property)
     .join('.')
     .concat('-' + (release.group || 'NOTEAM'))
 }
 
-function parse(name, options = { strict: false, defaults: {} }) {
+function parse(name, options = { strict: false, flagged: false, defaults: {} }) {
   options.defaults = Object.assign(
     properties
       .filter(property => !['type'].includes(property))
@@ -197,7 +198,7 @@ function parse(name, options = { strict: false, defaults: {} }) {
     .toLowerCase()
     .replace(/(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g, s => s.toUpperCase()) // ucwords
 
-  release.generated = stringify(release)
+  release.generated = stringify(release, options)
 
   release.score = properties
     .filter(property => !['season', 'episodes', 'episode', 'type'].includes(property))

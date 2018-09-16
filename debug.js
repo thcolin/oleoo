@@ -6,7 +6,8 @@ if (process.argv.length < 3) {
 }
 
 var release = oleoo.parse(process.argv[2], {
-  strict: process.argv[3] === '--strict'
+  strict: process.argv.includes('--strict'),
+  flagged: process.argv.includes('--flagged'),
 })
 
 console.log('[Release]', process.argv[2], JSON.stringify(release, null, 2))
