@@ -98,6 +98,7 @@ console.log(release)
 ## Results :
 | Original | Generated |
 | -------- | --------- |
+| 2.Fast.2.Furious.2003.MULTi.2160p.UHD.BluRay.x265-OohLaLa | 2.Fast.2.Furious.2003.MULTI.2160p.BLURAY.x265.UHD-OohLaLa |
 | Ugly Americans - S02 STFR 720p.WEB-DL.x264 AC3 MpEbUtCh3r | Ugly.Americans.S02.VOSTFR.720p.WEB-DL.x264.AC3-.MpEbUtCh3r |
 | The.Good.German.2006.DVDRip.MULTI.H264.720x480.AAC.MK2017 | The.Good.German.2006.MULTI.DVDRip.h264.AAC-NOTEAM |
 | La ligne Verte (1999) MULTi-VF2 [1080p] BluRay x264-PopHD (The Green Mile) | La.Ligne.Verte.1999.MULTI.1080p.BLURAY.x264-PopHD |

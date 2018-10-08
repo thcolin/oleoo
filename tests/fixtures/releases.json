@@ -1,4 +1,25 @@
 {
+  "2.Fast.2.Furious.2003.MULTi.2160p.UHD.BluRay.x265-OohLaLa": {
+    "original": "2.Fast.2.Furious.2003.MULTi.2160p.UHD.BluRay.x265-OohLaLa",
+    "language": "MULTI",
+    "source": "BLURAY",
+    "encoding": "x265",
+    "resolution": "2160p",
+    "dub": null,
+    "year": "2003",
+    "flags": [
+      "UHD"
+    ],
+    "season": null,
+    "episode": null,
+    "episodes": [],
+    "type": "movie",
+    "group": "OohLaLa",
+    "title": "2 Fast 2 Furious",
+    "generated": "2.Fast.2.Furious.2003.MULTI.2160p.BLURAY.x265.UHD-OohLaLa",
+    "score": 7,
+    "guess": {}
+  },
   "Ugly Americans - S02 STFR 720p.WEB-DL.x264 AC3 MpEbUtCh3r": {
     "original": "Ugly Americans - S02 STFR 720p.WEB-DL.x264 AC3 MpEbUtCh3r",
     "language": "VOSTFR",

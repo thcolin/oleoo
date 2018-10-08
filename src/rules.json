@@ -114,6 +114,9 @@
     ],
     "1080p": [
       "1080p"
+    ],
+    "2160p": [
+      "2160p"
     ]
   },
   "dub": {
@@ -209,6 +212,7 @@
   },
   "flags": {
     "3D": "3d",
+    "UHD": "UHD",
     "PROPER": "proper",
     "LIMITED": "limited",
     "FASTSUB": "fastsub",

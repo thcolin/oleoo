@@ -226,7 +226,13 @@ function guess(name, options) {
   }
 
   if (!release.resolution) {
-    release.resolution = ['BDSCR', 'BLURAY'].includes(release.source) ? '1080p' : 'SD'
+    if (['UHD'].includes(release.flags)) {
+      release.resolution = '2160p'
+    } else if (['BDSCR', 'BLURAY'].includes(release.source)) {
+      release.resolution = '1080p'
+    } else {
+      release.resolution = 'SD'
+    }
   }
 
   return release
