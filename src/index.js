@@ -182,7 +182,11 @@ function parse(name, options = { strict: false, flagged: true, defaults: {} }) {
   }
 
   properties.map(property => {
-    const result = deduce(property, waste, (property === 'flags'))
+    const result = deduce(property, waste, ['language', 'flags'].includes(property))
+
+    if (property === 'language' && result.match) {
+      result.match = result.match.length > 1 ? 'MULTI' : result.match[0]
+    }
 
     waste = result.waste
     handicap = handicap.concat([!result.match && options.defaults[property] && property])

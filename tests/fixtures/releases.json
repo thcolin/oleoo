@@ -1,4 +1,23 @@
 {
+  "The Hitmans BodyGuard (2017) VFQ-ENG AC3 BluRay 1080p x264.GHT (Mon meilleur ennemi)": {
+    "original": "The Hitmans BodyGuard (2017) VFQ-ENG AC3 BluRay 1080p x264.GHT (Mon meilleur ennemi)",
+    "language": "MULTI",
+    "source": "BLURAY",
+    "encoding": "x264",
+    "resolution": "1080p",
+    "dub": "AC3",
+    "year": "2017",
+    "flags": null,
+    "season": null,
+    "episode": null,
+    "episodes": [],
+    "type": "movie",
+    "group": null,
+    "title": "The Hitmans Bodyguard",
+    "generated": "The.Hitmans.Bodyguard.2017.MULTI.1080p.BLURAY.x264.AC3-NOTEAM",
+    "score": 6,
+    "guess": {}
+  },
   "2.Fast.2.Furious.2003.MULTi.2160p.UHD.BluRay.x265-OohLaLa": {
     "original": "2.Fast.2.Furious.2003.MULTi.2160p.UHD.BluRay.x265-OohLaLa",
     "language": "MULTI",
@@ -57,8 +76,8 @@
     "episodes": [],
     "type": "movie",
     "group": null,
-    "title": "The Good German",
-    "generated": "The.Good.German.2006.MULTI.DVDRip.h264.AAC-NOTEAM",
+    "title": "The Good",
+    "generated": "The.Good.2006.MULTI.DVDRip.h264.AAC-NOTEAM",
     "score": 5,
     "guess": {
       "resolution": "SD"
@@ -861,7 +880,7 @@
   },
   "Scary Movie 1 (2000) - 1080p FR EN x264 ac3 mHDgz": {
     "original": "Scary Movie 1 (2000) - 1080p FR EN x264 ac3 mHDgz",
-    "language": "FRENCH",
+    "language": "MULTI",
     "source": null,
     "encoding": "x264",
     "resolution": "1080p",
@@ -872,15 +891,15 @@
     "episode": null,
     "episodes": [],
     "type": "movie",
-    "group": ".EN.mHDgz",
+    "group": ".mHDgz",
     "title": "Scary Movie 1",
-    "generated": "Scary.Movie.1.2000.FRENCH.1080p.x264.AC3-.EN.mHDgz",
+    "generated": "Scary.Movie.1.2000.MULTI.1080p.x264.AC3-.mHDgz",
     "score": 6,
     "guess": {}
   },
   "Elektra 2005 [J.Garner, T.Stamp] BRRIP-H264-720P & AC3-5.1-VFF-STFR [Calinos1]": {
     "original": "Elektra 2005 [J.Garner, T.Stamp] BRRIP-H264-720P & AC3-5.1-VFF-STFR [Calinos1]",
-    "language": "TRUEFRENCH",
+    "language": "MULTI",
     "source": "BDRip",
     "encoding": "h264",
     "resolution": "720p",
@@ -893,10 +912,10 @@
     "episode": null,
     "episodes": [],
     "type": "movie",
-    "group": "STFR",
+    "group": null,
     "title": "Elektra",
-    "generated": "Elektra.2005.TRUEFRENCH.720p.BDRip.h264.AC3.DD5.1-STFR",
-    "score": 8,
+    "generated": "Elektra.2005.MULTI.720p.BDRip.h264.AC3.DD5.1-NOTEAM",
+    "score": 7,
     "guess": {}
   },
   "Tower Heist [1080p] MULTI 2011 BluRay x264-Pop  .Le casse De Central Park.": {

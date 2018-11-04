@@ -98,6 +98,7 @@ console.log(release)
 ## Results :
 | Original | Generated |
 | -------- | --------- |
+| The Hitmans BodyGuard (2017) VFQ-ENG AC3 BluRay 1080p x264.GHT (Mon meilleur ennemi) | The.Hitmans.Bodyguard.2017.MULTI.1080p.BLURAY.x264.AC3-NOTEAM |
 | 2.Fast.2.Furious.2003.MULTi.2160p.UHD.BluRay.x265-OohLaLa | 2.Fast.2.Furious.2003.MULTI.2160p.BLURAY.x265.UHD-OohLaLa |
 | Ugly Americans - S02 STFR 720p.WEB-DL.x264 AC3 MpEbUtCh3r | Ugly.Americans.S02.VOSTFR.720p.WEB-DL.x264.AC3-.MpEbUtCh3r |
 | The.Good.German.2006.DVDRip.MULTI.H264.720x480.AAC.MK2017 | The.Good.German.2006.MULTI.DVDRip.h264.AAC-NOTEAM |
