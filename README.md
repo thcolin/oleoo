@@ -98,10 +98,11 @@ console.log(release)
 ## Results :
 | Original | Generated |
 | -------- | --------- |
+| Dragon.Ball.Super.E89.FRENCH.1080P.HDTV.x264-R342 [ www.Torrent9.PH ].mkv | Dragon.Ball.Super.E89.FRENCH.1080p.HDTV.x264-R342 |
 | The Hitmans BodyGuard (2017) VFQ-ENG AC3 BluRay 1080p x264.GHT (Mon meilleur ennemi) | The.Hitmans.Bodyguard.2017.MULTI.1080p.BLURAY.x264.AC3-NOTEAM |
 | 2.Fast.2.Furious.2003.MULTi.2160p.UHD.BluRay.x265-OohLaLa | 2.Fast.2.Furious.2003.MULTI.2160p.BLURAY.x265.UHD-OohLaLa |
 | Ugly Americans - S02 STFR 720p.WEB-DL.x264 AC3 MpEbUtCh3r | Ugly.Americans.S02.VOSTFR.720p.WEB-DL.x264.AC3-.MpEbUtCh3r |
-| The.Good.German.2006.DVDRip.MULTI.H264.720x480.AAC.MK2017 | The.Good.German.2006.MULTI.DVDRip.h264.AAC-NOTEAM |
+| The.Good.German.2006.DVDRip.MULTI.H264.720x480.AAC.MK2017 | The.Good.2006.MULTI.DVDRip.h264.AAC-NOTEAM |
 | La ligne Verte (1999) MULTi-VF2 [1080p] BluRay x264-PopHD (The Green Mile) | La.Ligne.Verte.1999.MULTI.1080p.BLURAY.x264-PopHD |
 | Fear.the.Walking.Dead.S03E01-E02.PROPER.720p.HDTV.x264-AVS | Fear.The.Walking.Dead.S03E01-E02.720p.HDTV.x264.PROPER-AVS |
 | Teenage.Mutant.Ninja.Turtles.2012.S05E11E12E13.720p.WEB-DL.AAC2.0.H264-iT00NZ | Teenage.Mutant.Ninja.Turtles.2012.E11-E12-E13.720p.WEB-DL.h264-iT00NZ |
@@ -137,8 +138,8 @@ console.log(release)
 | Tammy.Voll.abgefahren.German.DL.AC3.Dubbed.720p.WebHD.h264-PsO | Tammy.Voll.Abgefahren.GERMAN.720p.WEB-DL.h264.DUBBED.DL-PsO |
 | Faster, Pussycat ! Kill ! Kill !. 1965.Russ Meyer.VOSTFR.Blu-Ray 720p.Liosaa (RU) / Popo | Faster,.Pussycat.Kill.Kill.1965.VOSTFR.720p.BLURAY-NOTEAM |
 | Kiss the blood off my hands - (Norman FOSTER) - 1948 - VOSTFR - Dvdrip-x264 - kerfiche | Kiss.The.Blood.Off.My.Hands.-.Norman.Foster.-.-.1948.VOSTFR.DVDRip.x264-.kerfiche |
-| Scary Movie 1 (2000) - 1080p FR EN x264 ac3 mHDgz | Scary.Movie.1.2000.FRENCH.1080p.x264.AC3-.EN.mHDgz |
-| Elektra 2005 [J.Garner, T.Stamp] BRRIP-H264-720P & AC3-5.1-VFF-STFR [Calinos1] | Elektra.2005.TRUEFRENCH.720p.BDRip.h264.AC3.DD5.1-STFR |
+| Scary Movie 1 (2000) - 1080p FR EN x264 ac3 mHDgz | Scary.Movie.1.2000.MULTI.1080p.x264.AC3-.mHDgz |
+| Elektra 2005 [J.Garner, T.Stamp] BRRIP-H264-720P & AC3-5.1-VFF-STFR [Calinos1] | Elektra.2005.MULTI.720p.BDRip.h264.AC3.DD5.1-NOTEAM |
 | Tower Heist [1080p] MULTI 2011 BluRay x264-Pop  .Le casse De Central Park. | Tower.Heist.2011.MULTI.1080p.BLURAY.x264-Pop |
 | Star.Wars.Episode.I.The.Phantom.Menace.1999.MULTi.1080p.BluRay.x264-LOST | Star.Wars.Episode.I.The.Phantom.Menace.1999.MULTI.1080p.BLURAY.x264-LOST |
 | Star Wars Episode 6 Le Retour du Jedi 1983 Truefrench BDrip x264-BBer | Star.Wars.Episode.6.Le.Retour.Du.Jedi.1983.TRUEFRENCH.BDRip.x264-BBer |

@@ -1,4 +1,27 @@
 {
+  "Dragon.Ball.Super.E89.FRENCH.1080P.HDTV.x264-R342 [ www.Torrent9.PH ].mkv": {
+    "original": "Dragon.Ball.Super.E89.FRENCH.1080P.HDTV.x264-R342 [ www.Torrent9.PH ].mkv",
+    "language": "FRENCH",
+    "source": "HDTV",
+    "encoding": "x264",
+    "resolution": "1080p",
+    "dub": null,
+    "year": null,
+    "flags": null,
+    "season": null,
+    "episode": 89,
+    "episodes": [
+      89
+    ],
+    "type": "tvshow",
+    "group": "R342",
+    "title": "Dragon Ball Super",
+    "generated": "Dragon.Ball.Super.E89.FRENCH.1080p.HDTV.x264-R342",
+    "score": 5,
+    "guess": {
+      "year": 2018
+    }
+  },
   "The Hitmans BodyGuard (2017) VFQ-ENG AC3 BluRay 1080p x264.GHT (Mon meilleur ennemi)": {
     "original": "The Hitmans BodyGuard (2017) VFQ-ENG AC3 BluRay 1080p x264.GHT (Mon meilleur ennemi)",
     "language": "MULTI",
