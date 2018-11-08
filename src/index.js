@@ -62,7 +62,7 @@ function deduce(property, name, multi = false) {
 
     case 'episode': {
       const regexps = {
-        episodes: /[\.\-]S(?:\d+)[\.\-]?((?:-?E(?:\d+))+)(?:[\.\-])/i,
+        episodes: /[\.\-](?:S(?:\d+))?[\.\-]?((?:-?E(?:\d+))+)(?:[\.\-])/i,
         episode: /E(\d+)/ig,
       }
 
@@ -83,7 +83,7 @@ function deduce(property, name, multi = false) {
 
     case 'episodes': {
       const regexps = {
-        episodes: /[\.\-]S(?:\d+)[\.\-]?((?:-?E(?:\d+))+)(?:[\.\-])/i,
+        episodes: /[\.\-](?:S(?:\d+))?[\.\-]?((?:-?E(?:\d+))+)(?:[\.\-])/i,
         episode: /E(\d+)/ig,
       }
 
@@ -101,10 +101,16 @@ function deduce(property, name, multi = false) {
     }
 
     case 'type': {
-      const regexp = /[\.\-]S\d+[\.\-]?(?:-?E\d+)*([\.\-])/i
+      result.match = 'movie'
+      result.waste = name
 
-      result.match = (name.match(regexp) ? 'tvshow' : 'movie')
-      result.waste = name.replace(regexp, '$1')
+      for (let regexp of [/[\.\-]S\d+[\.\-]?(?:-?E\d+)*([\.\-])/i, /[\.\-](?:-?E\d+)+([\.\-])/i]) {
+        if (name.match(regexp)) {
+          result.match = 'tvshow'
+          result.waste = name.replace(regexp, '$1')
+          break
+        }
+      }
 
       return result
     }
@@ -145,7 +151,7 @@ function stringify(release, options) {
       release.year,
       [
         (release.season ? 'S' + release.season.toString().padStart(2, '0') : null),
-        (release.episode ? 'E' + release.episodes.map(episode => episode.toString().padStart(2, '0')).join('-E') : null)
+        (release.episodes.length ? 'E' + release.episodes.map(episode => episode.toString().padStart(2, '0')).join('-E') : null)
       ]
       .join(''),
       (release.language !== 'VO' && release.language),
