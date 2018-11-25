@@ -98,6 +98,7 @@ console.log(release)
 ## Results :
 | Original | Generated |
 | -------- | --------- |
+| Serendipity (2001) MULTi VF2 [1080p] BluRay x264-PopHD ("Un amour à New York" ou "Heureux hasard") | Serendipity.2001.MULTI.1080p.BLURAY.x264-NOTEAM |
 | Dragon.Ball.Super.E89.FRENCH.1080P.HDTV.x264-R342 [ www.Torrent9.PH ].mkv | Dragon.Ball.Super.E89.FRENCH.1080p.HDTV.x264-R342 |
 | The Hitmans BodyGuard (2017) VFQ-ENG AC3 BluRay 1080p x264.GHT (Mon meilleur ennemi) | The.Hitmans.Bodyguard.2017.MULTI.1080p.BLURAY.x264.AC3-NOTEAM |
 | 2.Fast.2.Furious.2003.MULTi.2160p.UHD.BluRay.x265-OohLaLa | 2.Fast.2.Furious.2003.MULTI.2160p.BLURAY.x265.UHD-OohLaLa |

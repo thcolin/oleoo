@@ -201,7 +201,7 @@ function parse(name, options = { strict: false, flagged: true, defaults: {} }) {
   })
 
   release.title = waste
-    .replace(/\.+/, '.')
+    .replace(/[\.-]+/, '.')
     .split('.')
     .filter((word, position) => word === words[position])
     .join(' ')

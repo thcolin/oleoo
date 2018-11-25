@@ -1,4 +1,23 @@
 {
+  "Serendipity (2001) MULTi VF2 [1080p] BluRay x264-PopHD (\"Un amour à New York\" ou \"Heureux hasard\")": {
+    "original": "Serendipity (2001) MULTi VF2 [1080p] BluRay x264-PopHD (\"Un amour à New York\" ou \"Heureux hasard\")",
+    "language": "MULTI",
+    "source": "BLURAY",
+    "encoding": "x264",
+    "resolution": "1080p",
+    "dub": null,
+    "year": "2001",
+    "flags": null,
+    "season": null,
+    "episode": null,
+    "episodes": [],
+    "type": "movie",
+    "group": null,
+    "title": "Serendipity",
+    "generated": "Serendipity.2001.MULTI.1080p.BLURAY.x264-NOTEAM",
+    "score": 5,
+    "guess": {}
+  },
   "Dragon.Ball.Super.E89.FRENCH.1080P.HDTV.x264-R342 [ www.Torrent9.PH ].mkv": {
     "original": "Dragon.Ball.Super.E89.FRENCH.1080P.HDTV.x264-R342 [ www.Torrent9.PH ].mkv",
     "language": "FRENCH",
