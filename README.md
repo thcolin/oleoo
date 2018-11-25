@@ -25,6 +25,7 @@ let release
 release = oleoo.parse('Arrow.S03E01.FASTSUB.VOSTFR.HDTV.x264-ADDiCTiON', {
   strict: true, // if no main tags found, will throw an exception
   flagged: true, // add flags to generated relese name (like STV, REMASTERED, READNFO)
+  erase: [], // add expressions to erase before parsing
   defaults: {} // defaults values for : language, resolution and year
 })
 
@@ -98,8 +99,9 @@ console.log(release)
 ## Results :
 | Original | Generated |
 | -------- | --------- |
+| [ www.Torrent*.** ] The.Darkest.Minds.2018.MULTi.1080p.WEB-DL.DD5.1.H264-ACOOL.mkv | The.Darkest.Minds.2018.MULTI.1080p.WEB-DL.h264.DD5.1-ACOOL |
 | Serendipity (2001) MULTi VF2 [1080p] BluRay x264-PopHD ("Un amour à New York" ou "Heureux hasard") | Serendipity.2001.MULTI.1080p.BLURAY.x264-NOTEAM |
-| Dragon.Ball.Super.E89.FRENCH.1080P.HDTV.x264-R342 [ www.Torrent9.PH ].mkv | Dragon.Ball.Super.E89.FRENCH.1080p.HDTV.x264-R342 |
+| Dragon.Ball.Super.E89.FRENCH.1080P.HDTV.x264-R342 [ www.Torrent*.** ].mkv | Dragon.Ball.Super.E89.FRENCH.1080p.HDTV.x264-R342 |
 | The Hitmans BodyGuard (2017) VFQ-ENG AC3 BluRay 1080p x264.GHT (Mon meilleur ennemi) | The.Hitmans.Bodyguard.2017.MULTI.1080p.BLURAY.x264.AC3-NOTEAM |
 | 2.Fast.2.Furious.2003.MULTi.2160p.UHD.BluRay.x265-OohLaLa | 2.Fast.2.Furious.2003.MULTI.2160p.BLURAY.x265.UHD-OohLaLa |
 | Ugly Americans - S02 STFR 720p.WEB-DL.x264 AC3 MpEbUtCh3r | Ugly.Americans.S02.VOSTFR.720p.WEB-DL.x264.AC3-.MpEbUtCh3r |
@@ -243,7 +245,7 @@ console.log(release)
 | Pixels.2015.FRENCH.DVDRip.XviD-SVR | Pixels.2015.FRENCH.DVDRip.XviD-SVR |
 | Camp.X-Ray.2014.FRENCH.BDRip.x264-PRiDEHD | Camp.X-Ray.2014.FRENCH.BDRip.x264-PRiDEHD |
 | Pixels.2015.FRENCH.BDRip.x264-VENUE | Pixels.2015.FRENCH.BDRip.x264-VENUE |
-| Blue. Valentine 2010 French DvDRip Xvid-FwD | Blue.2010.FRENCH.DVDRip.XviD-FwD |
+| Blue. Valentine 2010 French DvDRip Xvid-FwD | Blue.Valentine.2010.FRENCH.DVDRip.XviD-FwD |
 | Pitch.Perfect.2.2015.FRENCH.BDRip.x264-COUAC | Pitch.Perfect.2.2015.FRENCH.BDRip.x264-COUAC |
 | Blended.2014.FRENCH.BRRIP XVID AC3-lecorse | Blended.2014.FRENCH.BDRip.XviD.AC3-lecorse |
 | Big.Eyes.2014.FRENCH.BDRip.XviD-GLUPS | Big.Eyes.2014.FRENCH.BDRip.XviD-GLUPS |

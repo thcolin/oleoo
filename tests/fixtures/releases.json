@@ -1,4 +1,25 @@
 {
+  "[ www.Torrent9.PH ] The.Darkest.Minds.2018.MULTi.1080p.WEB-DL.DD5.1.H264-ACOOL.mkv": {
+    "original": "[ www.Torrent9.PH ] The.Darkest.Minds.2018.MULTi.1080p.WEB-DL.DD5.1.H264-ACOOL.mkv",
+    "language": "MULTI",
+    "source": "WEB-DL",
+    "encoding": "h264",
+    "resolution": "1080p",
+    "dub": null,
+    "year": "2018",
+    "flags": [
+      "DD5.1"
+    ],
+    "season": null,
+    "episode": null,
+    "episodes": [],
+    "type": "movie",
+    "group": "ACOOL",
+    "title": "The Darkest Minds",
+    "generated": "The.Darkest.Minds.2018.MULTI.1080p.WEB-DL.h264.DD5.1-ACOOL",
+    "score": 7,
+    "guess": {}
+  },
   "Serendipity (2001) MULTi VF2 [1080p] BluRay x264-PopHD (\"Un amour à New York\" ou \"Heureux hasard\")": {
     "original": "Serendipity (2001) MULTi VF2 [1080p] BluRay x264-PopHD (\"Un amour à New York\" ou \"Heureux hasard\")",
     "language": "MULTI",
@@ -894,7 +915,7 @@
     "episodes": [],
     "type": "movie",
     "group": null,
-    "title": "Faster, Pussycat Kill Kill  ",
+    "title": "Faster, Pussycat Kill Kill",
     "generated": "Faster,.Pussycat.Kill.Kill.1965.VOSTFR.720p.BLURAY-NOTEAM",
     "score": 4,
     "guess": {}
@@ -3175,8 +3196,8 @@
     "episodes": [],
     "type": "movie",
     "group": "FwD",
-    "title": "Blue",
-    "generated": "Blue.2010.FRENCH.DVDRip.XviD-FwD",
+    "title": "Blue Valentine",
+    "generated": "Blue.Valentine.2010.FRENCH.DVDRip.XviD-FwD",
     "score": 5,
     "guess": {
       "resolution": "SD"

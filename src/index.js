@@ -14,8 +14,13 @@ const properties = [
   'group',
 ]
 
-function clean(str) {
-  return str.replace(/[\[\]\(\)\;\:\!\s\\]+/g, '.')
+function clean(string, erase) {
+  let result = string
+  erase.forEach(regexp => result = result.replace(new RegExp(`[\.\-]*?${regexp.replace(/\\\\/g, '\\')}[\.\-]*?`, 'ig'), ''))
+  result = result.trim()
+  result = result.replace(/[\[\]\(\)\;\:\!\s\\\.]+/g, '.')
+  result = result.replace(/\.(avi|mp4|mkv)/, '')
+  return result
 }
 
 function deduce(property, name, multi = false) {
@@ -26,7 +31,7 @@ function deduce(property, name, multi = false) {
 
   switch (property) {
     case 'year': {
-      const regexp = /[\.|\-](\d{4})([\.|\-])?/
+      const regexp = /[\.\-](\d{4})([\.\-])?/
       const matches = name.match(regexp)
 
       if (matches !== null) {
@@ -125,7 +130,7 @@ function deduce(property, name, multi = false) {
       const patterns = (Array.isArray(rule[tag]) ? rule[tag] : [rule[tag]])
 
       for (let j = 0; j < patterns.length; j++) {
-        const regexp = new RegExp('[\.|\-]' + patterns[j] + '([\.|\-]|$)', 'i')
+        const regexp = new RegExp('[\.\-]' + patterns[j] + '([\.\-]|$)', 'i')
 
         if (result.waste.match(regexp)) {
           result.match = (multi ? (result.match || []).concat([tag]) : tag)
@@ -166,7 +171,7 @@ function stringify(release, options) {
     .concat('-' + (release.group || 'NOTEAM'))
 }
 
-function parse(name, options = { strict: false, flagged: true, defaults: {} }) {
+function parse(name, options = { strict: false, flagged: true, erase: [], defaults: {} }) {
   options.defaults = Object.assign(
     properties
       .filter(property => !['type'].includes(property))
@@ -177,7 +182,7 @@ function parse(name, options = { strict: false, flagged: true, defaults: {} }) {
     options.defaults
   )
 
-  const cleaned = clean(name)
+  const cleaned = clean(name, [...(options.erase || []), ...rules.erase])
 
   let words = cleaned.split('.')
   let waste = cleaned
