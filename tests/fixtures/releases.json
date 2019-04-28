@@ -1,4 +1,86 @@
 {
+  "The.Lion.in.Winter.1968.RESTORED.VOSTFR.1080p.BluRay.X264-AMIABLE": {
+    "original": "The.Lion.in.Winter.1968.RESTORED.VOSTFR.1080p.BluRay.X264-AMIABLE",
+    "language": "VOSTFR",
+    "source": "BLURAY",
+    "encoding": "x264",
+    "resolution": "1080p",
+    "dub": null,
+    "year": "1968",
+    "flags": [
+      "RESTORED"
+    ],
+    "season": null,
+    "episode": null,
+    "episodes": [],
+    "type": "movie",
+    "group": "AMIABLE",
+    "title": "The Lion In Winter",
+    "generated": "The.Lion.In.Winter.1968.VOSTFR.1080p.BLURAY.x264.RESTORED-AMIABLE",
+    "score": 7,
+    "guess": {}
+  },
+  "Escape.from.New.York.1981.COMPLETE.UHD.BLURAY-COASTER": {
+    "original": "Escape.from.New.York.1981.COMPLETE.UHD.BLURAY-COASTER",
+    "language": "VO",
+    "source": "BLURAY",
+    "encoding": null,
+    "resolution": "2160p",
+    "dub": null,
+    "year": "1981",
+    "flags": [
+      "COMPLETE"
+    ],
+    "season": null,
+    "episode": null,
+    "episodes": [],
+    "type": "movie",
+    "group": "COASTER",
+    "title": "Escape From New York",
+    "generated": "Escape.From.New.York.1981.2160p.BLURAY.COMPLETE-COASTER",
+    "score": 5,
+    "guess": {}
+  },
+  "Escape From New York 1981 MULTi VFF BluRay 4K HDR DTS-HD MA AC3 x265-HD2": {
+    "original": "Escape From New York 1981 MULTi VFF BluRay 4K HDR DTS-HD MA AC3 x265-HD2",
+    "language": "MULTI",
+    "source": "HDRip",
+    "encoding": "x265",
+    "resolution": "2160p",
+    "dub": "AC3",
+    "year": "1981",
+    "flags": [
+      "DTS"
+    ],
+    "season": null,
+    "episode": null,
+    "episodes": [],
+    "type": "movie",
+    "group": "HD2",
+    "title": "Escape From New York",
+    "generated": "Escape.From.New.York.1981.MULTI.2160p.HDRip.x265.AC3.DTS-HD2",
+    "score": 8,
+    "guess": {}
+  },
+  "Syngue.Sabour.Pierre.de.Patience.The.Patience.Stone.2012.SUBFRENCH.720p.BluRay.x264-ROUGH": {
+    "original": "Syngue.Sabour.Pierre.de.Patience.The.Patience.Stone.2012.SUBFRENCH.720p.BluRay.x264-ROUGH",
+    "language": "VOSTFR",
+    "source": "BLURAY",
+    "encoding": "x264",
+    "resolution": "720p",
+    "dub": null,
+    "year": "2012",
+    "flags": null,
+    "season": null,
+    "episode": null,
+    "episodes": [],
+    "type": "movie",
+    "group": "ROUGH",
+    "title": "Syngue Sabour Pierre De Patience The Patience Stone",
+    "generated": "Syngue.Sabour.Pierre.De.Patience.The.Patience.Stone.2012.VOSTFR.720p.BLURAY.x264-ROUGH",
+    "score": 6,
+    "guess": {}
+  },
   "[ www.Torrent9.PH ] The.Darkest.Minds.2018.MULTi.1080p.WEB-DL.DD5.1.H264-ACOOL.mkv": {
     "original": "[ www.Torrent9.PH ] The.Darkest.Minds.2018.MULTi.1080p.WEB-DL.DD5.1.H264-ACOOL.mkv",
     "language": "MULTI",
@@ -59,7 +141,7 @@
     "generated": "Dragon.Ball.Super.E89.FRENCH.1080p.HDTV.x264-R342",
     "score": 5,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "The Hitmans BodyGuard (2017) VFQ-ENG AC3 BluRay 1080p x264.GHT (Mon meilleur ennemi)": {
@@ -89,17 +171,15 @@
     "resolution": "2160p",
     "dub": null,
     "year": "2003",
-    "flags": [
-      "UHD"
-    ],
+    "flags": null,
     "season": null,
     "episode": null,
     "episodes": [],
     "type": "movie",
     "group": "OohLaLa",
     "title": "2 Fast 2 Furious",
-    "generated": "2.Fast.2.Furious.2003.MULTI.2160p.BLURAY.x265.UHD-OohLaLa",
-    "score": 7,
+    "generated": "2.Fast.2.Furious.2003.MULTI.2160p.BLURAY.x265-OohLaLa",
+    "score": 6,
     "guess": {}
   },
   "Ugly Americans - S02 STFR 720p.WEB-DL.x264 AC3 MpEbUtCh3r": {
@@ -120,7 +200,7 @@
     "generated": "Ugly.Americans.S02.VOSTFR.720p.WEB-DL.x264.AC3-.MpEbUtCh3r",
     "score": 6,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "The.Good.German.2006.DVDRip.MULTI.H264.720x480.AAC.MK2017": {
@@ -188,7 +268,7 @@
     "generated": "Fear.The.Walking.Dead.S03E01-E02.720p.HDTV.x264.PROPER-AVS",
     "score": 5,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "Teenage.Mutant.Ninja.Turtles.2012.S05E11E12E13.720p.WEB-DL.AAC2.0.H264-iT00NZ": {
@@ -237,7 +317,7 @@
     "generated": "Scream.S02E01.GERMAN.720p.WEB-DL.x264.DL.DD5.1-TVS",
     "score": 6,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "Preacher S01E01 Pilot German DD51 DL 720p AmazonHD x264-TVS": {
@@ -263,7 +343,7 @@
     "generated": "Preacher.S01E01.GERMAN.720p.WEB-DL.x264.DL.DD5.1-TVS",
     "score": 6,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "Noah.German.2014.LD.1080p.BluRay.x264-HCS": {
@@ -322,7 +402,7 @@
     "generated": "2012.720p.BLURAY.x264.AC3-XXL",
     "score": 5,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "No.Foreigners.Here.100.Percent.British.S01E03.PDTV.x264-C4TV": {
@@ -345,7 +425,7 @@
     "generated": "No.Foreigners.Here.100.Percent.British.S01E03.PDTV.x264-C4TV",
     "score": 3,
     "guess": {
-      "year": 2018,
+      "year": 2019,
       "resolution": "SD"
     }
   },
@@ -371,7 +451,7 @@
     "generated": "Supernatural.S09E08.GERMAN.720p.BLURAY.x264.DUBBED.DL-TVP",
     "score": 7,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "Die.Hoehle.der.Loewen.S01E08.German.HDTVRip.x264-SotW": {
@@ -394,7 +474,7 @@
     "generated": "Die.Hoehle.Der.Loewen.S01E08.GERMAN.HDTV.x264-SotW",
     "score": 4,
     "guess": {
-      "year": 2018,
+      "year": 2019,
       "resolution": "SD"
     }
   },
@@ -420,7 +500,7 @@
     "generated": "Police.Ten.7.S21E35.720p.HDTV.x264.REPACK-FiHTV",
     "score": 5,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "Shortland.Street.S23E180.720p.HDTV.x264-FiHTV": {
@@ -443,7 +523,7 @@
     "generated": "Shortland.Street.S23E180.720p.HDTV.x264-FiHTV",
     "score": 4,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "Rules.of.Engagement.S05E24.German.DVDRip.x264-iNTENTiON": {
@@ -466,7 +546,7 @@
     "generated": "Rules.Of.Engagement.S05E24.GERMAN.DVDRip.x264-iNTENTiON",
     "score": 4,
     "guess": {
-      "year": 2018,
+      "year": 2019,
       "resolution": "SD"
     }
   },
@@ -492,7 +572,7 @@
     "generated": "Edge.Of.Tomorrow.GERMAN.1080p.BLURAY.x264.3D.DL.HOU-EXQUiSiTE",
     "score": 6,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "Friday.The.13th.Part.III.3D.1982.iNTERNAL.BDRip.x264-MARS": {
@@ -541,7 +621,7 @@
     "generated": "Free.Birds.Esst.Uns.An.Einem.Anderen.Tag.GERMAN.1080p.BLURAY.x264.3D.DL.HSBS-EXQUiSiTE",
     "score": 6,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "Nurse.3D.2013.German.DL.720p.BluRay.x264-PussyFoot": {
@@ -852,7 +932,7 @@
     "generated": "The.Purge.Anarchy.GERMAN.1080p.BLURAY.x264.DUBBED.DL-Pleaders",
     "score": 7,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "22.Jump.Street.GERMAN.DL.AC3.Dubbed.1080p.BluRay.x264-SOV": {
@@ -875,7 +955,7 @@
     "generated": "22.Jump.Street.GERMAN.1080p.BLURAY.x264.DUBBED.DL-SOV",
     "score": 7,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "Tammy.Voll.abgefahren.German.DL.AC3.Dubbed.720p.WebHD.h264-PsO": {
@@ -898,7 +978,7 @@
     "generated": "Tammy.Voll.Abgefahren.GERMAN.720p.WEB-DL.h264.DUBBED.DL-PsO",
     "score": 7,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "Faster, Pussycat ! Kill ! Kill !. 1965.Russ Meyer.VOSTFR.Blu-Ray 720p.Liosaa (RU) / Popo": {
@@ -1285,7 +1365,7 @@
     "generated": "Benjamin.Button.FRENCH.720p.HDRip.x264-NOTEAM",
     "score": 4,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "Lone.Survivor.2013.FANSUB.VOSTFR.DVDSCR.XVID.AC3-NIKOo": {
@@ -1482,7 +1562,7 @@
     "generated": "Marvels.Agent.Carter.S01.VOSTFR.720p.WEB-DL.h264.DD5.1-SEEHD",
     "score": 6,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "Weeds.S01.REPACK.MULTI.720p.BluRay.x264-DWS": {
@@ -1505,7 +1585,7 @@
     "generated": "Weeds.S01.MULTI.720p.BLURAY.x264.REPACK-DWS",
     "score": 6,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "Marvels.Agent.Carter.S01E03.VOSTFR.720p.WEB-DL.DD5.1.H.264-LTL": {
@@ -1530,7 +1610,7 @@
     "generated": "Marvels.Agent.Carter.S01E03.VOSTFR.720p.WEB-DL.h264.DD5.1-LTL",
     "score": 6,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "Water.For.Elephants.2011.FRENCH.SUBFORCED.BRRip.x264.AC3-FUNKY": {
@@ -1576,7 +1656,7 @@
     "generated": "Marvels.Agent.Carter.S01E02.VOSTFR.720p.HDTV.x264-LTL",
     "score": 5,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "Marvels.Agent.Carter.S01E01.VOSTFR.720p.HDTV.x264-LTL": {
@@ -1599,7 +1679,7 @@
     "generated": "Marvels.Agent.Carter.S01E01.VOSTFR.720p.HDTV.x264-LTL",
     "score": 5,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "Veronica Mars 2014 TRUEFRENCH BDRip XviD AC3-FrIeNdS": {
@@ -1645,7 +1725,7 @@
     "generated": "Marvels.Agent.Carter.S01E01.VOSTFR.720p.HDTV.x264.FASTSUB-ADDiCTiON",
     "score": 6,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "Ma.Premiere.Fois.2012.FRENCH.720p.BluRay.x264-CARPEDIEM": {
@@ -1687,7 +1767,7 @@
     "generated": "Manhattan.S01E01.FRENCH.HDTV.x264-CaCoLaC",
     "score": 4,
     "guess": {
-      "year": 2018,
+      "year": 2019,
       "resolution": "SD"
     }
   },
@@ -1900,7 +1980,7 @@
     "generated": "La.Veritable.Histoire.Du.Petit.Chaperon.Rouge.FRENCH.DVDRip.XviD-NOTEAM",
     "score": 3,
     "guess": {
-      "year": 2018,
+      "year": 2019,
       "resolution": "SD"
     }
   },
@@ -1943,7 +2023,7 @@
     "generated": "La.Planete.Des.Singes.L'affrontement.TRUEFRENCH.720p.HDRip.x264-NOTEAM",
     "score": 4,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "The Ten 2011 TRUEFRENCH SUBFORCED DVDRIP XVID-FwD": {
@@ -2117,7 +2197,7 @@
     "generated": "The.Man.In.The.High.Castle.S01E01.720p.WEB-DL.x264.DD5.1-FtDL",
     "score": 5,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "How.Do.You.Know.2010.TRUEFRENCH.DVDRip.XviD-LiberTeam": {
@@ -2247,7 +2327,7 @@
     "generated": "The.Last.Man.On.Earth.S01E01.VOSTFR.HDTV.XviD.FASTSUB-ADDiCTiON",
     "score": 5,
     "guess": {
-      "year": 2018,
+      "year": 2019,
       "resolution": "SD"
     }
   },
@@ -2403,7 +2483,7 @@
     "generated": "The.100.S01E01.VOSTFR.HDTV.XviD.FASTSUB-ADDiCTiON",
     "score": 5,
     "guess": {
-      "year": 2018,
+      "year": 2019,
       "resolution": "SD"
     }
   },
@@ -2596,7 +2676,7 @@
     "generated": "Factotum.FRENCH.DVDRip.XviD-ZANBiC",
     "score": 4,
     "guess": {
-      "year": 2018,
+      "year": 2019,
       "resolution": "SD"
     }
   },
@@ -2664,7 +2744,7 @@
     "generated": "Eureka.S05.FRENCH.DVDRip.XviD.LD-EPZ",
     "score": 5,
     "guess": {
-      "year": 2018,
+      "year": 2019,
       "resolution": "SD"
     }
   },
@@ -2834,7 +2914,7 @@
     "generated": "Dumb.And.Dumber.FRENCH.BDRip.XviD-LKT",
     "score": 4,
     "guess": {
-      "year": 2018,
+      "year": 2019,
       "resolution": "SD"
     }
   },
@@ -2858,7 +2938,7 @@
     "generated": "Shrek.Tetralogie.TRUEFRENCH.DVDRip.XviD.AC3.DD5.1-lanesra13",
     "score": 6,
     "guess": {
-      "year": 2018,
+      "year": 2019,
       "resolution": "SD"
     }
   },
@@ -3008,7 +3088,7 @@
     "generated": "Quand.Harry.Rencontre.Sally.FRENCH.DVDRip.XviD-Shane",
     "score": 4,
     "guess": {
-      "year": 2018,
+      "year": 2019,
       "resolution": "SD"
     }
   },
@@ -3284,7 +3364,7 @@
     "generated": "Peter.Pan.TRUEFRENCH.DVDRip.XviD.AC3-LiberTeam",
     "score": 5,
     "guess": {
-      "year": 2018,
+      "year": 2019,
       "resolution": "SD"
     }
   },
@@ -3373,7 +3453,7 @@
     "generated": "Orange.Mecanique.MULTI.DVDRip.x264.AAC-ECKOES",
     "score": 5,
     "guess": {
-      "year": 2018,
+      "year": 2019,
       "resolution": "SD"
     }
   },
@@ -3399,7 +3479,7 @@
     "generated": "Arrow.S03E01.VOSTFR.HDTV.x264.FASTSUB-ADDiCTiON",
     "score": 5,
     "guess": {
-      "year": 2018,
+      "year": 2019,
       "resolution": "SD"
     }
   },
@@ -3421,7 +3501,7 @@
     "generated": "Nights.In.Rodanthe.TRUEFRENCH.DVDRip.XviD-UNSKiLLED",
     "score": 4,
     "guess": {
-      "year": 2018,
+      "year": 2019,
       "resolution": "SD"
     }
   },
@@ -3446,7 +3526,7 @@
     "generated": "Mr.Robot.S01.VOSTFR.720p.WEB-DL.h264.PROPER.DD5.1-ARK01",
     "score": 6,
     "guess": {
-      "year": 2018
+      "year": 2019
     }
   },
   "12.Monkeys.S01E01.FRENCH.HDTV.x264-AZR": {
@@ -3469,7 +3549,7 @@
     "generated": "12.Monkeys.S01E01.FRENCH.HDTV.x264-AZR",
     "score": 4,
     "guess": {
-      "year": 2018,
+      "year": 2019,
       "resolution": "SD"
     }
   }

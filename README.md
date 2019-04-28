@@ -88,6 +88,10 @@ console.log(release)
 ## Issues :
 | Original | Generated |
 | -------- | --------- |
+| The Good German (2006).VOSTR.720p.WEBDL.h264.aac | The.Good.2006.GERMAN.720p.WEB-DL.h264-NOTEAM |
+| La.French.2014.FRENCH.SUBFORCED.BRRip.XviD-VENUM.avi | La.2014.FRENCH.BDRip.XviD-VENUM |
+| The French Connection 2 (1975) MULTI. VFF. VO. 1080p BluRay REMUX AVC H264 DTS-HD.MA.5.1 SEL | The.1975.MULTI.1080p.HDRip.h264-NOTEAM |
+| Johnny English Contre-Attaque 2018 FRENCH WEBRip 720p x264-Notag | Johnny.2018.FRENCH.720p.WEB-DL.x264-Notag |
 | Nurse.3D.2013.German.DL.720p.BluRay.x264-PussyFoot | Nurse.2013.GERMAN.720p.BLURAY.x264.3D.DL-PussyFoot |
 | Faster, Pussycat ! Kill ! Kill !. 1965.Russ Meyer.VOSTFR.Blu-Ray 720p.Liosaa (RU) / Popo | Faster,.Pussycat.Kill.Kill.1965.VOSTFR.720p.BLURAY-NOTEAM |
 | Kiss the blood off my hands - (Norman FOSTER) - 1948 - VOSTFR - Dvdrip-x264 - kerfiche | Kiss.The.Blood.Off.My.Hands.-.Norman.Foster.-.-.1948.VOSTFR.DVDRip.x264-.kerfiche |
@@ -100,10 +104,15 @@ console.log(release)
 | Original | Generated |
 | -------- | --------- |
 | [ www.Torrent*.** ] The.Darkest.Minds.2018.MULTi.1080p.WEB-DL.DD5.1.H264-ACOOL.mkv | The.Darkest.Minds.2018.MULTI.1080p.WEB-DL.h264.DD5.1-ACOOL |
+| The.Lion.in.Winter.1968.RESTORED.VOSTFR.1080p.BluRay.X264-AMIABLE | The.Lion.In.Winter.1968.VOSTFR.1080p.BLURAY.x264.RESTORED-AMIABLE |
+| Escape.from.New.York.1981.COMPLETE.UHD.BLURAY-COASTER | Escape.From.New.York.1981.2160p.BLURAY.COMPLETE-COASTER |
+| Escape From New York 1981 MULTi VFF BluRay 4K HDR DTS-HD MA AC3 x265-HD2 | Escape.From.New.York.1981.MULTI.2160p.HDRip.x265.AC3.DTS-HD2 |
+| Syngue.Sabour.Pierre.de.Patience.The.Patience.Stone.2012.SUBFRENCH.720p.BluRay.x264-ROUGH | Syngue.Sabour.Pierre.De.Patience.The.Patience.Stone.2012.VOSTFR.720p.BLURAY.x264-ROUGH |
+| [ www.Torrent*.** ] The.Darkest.Minds.2018.MULTi.1080p.WEB-DL.DD5.1.H264-ACOOL.mkv | The.Darkest.Minds.2018.MULTI.1080p.WEB-DL.h264.DD5.1-ACOOL |
 | Serendipity (2001) MULTi VF2 [1080p] BluRay x264-PopHD ("Un amour à New York" ou "Heureux hasard") | Serendipity.2001.MULTI.1080p.BLURAY.x264-NOTEAM |
 | Dragon.Ball.Super.E89.FRENCH.1080P.HDTV.x264-R342 [ www.Torrent*.** ].mkv | Dragon.Ball.Super.E89.FRENCH.1080p.HDTV.x264-R342 |
 | The Hitmans BodyGuard (2017) VFQ-ENG AC3 BluRay 1080p x264.GHT (Mon meilleur ennemi) | The.Hitmans.Bodyguard.2017.MULTI.1080p.BLURAY.x264.AC3-NOTEAM |
-| 2.Fast.2.Furious.2003.MULTi.2160p.UHD.BluRay.x265-OohLaLa | 2.Fast.2.Furious.2003.MULTI.2160p.BLURAY.x265.UHD-OohLaLa |
+| 2.Fast.2.Furious.2003.MULTi.2160p.UHD.BluRay.x265-OohLaLa | 2.Fast.2.Furious.2003.MULTI.2160p.BLURAY.x265-OohLaLa |
 | Ugly Americans - S02 STFR 720p.WEB-DL.x264 AC3 MpEbUtCh3r | Ugly.Americans.S02.VOSTFR.720p.WEB-DL.x264.AC3-.MpEbUtCh3r |
 | The.Good.German.2006.DVDRip.MULTI.H264.720x480.AAC.MK2017 | The.Good.2006.MULTI.DVDRip.h264.AAC-NOTEAM |
 | La ligne Verte (1999) MULTi-VF2 [1080p] BluRay x264-PopHD (The Green Mile) | La.Ligne.Verte.1999.MULTI.1080p.BLURAY.x264-PopHD |

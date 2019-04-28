@@ -116,7 +116,9 @@
       "1080p"
     ],
     "2160p": [
-      "2160p"
+      "2160p",
+      "4k",
+      "uhd"
     ]
   },
   "dub": {
@@ -158,7 +160,8 @@
     "VFQ": "vfq",
     "VOSTFR": [
       "vostfr",
-      "stfr"
+      "stfr",
+      "subfrench"
     ],
     "PERSIAN": "persian",
     "AMHARIC": "amharic",
@@ -213,7 +216,6 @@
   },
   "flags": {
     "3D": "3d",
-    "UHD": "UHD",
     "PROPER": "proper",
     "LIMITED": "limited",
     "FASTSUB": "fastsub",
@@ -250,6 +252,7 @@
     "DUAL": "dual",
     "FINAL": "final",
     "COLORIZED": "colorized",
+    "RESTORED": "restored",
     "WS": "ws",
     "DL": "dl",
     "DOLBY DIGITAL": [
