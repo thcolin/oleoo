@@ -1,4 +1,44 @@
 {
+  "Reviens-moi (2007) [1080p] BluRay MULTi x264-PopHD.mkv": {
+    "original": "Reviens-moi (2007) [1080p] BluRay MULTi x264-PopHD.mkv",
+    "language": "MULTI",
+    "source": "BLURAY",
+    "encoding": "x264",
+    "resolution": "1080p",
+    "dub": null,
+    "year": "2007",
+    "flags": null,
+    "season": null,
+    "episode": null,
+    "episodes": [],
+    "type": "movie",
+    "group": "PopHD",
+    "title": "Reviens Moi",
+    "generated": "Reviens.Moi.2007.MULTI.1080p.BLURAY.x264-PopHD",
+    "score": 6,
+    "guess": {}
+  },
+  "Spider-Man.Into.The.Spider-Verse.2018.TRUEFRENCH.BDRip.x264-NEO": {
+    "original": "Spider-Man.Into.The.Spider-Verse.2018.TRUEFRENCH.BDRip.x264-NEO",
+    "language": "TRUEFRENCH",
+    "source": "BDRip",
+    "encoding": "x264",
+    "resolution": null,
+    "dub": null,
+    "year": "2018",
+    "flags": null,
+    "season": null,
+    "episode": null,
+    "episodes": [],
+    "type": "movie",
+    "group": "NEO",
+    "title": "Spider Man Into The Spider-Verse",
+    "generated": "Spider.Man.Into.The.Spider-Verse.2018.TRUEFRENCH.BDRip.x264-NEO",
+    "score": 5,
+    "guess": {
+      "resolution": "SD"
+    }
+  },
   "The.Lion.in.Winter.1968.RESTORED.VOSTFR.1080p.BluRay.X264-AMIABLE": {
     "original": "The.Lion.in.Winter.1968.RESTORED.VOSTFR.1080p.BluRay.X264-AMIABLE",
     "language": "VOSTFR",
@@ -81,8 +121,8 @@
     "score": 6,
     "guess": {}
   },
-  "[ www.Torrent9.PH ] The.Darkest.Minds.2018.MULTi.1080p.WEB-DL.DD5.1.H264-ACOOL.mkv": {
-    "original": "[ www.Torrent9.PH ] The.Darkest.Minds.2018.MULTi.1080p.WEB-DL.DD5.1.H264-ACOOL.mkv",
+  "[ www.Torrent*.** ] The.Darkest.Minds.2018.MULTi.1080p.WEB-DL.DD5.1.H264-ACOOL.mkv": {
+    "original": "[ www.Torrent*.** ] The.Darkest.Minds.2018.MULTi.1080p.WEB-DL.DD5.1.H264-ACOOL.mkv",
     "language": "MULTI",
     "source": "WEB-DL",
     "encoding": "h264",
@@ -121,8 +161,8 @@
     "score": 5,
     "guess": {}
   },
-  "Dragon.Ball.Super.E89.FRENCH.1080P.HDTV.x264-R342 [ www.Torrent9.PH ].mkv": {
-    "original": "Dragon.Ball.Super.E89.FRENCH.1080P.HDTV.x264-R342 [ www.Torrent9.PH ].mkv",
+  "Dragon.Ball.Super.E89.FRENCH.1080P.HDTV.x264-R342 [ www.Torrent*.** ].mkv": {
+    "original": "Dragon.Ball.Super.E89.FRENCH.1080P.HDTV.x264-R342 [ www.Torrent*.** ].mkv",
     "language": "FRENCH",
     "source": "HDTV",
     "encoding": "x264",
@@ -592,8 +632,8 @@
     "episodes": [],
     "type": "movie",
     "group": "MARS",
-    "title": "Friday The 13th Part Iii",
-    "generated": "Friday.The.13th.Part.Iii.1982.BDRip.x264.3D.INTERNAL-MARS",
+    "title": "Friday The 13th Part 3",
+    "generated": "Friday.The.13th.Part.3.1982.BDRip.x264.3D.INTERNAL-MARS",
     "score": 5,
     "guess": {
       "resolution": "SD"
@@ -1094,8 +1134,8 @@
     "episodes": [],
     "type": "movie",
     "group": "LOST",
-    "title": "Star Wars Episode I The Phantom Menace",
-    "generated": "Star.Wars.Episode.I.The.Phantom.Menace.1999.MULTI.1080p.BLURAY.x264-LOST",
+    "title": "Star Wars Episode 1 The Phantom Menace",
+    "generated": "Star.Wars.Episode.1.The.Phantom.Menace.1999.MULTI.1080p.BLURAY.x264-LOST",
     "score": 6,
     "guess": {}
   },

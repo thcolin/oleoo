@@ -124,7 +124,7 @@ function deduce(property, name, multi = false) {
   const rule = rules[property]
   const tags = Object.keys(rule)
 
-  single:
+  single: {
     for (let i = 0; i < tags.length; i++) {
       const tag = tags[i]
       const patterns = (Array.isArray(rule[tag]) ? rule[tag] : [rule[tag]])
@@ -143,8 +143,8 @@ function deduce(property, name, multi = false) {
           break
         }
       }
-
     }
+  }
 
   return result
 }
@@ -184,7 +184,7 @@ function parse(name, options = { strict: false, flagged: true, erase: [], defaul
 
   const cleaned = clean(name, [...(options.erase || []), ...rules.erase])
 
-  let words = cleaned.split('.')
+  let words = cleaned.replace(/[\.\-]+/, '.').split('.')
   let waste = cleaned
   let handicap = []
 
@@ -209,6 +209,7 @@ function parse(name, options = { strict: false, flagged: true, erase: [], defaul
     .replace(/[\.\-]+/, '.')
     .split('.')
     .filter((word, position) => word === words[position])
+    .map(word => word.split('').every(char => ['i', 'I'].includes(char)) ? word.length : word)
     .join(' ')
     .toLowerCase()
     .replace(/(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g, s => s.toUpperCase()) // ucwords
