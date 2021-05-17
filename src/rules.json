@@ -240,6 +240,18 @@
     "FESTIVAL": "festival",
     "STV": "stv",
     "RETAIL": "retails",
+    "NETFLIX": [
+      "nf",
+      "netflix"
+    ],
+    "AMAZON": [
+      "amzn",
+      "amazon"
+    ],
+    "DISNEY+": [
+      "dnsp",
+      "disney+"
+    ],
     "REMASTERED": "remastered",
     "RATED": "rated",
     "CHRONO": "chrono",
