@@ -257,6 +257,7 @@ function guess(name, options) {
 const oleoo = {
   parse,
   guess,
+  stringify,
 }
 
 module.exports = oleoo
