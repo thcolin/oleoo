@@ -1,4 +1,22 @@
 {
+  "type":{
+    "movie":[
+      "avi",
+      "mp4",
+      "mkv"
+    ],
+    "book":[
+      "pdf",
+      "epub"
+    ],
+    "iso":[
+      "diskimage"
+    ],
+    "archive":[
+      "tar",
+      "zip"
+    ]
+  },
   "source": {
     "CAM": [
       "camrip",

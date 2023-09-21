@@ -19,11 +19,11 @@ function clean(string, erase) {
   erase.forEach(regexp => result = result.replace(new RegExp(`[\.\-]*?${regexp.replace(/\\\\/g, '\\')}[\.\-]*?`, 'ig'), ''))
   result = result.trim()
   result = result.replace(/[\[\]\(\)\;\:\!\s\\\.]+/g, '.')
-  result = result.replace(/\.(avi|mp4|mkv)/, '')
+  result = result.replace(/\.(avi|mp4|mkv|iso|tar|zip|pdf|epub)/, '')
   return result
 }
 
-function deduce(property, name, multi = false) {
+function deduce(property, name, multi = false, original) {
   const result =  {
     match: null,
     waste: name
@@ -109,6 +109,14 @@ function deduce(property, name, multi = false) {
       result.match = 'movie'
       result.waste = name
 
+      const extension = original.match(/\.(avi|mp4|mkv|iso|tar|zip|pdf|epub)$/)?.[1]
+      if (extension) {
+        const match = Object.entries(rules.type).find(([type, extensions]) => extensions.includes(extension.toLowerCase()))
+        if (match) {
+          result.waste = match[0]
+        }
+      }
+
       for (let regexp of [/[\.\-]S\d+[\.\-]?(?:-?E\d+)*([\.\-])/i, /[\.\-](?:-?E\d+)+([\.\-])/i]) {
         if (name.match(regexp)) {
           result.match = 'tvshow'
@@ -182,7 +190,7 @@ function parse(name, options = { strict: false, flagged: true, erase: [], defaul
     options.defaults
   )
 
-  const cleaned = clean(name, [...(options.erase || []), ...rules.erase])
+  const cleaned = clean(name, [...(options.erase || []), ...rules.erase])
 
   let words = cleaned.replace(/[\.\-]+/, '.').split('.')
   let waste = cleaned
@@ -193,7 +201,7 @@ function parse(name, options = { strict: false, flagged: true, erase: [], defaul
   }
 
   properties.map(property => {
-    const result = deduce(property, waste, ['language', 'flags'].includes(property))
+    const result = deduce(property, waste, ['language', 'flags'].includes(property), name)
 
     if (property === 'language' && result.match) {
       result.match = result.match.length > 1 ? 'MULTI' : result.match[0]
