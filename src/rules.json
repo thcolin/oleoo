@@ -1,18 +1,18 @@
 {
-  "type":{
-    "movie":[
+  "type": {
+    "movie": [
       "avi",
       "mp4",
       "mkv"
     ],
-    "book":[
+    "book": [
       "pdf",
       "epub"
     ],
-    "iso":[
+    "iso": [
       "diskimage"
     ],
-    "archive":[
+    "archive": [
       "tar",
       "zip"
     ]
