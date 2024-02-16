@@ -258,6 +258,7 @@ const oleoo = {
   parse,
   guess,
   stringify,
+  rules,
 }
 
 module.exports = oleoo
