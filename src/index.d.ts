@@ -18,12 +18,6 @@ type SceneTags = {
   score: number
 }
 
-type SceneTagsResult = {
-  [key: string]: SceneTags | object
-  strict: SceneTags | object,
-  guess: SceneTags | object,
-}
-
 type ReleaseOptions = {
   [key: string]: boolean | string[] | SceneTags | object
   strict?: boolean,
