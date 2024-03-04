@@ -23,7 +23,7 @@ type ReleaseOptions = {
   strict?: boolean,
   flagged?: boolean,
   erase?: string[],
-  defaults: SceneTags | object,
+  defaults?: SceneTags | object,
 }
 
 declare module 'oleoo' {
