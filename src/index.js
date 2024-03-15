@@ -205,14 +205,24 @@ function parse(name, options = { strict: false, flagged: true, erase: [], defaul
     release[property] = result.match || options.defaults[property]
   })
 
+  let yearPos = 0
+  words.reduceRight((_, w, i) => {
+    if (/19|20\d{2}/.test(w)) {
+      yearPos = i
+    }
+  }, null)
+
   release.title = waste
     .replace(/[\.\-]+/, '.')
     .split('.')
     .filter((word, position) => word === words[position])
-    .map(word => word.split('').every(char => ['i', 'I'].includes(char)) ? word.length : word)
-    .join(' ')
-    .toLowerCase()
-    .replace(/(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g, s => s.toUpperCase()) // ucwords
+    .map((word, i) => {
+      if (i === (yearPos - 1) && word.split('').every(char => ['i', 'I'].includes(char))) {
+        return word.length
+      } else {
+        return word
+      }
+    })
 
   release.generated = stringify(release, options)
 
