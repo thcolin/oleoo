@@ -217,7 +217,7 @@ function parse(name, options = { strict: false, flagged: true, erase: [], defaul
     .split('.')
     .filter((word, position) => word === words[position])
     .map((word, i) => {
-      if (i === (yearPos - 1) && word.split('').every(char => ['i', 'I'].includes(char))) {
+      if ((i === (yearPos - 1) || i === (words.length - 1)) && word.split('').every(char => ['i', 'I'].includes(char))) {
         return word.length
       } else {
         return word
