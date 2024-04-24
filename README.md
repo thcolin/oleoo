@@ -266,7 +266,7 @@ console.log(release)
 | The French Connection 2 (1975) MULTI. VFF. VO. 1080p BluRay REMUX AVC H264 DTS-HD.MA.5.1 SEL | The.French.Connection.2.1975.MULTi-VFF.1080p.BLURAY.h264-SEL |
 | Johnny English Contre-Attaque 2018 FRENCH WEBRip 720p x264-Notag | Johnny.English.Contre.Attaque.2018.FRENCH.720p.WEB-DL.x264-Notag |
 | Nurse.3D.2013.German.DL.720p.BluRay.x264-PussyFoot | Nurse.2013.GERMAN.720p.BLURAY.x264-PussyFoot |
-| Faster, Pussycat ! Kill ! Kill !. 1965.Russ Meyer.VOSTFR.Blu-Ray 720p.Liosaa (RU) / Popo | v |
+| Faster, Pussycat ! Kill ! Kill !. 1965.Russ Meyer.VOSTFR.Blu-Ray 720p.Liosaa (RU) / Popo | Faster.Pussycat.Kill.Kill.1965.VOSTFR.720p.BLURAY-Liosaa |
 | Kiss the blood off my hands - (Norman FOSTER) - 1948 - VOSTFR - Dvdrip-x264 - kerfiche | Kiss.The.Blood.Off.My.Hands.Norman.Foster.1948.VOSTFR.DVDRip.x264-kerfiche |
 | Le Nouveau Stagiaire (2015) The Intern - Multi 1080p - x264 AAC 5.1 - CCATS | Le.Nouveau.Stagiaire.2015.MULTi.1080p.x264-CCATS |
 | La.Planete.Des.Singes.L'affrontement.TRUEFRENCH.720p.x264.HDLIGHT | La.Planete.Des.Singes.L.Affrontement.TRUEFRENCH.720p.HDRip.x264-NOTEAM |
