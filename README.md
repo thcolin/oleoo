@@ -34,6 +34,7 @@ console.log(release)
 /*
 {
   original: 'Arrow.S03E01.FASTSUB.VOSTFR.HDTV.x264-ADDiCTiON',
+  languages: ['VOSTFR'],
   language: 'VOSTFR',
   source: 'HDTV',
   encoding: 'x264',
@@ -88,18 +89,7 @@ console.log(release)
 ## Issues :
 | Original | Generated |
 | -------- | --------- |
-| 40 JOURS ET 40 NUITS HDTV 1080p MULTI FR-EN AC3 .ts | 40.Jours.Et.40.Nuits.Hdtv.MULTI.1080p.CAM.AC3-NOTEAM |
-| Reviens-moi .2007.MULTi.1080p.BluRay.DTS.HDMA.x265.AZAZE | Reviens.2007.MULTI.1080p.BLURAY.x265-moi |
-| The Good German (2006).VOSTR.720p.WEBDL.h264.aac | The.Good.2006.GERMAN.720p.WEB-DL.h264-NOTEAM |
-| La.French.2014.FRENCH.SUBFORCED.BRRip.XviD-VENUM.avi | La.2014.FRENCH.BDRip.XviD-VENUM |
-| The French Connection 2 (1975) MULTI. VFF. VO. 1080p BluRay REMUX AVC H264 DTS-HD.MA.5.1 SEL | The.1975.MULTI.1080p.HDRip.h264-NOTEAM |
-| Johnny English Contre-Attaque 2018 FRENCH WEBRip 720p x264-Notag | Johnny.2018.FRENCH.720p.WEB-DL.x264-Notag |
-| Nurse.3D.2013.German.DL.720p.BluRay.x264-PussyFoot | Nurse.2013.GERMAN.720p.BLURAY.x264.3D.DL-PussyFoot |
-| Faster, Pussycat ! Kill ! Kill !. 1965.Russ Meyer.VOSTFR.Blu-Ray 720p.Liosaa (RU) / Popo | Faster,.Pussycat.Kill.Kill.1965.VOSTFR.720p.BLURAY-NOTEAM |
-| Kiss the blood off my hands - (Norman FOSTER) - 1948 - VOSTFR - Dvdrip-x264 - kerfiche | Kiss.The.Blood.Off.My.Hands.-.Norman.Foster.-.-.1948.VOSTFR.DVDRip.x264-.kerfiche |
-| Le Nouveau Stagiaire (2015) The Intern - Multi 1080p - x264 AAC 5.1 - CCATS | Le.Nouveau.Stagiaire.-.2015.MULTI.1080p.x264.AAC.DD5.1-.CCATS |
-| La.Planete.Des.Singes.L'affrontement.TRUEFRENCH.720p.x264.HDLIGHT | La.Planete.Des.Singes.L'affrontement.TRUEFRENCH.720p.HDRip.x264-NOTEAM |
-<!-- | 👻 | 👻 | -->
+| 👻 | 👻 |
 
 ## Results :
 | Original | Generated |
@@ -269,3 +259,14 @@ console.log(release)
 | Nights.In.Rodanthe.TRUEFRENCH.DVDRip.XviD-UNSKiLLED | Nights.In.Rodanthe.TRUEFRENCH.DVDRip.XviD-UNSKiLLED |
 | Mr.Robot.S01.PROPER.VOSTFR.720p.WEB-DL.DD5.1.H264-ARK01 | Mr.Robot.S01.VOSTFR.720p.WEB-DL.h264.PROPER.DD5.1-ARK01 |
 | 12.Monkeys.S01E01.FRENCH.HDTV.x264-AZR | 12.Monkeys.S01E01.FRENCH.HDTV.x264-AZR |
+| 40 JOURS ET 40 NUITS HDTV 1080p MULTI FR-EN AC3 .ts | 40.Jours.Et.40.Nuits.MULTi.1080p.HDTV.AC3-NOTEAM |
+| Reviens-moi .2007.MULTi.1080p.BluRay.DTS.HDMA.x265.AZAZE | Reviens.Moi.2007.MULTi.1080p.BLURAY.x265-AZAZE |
+| The Good German (2006).VOSTR.720p.WEBDL.h264.aac | The.Good.German.2006.VOSTFR.720p.WEB-DL.h264-NOTEAM |
+| La.French.2014.FRENCH.SUBFORCED.BRRip.XviD-VENUM.avi | La.French.2014.FRENCH.BDRip.XviD-VENUM |
+| The French Connection 2 (1975) MULTI. VFF. VO. 1080p BluRay REMUX AVC H264 DTS-HD.MA.5.1 SEL | The.French.Connection.2.1975.MULTi-VFF.1080p.BLURAY.h264-SEL |
+| Johnny English Contre-Attaque 2018 FRENCH WEBRip 720p x264-Notag | Johnny.English.Contre.Attaque.2018.FRENCH.720p.WEB-DL.x264-Notag |
+| Nurse.3D.2013.German.DL.720p.BluRay.x264-PussyFoot | Nurse.2013.GERMAN.720p.BLURAY.x264-PussyFoot |
+| Faster, Pussycat ! Kill ! Kill !. 1965.Russ Meyer.VOSTFR.Blu-Ray 720p.Liosaa (RU) / Popo | v |
+| Kiss the blood off my hands - (Norman FOSTER) - 1948 - VOSTFR - Dvdrip-x264 - kerfiche | Kiss.The.Blood.Off.My.Hands.Norman.Foster.1948.VOSTFR.DVDRip.x264-kerfiche |
+| Le Nouveau Stagiaire (2015) The Intern - Multi 1080p - x264 AAC 5.1 - CCATS | Le.Nouveau.Stagiaire.2015.MULTi.1080p.x264-CCATS |
+| La.Planete.Des.Singes.L'affrontement.TRUEFRENCH.720p.x264.HDLIGHT | La.Planete.Des.Singes.L.Affrontement.TRUEFRENCH.720p.HDRip.x264-NOTEAM |

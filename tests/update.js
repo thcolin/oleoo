@@ -1,5 +1,4 @@
 const oleoo = require('../src/index.js')
-const assert = require('assert')
 const path = require('path')
 const fs  = require('fs')
 
