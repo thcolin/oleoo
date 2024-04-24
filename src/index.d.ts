@@ -30,5 +30,5 @@ declare module 'oleoo' {
   export function parse(release: string, options?: ReleaseOptions): SceneTags
   export function guess(release: string, options?: ReleaseOptions): SceneTags
   export function stringify(release: string, options?: ReleaseOptions): string
-  export const rules: string
+  export const rules: { [property: string]: { [key: string]: string[] } }
 }
