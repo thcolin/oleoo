@@ -1,4 +1,95 @@
 {
+  "The.Invisible.2007.DC.DVDRip.XviD-NQR": {
+    "original": "The.Invisible.2007.DC.DVDRip.XviD-NQR",
+    "language": null,
+    "languages": [],
+    "source": "DVDRip",
+    "encoding": "XviD",
+    "resolution": null,
+    "dub": null,
+    "year": "2007",
+    "flags": [
+      "DC"
+    ],
+    "season": null,
+    "episode": null,
+    "episodes": [],
+    "type": "movie",
+    "group": "NQR",
+    "title": "The Invisible",
+    "generated": "The.Invisible.2007.DVDRip.XviD.DC-NQR",
+    "score": 5,
+    "guess": {
+      "resolution": "SD"
+    }
+  },
+  "A.crazy.movie.2007.720p.XviD-NQR": {
+    "original": "A.crazy.movie.2007.720p.XviD-NQR",
+    "language": null,
+    "languages": [],
+    "source": null,
+    "encoding": "XviD",
+    "resolution": "720p",
+    "dub": null,
+    "year": "2007",
+    "flags": null,
+    "season": null,
+    "episode": null,
+    "episodes": [],
+    "type": "movie",
+    "group": "NQR",
+    "title": "A Crazy Movie",
+    "generated": "A.Crazy.Movie.2007.720p.XviD-NQR",
+    "score": 4,
+    "guess": {}
+  },
+  "Regular.Show.S05E26.Return.of.Mordecai.and.the.Rigbys.720p.HDTV.x264-W4F": {
+    "original": "Regular.Show.S05E26.Return.of.Mordecai.and.the.Rigbys.720p.HDTV.x264-W4F",
+    "language": null,
+    "languages": [],
+    "source": "HDTV",
+    "encoding": "x264",
+    "resolution": "720p",
+    "dub": null,
+    "year": null,
+    "flags": null,
+    "season": 5,
+    "episode": "26",
+    "episodes": [
+      26
+    ],
+    "type": "tvshow",
+    "group": "W4F",
+    "title": "Regular Show",
+    "generated": "Regular.Show.S05E26.720p.HDTV.x264-W4F",
+    "score": 4,
+    "guess": {
+      "year": 2024
+    }
+  },
+  "Godzilla.x.Kong.The.New.Empire.2024.MULTI.VFQ.1080p.10bit.WEBRip.6CH.x265.HEVC-SERQPH (Godzilla x Kong : Le Nouvel Empire) ": {
+    "original": "Godzilla.x.Kong.The.New.Empire.2024.MULTI.VFQ.1080p.10bit.WEBRip.6CH.x265.HEVC-SERQPH (Godzilla x Kong : Le Nouvel Empire)",
+    "language": "MULTi-VFQ",
+    "languages": [
+      "MULTi",
+      "VFQ"
+    ],
+    "source": "WEB-DL",
+    "encoding": "h265",
+    "resolution": "1080p",
+    "dub": null,
+    "year": "2024",
+    "flags": null,
+    "season": null,
+    "episode": null,
+    "episodes": [],
+    "type": "movie",
+    "group": "SERQPH",
+    "title": "Godzilla X Kong The New Empire",
+    "generated": "Godzilla.X.Kong.The.New.Empire.2024.MULTi-VFQ.1080p.WEB-DL.h265-SERQPH",
+    "score": 7,
+    "guess": {}
+  },
   "Reviens-moi (2007) [1080p] BluRay MULTi x264-PopHD.mkv": {
     "original": "Reviens-moi (2007) [1080p] BluRay MULTi x264-PopHD.mkv",
     "language": "MULTi",
@@ -215,7 +306,7 @@
   },
   "The Hitmans BodyGuard (2017) VFQ-ENG AC3 BluRay 1080p x264.GHT (Mon meilleur ennemi)": {
     "original": "The Hitmans BodyGuard (2017) VFQ-ENG AC3 BluRay 1080p x264.GHT (Mon meilleur ennemi)",
-    "language": "MULTi",
+    "language": "MULTi-VFQ",
     "languages": [
       "VFQ",
       "ENGLISH"
@@ -232,7 +323,7 @@
     "type": "movie",
     "group": "GHT",
     "title": "The Hitmans Bodyguard",
-    "generated": "The.Hitmans.Bodyguard.2017.MULTi.1080p.BLURAY.x264.AC3-GHT",
+    "generated": "The.Hitmans.Bodyguard.2017.MULTi-VFQ.1080p.BLURAY.x264.AC3-GHT",
     "score": 7,
     "guess": {}
   },
@@ -1540,7 +1631,7 @@
   },
   "Jamais entre amis (2015) [1080p] MULTI (VFQ-VOA) Bluray x264 AC3-PopHD (Sleeping with Other People)": {
     "original": "Jamais entre amis (2015) [1080p] MULTI (VFQ-VOA) Bluray x264 AC3-PopHD (Sleeping with Other People)",
-    "language": "MULTi",
+    "language": "MULTi-VFQ",
     "languages": [
       "MULTi",
       "VFQ",
@@ -1558,7 +1649,7 @@
     "type": "movie",
     "group": "PopHD",
     "title": "Jamais Entre Amis",
-    "generated": "Jamais.Entre.Amis.2015.MULTi.1080p.BLURAY.x264.AC3-PopHD",
+    "generated": "Jamais.Entre.Amis.2015.MULTi-VFQ.1080p.BLURAY.x264.AC3-PopHD",
     "score": 7,
     "guess": {}
   },

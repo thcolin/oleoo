@@ -279,7 +279,8 @@ const parse = (raw = '', options = { strict: false, flagged: true, erase: [], de
         'MULTi',
         ...(
           (payload.languages.includes('TRUEFRENCH') && (payload.languages.includes('FRENCH') || payload.languages.includes('VFQ'))) ? ['VF2'] :
-          (payload.languages.includes('TRUEFRENCH')) ? ['VFF'] : []
+          (payload.languages.includes('TRUEFRENCH')) ? ['VFF'] :
+          (payload.languages.includes('VFQ')) ? ['VFQ'] : []
         ),
       ].join('-')
     )
