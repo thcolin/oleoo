@@ -1,4 +1,26 @@
 {
+  "La Grande Cuisine.1978.HDTV.1080i.Untouched.AVC-EAC3.AC3.SubFr-BB85": {
+    "original": "La Grande Cuisine.1978.HDTV.1080i.Untouched.AVC-EAC3.AC3.SubFr-BB85",
+    "language": null,
+    "languages": [],
+    "source": "HDTV",
+    "encoding": null,
+    "resolution": "1080p",
+    "dub": "AC3",
+    "year": "1978",
+    "flags": [
+      "UNTOUCHED"
+    ],
+    "season": null,
+    "episode": null,
+    "episodes": [],
+    "type": "movie",
+    "group": "SubFr",
+    "title": "La Grande Cuisine",
+    "generated": "La.Grande.Cuisine.1978.1080p.HDTV.AC3.UNTOUCHED-SubFr",
+    "score": 6,
+    "guess": {}
+  },
   "Zorro.01x01.Arriva.Zorro.XViD.DVDRip.ITA.AC3-iTV": {
     "original": "Zorro.01x01.Arriva.Zorro.XViD.DVDRip.ITA.AC3-iTV",
     "language": "ITALIAN",

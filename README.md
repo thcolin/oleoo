@@ -93,6 +93,7 @@ console.log(release)
 ## Results :
 | Original | Generated |
 | -------- | --------- |
+| La Grande Cuisine.1978.HDTV.1080i.Untouched.AVC-EAC3.AC3.SubFr-BB85 | La.Grande.Cuisine.1978.1080p.HDTV.AC3.UNTOUCHED-SubFr |
 | Zorro.01x01.Arriva.Zorro.XViD.DVDRip.ITA.AC3-iTV | Zorro.S01E01.ITALIAN.DVDRip.XviD.AC3-iTV |
 | The Closer - 02x14-2x15 - Serving the King | The.Closer.S02E14-E15-Serving |
 | Quand je serai petit | Quand.Je.Serai.Petit-NOTEAM |
