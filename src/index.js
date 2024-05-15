@@ -38,7 +38,7 @@ const rules = {
   language: {
     'MULTi': ['multi', 'vf2'],
     'TRUEFRENCH': ['truefrench', 'vff', 'vf2'],
-    'FRENCH': ['french', 'français', 'francais', 'fr', 'vf', 'vfi', 'vf2'],
+    'FRENCH': ['french', 'français', 'francais', 'fr', 'vf', 'vof', 'vfi', 'vf2'],
     'VFQ': ['vfq', 'vq'],
     'VOSTFR': ['vostfr', 'vostr', 'stfr', 'subfrench'],
     'PERSIAN': ['persian'],
