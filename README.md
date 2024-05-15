@@ -93,6 +93,11 @@ console.log(release)
 ## Results :
 | Original | Generated |
 | -------- | --------- |
+| Zorro.01x01.Arriva.Zorro.XViD.DVDRip.ITA.AC3-iTV | Zorro.S01E01.ITALIAN.DVDRip.XviD.AC3-iTV |
+| The Closer - 02x14-2x15 - Serving the King | The.Closer.S02E14-E15-Serving |
+| Quand je serai petit | Quand.Je.Serai.Petit-NOTEAM |
+| Hedwig And The Angry Inch.avi | Hedwig.And.The.Angry.Inch-NOTEAM |
+| Easy Living.1937.VOSTFR.DVDRip.XVid-AC3.afrique31 | Easy.Living.1937.VOSTFR.DVDRip.XviD.AC3-afrique31 |
 | The.Invisible.2007.DC.DVDRip.XviD-NQR | The.Invisible.2007.DVDRip.XviD.DC-NQR |
 | A.crazy.movie.2007.720p.XviD-NQR | A.Crazy.Movie.2007.720p.XviD-NQR |
 | Regular.Show.S05E26.Return.of.Mordecai.and.the.Rigbys.720p.HDTV.x264-W4F | Regular.Show.S05E26.720p.HDTV.x264-W4F |

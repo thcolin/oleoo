@@ -59,7 +59,7 @@ const rules = {
     'HEBREW': ['hebrew'],
     'INDONESIAN': ['indonesian'],
     'IRISH': ['irish'],
-    'ITALIAN': ['italian'],
+    'ITALIAN': ['italian', 'ita'],
     'JAPANESE': ['japanese'],
     'KOREAN': ['korean'],
     'LAOTIAN': ['laotian'],
@@ -160,7 +160,11 @@ const stringify = (payload, options) => [
 ].join('.').concat('-' + (payload.group || 'NOTEAM'))
 
 const parse = (raw = '', options = { strict: false, flagged: true, erase: [], defaults: {} }) => {
-  const input = [...(options.erase || []), ...rules.erase].reduce((input, regexp) => input.replace(new RegExp(`[\.\-]*?${regexp.replace(/\\\\/g, '\\')}[\.\-]*?`, 'ig'), ''), raw).trim()
+  const input = [...(options.erase || []), ...rules.erase]
+    .reduce((input, regexp) => input.replace(new RegExp(`[\.\-]*?${regexp.replace(/\\\\/g, '\\')}[\.\-]*?`, 'ig'), ''), raw)
+    .replace(/\.(avi|mp4|mpeg4|mkv|ts|mov|wmv|flv|webm)(\W.*)?$/i, '')
+    .trim()
+
   const payload = {
     type: null,
     year: null,
@@ -192,6 +196,10 @@ const parse = (raw = '', options = { strict: false, flagged: true, erase: [], de
     groupStartPosition = match.index + match[0].length
     payload.type = 'tvshow'
   } else if (match = input.match(/\W(?:-?E\d+)+(\W)?/i)) {
+    titleEndPosition = match.index
+    groupStartPosition = match.index + match[0].length
+    payload.type = 'tvshow'
+  } else if (match = input.match(/\W(?:(?:\d{1,2})x(?:\d{1,3}))+(\W)?/i)) {
     titleEndPosition = match.index
     groupStartPosition = match.index + match[0].length
     payload.type = 'tvshow'
@@ -309,19 +317,36 @@ const parse = (raw = '', options = { strict: false, flagged: true, erase: [], de
     payload.score += 1
   }
 
-  // payload.season
-  if (match = input.match(/\WS(\d+)\W?/i)) {
-    payload.season = Number(match[1])
-  }
+  // payload.season, payload.episodes, payload.episode
+  if (payload.type === 'tvshow') {
+    if (match = input.match(/\WS(\d+)\W?/i)) {
+      payload.season = Number(match[1])
 
-  // payload.episodes, payload.episode
-  if ((matches = [...input.matchAll(/E(\d+)/ig)]).length) {
-    payload.episodes = matches.map(match => Number(match[1]))
-    payload.episode = payload.episodes.map(episode => `${episode}`.padStart(2, '0')).join('-')
+      if ((match.index + match[0].length) > groupStartPosition) {
+        groupStartPosition = match.index + match[0].length
+      }
+    }
+  
+    if ((matches = [...input.matchAll(/E(\d+)/ig)]).length) {
+      payload.episodes = matches.map(match => Number(match[1]))
+      payload.episode = payload.episodes.map(episode => `${episode}`.padStart(2, '0')).join('-')
+
+      if ((matches[matches.length - 1].index + matches[matches.length - 1][0].length) > groupStartPosition) {
+        groupStartPosition = matches[matches.length - 1].index + matches[matches.length - 1][0].length
+      }
+    } else if ((matches = [...input.matchAll(/\W?(?:(\d{1,2})x(\d{1,3}))+(\W)?/ig)]).length) {
+      payload.season = Number(matches[0][1])
+      payload.episodes = matches.map(match => Number(match[2]))
+      payload.episode = payload.episodes.map(episode => `${episode}`.padStart(2, '0')).join('-')
+
+      if ((matches[matches.length - 1].index + matches[matches.length - 1][0].length) > groupStartPosition) {
+        groupStartPosition = matches[matches.length - 1].index + matches[matches.length - 1][0].length
+      }
+    }
   }
 
   // payload.group
-  if (match = input.slice(groupStartPosition).replace(/\.(avi|mp4|mpeg4|mkv|ts|mov|wmv|flv|webm)/i, '').match(/(?:by\W)?([\w\.]+)/)) {
+  if (match = input.slice(Math.max(groupStartPosition, titleEndPosition)).match(/(?:by\W)?([\w\.]+)/)) {
     payload.group = match[1]
     payload.score += 1
   }

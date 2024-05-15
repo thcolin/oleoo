@@ -1,4 +1,127 @@
 {
+  "Zorro.01x01.Arriva.Zorro.XViD.DVDRip.ITA.AC3-iTV": {
+    "original": "Zorro.01x01.Arriva.Zorro.XViD.DVDRip.ITA.AC3-iTV",
+    "language": "ITALIAN",
+    "languages": [
+      "ITALIAN"
+    ],
+    "source": "DVDRip",
+    "encoding": "XviD",
+    "resolution": null,
+    "dub": "AC3",
+    "year": null,
+    "flags": null,
+    "season": 1,
+    "episode": "01",
+    "episodes": [
+      1
+    ],
+    "type": "tvshow",
+    "group": "iTV",
+    "title": "Zorro",
+    "generated": "Zorro.S01E01.ITALIAN.DVDRip.XviD.AC3-iTV",
+    "score": 5,
+    "guess": {
+      "year": 2024,
+      "resolution": "SD"
+    }
+  },
+  "The Closer - 02x14-2x15 - Serving the King": {
+    "original": "The Closer - 02x14-2x15 - Serving the King",
+    "language": null,
+    "languages": [],
+    "source": null,
+    "encoding": null,
+    "resolution": null,
+    "dub": null,
+    "year": null,
+    "flags": null,
+    "season": 2,
+    "episode": "14-15",
+    "episodes": [
+      14,
+      15
+    ],
+    "type": "tvshow",
+    "group": "Serving",
+    "title": "The Closer",
+    "generated": "The.Closer.S02E14-E15-Serving",
+    "score": 1,
+    "guess": {
+      "year": 2024,
+      "resolution": "SD"
+    }
+  },
+  "Quand je serai petit": {
+    "original": "Quand je serai petit",
+    "language": null,
+    "languages": [],
+    "source": null,
+    "encoding": null,
+    "resolution": null,
+    "dub": null,
+    "year": null,
+    "flags": null,
+    "season": null,
+    "episode": null,
+    "episodes": [],
+    "type": "movie",
+    "group": null,
+    "title": "Quand Je Serai Petit",
+    "generated": "Quand.Je.Serai.Petit-NOTEAM",
+    "score": 0,
+    "guess": {
+      "year": 2024,
+      "resolution": "SD"
+    }
+  },
+  "Hedwig And The Angry Inch.avi": {
+    "original": "Hedwig And The Angry Inch",
+    "language": null,
+    "languages": [],
+    "source": null,
+    "encoding": null,
+    "resolution": null,
+    "dub": null,
+    "year": null,
+    "flags": null,
+    "season": null,
+    "episode": null,
+    "episodes": [],
+    "type": "movie",
+    "group": null,
+    "title": "Hedwig And The Angry Inch",
+    "generated": "Hedwig.And.The.Angry.Inch-NOTEAM",
+    "score": 0,
+    "guess": {
+      "year": 2024,
+      "resolution": "SD"
+    }
+  },
+  "Easy Living.1937.VOSTFR.DVDRip.XVid-AC3.afrique31": {
+    "original": "Easy Living.1937.VOSTFR.DVDRip.XVid-AC3.afrique31",
+    "language": "VOSTFR",
+    "languages": [
+      "VOSTFR"
+    ],
+    "source": "DVDRip",
+    "encoding": "XviD",
+    "resolution": null,
+    "dub": "AC3",
+    "year": "1937",
+    "flags": null,
+    "season": null,
+    "episode": null,
+    "episodes": [],
+    "type": "movie",
+    "group": "afrique31",
+    "title": "Easy Living",
+    "generated": "Easy.Living.1937.VOSTFR.DVDRip.XviD.AC3-afrique31",
+    "score": 6,
+    "guess": {
+      "resolution": "SD"
+    }
+  },
   "The.Invisible.2007.DC.DVDRip.XviD-NQR": {
     "original": "The.Invisible.2007.DC.DVDRip.XviD-NQR",
     "language": null,
@@ -91,7 +214,7 @@
     "guess": {}
   },
   "Reviens-moi (2007) [1080p] BluRay MULTi x264-PopHD.mkv": {
-    "original": "Reviens-moi (2007) [1080p] BluRay MULTi x264-PopHD.mkv",
+    "original": "Reviens-moi (2007) [1080p] BluRay MULTi x264-PopHD",
     "language": "MULTi",
     "languages": [
       "MULTi"
@@ -231,7 +354,7 @@
     "guess": {}
   },
   "[ www.Torrent*.** ] The.Darkest.Minds.2018.MULTi.1080p.WEB-DL.DD5.1.H264-ACOOL.mkv": {
-    "original": "The.Darkest.Minds.2018.MULTi.1080p.WEB-DL.DD5.1.H264-ACOOL.mkv",
+    "original": "The.Darkest.Minds.2018.MULTi.1080p.WEB-DL.DD5.1.H264-ACOOL",
     "language": "MULTi",
     "languages": [
       "MULTi"
@@ -279,7 +402,7 @@
     "guess": {}
   },
   "Dragon.Ball.Super.E89.FRENCH.1080P.HDTV.x264-R342 [ www.Torrent*.** ].mkv": {
-    "original": "Dragon.Ball.Super.E89.FRENCH.1080P.HDTV.x264-R342 .mkv",
+    "original": "Dragon.Ball.Super.E89.FRENCH.1080P.HDTV.x264-R342",
     "language": "FRENCH",
     "languages": [
       "FRENCH"
