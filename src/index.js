@@ -297,18 +297,22 @@ const parse = (raw = '', options = { strict: false, flagged: true, erase: [], de
   // payload.flags
   for ([key, patterns] of Object.entries(rules.flags)) {
     for (pattern of patterns) {
-      if (match = input.match(new RegExp('\\W' + pattern + '(\\W|$)', 'i'))) {
-        payload.flags.push(key)
-
-        if (match.index < titleEndPosition) {
-          titleEndPosition = match.index
+      try {
+        if (match = input.match(new RegExp('\\W' + pattern + '(\\W|$)', 'i'))) {
+          payload.flags.push(key)
+  
+          if (match.index < titleEndPosition) {
+            titleEndPosition = match.index
+          }
+  
+          if ((match.index + match[0].length) > groupStartPosition) {
+            groupStartPosition = match.index + match[0].length
+          }
+  
+          break
         }
-
-        if ((match.index + match[0].length) > groupStartPosition) {
-          groupStartPosition = match.index + match[0].length
-        }
-
-        break
+      } catch (e) {
+        console.warn(e)
       }
     }
   }
