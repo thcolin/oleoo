@@ -2,6 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/oleoo.svg)](https://www.npmjs.com/package/oleoo)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE.md)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/thcolin/oleoo)
 
 <div align="center">
 <pre>
