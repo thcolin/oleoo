@@ -197,7 +197,7 @@ Contributing test cases is easy:
 
 3.  **Check Parsing & Update Tests:** Run the interactive script:
     ```bash
-    yarn test:update
+    yarn test
     ```
     This command parses all names in `releases.txt`. For any new or changed results, it will show the parsed output and ask you to confirm if it's correct (`y`) or incorrect (`n`). If incorrect, add a comment explaining the problem. This updates the `accepted.json` (correct) and `refused.json` (incorrect) fixture files.
 
@@ -207,7 +207,7 @@ Contributing test cases is easy:
         * `./tests/fixtures/releases.txt`
         * `./tests/fixtures/accepted.json`
         * `./tests/fixtures/refused.json`
-    * If you were also able to **fix any parsing issues** you found in `src/index.js`, include those code changes in the same PR! **Important:** Modifying the parsing logic (`src/index.js`) can easily introduce regressions (breaking previously correct parses). **This is the main challenge!** Carefully use the `yarn test:update` script to confirm that your changes only fix the intended issue and do not negatively affect other entries in `accepted.json`.
+    * If you were also able to **fix any parsing issues** you found in `src/index.js`, include those code changes in the same PR! **Important:** Modifying the parsing logic (`src/index.js`) can easily introduce regressions (breaking previously correct parses). **This is the main challenge!** Carefully use the `yarn test` script to confirm that your changes only fix the intended issue and do not negatively affect other entries in `accepted.json`.
 
 **Reporting Issues without a PR:**
 
@@ -217,12 +217,12 @@ To help fix the issue quickly, please include as much detail as possible in your
 
 * **Essential:** The **full original filename** that failed to parse correctly.
 * **Highly Recommended:**
-    * The **actual JSON output** you got from Oleoo for that filename. You can copy this from the output of the `yarn test:update` script when you mark the parse as incorrect, or by running `oleoo.parse()` directly. Please format it using Markdown code blocks (\`\`\`json ... \`\`\`).
+    * The **actual JSON output** you got from Oleoo for that filename. You can copy this from the output of the `yarn test` script when you mark the parse as incorrect, or by running `oleoo.parse()` directly. Please format it using Markdown code blocks (\`\`\`json ... \`\`\`).
     * A **description of what's wrong** with the actual output, or what you **expected** the output to be (e.g., "Expected group to be 'XYZ' but got 'ABC'", "Year '2023' was missed", "Flag 'REPACK' should be present").
-    * If you used `yarn test:update` and marked the parse as incorrect, include the **comment** you added explaining the error.
+    * If you used `yarn test` and marked the parse as incorrect, include the **comment** you added explaining the error.
 
 Even just providing the problematic filename is helpful, but more detail makes debugging much faster! Thank you for contributing!
 
 ## License
 
-[MIT](./LICENSE)
+[MIT](./LICENSE.md)
