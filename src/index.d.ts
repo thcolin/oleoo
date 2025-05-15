@@ -17,6 +17,7 @@ export type SourceType =
   | 'SCREENER'
   | 'DVDSCr'
   | 'R5'
+  | 'R6'
   | 'HDRip'
   | 'BRRip'
   | 'BDRip'
@@ -32,13 +33,14 @@ export type SourceType =
   | 'TVRip'
 
 /** Represents the standardized keys for video encodings. */
-export type EncodingType = 'MPEG2' | 'MPEG4' | 'DivX' | 'XviD' | 'h264' | 'h265' | 'x264' | 'x265'
+export type EncodingType = 'MPEG2' | 'MPEG4' | 'DivX' | 'XviD' | 'h264' | 'h265' | 'x264' | 'x265' | 'VP9'
 
 /** Represents the standardized keys for video resolutions. */
 export type ResolutionType = 'SD' | '720p' | '1080p' | '2160p'
 
 /** Represents the standardized keys for audio formats/dubs. */
 export type DubType =
+  | 'MP3'
   | 'ACC'
   | 'AAC'
   | 'AAC-LC'
@@ -65,12 +67,16 @@ export type DubType =
   | 'PCM-2.0'
   | 'PCM-5.1'
   | 'PCM-7.1'
+  | 'LPCM'
+  | 'LPCM-1.0'
+  | 'LPCM-2.0'
+  | 'LPCM-5.1'
+  | 'LPCM-7.1'
   | 'EAC3'
   | 'EAC3-1.0'
   | 'EAC3-2.0'
   | 'EAC3-5.1'
   | 'EAC3-7.1'
-  | 'LPCM'
   | 'OPUS'
   | 'OPUS-1.0'
   | 'OPUS-2.0'
@@ -108,6 +114,7 @@ export type LanguageType =
   | 'GERMAN'
   | 'GREEK'
   | 'HEBREW'
+  | 'HiNDi'
   | 'iNDONESiAN'
   | 'iRiSH'
   | 'iTALiAN'
@@ -119,6 +126,7 @@ export type LanguageType =
   | 'MALAY'
   | 'MALAYSiAN'
   | 'MAORi'
+  | 'NORDiC'
   | 'NORWEGiAN'
   | 'PASHTO'
   | 'POLiSH'
@@ -127,6 +135,7 @@ export type LanguageType =
   | 'RUSSiAN'
   | 'SPANiSH'
   | 'SWAHiLi'
+  | 'SLOVENiAN'
   | 'SWEDiSH'
   | 'SWiSS'
   | 'TAGALOG'
@@ -137,6 +146,7 @@ export type LanguageType =
   | 'ViETNAMESE'
   | 'WELSH'
   | 'VO'
+  | 'VOST'
 
 /** Represents the standardized keys for miscellaneous flags. */
 export type FlagType =
@@ -199,6 +209,7 @@ export type FlagType =
   | 'PCOK'
   | 'ARTE'
   | 'AMZN'
+  | 'ATVP'
   | 'DSNP'
   | 'HULU'
   | 'HMAX'
@@ -207,7 +218,10 @@ export type FlagType =
   | 'VC'
   | 'SC'
   | 'AVC'
+  | 'QEBS5'
   | 'DV'
+  | 'DXVA'
+  | 'CEE'
   | 'DTS-HD'
   | 'DTS-MA'
   | 'DTS-HDMA'
@@ -218,6 +232,7 @@ export type FlagType =
   | 'UHD'
   | 'HOU'
   | 'DOC'
+  | 'PPV'
   | 'RERiP'
   | 'DD1.0'
   | 'DD2.0'
