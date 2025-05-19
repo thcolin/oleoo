@@ -925,6 +925,10 @@ const parse = (raw = '', options = { strict: false, flagged: true, erase: [], de
     delete payload.flags[payload.flags.indexOf('COMPLETE')]
   }
 
+  if (payload.year === '0') {
+    payload.year = null
+  }
+
   // payload.output
   payload.output = stringify(payload, options)
 
