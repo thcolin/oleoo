@@ -951,7 +951,7 @@ const parse = (raw = '', options = { strict: false, flagged: true, erase: [], de
       //   .fill(1)
       //   .map((_, i) => Number(payload.year.split('-').sort((a, b) => b - a).pop()) + i),
     } : {}),
-    flags: payload.flags && payload.flags.length ? payload.flags : null,
+    flags: payload.flags,
     season: payload.season,
     episode: payload.episode,
     episodes: payload.episodes,
