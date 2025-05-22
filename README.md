@@ -110,7 +110,7 @@ oleoo.guess('My Movie (2023)', { defaults: { language: 'ENGLiSH', resolution: 'S
 //   "resolution": "SD",
 //   "dub": null,
 //   "year": "2023",
-//   "flags": null,
+//   "flags": [],
 //   "season": null,
 //   "episode": null,
 //   "episodes": [],
