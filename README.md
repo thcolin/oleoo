@@ -194,7 +194,10 @@ Contributing test cases is easy:
 1.  **Get Ready:** Clone the repo (`git clone https://github.com/thcolin/oleoo.git`) and install dependencies (`cd oleoo && yarn install`).
 
 2.  **Add Your Filenames:** Append your movie/TV show filenames (one per line) to the `./tests/fixtures/releases.txt` file.
-    * *Tip:* You can quickly add many names using a command like `ls /path/to/your/movies >> tests/fixtures/releases.txt` (but please review and clean up the added list!).
+
+> [!TIP]
+> 
+> You can quickly add many names using a command like `ls /path/to/your/movies >> tests/fixtures/releases.txt` (but please review and clean up the added list!).
 
 3.  **Check Parsing & Update Tests:** Run the interactive script:
     ```bash

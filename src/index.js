@@ -30,6 +30,7 @@ const rules = {
     'x264': ['(avc)?x[\\.\\-\\s]?264'],
     'x265': ['(avc)?x[\\.\\-\\s]?265'],
     'VP9': ['vp9'],
+    'VC1': ['vc[\\.\\-\\s]?1'],
   },
   resolution: {
     'SD': ['sd', '480[pi]'],
@@ -236,7 +237,7 @@ const rules = {
     'HMAX': ['hmax'],
     'HBO': ['hbo'],
     'iTN': ['itunes', 'itn'],
-    'VC': ['vc'],
+    'VC': ['vc(?![\\.\\-\\s]\?d)'],
     'SC': ['sc'],
     'AVC': ['avc[\\.\\s]?(x26[45])?'],
     'QEBS5': ['qebs5'],

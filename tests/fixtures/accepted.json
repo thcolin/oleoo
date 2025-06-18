@@ -95516,7 +95516,7 @@
       "MULTi"
     ],
     "source": "BLURAY",
-    "encoding": null,
+    "encoding": "VC1",
     "resolution": "1080p",
     "dub": "AC3",
     "year": "1958",
@@ -95529,8 +95529,8 @@
     "type": "movie",
     "group": null,
     "title": "Gigi",
-    "generated": "Gigi.1958.MULTi.1080p.BLURAY.REMUX.AC3-NOTEAM",
-    "score": 6
+    "generated": "Gigi.1958.MULTi.1080p.BLURAY.REMUX.VC1.AC3-NOTEAM",
+    "score": 7
   },
   "Gifted.2017.FRENCH.720p.BluRay.x264.mkv": {
     "original": "Gifted.2017.FRENCH.720p.BluRay.x264",
