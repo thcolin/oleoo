@@ -2,14 +2,15 @@
   "name": "oleoo",
   "version": "2.1.0",
   "description": "🏴‍☠️✨🎟 Oleoo - Scene/P2P/Warez release name parser ",
-  "main": "src/index.js",
-  "types": "src/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "src"
+    "dist"
   ],
   "type": "module",
   "scripts": {
-    "test": "node ./tests/check.js",
+    "build": "esbuild src/index.js --bundle --format=esm --platform=neutral --outfile=dist/index.js && cp src/index.d.ts dist/index.d.ts",
+    "test": "node ./tests/check.js && npm run build && node ./tests/check.js ./dist/index.js",
     "fixtures": "node ./tests/index.js",
     "debug": "node ./tests/debug.js"
   },
@@ -33,6 +34,7 @@
   "devDependencies": {
     "@inquirer/prompts": "^7.4.0",
     "chalk": "^5.4.1",
-    "cli-diff": "^1.0.0"
+    "cli-diff": "^1.0.0",
+    "esbuild": "^0.28.2"
   }
 }

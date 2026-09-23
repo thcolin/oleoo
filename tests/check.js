@@ -1,9 +1,9 @@
 import { readFileSync } from 'fs'
-import { join } from 'path'
+import { join, resolve } from 'path'
 import * as url from 'url'
-import oleoo from '../src/index.js'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
+const { default: oleoo } = await import(url.pathToFileURL(process.argv[2] ? resolve(process.argv[2]) : join(__dirname, '../src/index.js')))
 const fixture = (file) => readFileSync(join(__dirname, 'fixtures', file), 'utf-8')
 
 const names = [...new Set(fixture('releases.txt').split(/\r?\n/).filter(Boolean))]
@@ -48,5 +48,5 @@ if (oleoo.parse('Foo.2010.1080p.BluRay.x264-GRP.[www.site.com]', { erase: [/\[ww
 }
 
 failures.forEach(failure => console.log(failure + '\n'))
-console.log(`${names.length} releases, ${Object.keys(accepted).length} accepted, ${Object.keys(refused).length} refused, ${failures.length} to review`)
+console.log(`${process.argv[2] || 'src/index.js'}: ${names.length} releases, ${Object.keys(accepted).length} accepted, ${Object.keys(refused).length} refused, ${failures.length} to review`)
 process.exit(failures.length ? 1 : 0)
