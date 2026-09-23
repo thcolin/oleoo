@@ -1,0 +1,162 @@
+package oleoo
+
+import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"os"
+	"reflect"
+	"regexp"
+	"slices"
+	"sort"
+	"strings"
+	"testing"
+)
+
+func fixture(t *testing.T, name string) []byte {
+	t.Helper()
+	b, err := os.ReadFile("../../tests/fixtures/" + name)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return b
+}
+
+func normalize(t *testing.T, v any) map[string]any {
+	t.Helper()
+	b, err := json.Marshal(v)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var m map[string]any
+	if err := json.Unmarshal(b, &m); err != nil {
+		t.Fatal(err)
+	}
+	return m
+}
+
+func diff(expected, actual map[string]any) []string {
+	keys := map[string]bool{}
+	for k := range expected {
+		keys[k] = true
+	}
+	for k := range actual {
+		keys[k] = true
+	}
+
+	var lines []string
+	for k := range keys {
+		if !reflect.DeepEqual(expected[k], actual[k]) {
+			e, _ := json.Marshal(expected[k])
+			a, _ := json.Marshal(actual[k])
+			lines = append(lines, fmt.Sprintf("    %s: %s -> %s", k, e, a))
+		}
+	}
+	sort.Strings(lines)
+	return lines
+}
+
+// Pins the year window so the fixtures give the same result on any date.
+func TestFixtures(t *testing.T) {
+	var accepted, refused map[string]map[string]any
+	if err := json.Unmarshal(fixture(t, "accepted.json"), &accepted); err != nil {
+		t.Fatal(err)
+	}
+	if err := json.Unmarshal(fixture(t, "refused.json"), &refused); err != nil {
+		t.Fatal(err)
+	}
+
+	var names []string
+	for _, name := range regexp.MustCompile(`\r?\n`).Split(string(fixture(t, "releases.txt")), -1) {
+		if name != "" && !slices.Contains(names, name) {
+			names = append(names, name)
+		}
+	}
+
+	failures := 0
+	for _, name := range names {
+		release, err := Parse(name, CurrentYear(2026))
+		if err != nil {
+			t.Errorf("%s\n    %v", name, err)
+			failures++
+			continue
+		}
+
+		expected, ok := accepted[name]
+		if !ok {
+			if expected, ok = refused[name]; ok {
+				delete(expected, "comment")
+			}
+		}
+		if !ok {
+			t.Errorf("[unknown] %s\n    neither accepted nor refused", name)
+			failures++
+			continue
+		}
+
+		if lines := diff(expected, normalize(t, release)); len(lines) > 0 {
+			t.Errorf("%s\n%s", name, strings.Join(lines, "\n"))
+			failures++
+		}
+	}
+
+	t.Logf("%d releases, %d accepted, %d refused, %d to review", len(names), len(accepted), len(refused), failures)
+}
+
+func TestRulesCopy(t *testing.T) {
+	root, err := os.ReadFile("../../rules.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !bytes.Equal(root, rulesJSON) {
+		t.Error("rules.json differs from ../../rules.json, run `go generate`")
+	}
+}
+
+func TestRulesCompile(t *testing.T) {
+	for _, set := range []ruleSet{rules.Source, rules.Encoding, rules.Resolution, rules.Dub, rules.Language, rules.Flags} {
+		for _, k := range set {
+			for _, r := range k.rules {
+				for _, pattern := range []string{r.pattern, r.notAfter} {
+					if _, err := compile(pattern, ci); err != nil {
+						t.Errorf("%s: %s: %v", k.key, pattern, err)
+					}
+				}
+			}
+		}
+	}
+}
+
+func TestOptions(t *testing.T) {
+	if r, _ := Parse("Foo.2010.1080p.BluRay.x264-GRP.[www.site.com]", CurrentYear(2026), Erase(`\[www.*?\]`)); r.Original != "Foo.2010.1080p.BluRay.x264-GRP" {
+		t.Errorf("erase does not remove its match: %q", r.Original)
+	}
+
+	if _, err := Parse("Foo.2010.1080p.BluRay.x264-GRP", Erase(`(`)); err == nil {
+		t.Error("an erase pattern that is not a regex gives no error")
+	}
+
+	before, _ := Parse("Foo.2031.1080p.BluRay.x264-GRP", CurrentYear(2026))
+	after, _ := Parse("Foo.2031.1080p.BluRay.x264-GRP", CurrentYear(2027))
+	if before.Year != nil || after.Year == nil || *after.Year != "2031" {
+		t.Error("currentYear does not bound the accepted years")
+	}
+
+	defaults := Release{Languages: []string{"ENGLiSH"}}
+	Parse("Foo.2010.1080p.BluRay.x264.FRENCH-GRP", CurrentYear(2026), Defaults(defaults))
+	if len(defaults.Languages) != 1 {
+		t.Error("parse writes into the defaults it is given")
+	}
+
+	if _, err := Parse("Foo Bar", Strict(true)); err == nil || err.Error() != `"Foo Bar" does't follow scene release naming rules` {
+		t.Errorf("strict gives %v", err)
+	}
+
+	if r, _ := Parse("Foo.2010.1080p.BluRay.x264.DTS-GRP", CurrentYear(2026), Flagged(false)); r.Generated != "Foo.2010.1080p.BLURAY.x264-GRP" {
+		t.Errorf("flagged false gives %q", r.Generated)
+	}
+
+	if r, _ := Guess("Foo.BluRay.x264-GRP", CurrentYear(2026)); *r.Year != "2026" || *r.Resolution != "1080p" || r.Generated != "Foo.2026.1080p.BLURAY.x264-GRP" {
+		t.Errorf("guess gives %s, %s, %q", *r.Year, *r.Resolution, r.Generated)
+	}
+}
