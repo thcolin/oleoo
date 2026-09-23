@@ -142,10 +142,10 @@ func TestOptions(t *testing.T) {
 		t.Error("currentYear does not bound the accepted years")
 	}
 
-	defaults := Release{Languages: []string{"ENGLiSH"}}
-	Parse("Foo.2010.1080p.BluRay.x264.FRENCH-GRP", CurrentYear(2026), Defaults(defaults))
-	if len(defaults.Languages) != 1 {
-		t.Error("parse writes into the defaults it is given")
+	defaults := Release{Flags: []string{"COLLECTION", "PROPER"}}
+	Parse("Foo.S01E01.720p.HDTV.x264-GRP", CurrentYear(2026), Defaults(defaults))
+	if !slices.Equal(defaults.Flags, []string{"COLLECTION", "PROPER"}) {
+		t.Errorf("parse writes into the defaults it is given: %q", defaults.Flags)
 	}
 
 	if _, err := Parse("Foo Bar", Strict(true)); err == nil || err.Error() != `"Foo Bar" does't follow scene release naming rules` {
@@ -158,5 +158,20 @@ func TestOptions(t *testing.T) {
 
 	if r, _ := Guess("Foo.BluRay.x264-GRP", CurrentYear(2026)); *r.Year != "2026" || *r.Resolution != "1080p" || r.Generated != "Foo.2026.1080p.BLURAY.x264-GRP" {
 		t.Errorf("guess gives %s, %s, %q", *r.Year, *r.Resolution, r.Generated)
+	}
+}
+
+// Expected values are those of packages/js/src/index.js, except U+FFFD: JavaScript keeps the lone surrogate.
+func TestJavaScriptStrings(t *testing.T) {
+	for _, c := range []struct{ name, title, group, generated string }{
+		{"Kelvin\u212a1080p.BluRay.x264-GRP", "Kelvin", "GRP", "Kelvin.1080p.BLURAY.x264-GRP"},
+		{"Film.2010.1080p.WEB.x264-\u0130stanbul", "Film", "stanbul", "Film.2010.1080p.WEB-DL.x264-stanbul"},
+		{"Foo.S01\U0001f600E01.720p.HDTV.x264-GRP", "Foo S01\ufffd", "GRP", "Foo.S01\ufffd.E01.720p.HDTV.x264-GRP"},
+		{"Foo.2010.mkv\u2028a\u2028b", "Foo", "mkv", "Foo.2010-mkv"},
+	} {
+		r, err := Parse(c.name, CurrentYear(2026))
+		if err != nil || r.Title != c.title || r.Group == nil || *r.Group != c.group || r.Generated != c.generated {
+			t.Errorf("%+q gives %+q, %v, %+q, %v", c.name, r.Title, r.Group, r.Generated, err)
+		}
 	}
 }

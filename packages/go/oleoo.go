@@ -9,6 +9,7 @@ import (
 	"strings"
 	"sync"
 	"time"
+	"unicode/utf16"
 
 	"github.com/dlclark/regexp2"
 	"golang.org/x/text/cases"
@@ -103,8 +104,9 @@ func must(pattern string, flags regexp2.RegexOptions) *regexp2.Regexp {
 	return regexp2.MustCompile(dialect(pattern), flags)
 }
 
-// dialect rewrites a class holding \W, [_\W], into (?:\W|[_]): with IgnoreCase, regexp2 lowercases the
-// ranges of \W inside a class, and U+0130 brings "i" into it. \W on its own is right.
+// dialect brings a pattern back to the meaning JavaScript gives it. A class holding \W, [_\W], becomes (?:\W|[_]):
+// under IgnoreCase regexp2 lowercases the ranges of \W inside a class, and U+0130 brings "i" into it. A "." outside
+// a class leaves out U+2028 and U+2029, which the "." of regexp2 matches.
 func dialect(pattern string) string {
 	var out strings.Builder
 	runes := []rune(pattern)
@@ -114,6 +116,11 @@ func dialect(pattern string) string {
 			out.WriteRune(runes[i])
 			out.WriteRune(runes[i+1])
 			i++
+			continue
+		}
+
+		if runes[i] == '.' {
+			out.WriteString(`[^\n\r\u2028\u2029]`)
 			continue
 		}
 
@@ -150,34 +157,96 @@ func dialect(pattern string) string {
 	return out.String()
 }
 
-func first(re *regexp2.Regexp, s []rune) *regexp2.Match {
-	m, _ := re.FindRunesMatch(s)
+// text is a string as JavaScript sees it: one rune per UTF-16 code unit, so that positions count the same.
+// probe is what the regexes read: under IgnoreCase regexp2 lowercases U+0130 and U+212A into the ASCII "i" and
+// "k", which JavaScript does not, so both become U+E000, which every class of the dialect reads as they do.
+type text struct {
+	units []rune
+	probe []rune
+}
+
+func newText(s string) text {
+	units := utf16.Encode([]rune(s))
+	t := text{make([]rune, len(units)), make([]rune, len(units))}
+	for i, u := range units {
+		t.units[i], t.probe[i] = rune(u), rune(u)
+		if u == 0x0130 || u == 0x212a {
+			t.probe[i] = 0xe000
+		}
+	}
+	return t
+}
+
+func decode(units []rune) string {
+	u := make([]uint16, len(units))
+	for i, r := range units {
+		u[i] = uint16(r)
+	}
+	return string(utf16.Decode(u))
+}
+
+func (t text) from(i int) text { return text{t.units[i:], t.probe[i:]} }
+
+func (t text) slice(a, b int) string {
+	if a >= b {
+		return ""
+	}
+	return decode(t.units[a:b])
+}
+
+func (t text) first(re *regexp2.Regexp) *regexp2.Match {
+	m, _ := re.FindRunesMatch(t.probe)
 	return m
 }
 
-func every(re *regexp2.Regexp, s []rune) []*regexp2.Match {
+func (t text) every(re *regexp2.Regexp) []*regexp2.Match {
 	var matches []*regexp2.Match
-	for m, _ := re.FindRunesMatch(s); m != nil; m, _ = re.FindNextMatch(m) {
+	for m, _ := re.FindRunesMatch(t.probe); m != nil; m, _ = re.FindNextMatch(m) {
 		matches = append(matches, m)
 	}
 	return matches
 }
 
-func test(re *regexp2.Regexp, s string) bool {
-	ok, _ := re.MatchString(s)
-	return ok
+func (t text) match(m *regexp2.Match) string { return t.slice(m.Index, end(m)) }
+
+func (t text) group(m *regexp2.Match, i int) string {
+	g := m.GroupByNumber(i)
+	return t.slice(g.Index, g.Index+g.Length)
+}
+
+func match(re *regexp2.Regexp, s string) (text, *regexp2.Match) {
+	t := newText(s)
+	return t, t.first(re)
+}
+
+func test(re *regexp2.Regexp, s string) bool { return newText(s).first(re) != nil }
+
+// replaceFunc replaces the first count matches, all of them when count is -1.
+func replaceFunc(re *regexp2.Regexp, s string, with func(string) string, count int) string {
+	t := newText(s)
+	var out []rune
+	last := 0
+	for _, m := range t.every(re) {
+		if count == 0 {
+			break
+		}
+		out = append(out, t.units[last:m.Index]...)
+		for _, u := range utf16.Encode([]rune(with(t.match(m)))) {
+			out = append(out, rune(u))
+		}
+		last = end(m)
+		count--
+	}
+	return decode(append(out, t.units[last:]...))
 }
 
 func replace(re *regexp2.Regexp, s, with string, count int) string {
-	out, _ := re.ReplaceFunc(s, func(regexp2.Match) string { return with }, -1, count)
-	return out
+	return replaceFunc(re, s, func(string) string { return with }, count)
 }
-
-func group(m *regexp2.Match, i int) string { return m.GroupByNumber(i).String() }
 
 func end(m *regexp2.Match) int { return m.Index + m.Length }
 
-func find(s []rune, before string, r rule, after string) (*regexp2.Match, error) {
+func find(t text, before string, r rule, after string) (*regexp2.Match, error) {
 	re, err := compile("("+before+")"+r.pattern+after, ci)
 	if err != nil {
 		return nil, err
@@ -190,8 +259,8 @@ func find(s []rune, before string, r rule, after string) (*regexp2.Match, error)
 		}
 	}
 
-	for at := 0; at <= len(s); {
-		m, _ := re.FindRunesMatchStartingAt(s, at)
+	for at := 0; at <= len(t.probe); {
+		m, _ := re.FindRunesMatchStartingAt(t.probe, at)
 		if m == nil {
 			return nil, nil
 		}
@@ -200,7 +269,7 @@ func find(s []rune, before string, r rule, after string) (*regexp2.Match, error)
 			return m, nil
 		}
 
-		if ok, _ := guard.MatchRunes(s[:m.Index+m.GroupByNumber(1).Length]); !ok {
+		if ok, _ := guard.MatchRunes(t.probe[:m.Index+m.GroupByNumber(1).Length]); !ok {
 			return m, nil
 		}
 
@@ -228,8 +297,8 @@ func upper(s string) string { return cases.Upper(language.Und).String(s) }
 
 func pad2(v any) string {
 	s := fmt.Sprint(v)
-	if len([]rune(s)) < 2 {
-		return strings.Repeat("0", 2-len([]rune(s))) + s
+	if n := len(utf16.Encode([]rune(s))); n < 2 {
+		return strings.Repeat("0", 2-n) + s
 	}
 	return s
 }
@@ -283,8 +352,8 @@ var (
 	collection  = must(`^(.+)(\d[, \-]\s?){2,}\d$`, regexp2.ECMAScript)
 )
 
-// Parse reads a release name. It returns an error when an Erase pattern or a rule is not a valid regex,
-// and with Strict(true) when the name has no source, encoding, resolution nor dub.
+// Parse reads a release name. It returns an error when an Erase pattern, or a rule other than a flag, is not a
+// valid regex, and with Strict(true) when the name has no source, encoding, resolution nor dub.
 func Parse(raw string, opts ...Option) (Release, error) {
 	o := newOptions(opts)
 
@@ -297,7 +366,7 @@ func Parse(raw string, opts ...Option) (Release, error) {
 		s = replace(re, s, "", -1)
 	}
 	s = trim(replace(extensions, s, "", 1))
-	input := []rune(s)
+	input := newText(s)
 
 	r := Release{Languages: []string{}, Flags: []string{}, Episodes: []any{}}
 	if d := o.defaults; d != nil {
@@ -316,7 +385,7 @@ func Parse(raw string, opts ...Option) (Release, error) {
 	}
 	valid := false
 
-	titleStart, titleEnd, groupStart := 0, len(input), 0
+	titleStart, titleEnd, groupStart := 0, len(input.units), 0
 	move := func(m *regexp2.Match) {
 		titleEnd = min(titleEnd, m.Index)
 		groupStart = max(groupStart, end(m))
@@ -329,7 +398,7 @@ func Parse(raw string, opts ...Option) (Release, error) {
 
 	r.Type = "movie"
 	for _, re := range tvshow {
-		if m := first(re, input); m != nil {
+		if m := input.first(re); m != nil {
 			titleEnd, groupStart = m.Index, end(m)
 			r.Type = "tvshow"
 			break
@@ -340,21 +409,21 @@ func Parse(raw string, opts ...Option) (Release, error) {
 		n, _ := strconv.Atoi(year)
 		return n > 1900 && n < o.currentYear+5
 	}
-	if m := first(yearRange, input); m != nil && accepted(group(m, 2)) && accepted(group(m, 3)) {
-		r.Year = ptr(group(m, 2) + "-" + group(m, 3))
+	if m := input.first(yearRange); m != nil && accepted(input.group(m, 2)) && accepted(input.group(m, 3)) {
+		r.Year = ptr(input.group(m, 2) + "-" + input.group(m, 3))
 		r.Score++
 		r.Flags = append(r.Flags, "COLLECTION")
 		move(m)
 	} else {
 		var kept []*regexp2.Match
-		for _, m := range every(yearSingle, input) {
-			if ok, _ := endsInDate.MatchRunes(input[:m.Index]); !ok && accepted(group(m, 1)) {
+		for _, m := range input.every(yearSingle) {
+			if ok, _ := endsInDate.MatchRunes(input.probe[:m.Index]); !ok && accepted(input.group(m, 1)) {
 				kept = append(kept, m)
 			}
 		}
 		if len(kept) > 0 {
 			m := kept[len(kept)-1]
-			r.Year = ptr(group(m, 1))
+			r.Year = ptr(input.group(m, 1))
 			r.Score++
 			move(m)
 		}
@@ -408,7 +477,7 @@ func Parse(raw string, opts ...Option) (Release, error) {
 				}
 
 				if m != nil {
-					if ambiguous && !anchored && m.Index < titleEnd && end(m) <= titleEnd+1 && !strings.Contains(m.String(), k.key) {
+					if ambiguous && !anchored && m.Index < titleEnd && end(m) <= titleEnd+1 && !strings.Contains(input.match(m), k.key) {
 						break
 					}
 
@@ -433,12 +502,12 @@ func Parse(raw string, opts ...Option) (Release, error) {
 	flags(false)
 
 	offset := 0
-	if titleEnd != len(input) {
+	if titleEnd != len(input.units) {
 		offset = titleEnd
 	}
 	for _, k := range rules.Language {
 		for _, rl := range k.rules {
-			m, err := find(input[offset:], `[_\W]`, rl, `([_\W]|$)`)
+			m, err := find(input.from(offset), `[_\W]`, rl, `([_\W]|$)`)
 			if err != nil {
 				return Release{}, err
 			}
@@ -514,48 +583,49 @@ func Parse(raw string, opts ...Option) (Release, error) {
 			}
 		}
 
-		if m := first(season, input); m != nil {
-			n, _ := strconv.Atoi(group(m, 1))
+		if m := input.first(season); m != nil {
+			n, _ := strconv.Atoi(input.group(m, 1))
 			r.Season = ptr(n)
 			groupStart = max(groupStart, end(m))
 		}
 
-		if m := first(episodeRange, input); m != nil {
-			from, _ := strconv.Atoi(group(m, 1))
-			to, _ := strconv.Atoi(group(m, 2))
+		if m := input.first(episodeRange); m != nil {
+			from, _ := strconv.Atoi(input.group(m, 1))
+			to, _ := strconv.Atoi(input.group(m, 2))
 			r.Episodes = []any{}
 			for n := from; n <= to; n++ {
 				r.Episodes = append(r.Episodes, n)
 			}
 			r.Episode = joined()
 			groupStart = max(groupStart, end(m))
-		} else if matches := every(episodeSingle, input); len(matches) > 0 {
+		} else if matches := input.every(episodeSingle); len(matches) > 0 {
 			r.Episodes = []any{}
 			for _, m := range matches {
-				n, _ := strconv.Atoi(group(m, 1))
+				n, _ := strconv.Atoi(input.group(m, 1))
 				r.Episodes = append(r.Episodes, n)
 			}
 			r.Episode = joined()
 			groupStart = max(groupStart, end(matches[len(matches)-1]))
-		} else if matches := every(episodeCross, input); len(matches) > 0 {
-			n, _ := strconv.Atoi(group(matches[0], 1))
+		} else if matches := input.every(episodeCross); len(matches) > 0 {
+			n, _ := strconv.Atoi(input.group(matches[0], 1))
 			r.Season = ptr(n)
 			r.Episodes = []any{}
 			for _, m := range matches {
-				n, _ := strconv.Atoi(group(m, 2))
+				n, _ := strconv.Atoi(input.group(m, 2))
 				r.Episodes = append(r.Episodes, n)
 			}
 			r.Episode = joined()
 			groupStart = max(groupStart, end(matches[len(matches)-1]))
-		} else if m := first(episodeYMD, input); m != nil {
-			date(m, group(m, 1), group(m, 2))
-		} else if m := first(episodeDMY, input); m != nil {
-			date(m, group(m, 2), group(m, 1))
+		} else if m := input.first(episodeYMD); m != nil {
+			date(m, input.group(m, 1), input.group(m, 2))
+		} else if m := input.first(episodeDMY); m != nil {
+			date(m, input.group(m, 2), input.group(m, 1))
 		}
 	}
 
-	if m := first(groupName, input[min(max(groupStart, titleEnd), len(input)):]); m != nil {
-		name := strings.Replace(group(m, 1), "'s", "s", 1)
+	rest := input.from(min(max(groupStart, titleEnd), len(input.units)))
+	if m := rest.first(groupName); m != nil {
+		name := strings.Replace(rest.group(m, 1), "'s", "s", 1)
 		name = strings.Map(func(c rune) rune {
 			switch {
 			case c >= 0x0300 && c <= 0x036f, c >= 0x2000 && c <= 0x206f:
@@ -573,10 +643,7 @@ func Parse(raw string, opts ...Option) (Release, error) {
 		r.Score++
 	}
 
-	title := ""
-	if titleStart < titleEnd {
-		title = string(input[titleStart:titleEnd])
-	}
+	title := input.slice(titleStart, titleEnd)
 	title = replace(dots, title, " ", -1)
 	title = norm.NFD.String(title)
 	title = replace(possessive, title, "s", 1)
@@ -597,14 +664,14 @@ func Parse(raw string, opts ...Option) (Release, error) {
 	clean := func(s string) string {
 		return replace(dashClean, strings.NewReplacer("(", "", ")", "").Replace(s), " ", 1)
 	}
-	if m, _ := aka.FindStringMatch(r.Title); m != nil {
-		r.Title = strings.Replace(r.Title, m.String(), "", 1)
-		r.AlternativeTitle = group(m, 1)
+	if t, m := match(aka, r.Title); m != nil {
+		r.Title = strings.Replace(r.Title, t.match(m), "", 1)
+		r.AlternativeTitle = t.group(m, 1)
 	}
 	for _, re := range []*regexp2.Regexp{dash, square, round} {
-		if m, _ := re.FindStringMatch(r.Title); m != nil {
-			r.Title = clean(strings.Replace(r.Title, m.String(), "", 1))
-			r.AlternativeTitle = clean(group(m, 1))
+		if t, m := match(re, r.Title); m != nil {
+			r.Title = clean(strings.Replace(r.Title, t.match(m), "", 1))
+			r.AlternativeTitle = clean(t.group(m, 1))
 		}
 	}
 
@@ -632,32 +699,32 @@ func Parse(raw string, opts ...Option) (Release, error) {
 		r.Title, r.AlternativeTitle = r.AlternativeTitle, ""
 	}
 
-	if m, _ := leadingYear.FindStringMatch(r.Title); !present(r.Year) && m != nil {
+	if t, m := match(leadingYear, r.Title); !present(r.Year) && m != nil {
 		i := slices.IndexFunc(rules.Title.LeadingYears, func(y struct {
 			Year     string `json:"year"`
 			Contains string `json:"contains"`
 			Release  string `json:"release"`
 		}) bool {
-			return y.Year == group(m, 1) && strings.Contains(lower(group(m, 2)), y.Contains)
+			return y.Year == t.group(m, 1) && strings.Contains(lower(t.group(m, 2)), y.Contains)
 		})
 		if i >= 0 {
 			r.Year = ptr(rules.Title.LeadingYears[i].Release)
 		} else {
-			r.Year = ptr(group(m, 1))
-			r.Title = group(m, 2)
+			r.Year = ptr(t.group(m, 1))
+			r.Title = t.group(m, 2)
 		}
 	}
 
-	if m, _ := manga.FindStringMatch(r.AlternativeTitle); r.Type == "movie" && r.AlternativeTitle != "" && m != nil {
+	if t, m := match(manga, r.AlternativeTitle); r.Type == "movie" && r.AlternativeTitle != "" && m != nil {
 		r.Type = "tvshow"
-		r.Episode = ptr(group(m, 1))
-		r.Episodes = []any{group(m, 1)}
+		r.Episode = ptr(t.group(m, 1))
+		r.Episodes = []any{t.group(m, 1)}
 		r.AlternativeTitle = ""
 	}
 
-	if m, _ := collection.FindStringMatch(r.Title); r.Type == "movie" && m != nil {
+	if t, m := match(collection, r.Title); r.Type == "movie" && m != nil {
 		r.Flags = append(r.Flags, "COLLECTION")
-		r.Title = trim(group(m, 1))
+		r.Title = trim(t.group(m, 1))
 	}
 
 	if r.Type == "tvshow" {
@@ -698,7 +765,7 @@ func capitalize(s string) string {
 	s = strings.Join(words, " ")
 
 	for _, re := range []*regexp2.Regexp{initials, romans, romanOnes} {
-		s, _ = re.ReplaceFunc(s, func(m regexp2.Match) string { return upper(m.String()) }, -1, -1)
+		s = replaceFunc(re, s, upper, -1)
 	}
 
 	return s
@@ -731,7 +798,7 @@ func Guess(name string, opts ...Option) (Release, error) {
 	return r, nil
 }
 
-// Stringify writes a release name back from a release.
+// Stringify writes a release name back from its fields.
 func Stringify(release Release, opts ...Option) string {
 	return stringify(release, newOptions(opts).flagged)
 }
