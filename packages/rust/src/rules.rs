@@ -4,8 +4,7 @@ use serde::{Deserialize, Deserializer, de::Error as _};
 use serde_json::{Map, Value};
 
 pub static RULES: LazyLock<Rules> = LazyLock::new(|| {
-    serde_json::from_str(include_str!(concat!(env!("OUT_DIR"), "/rules.json")))
-        .expect("rules.json does not follow SPEC.md")
+    serde_json::from_str(include_str!("../rules.json")).expect("rules.json does not follow SPEC.md")
 });
 
 // A rule is a pattern, or { pattern, notAfter } when the match must not follow notAfter: it stands in for a lookbehind.

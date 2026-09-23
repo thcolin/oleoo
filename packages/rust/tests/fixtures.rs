@@ -77,3 +77,13 @@ fn fixtures() {
 fn show(value: Option<&Value>) -> String {
     value.map_or("(none)".to_owned(), Value::to_string)
 }
+
+#[test]
+fn rules_json_is_the_one_of_the_root() {
+    let root = std::fs::read_to_string("../../rules.json").unwrap();
+    let copy = std::fs::read_to_string("rules.json").unwrap();
+    assert!(
+        root == copy,
+        "rules.json differs from ../../rules.json, run `cp ../../rules.json .`"
+    );
+}
