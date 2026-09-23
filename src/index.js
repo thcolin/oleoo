@@ -103,7 +103,7 @@ const rules = {
     'AMHARiC': ['amharic'],
     'ARABiC': ['arabic'],
     'CAMBODiAN': ['cambodian'],
-    'CHiNESE': ['chinese', '(?<!\d[\\.\\-\\s]?)ch[\\.\\-\\s]', 'ci', 'chi', 'chs', 'mandarin'],
+    'CHiNESE': ['chinese', '(?<!\\d[\\.\\-\\s]?)ch[\\.\\-\\s]', 'ci', 'chi', 'chs', 'mandarin'],
     'CREOLE': ['creole'],
     'DANiSH': ['danish'],
     'DUTCH': ['dutch', 'nl(subs?)?'],
