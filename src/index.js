@@ -66,7 +66,11 @@ const stringify = (payload, options = {}) => {
 
 const parse = (raw = '', options = {}) => {
   const { strict = false, flagged = true, erase = [], defaults = {} } = options
-  const currentYear = options.currentYear ?? new Date().getFullYear()
+  const currentYear = Number(options.currentYear ?? new Date().getFullYear())
+
+  if (Number.isNaN(currentYear)) {
+    throw new TypeError('currentYear must be a number, got ' + JSON.stringify(options.currentYear))
+  }
   const input = [...(erase || []), ...rules.erase]
     .reduce((input, regexp) => input.replace(new RegExp(`[\.\-]*?${typeof regexp === 'string' ? regexp.replace(/\\\\/g, '\\') : regexp.source}[\.\-]*?`, 'ig' + (typeof regexp === 'string' ? '' : regexp.flags.replace(/[igy]/g, ''))), ''), raw)
     .replace(new RegExp('\\.(' + extensions.join('|') + ')(\\W.*)?$', 'i'), '')
