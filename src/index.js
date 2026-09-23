@@ -99,7 +99,7 @@ const parse = (raw = '', options = {}) => {
   let match, matches, property, key, patterns, pattern
 
   // payload.type
-  if (match = input.match(/\WS(eason[_\W])?\d{1,3}\W?(?:-?EP?\d+)*[e\.-\s]/i)) {
+  if (match = input.match(/\WS(eason[_\W])?\d{1,3}\W?(?:-?EP?\d+)*[e\.\-\s]/i)) {
     titleEndPosition = match.index
     groupStartPosition = match.index + match[0].length
     payload.type = 'tvshow'
