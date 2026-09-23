@@ -60,15 +60,63 @@ const patterns = [
     .flatMap(property => Object.values(rules[property]).flat())
     .flatMap(rule => typeof rule === 'string' ? [rule] : [rule.pattern, rule.notAfter]),
   ...rules.erase,
+  ...rules.extensions,
 ]
 
-for (const pattern of patterns) {
-  const escapes = [...pattern.matchAll(/\\(.)/g)].map(match => match[1]).filter(escape => !'dswW.-+*?()[]{}|^$/\\'.includes(escape))
-  const groups = [...pattern.matchAll(/\((\?.?)?/g)].filter(match => pattern[match.index - 1] !== '\\' && match[1] && !['?:', '?=', '?!'].includes(match[1]))
+const outside = (pattern) => {
+  const found = []
+  let inClass = false
 
-  if (escapes.length || groups.length) {
-    failures.push(`[dialect] ${pattern}\n    ${[...escapes.map(escape => `\\${escape}`), ...groups.map(group => `(${group[1]}`)].join(', ')} outside the dialect`)
+  for (let i = 0; i < pattern.length; i++) {
+    const char = pattern[i]
+
+    if (char === '\\') {
+      if (!'dswW.-+*?()[]{}|^$/\\'.includes(pattern[i + 1])) {
+        found.push('\\' + pattern[i + 1])
+      }
+      i++
+    } else if (inClass) {
+      inClass = char !== ']'
+    } else if (char === '[') {
+      inClass = true
+    } else if (char === '(' && pattern[i + 1] === '?' && !':=!'.includes(pattern[i + 2])) {
+      found.push('(?' + pattern[i + 2])
+    } else if ('+*?}'.includes(char) && pattern[i + 1] === '+') {
+      found.push(char + '+')
+    }
   }
+
+  return found
+}
+
+for (const pattern of patterns) {
+  const found = outside(pattern)
+  found.length && failures.push(`[dialect] ${pattern}\n    ${found.join(', ')} outside the dialect`)
+}
+
+for (const [pattern, expected] of [['(?<!x)a\\b', ['(?<', '\\b']], ['\\\\(?<=a)', ['(?<']], ['a++', ['++']], ['x{2}+', ['}+']], ['[(?<+]a+?', []]]) {
+  if (JSON.stringify(outside(pattern)) !== JSON.stringify(expected)) {
+    failures.push(`[dialect] the check reads ${pattern} as ${JSON.stringify(outside(pattern))}, not ${JSON.stringify(expected)}`)
+  }
+}
+
+for (const [name, key, expected] of [
+  ['Le.Cœur.des.Œuvres.Œdipe.2010.1080p.BluRay.x264-GRP', 'title', 'Le Coeur Des Oeuvres Oedipe'],
+  ['Foo.2010.AD.CH. 720p.HDTV.x264-GRP', 'languages', ['CHiNESE']],
+  ['Foo.2010.DTS.5.1.CH. 720p.x264-GRP', 'languages', []],
+]) {
+  const actual = oleoo.parse(name, options)[key]
+
+  if (JSON.stringify(actual) !== JSON.stringify(expected)) {
+    failures.push(`[rules] ${name}\n    ${key}: ${JSON.stringify(expected)} -> ${JSON.stringify(actual)}`)
+  }
+}
+
+try {
+  oleoo.parse('Foo.2010.1080p.BluRay.x264-GRP', { currentYear: 'soon' })
+  failures.push('[options] currentYear accepts what is not a number')
+} catch (e) {
+  e instanceof TypeError || failures.push(`[options] currentYear throws ${e.name}, not a TypeError`)
 }
 
 failures.forEach(failure => console.log(failure + '\n'))
