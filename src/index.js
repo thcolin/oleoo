@@ -90,7 +90,7 @@ const parse = (raw = '', options = {}) => {
     episodes: [],
     group: null,
     flags: [],
-    ...defaults,
+    ...Object.fromEntries(Object.entries(defaults || {}).map(([key, value]) => [key, Array.isArray(value) ? [...value] : value])),
     input: input,
     score: 0,
     valid: false,
