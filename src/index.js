@@ -216,11 +216,13 @@ const parse = (raw = '', options = {}) => {
   // payload.languages
   for ([key, patterns] of Object.entries(rules.language)) {
     for (pattern of patterns) {
-      if (match = find(input.slice(titleEndPosition === input.length ? 0 : titleEndPosition), '[_\\W]', pattern, '([_\\W]|$)')) {
+      const offset = titleEndPosition === input.length ? 0 : titleEndPosition
+
+      if (match = find(input.slice(offset), '[_\\W]', pattern, '([_\\W]|$)')) {
         payload.languages.push(key)
 
-        if ((titleEndPosition + match.index + match[0].length) > groupStartPosition) {
-          groupStartPosition = titleEndPosition + match.index + match[0].length
+        if ((offset + match.index + match[0].length) > groupStartPosition) {
+          groupStartPosition = offset + match.index + match[0].length
         }
 
         break
