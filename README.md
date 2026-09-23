@@ -264,7 +264,7 @@ While Oleoo aims for broad compatibility, some release name patterns can be chal
 * **Group Detection:** Can sometimes be confused by tags, alternative titles in parentheses, or multiple hyphenated parts near the end of the filename.
 * **Title Boundaries:** Occasionally, tags (especially language tags) might be incorrectly included in the extracted title if the structure is unusual. Filenames without clear separators are difficult.
 * **Complex Structures:** Very unconventional filenames, heavy use of nested brackets/parentheses, or ambiguous terms might lead to partial or incorrect parsing.
-* **Bounds:** a name longer than 1024 characters, or an episode range of more than 9999 episodes (`E1-E10000`), is refused with an error. The longest release of the fixtures holds 205 characters.
+* **Bounds:** a name longer than 1024 characters, or an episode range of more than 9999 episodes (`E1-10000`), is refused with an error. The longest release of the fixtures holds 205 characters.
 * **Characters above U+FFFF** (emoji): the JavaScript and Go packages count them as two UTF-16 code units, the Rust package as one character, so results can differ on such names. See [`SPEC.md`](./SPEC.md#strings-and-positions).
 
 ## Help Improve Oleoo! ❤️
