@@ -17,7 +17,7 @@ yarn test
 (cd packages/rust && cargo publish --dry-run --quiet)
 
 trap 'git checkout HEAD -- packages/js/package.json packages/rust/Cargo.toml packages/rust/Cargo.lock' ERR
-(cd packages/js && npm --no-git-tag-version version $1)
+(cd packages/js && npm --no-git-tag-version --no-workspaces-update version $1)
 sed -i.bak "s/^version = \".*\"/version = \"$1\"/" packages/rust/Cargo.toml && rm packages/rust/Cargo.toml.bak
 (cd packages/rust && cargo check --quiet)
 git add packages/js/package.json packages/rust/Cargo.toml packages/rust/Cargo.lock
