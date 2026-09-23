@@ -975,10 +975,11 @@ const parse = (raw = '', options = {}) => {
 }
 
 const guess = (input, options) => {
-  const payload = parse(input, Object.assign({}, options, { strict: false }))
+  options = Object.assign({}, options, { strict: false })
+  const payload = parse(input, options)
 
   if (!payload.year) {
-    payload.year = new Date().getFullYear()
+    payload.year = String(new Date().getFullYear())
   }
 
   if (!payload.resolution) {
@@ -990,6 +991,8 @@ const guess = (input, options) => {
       payload.resolution = 'SD'
     }
   }
+
+  payload.generated = stringify(payload, options)
 
   return payload
 }
