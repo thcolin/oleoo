@@ -185,13 +185,15 @@ const parse = (raw = '', options = {}) => {
     }
 
     for (pattern of patterns) {
+      const anchored = typeof pattern === 'string' && pattern.startsWith('^')
+
       try {
-        if (match = find(input, typeof pattern === 'string' && pattern.startsWith('^') ? '' : '[_\\W]', pattern, '([_\\W]|$)')) {
+        if (match = find(input, anchored ? '' : '[_\\W]', pattern, '([_\\W]|$)')) {
           if (!payload.flags.includes(key)) {
             payload.flags.push(key)
           }
   
-          if (!(typeof pattern === 'string' && pattern.startsWith('^')) && match.index < titleEndPosition) {
+          if (!anchored && match.index < titleEndPosition) {
             titleEndPosition = match.index
           }
   
@@ -261,10 +263,12 @@ const parse = (raw = '', options = {}) => {
     }
 
     for (pattern of patterns) {
+      const anchored = typeof pattern === 'string' && pattern.startsWith('^')
+
       try {
-        if (match = find(input, typeof pattern === 'string' && pattern.startsWith('^') ? '' : '[_\\W]', pattern, '([_\\W]|$)')) {
+        if (match = find(input, anchored ? '' : '[_\\W]', pattern, '([_\\W]|$)')) {
           if (
-            !(typeof pattern === 'string' && pattern.startsWith('^')) &&
+            !anchored &&
             match.index < titleEndPosition &&
             (match.index + match[0].length) <= (titleEndPosition + 1) &&
             !(new RegExp(key).test(match[0]))
@@ -276,7 +280,7 @@ const parse = (raw = '', options = {}) => {
             payload.flags.push(key)
           }
   
-          if (!(typeof pattern === 'string' && pattern.startsWith('^')) && match.index < titleEndPosition) {
+          if (!anchored && match.index < titleEndPosition) {
             titleEndPosition = match.index
           }
   
