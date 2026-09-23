@@ -215,7 +215,7 @@ Contributing test cases is easy:
         * `./tests/fixtures/releases.txt`
         * `./tests/fixtures/accepted.json`
         * `./tests/fixtures/refused.json`
-    * If you were also able to **fix any parsing issues** you found in `src/index.js`, include those code changes in the same PR! **Important:** Modifying the parsing logic (`src/index.js`) can easily introduce regressions (breaking previously correct parses). **This is the main challenge!** Run `yarn test` to list every changed entry, then `yarn fixtures` to review them one by one and confirm that your changes only fix the intended issue and do not negatively affect other entries in `accepted.json`.
+    * If you were also able to **fix any parsing issues** you found in `rules.json` or `src/index.js`, include those changes in the same PR! **Important:** Modifying the rules (`rules.json`) or the parsing logic (`src/index.js`) can easily introduce regressions (breaking previously correct parses). **This is the main challenge!** Run `yarn test` to list every changed entry, then `yarn fixtures` to review them one by one and confirm that your changes only fix the intended issue and do not negatively affect other entries in `accepted.json`.
 
 **Reporting Issues without a PR:**
 
@@ -230,6 +230,10 @@ To help fix the issue quickly, please include as much detail as possible in your
     * If you used `yarn fixtures` and marked the parse as incorrect, include the **comment** you added explaining the error.
 
 Even just providing the problematic filename is helpful, but more detail makes debugging much faster! Thank you for contributing!
+
+## Porting Oleoo
+
+Oleoo can be written again in another language. Every pattern and list lives in [`rules.json`](./rules.json), written in a regex dialect that other engines can read, and [`SPEC.md`](./SPEC.md) describes the algorithm step by step. A port is conformant when it gives the results of `tests/fixtures/accepted.json` and `tests/fixtures/refused.json` for every release of `tests/fixtures/releases.txt`.
 
 ## License
 

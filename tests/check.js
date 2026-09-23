@@ -53,7 +53,7 @@ if (oleoo.parse('Foo.2031.1080p.BluRay.x264-GRP', options).year !== null || oleo
   failures.push('[options] currentYear does not bound the accepted years')
 }
 
-// rules.json stays in the regex dialect SPEC.md describes, which PCRE2, fancy-regex and std::regex all read.
+// rules.json stays in the regex dialect SPEC.md describes, so that other regex engines can read it.
 const rules = JSON.parse(readFileSync(join(__dirname, '..', 'rules.json'), 'utf-8'))
 const patterns = [
   ...['source', 'encoding', 'resolution', 'dub', 'language', 'flags']
