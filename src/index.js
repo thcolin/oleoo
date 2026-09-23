@@ -853,7 +853,7 @@ const parse = (raw = '', options = {}) => {
     .split(' ')
     .map(s => UPPERCASE_WORDS.includes(s.toUpperCase()) ? s.toUpperCase() : s)
     .join(' ')
-    .replace(/(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g, s => s.toUpperCase())
+    .replace(/(^([a-zA-Z]))|([ -][a-zA-Z])/g, s => s.toUpperCase())
     .replace(/\W([ivx]+)(\W|$)/ig, s => s.toUpperCase()) // Roman number (XVI)
     .replace(/\W(i+)\W?/ig, s => s.toUpperCase()) // Roman number (III)
 
@@ -867,7 +867,7 @@ const parse = (raw = '', options = {}) => {
       .split(' ')
       .map(s => UPPERCASE_WORDS.includes(s.toUpperCase()) ? s.toUpperCase() : s)
       .join(' ')
-      .replace(/(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g, s => s.toUpperCase())
+      .replace(/(^([a-zA-Z]))|([ -][a-zA-Z])/g, s => s.toUpperCase())
       .replace(/\W([ivx]+)(\W|$)/ig, s => s.toUpperCase()) // Roman number (XVI)
       .replace(/\W(i+)\W?/ig, s => s.toUpperCase()) // Roman number (III)
 
