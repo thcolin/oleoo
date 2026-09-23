@@ -22,10 +22,12 @@ const fields = (expected, actual) => {
   return lines.length ? lines : ['    key order changed']
 }
 
+// Pins the year window so the fixtures give the same result on any date.
+const options = { currentYear: 2026 }
 const failures = []
 
 for (const name of names) {
-  const release = oleoo.parse(name)
+  const release = oleoo.parse(name, options)
 
   if (name in accepted) {
     const lines = fields(accepted[name], release)
@@ -38,13 +40,17 @@ for (const name of names) {
     failures.push(`[unknown] ${name}\n    neither accepted nor refused, run \`yarn fixtures\``)
   }
 
-  if (JSON.stringify(oleoo.parse(name, { strict: false })) !== JSON.stringify(release)) {
+  if (JSON.stringify(oleoo.parse(name, { ...options, strict: false })) !== JSON.stringify(release)) {
     failures.push(`[options] ${name}\n    parse with { strict: false } differs from parse with no options`)
   }
 }
 
-if (oleoo.parse('Foo.2010.1080p.BluRay.x264-GRP.[www.site.com]', { erase: [/\[www.*?\]/] }).original !== 'Foo.2010.1080p.BluRay.x264-GRP') {
+if (oleoo.parse('Foo.2010.1080p.BluRay.x264-GRP.[www.site.com]', { ...options, erase: [/\[www.*?\]/] }).original !== 'Foo.2010.1080p.BluRay.x264-GRP') {
   failures.push('[options] erase with a RegExp does not remove its match')
+}
+
+if (oleoo.parse('Foo.2031.1080p.BluRay.x264-GRP', options).year !== null || oleoo.parse('Foo.2031.1080p.BluRay.x264-GRP', { currentYear: 2027 }).year !== '2031') {
+  failures.push('[options] currentYear does not bound the accepted years')
 }
 
 failures.forEach(failure => console.log(failure + '\n'))

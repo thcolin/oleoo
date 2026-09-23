@@ -361,6 +361,11 @@ export interface OleooOptions {
    * @default {}
    */
   defaults?: Partial<Pick<OleooPayload, 'language' | 'resolution' | 'year'>>
+  /**
+   * The year a release is parsed in: a year is accepted up to `currentYear + 4`, and `guess` falls back to it.
+   * @default new Date().getFullYear()
+   */
+  currentYear?: number
 }
 
 /**

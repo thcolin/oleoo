@@ -66,6 +66,7 @@ const stringify = (payload, options = {}) => {
 
 const parse = (raw = '', options = {}) => {
   const { strict = false, flagged = true, erase = [], defaults = {} } = options
+  const currentYear = options.currentYear ?? new Date().getFullYear()
   const input = [...(erase || []), ...rules.erase]
     .reduce((input, regexp) => input.replace(new RegExp(`[\.\-]*?${typeof regexp === 'string' ? regexp.replace(/\\\\/g, '\\') : regexp.source}[\.\-]*?`, 'ig' + (typeof regexp === 'string' ? '' : regexp.flags.replace(/[igy]/g, ''))), ''), raw)
     .replace(new RegExp('\\.(' + extensions.join('|') + ')(\\W.*)?$', 'i'), '')
@@ -125,8 +126,8 @@ const parse = (raw = '', options = {}) => {
   // payload.year
   if (
     (match = input.match(/[_\W]((\d{4})[\.\s]?-[\.\s]?(\d{4}))/)) && (
-      (Number(match[2]) > 1900 && Number(match[2]) < (new Date().getFullYear() + 5)) &&
-      (Number(match[3]) > 1900 && Number(match[3]) < (new Date().getFullYear() + 5))
+      (Number(match[2]) > 1900 && Number(match[2]) < (currentYear + 5)) &&
+      (Number(match[3]) > 1900 && Number(match[3]) < (currentYear + 5))
     )
   ) {
     payload.year = `${match[2]}-${match[3]}`
@@ -140,7 +141,7 @@ const parse = (raw = '', options = {}) => {
     if ((match.index + match[0].length) > groupStartPosition) {
       groupStartPosition = match.index + match[0].length
     }
-  } else if ((matches = [...input.matchAll(/[_\W](\d{4})(?![_\W]\d{2}[_\W]\d{2})/g)].filter(y => !/\d{2}[_\W]\d{2}$/.test(input.slice(0, y.index)) && Number(y[1]) > 1900 && Number(y[1]) < (new Date().getFullYear() + 5))).length) {
+  } else if ((matches = [...input.matchAll(/[_\W](\d{4})(?![_\W]\d{2}[_\W]\d{2})/g)].filter(y => !/\d{2}[_\W]\d{2}$/.test(input.slice(0, y.index)) && Number(y[1]) > 1900 && Number(y[1]) < (currentYear + 5))).length) {
     const match = matches.pop()
     payload.year = match[1]
     payload.score += 1
@@ -567,7 +568,7 @@ const guess = (input, options) => {
   const payload = parse(input, options)
 
   if (!payload.year) {
-    payload.year = String(new Date().getFullYear())
+    payload.year = String(options.currentYear ?? new Date().getFullYear())
   }
 
   if (!payload.resolution) {
