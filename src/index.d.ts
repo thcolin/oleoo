@@ -33,7 +33,7 @@ export type SourceType =
   | 'TVRip'
 
 /** Represents the standardized keys for video encodings. */
-export type EncodingType = 'MPEG2' | 'MPEG4' | 'DivX' | 'XviD' | 'h264' | 'h265' | 'x264' | 'x265' | 'VP9'
+export type EncodingType = 'MPEG2' | 'MPEG4' | 'DivX' | 'XviD' | 'h264' | 'h265' | 'x264' | 'x265' | 'VP9' | 'VC1'
 
 /** Represents the standardized keys for video resolutions. */
 export type ResolutionType = 'SD' | '720p' | '1080p' | '2160p'
@@ -197,6 +197,7 @@ export type FlagType =
   | 'mHD'
   | 'REMUX'
   | 'DUAL'
+  | 'DKSUBS'
   | 'COLORiZED'
   | 'RESTORED'
   | 'NB'
@@ -229,7 +230,9 @@ export type FlagType =
   | 'TrueHD'
   | 'HSBS'
   | 'SDH'
+  | 'SBS'
   | 'UHD'
+  | 'HC'
   | 'HOU'
   | 'DOC'
   | 'PPV'
@@ -311,7 +314,7 @@ export interface OleooPayload {
   language: string | null // Combined language string (e.g., "FRENCH", "MULTi-VFF") or null
   season: number | null
   episode: string | null // Formatted episode string (e.g., "01", "01-03") or null
-  episodes: number[] // Array of episode numbers
+  episodes: (number | string)[] // Array of episode numbers, or strings for dated episodes (e.g., "04.02")
   group: string | null
   flags: FlagType[] // Array of detected standardized flags
   input: string // Original input after initial cleanup
@@ -378,14 +381,14 @@ export interface OleooResult {
   dub: DubType | null
   /** Detected year or year range (e.g., "2023", "2001-2003"). */
   year: string | null
-  /** Array of detected standardized flags (e.g., ["EXTENDED", "PROPER"]), or null if none. */
-  flags: FlagType[] | null
+  /** Array of detected standardized flags (e.g., ["EXTENDED", "PROPER"]), empty if none. */
+  flags: FlagType[]
   /** Detected season number for TV shows. */
   season: number | null
   /** Formatted episode number(s) string for TV shows (e.g., "01", "01-03"). */
   episode: string | null
-  /** Array of detected episode numbers (e.g., [1], [1, 2, 3]). */
-  episodes: number[]
+  /** Array of detected episode numbers (e.g., [1], [1, 2, 3]), or strings for dated episodes (e.g., ["04.02"]). */
+  episodes: (number | string)[]
   /** Detected media type ('movie' or 'tvshow'). */
   type: MediaType // Type should always be determined
   /** Detected release group. */
