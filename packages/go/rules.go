@@ -69,7 +69,6 @@ func (s *ruleSet) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
-// entry is a flag of stringify.after*: a flag name, or { flag, dubRelated }.
 type entry struct {
 	flag       string
 	dubRelated bool
