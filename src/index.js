@@ -1,14 +1,6 @@
-import source from '../rules/source.json' with { type: 'json' }
-import encoding from '../rules/encoding.json' with { type: 'json' }
-import resolution from '../rules/resolution.json' with { type: 'json' }
-import dub from '../rules/dub.json' with { type: 'json' }
-import language from '../rules/language.json' with { type: 'json' }
-import flags from '../rules/flags.json' with { type: 'json' }
-import erase from '../rules/erase.json' with { type: 'json' }
-import ambiguous from '../rules/ambiguous.json' with { type: 'json' }
-import title from '../rules/title.json' with { type: 'json' }
-import order from '../rules/stringify.json' with { type: 'json' }
-import extensions from '../rules/extensions.json' with { type: 'json' }
+import data from '../rules.json' with { type: 'json' }
+
+const { source, encoding, resolution, dub, language, flags, erase, ambiguous, title, stringify: order, extensions } = data
 
 // When several keys of source, encoding, resolution or dub match, the last declared one wins: generic keys go first.
 const rules = { source, encoding, resolution, dub, language, flags, erase }
