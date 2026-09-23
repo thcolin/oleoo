@@ -1,6 +1,7 @@
 # Oleoo
 
 [![npm version](https://img.shields.io/npm/v/oleoo.svg)](https://www.npmjs.com/package/oleoo)
+[![crates.io](https://img.shields.io/crates/v/oleoo.svg)](https://crates.io/crates/oleoo)
 [![Go Reference](https://pkg.go.dev/badge/github.com/thcolin/oleoo/packages/go/v3.svg)](https://pkg.go.dev/github.com/thcolin/oleoo/packages/go/v3)
 [![Fixtures](https://img.shields.io/badge/fixtures-6697%20releases-blue.svg)](./tests/fixtures/releases.txt)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE.md)
@@ -31,7 +32,7 @@ It exists in **JavaScript**, **Go** and **Rust**. The three packages read the sa
 |---|---|---|---|
 | JavaScript | [`oleoo`](https://www.npmjs.com/package/oleoo) on npm, zero dependency | [`packages/js`](./packages/js) (reference) | built-in `RegExp` |
 | Go | [`github.com/thcolin/oleoo/packages/go/v3`](https://pkg.go.dev/github.com/thcolin/oleoo/packages/go/v3) | [`packages/go`](./packages/go) | [`dlclark/regexp2`](https://github.com/dlclark/regexp2) |
-| Rust | `oleoo` crate, from git until published on crates.io | [`packages/rust`](./packages/rust) | [`fancy-regex`](https://github.com/fancy-regex/fancy-regex) |
+| Rust | [`oleoo`](https://crates.io/crates/oleoo) on crates.io | [`packages/rust`](./packages/rust) | [`fancy-regex`](https://github.com/fancy-regex/fancy-regex) |
 
 ## Features
 
@@ -65,7 +66,7 @@ yarn add oleoo   # or: npm install oleoo
 go get github.com/thcolin/oleoo/packages/go/v3
 
 # Rust
-cargo add oleoo --git https://github.com/thcolin/oleoo
+cargo add oleoo
 ```
 
 ## Basic Usage
