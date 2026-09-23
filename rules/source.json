@@ -1,0 +1,94 @@
+{
+  "TVRip": [
+    "tv[\\.\\-\\s]?(r(ip)?)?"
+  ],
+  "CAM": [
+    "cam[\\.\\-\\s]?r?(ip)?",
+    "(hd)?cam",
+    "ts",
+    "telesync",
+    "pdvd"
+  ],
+  "TC": [
+    "tc",
+    "telecine"
+  ],
+  "SCREENER": [
+    "screener",
+    "scr",
+    "ddc"
+  ],
+  "DVDSCr": [
+    "dvd[\\.\\-\\s]?scr",
+    "dvdscreener"
+  ],
+  "R5": [
+    "r5"
+  ],
+  "R6": [
+    "r6"
+  ],
+  "HDRip": [
+    "hd[\\.\\-\\s]?rip",
+    "hd[\\.\\-\\s]?l(ight)?",
+    "mhd(?!$)",
+    "hd(web)?",
+    "hddvdrip"
+  ],
+  "BRRip": [
+    "br[\\.\\-\\s]?r?(ip)?"
+  ],
+  "BDRip": [
+    "bd[\\.\\-\\s]?r?(ip)?"
+  ],
+  "DVD-R": [
+    "dvd[\\.\\-\\s]?r",
+    "dvd[\\.\\-\\s]?5",
+    "dvd[\\.\\-\\s]?9",
+    "r6[\\.\\-\\s]?dvd",
+    "dvd"
+  ],
+  "DVDRip": [
+    "dvd[\\.\\-\\s]?rip",
+    "480p"
+  ],
+  "WEB-DL": [
+    "web[\\.\\-\\s]?tv",
+    "web[\\.\\-\\s]?dl",
+    "web[\\.\\-\\s]?r?(ip)?",
+    "amazonhd",
+    "netflixhd",
+    "webhd",
+    "web",
+    "weblight"
+  ],
+  "BLURAY": [
+    "blu[\\.\\-\\s]?ray",
+    "br(1080|720)p?",
+    "br"
+  ],
+  "BDSCR": [
+    "bluray\\-scr",
+    "bdscr"
+  ],
+  "PDTV": [
+    "pdtv"
+  ],
+  "SDTV": [
+    "sdtv",
+    "dsr",
+    "ds[\\.\\-\\s]?r?(ip)?",
+    "sat[\\.\\-\\s]?r?(ip)?",
+    "dth[\\.\\-\\s]?r?(ip)?",
+    "dvb[\\.\\-\\s]?r?(ip)?"
+  ],
+  "HDTV": [
+    "hdtv[\\.\\-\\s]?r?(ip)?",
+    "hdtv",
+    "tvriphd"
+  ],
+  "UHDTV": [
+    "uhdtv[\\.\\-\\s]?r?(ip)?",
+    "uhdtv"
+  ]
+}

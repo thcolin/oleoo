@@ -1,0 +1,177 @@
+{
+  "dubRelated": [
+    "DOLBY-VISION",
+    "DD1.0",
+    "DD2.0",
+    "DD5.1",
+    "DD7.1",
+    "DDP2.0",
+    "DDP5.1",
+    "DDP7.1",
+    "DTS-HD",
+    "DTS-MA",
+    "DTS-HDMA",
+    "DTS",
+    "Dolby",
+    "Atmos",
+    "TrueHD",
+    "AVC",
+    "DV"
+  ],
+  "afterTitle": [
+    "3D",
+    "HSBS",
+    "HOU",
+    "COLLECTION"
+  ],
+  "afterYear": [
+    "FiNAL",
+    "UNTOUCHED",
+    "RESTORED",
+    "READNFO",
+    "DiRFiX",
+    "FiXED",
+    "CRITERION",
+    "VC",
+    "SC",
+    "DC",
+    "EXTENDED",
+    "THEATRiCAL",
+    "BONUS",
+    "DKSUBS",
+    "PPV",
+    "PROPER",
+    "REPACK",
+    "RERiP",
+    "CUSTOM",
+    "LiMiTED",
+    "DOC",
+    "NB",
+    "DUAL",
+    "COMPLETE",
+    "FASTSUB",
+    "FANSUB",
+    "UNRATED",
+    "iNTERNAL",
+    "FESTiVAL",
+    "STV",
+    "REMASTERED",
+    "RATED",
+    "UNCUT",
+    "UNCENSORED"
+  ],
+  "afterLanguage": [
+    "AD",
+    "LD",
+    "MD",
+    "DL",
+    "SUBFORCED",
+    "SUBBED",
+    "WORKPRiNT",
+    "iMAX"
+  ],
+  "afterResolution": [
+    "NETFLIX",
+    "AMZN",
+    "ATVP",
+    "DSNP",
+    "HMAX",
+    "HBO",
+    "HULU",
+    "iTN",
+    "ARTE",
+    "PCOK",
+    "10bit",
+    "8bit",
+    "UHD",
+    "HC",
+    "NTSC",
+    "PAL",
+    "QEBS5"
+  ],
+  "afterSource": [
+    "REMUX",
+    "CEE",
+    "SBS",
+    "HDR",
+    "mHD",
+    "2CH",
+    "3CH",
+    "4CH",
+    "5CH",
+    "6CH",
+    "DOLBY-VISION",
+    "DD1.0",
+    "DD2.0",
+    "DD5.1",
+    "DD7.1",
+    "DDP2.0",
+    "DDP5.1",
+    "DDP7.1",
+    "DTS-HD",
+    "DTS-MA",
+    "DTS-HDMA",
+    "DTS",
+    "Dolby",
+    "Atmos",
+    "TrueHD",
+    "AVC",
+    "DV",
+    {
+      "flag": "1.0",
+      "dubRelated": true
+    },
+    {
+      "flag": "3.0",
+      "dubRelated": true
+    },
+    {
+      "flag": "2.0",
+      "dubRelated": true
+    },
+    {
+      "flag": "6.1",
+      "dubRelated": true
+    },
+    {
+      "flag": "5.1",
+      "dubRelated": true
+    },
+    {
+      "flag": "7.1",
+      "dubRelated": true
+    }
+  ],
+  "afterEncoding": [
+    "HEVC",
+    "AV1"
+  ],
+  "afterDub": [
+    "DDP",
+    "MONO",
+    {
+      "flag": "1.0",
+      "dubRelated": false
+    },
+    {
+      "flag": "3.0",
+      "dubRelated": false
+    },
+    {
+      "flag": "2.0",
+      "dubRelated": false
+    },
+    {
+      "flag": "6.1",
+      "dubRelated": false
+    },
+    {
+      "flag": "5.1",
+      "dubRelated": false
+    },
+    {
+      "flag": "7.1",
+      "dubRelated": false
+    }
+  ]
+}

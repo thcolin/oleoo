@@ -1,437 +1,17 @@
+import source from '../rules/source.json' with { type: 'json' }
+import encoding from '../rules/encoding.json' with { type: 'json' }
+import resolution from '../rules/resolution.json' with { type: 'json' }
+import dub from '../rules/dub.json' with { type: 'json' }
+import language from '../rules/language.json' with { type: 'json' }
+import flags from '../rules/flags.json' with { type: 'json' }
+import erase from '../rules/erase.json' with { type: 'json' }
+import ambiguous from '../rules/ambiguous.json' with { type: 'json' }
+import title from '../rules/title.json' with { type: 'json' }
+import order from '../rules/stringify.json' with { type: 'json' }
+import extensions from '../rules/extensions.json' with { type: 'json' }
+
 // When several keys of source, encoding, resolution or dub match, the last declared one wins: generic keys go first.
-const rules = {
-  source: {
-    'TVRip': ['tv[\\.\\-\\s]?(r(ip)?)?'],
-    'CAM': ['cam[\\.\\-\\s]?r?(ip)?', '(hd)?cam', 'ts', 'telesync', 'pdvd'],
-    'TC': ['tc', 'telecine'],
-    'SCREENER': ['screener', 'scr', 'ddc'],
-    'DVDSCr': ['dvd[\\.\\-\\s]?scr', 'dvdscreener'],
-    'R5': ['r5'],
-    'R6': ['r6'],
-    'HDRip': ['hd[\\.\\-\\s]?rip', 'hd[\\.\\-\\s]?l(ight)?', 'mhd(?!$)', 'hd(web)?', 'hddvdrip'],
-    'BRRip': ['br[\\.\\-\\s]?r?(ip)?'],
-    'BDRip': ['bd[\\.\\-\\s]?r?(ip)?'],
-    'DVD-R': ['dvd[\\.\\-\\s]?r', 'dvd[\\.\\-\\s]?5', 'dvd[\\.\\-\\s]?9', 'r6[\\.\\-\\s]?dvd', 'dvd'],
-    'DVDRip': ['dvd[\\.\\-\\s]?rip', '480p'],
-    'WEB-DL': ['web[\\.\\-\\s]?tv', 'web[\\.\\-\\s]?dl', 'web[\\.\\-\\s]?r?(ip)?', 'amazonhd', 'netflixhd', 'webhd', 'web', 'weblight'],
-    'BLURAY': ['blu[\\.\\-\\s]?ray', 'br(1080|720)p?', 'br'],
-    'BDSCR': ['bluray\\-scr', 'bdscr'],
-    'PDTV': ['pdtv'],
-    'SDTV': ['sdtv', 'dsr', 'ds[\\.\\-\\s]?r?(ip)?', 'sat[\\.\\-\\s]?r?(ip)?', 'dth[\\.\\-\\s]?r?(ip)?', 'dvb[\\.\\-\\s]?r?(ip)?'],
-    'HDTV': ['hdtv[\\.\\-\\s]?r?(ip)?', 'hdtv', 'tvriphd'],
-    'UHDTV': ['uhdtv[\\.\\-\\s]?r?(ip)?', 'uhdtv'],
-  },
-  encoding: {
-    'MPEG2': ['mpeg[\\.\\-\\s]?2'],
-    'MPEG4': ['mp(eg)?[\\.\\-\\s]?4'],
-    'DivX': ['divx'],
-    'XviD': ['xvid(hd)?'],
-    'h264': ['h?[\\.\\-\\s]?264'],
-    'h265': ['h?[\\.\\-\\s]?265', 'hevc'],
-    'x264': ['(avc)?x[\\.\\-\\s]?264'],
-    'x265': ['(avc)?x[\\.\\-\\s]?265'],
-    'VP9': ['vp9'],
-    'VC1': ['vc[\\.\\-\\s]?1'],
-  },
-  resolution: {
-    'SD': ['sd', '480[pi]'],
-    '720p': ['(br)?720p', '1280x720'],
-    '1080p': ['(br)?1080[pi]?'],
-    '2160p': ['2160p', '4k(?![\\.\\-\\s]remaster)', 'uhd(r10)?'],
-  },
-  // Should I keep "2.0", "5.1" and "7.1" only as flags to simplify dub ?
-  dub: {
-    'DUBBED': ['dubbed'],
-    'MP3': ['mp3'],
-    'ACC': ['acc'],
-    'AAC': ['aac'],
-    'AAC-LC': ['aac[\\.\\-\\s]?lc'],
-    'AAC-LC-1.0': ['aac[\\.\\-\\s]?lc[\\.\\-\\s]?1[\\.\\-\\s]0'],
-    'AAC-LC-2.0': ['aac[\\.\\-\\s]?lc[\\.\\-\\s]?2[\\.\\-\\s]0'],
-    'AAC-LC-5.1': ['aac[\\.\\-\\s]?lc[\\.\\-\\s]?5[\\.\\-\\s]1'],
-    'AAC-LC-7.1': ['aac[\\.\\-\\s]?lc[\\.\\-\\s]?7[\\.\\-\\s]1'],
-    'AAC-1.0': ['aac([\\.\\-\\s]?v\\d+)?[\\.\\-\\s]?1[\\.\\-\\s]0'],
-    'AAC-2.0': ['aac([\\.\\-\\s]?v\\d+)?[\\.\\-\\s]?2[\\.\\-\\s]0'],
-    'AAC-5.1': ['aac([\\.\\-\\s]?v\\d+)?[\\.\\-\\s]?5[\\.\\-\\s]1'],
-    'AAC-7.1': ['aac([\\.\\-\\s]?v\\d+)?[\\.\\-\\s]?7[\\.\\-\\s]1'],
-    'HE-AAC': ['he[\\.\\-\\s]aac'],
-    'HE-AAC-1.0': ['he[\\.\\-\\s]aac([\\.\\-\\s]?v\\d+)?[\\.\\-\\s]?1[\\.\\-\\s]0'],
-    'HE-AAC-2.0': ['he[\\.\\-\\s]aac([\\.\\-\\s]?v\\d+)?[\\.\\-\\s]?2[\\.\\-\\s]0'],
-    'HE-AAC-5.1': ['he[\\.\\-\\s]aac([\\.\\-\\s]?v\\d+)?[\\.\\-\\s]?5[\\.\\-\\s]1'],
-    'HE-AAC-7.1': ['he[\\.\\-\\s]aac([\\.\\-\\s]?v\\d+)?[\\.\\-\\s]?7[\\.\\-\\s]1'],
-    'AC3': ['ac[\\.\\-\\s]?3(\\.dubbed)?'],
-    'AC3-1.0': ['ac[\\.\\-\\s]?3[\\.\\-\\s]?1[\\.\\-\\s]0'],
-    'AC3-2.0': ['ac[\\.\\-\\s]?3[\\.\\-\\s]?2[\\.\\-\\s]0'],
-    'AC3-5.1': ['ac[\\.\\-\\s]?3[\\.\\-\\s]?5[\\.\\-\\s]1'],
-    'AC3-7.1': ['ac[\\.\\-\\s]?3[\\.\\-\\s]?7[\\.\\-\\s]1'],
-    'PCM': ['pcm(\\.dubbed)?'],
-    'PCM-1.0': ['pcm[\\.\\-\\s]?1[\\.\\-\\s]0'],
-    'PCM-2.0': ['pcm[\\.\\-\\s]?2[\\.\\-\\s]0'],
-    'PCM-5.1': ['pcm[\\.\\-\\s]?5[\\.\\-\\s]1'],
-    'PCM-7.1': ['pcm[\\.\\-\\s]?7[\\.\\-\\s]1'],
-    'LPCM': ['lpcm(\\.dubbed)?'],
-    'LPCM-1.0': ['lpcm[\\.\\-\\s]?1[\\.\\-\\s]0'],
-    'LPCM-2.0': ['lpcm[\\.\\-\\s]?2[\\.\\-\\s]0'],
-    'LPCM-5.1': ['lpcm[\\.\\-\\s]?5[\\.\\-\\s]1'],
-    'LPCM-7.1': ['lpcm[\\.\\-\\s]?7[\\.\\-\\s]1'],
-    'EAC3': ['e[\\.\\-\\s]?ac[\\.\\-\\s]?3'],
-    'EAC3-1.0': ['e[\\.\\-\\s]?ac[\\.\\-\\s]?3[\\.\\-\\s]?1[\\.\\-\\s]0'],
-    'EAC3-2.0': ['e[\\.\\-\\s]?ac[\\.\\-\\s]?3[\\.\\-\\s]?2[\\.\\-\\s]0'],
-    'EAC3-5.1': ['e[\\.\\-\\s]?ac[\\.\\-\\s]?3[\\.\\-\\s]?5[\\.\\-\\s]1'],
-    'EAC3-7.1': ['e[\\.\\-\\s]?ac[\\.\\-\\s]?3[\\.\\-\\s]?7[\\.\\-\\s]1'],
-    'OPUS': ['opus'],
-    'OPUS-1.0': ['opus[\\.\\-\\s]?1[\\.\\-\\s]0'],
-    'OPUS-2.0': ['opus[\\.\\-\\s]?2[\\.\\-\\s]0'],
-    'OPUS-5.1': ['opus[\\.\\-\\s]?5[\\.\\-\\s]1'],
-    'OPUS-7.1': ['opus[\\.\\-\\s]?7[\\.\\-\\s]1'],
-    'FLAC': ['flac'],
-    'FLAC-1.0': ['flac[\\.\\-\\s]?1[\\.\\-\\s]0'],
-    'FLAC-2.0': ['flac[\\.\\-\\s]?2[\\.\\-\\s]0'],
-    'FLAC-5.1': ['flac[\\.\\-\\s]?5[\\.\\-\\s]1'],
-    'FLAC-7.1': ['flac[\\.\\-\\s]?7[\\.\\-\\s]1'],
-  },
-  language: {
-    'SiLENT': ['muet', 'silent'],
-    'MULTi': ['multi?(\\d+)?', 'vf2', 'fr[\\.\\-\\s]en', 'en[\\.\\-\\s]fr', 'mlv', '(dual|2)[\\.\\-\\s]?audio', 'multilang'],
-    'VFQ': ['vfq', 'vq', 'ca'],
-    'TRUEFRENCH': ['truefrench', '(french[\\.\\-\\s]?)?vff', 'vf2', 'vof'],
-    'FRENCH': [{ pattern: 'french(?![\\.\\-\\s](vof|vff))', notAfter: '(vof|true|sub|vff)[\\.\\-\\s]?' }, 'francais', 'français', { pattern: 'fra?(?![\\.\\-\\s]s(tr|rt)|vff)', notAfter: '(s(rt|tr?)|vo|sub|vff)[\\.\\-\\s]?' }, 'vf(?!f)', 'vfi', 'vf2', 'vof(st(fr)?)'],
-    'VOSTFR': ['s(rt|tr?)[\\.\\-\\s]?fr', 'fr[\\.\\-\\s]?s(rt|tr?)', 'vo(?!f)(\\w*)stfr', 'vo(?!f)(\\w*)str', 'vo(?!f)(\\w*)stf', 'vo(?!f)(\\w*)st', 'stfr', 'subfr(ench)?'],
-    'VOSTA': ['vo(?!f)(\\w*)sta', 'vo(?!f)(\\w*)sten', 'e[\\.\\-\\s]?subs?'],
-    'VOST': ['multi(\\d+)?[\\.\\-\\s]?subs?'],
-    'PERSiAN': ['persian'],
-    'AMHARiC': ['amharic'],
-    'ARABiC': ['arabic'],
-    'CAMBODiAN': ['cambodian'],
-    'CHiNESE': ['chinese', { pattern: 'ch[\\.\\-\\s]', notAfter: '\\d[\\.\\-\\s]?' }, 'ci', 'chi', 'chs', 'mandarin'],
-    'CREOLE': ['creole'],
-    'DANiSH': ['danish'],
-    'DUTCH': ['dutch', 'nl(subs?)?'],
-    'ENGLiSH': ['english', 'eng', 'en', 'voa'],
-    'ESTONiAN': ['estonian'],
-    'FiLiPiNO': ['filipino'],
-    'FiNNiSH': ['finnish'],
-    'FLEMiSH': ['flemish'],
-    'GERMAN': ['german', 'ge'],
-    'GREEK': ['greek'],
-    'HEBREW': ['hebrew'],
-    'HiNDi': ['hindi'],
-    'iNDONESiAN': ['indonesian'],
-    'iRiSH': ['irish'],
-    'iTALiAN': ['italian', 'ita', 'it'],
-    'JAPANESE': ['japanese', 'ja?p'],
-    'KOREAN': ['korean', 'kor?(sub)?'],
-    'LAOTiAN': ['laotian'],
-    'LATViAN': ['latvian'],
-    'LiTHUANiAN': ['lithuanian'],
-    'MALAY': ['malay'],
-    'MALAYSiAN': ['malaysian'],
-    'MAORi': ['maori'],
-    'NORDiC': ['nordic'],
-    'NORWEGiAN': ['norwegian', 'no'],
-    'PASHTO': ['pashto', 'pa'],
-    'POLiSH': ['polish', 'po'],
-    'PORTUGUESE': ['portuguese', 'pt'],
-    'ROMANiAN': ['romanian', 'ro'],
-    'RUSSiAN': ['russian', 'rus?'],
-    'SPANiSH': ['spanish', 'e?sp', 'spa'],
-    'SWAHiLi': ['swahili'],
-    'SLOVENiAN': ['slovenian', 'slo(subs?)?'],
-    'SWEDiSH': ['swedish', 'swe'],
-    'SWiSS': ['swiss'],
-    'TAGALOG': ['tagalog'],
-    'TAJiK': ['tajik'],
-    'THAi': ['thai'],
-    'TURKiSH': ['turkish'],
-    'UKRAiNiAN': ['ukrainian'],
-    'ViETNAMESE': ['vietnamese'],
-    'WELSH': ['welsh'],
-    'VO': ['vo'],
-  },
-  flags: {
-    'Atmos': ['atmos'],
-    '8bit': ['8[\\.\\-\\s]?b(its?)?', 'u?hdr8'],
-    '10bit': ['10[\\.\\-\\s]?b(its?)?', 'u?hdr10'],
-    '2CH': ['2[\\.\\-\\s]?ch'],
-    '3CH': ['3[\\.\\-\\s]?ch'],
-    '4CH': ['4[\\.\\-\\s]?ch'],
-    '5CH': ['5[\\.\\-\\s]?ch'],
-    '6CH': ['6[\\.\\-\\s]?ch'],
-    'HEVC': ['hevc'],
-    'AV1': ['av1'],
-    'HD1': ['hd1'],
-    'PROPER': ['proper'],
-    'COLLECTION': [
-      { pattern: '(la[\\.\\-\\s])?(the[\\.\\-\\s])?collec?tion', notAfter: 'criterion[\\.\\-\\s]?' },
-      '(la[\\.\\-\\s]saga|complete[\\.\\-\\s]saga|saga[\\.\\-\\s]complete)',
-      'coffret',
-      '(l\')?int[ée]grale?',
-      'duologie',
-      'duology',
-      'trilogie',
-      'trilogy',
-      'quadrilogie',
-      'quadrilogy',
-      'pentalogie',
-      'pentalogy',
-      'hexalogie',
-      'hexalogy',
-      'octalogie',
-      'octalogy',
-      'heptalogie',
-      'heptalogy',
-      'nonalogie',
-      'nonalogy',
-      'decalogie',
-      'decalogy',
-    ],
-    'FASTSUB': ['fastsub'],
-    'SUBFORCED': ['subforced'],
-    'SUBBED': ['subbed'],
-    'LiMiTED': ['limited'],
-    'EXTENDED': ['ex-?tended([\\.\\-\\s](edition|cut))?', 'ext', 'version[\\.\\-\\s]longue', 'vl', 'sp[ée]ciale?([\\.\\-\\s]\\w+)?[\\.\\-\\s](edition|cut)'],
-    'DC': ['director[\\W\\s]?s?([\\.\\-\\s]Cut)?', '(version[\\.\\-\\s])?d[\\.\\-\\s]?c', '(alternate|alternative)[\\.\\-\\s]cut', 'final[\\.\\-\\s]cut'],
-    'THEATRiCAL': ['theatrical'],
-    'WORKPRiNT': ['workprint', 'wp'],
-    'BONUS': ['bonus'],
-    'FANSUB': ['fansub'],
-    'REPACK': ['repack'],
-    'UNRATED': ['unrated'],
-    'NFOFiX': ['nfofix'],
-    'NTSC': ['ntsc'],
-    'PAL': ['pal'],
-    'iNTERNAL': ['internal', 'int'],
-    'FESTiVAL': ['festival'],
-    'STV': ['stv'],
-    'RETAiL': ['retails?'],
-    'REMASTERED': ['remastered', 'remasteris[eé]e?', 'rm'],
-    'RATED': ['rated'],
-    'CHRONO': ['chrono'],
-    'UNCUT': ['uncut'],
-    'UNCENSORED': ['uncensored', '(version[\\.\\-\\s])?non[\\.\\-\\s]censur[ée]e'],
-    'CUSTOM': ['custom'],
-    'COMPLETE': ['complete'],
-    'UNTOUCHED': ['untouched'],
-    'AD': ['ad', 'stsm', 's[&\\.\\-\\s]m', 'sourds?[\\.\\-\\s](et)?[\\.\\-\\s]?malentendants?'],
-    'HDR': ['hdr'],
-    'mHD': ['mhd(?!$)', '(hd|ultra)[\\.\\-\\s]?l(ight)?'],
-    'REMUX': ['remux'],
-    'DUAL': ['dual(?![\\.\\-\\s]audio)'],
-    'DKSUBS': ['dksubs'],
-    'FiNAL': [{ pattern: 'final(?![\\.\\-\\s]?(cut|edition))', notAfter: 'version[\\.\\-\\s]' }],
-    'COLORiZED': ['colorized'],
-    'NB': ['nb'], // Noir et Blanc
-    'RESTORED': ['restored', 'restaur[ée]e?'],
-    'WS': ['ws'],
-    'DL': [{ pattern: 'dl', notAfter: 'web[\\.\\-\\s]?' }],
-    'DOLBY-DIGITAL': ['dolby[\\.\\s]?digital'],
-    'DOLBY-VISION': ['dolby[\\.\\s]?vision'],
-    'Dolby': ['dolby(?![\\.\\s]?(vision|digital))'],
-    'NETFLIX': ['nf', 'netflix', 'netflixhd'],
-    'PCOK': ['pcok'],
-    'ARTE': ['arte'],
-    'AMZN': ['amzn', 'amazon'],
-    'ATVP': ['atvp'],
-    'DSNP': ['dsnp', 'disney\\+'],
-    'HULU': ['hulu'],
-    'HMAX': ['hmax'],
-    'HBO': ['hbo'],
-    'iTN': ['itunes', 'itn'],
-    'VC': ['vc(?![\\.\\-\\s]?\\d)'],
-    'SC': ['sc'],
-    'AVC': ['avc[\\.\\s]?(x26[45])?'],
-    'QEBS5': ['qebs5'],
-    'DV': ['dv'],
-    'DXVA': ['dxva'],
-    'CEE': ['cee'],
-    'DTS-HD': ['dts[\\.\\-\\s]hd(?![\\.\\-\\s]?ma)'],
-    'DTS-MA': ['dts[\\.\\-\\s]ma'],
-    'DTS-HDMA': ['dts[\\.\\-\\s]hd[\\.\\-\\s]?ma'],
-    'DTS': ['^(?!.*(dts[\\.\\-\\s]hd(?!china)|dts[\\.\\-\\s]ma|dts[\\.\\-\\s]hd[\\.\\-\\s]?ma)).*dts'],
-    'TrueHD': ['true[\\.\\-\\s]?hd'],
-    'HSBS': ['hsbs', 'half[\\.\\-\\s]?sbs'],
-    'HOU': ['hou'],
-    'SDH': ['SDH'],
-    'SBS': [{ pattern: 'SBS', notAfter: 'h(alf)?[\\.\\-\\s]?' }],
-    'UHD': ['UHD'],
-    'HC': ['HC'],
-    'DOC': ['doc'],
-    'PPV': ['ppv'],
-    'RERiP': ['re[\\-]?rip'],
-    'DD1.0': ['dd[\\.\\-\\s]?1[\\.\\-\\s]?0'],
-    'DD2.0': ['dd[\\.\\-\\s]?2[\\.\\-\\s]?0'],
-    'DD5.1': ['dd[\\.\\-\\s]?5[\\.\\-\\s]?1'],
-    'DD7.1': ['dd[\\.\\-\\s]?7[\\.\\-\\s]?1'],
-    'DDP1.0': ['dd[p\\+][\\.\\-\\s]?1[\\.\\-\\s]?0'],
-    'DDP2.0': ['dd[p\\+][\\.\\-\\s]?2[\\.\\-\\s]?0'],
-    'DDP5.1': ['dd[p\\+][\\.\\-\\s]?5[\\.\\-\\s]?1'],
-    'DDP7.1': ['dd[p\\+][\\.\\-\\s]?7[\\.\\-\\s]?1'],
-    'DDP': ['^(?!.*(dd[p\\+][\\.\\-\\s]?5[\\.\\-\\s]?1|dd[p\\+][\\.\\-\\s]?2[\\.\\-\\s]?0|dd[p\\+][\\.\\-\\s]?1[\\.\\-\\s]?0)).*dd[p\\+]'],
-    '1.0': ['^(?!.*(dd[\\.\\-\\s]?1[\\.\\-\\s]?0|dd[p\\+][\\.\\-\\s]?1[\\.\\-\\s]?0|(he\-)?aac([\\.\\-\\s]?((v\\d+)|lc))?[\\.\\-\\s]?1[\\.\\-\\s]0|e?[\\.\\-\\s]?ac[\\.\\-\\s]?3[\\.\\-\\s]?1[\\.\\-\\s]0|opus[\\.\\-\\s]?1[\\.\\-\\s]0|flac[\\.\\-\\s]?1[\\.\\-\\s]0|l?pcm[\\.\\-\\s]?1[\\.\\-\\s]0)).*1[\\.\\-\\s]0'],
-    '2.0': ['^(?!.*(dd[\\.\\-\\s]?2[\\.\\-\\s]?0|dd[p\\+][\\.\\-\\s]?2[\\.\\-\\s]?0|(he\-)?aac([\\.\\-\\s]?((v\\d+)|lc))?[\\.\\-\\s]?2[\\.\\-\\s]0|e?[\\.\\-\\s]?ac[\\.\\-\\s]?3[\\.\\-\\s]?2[\\.\\-\\s]0|opus[\\.\\-\\s]?2[\\.\\-\\s]0|flac[\\.\\-\\s]?2[\\.\\-\\s]0|l?pcm[\\.\\-\\s]?2[\\.\\-\\s]0)).*2[\\.\\-\\s]0'],
-    '3.0': ['^(?!.*(dd[\\.\\-\\s]?3[\\.\\-\\s]?0|dd[p\\+][\\.\\-\\s]?3[\\.\\-\\s]?0|(he\-)?aac([\\.\\-\\s]?((v\\d+)|lc))?[\\.\\-\\s]?3[\\.\\-\\s]0|e?[\\.\\-\\s]?ac[\\.\\-\\s]?3[\\.\\-\\s]?3[\\.\\-\\s]0|opus[\\.\\-\\s]?3[\\.\\-\\s]0|flac[\\.\\-\\s]?3[\\.\\-\\s]0|l?pcm[\\.\\-\\s]?3[\\.\\-\\s]0)).*3[\\.\\-\\s]0'],
-    '5.1': ['^(?!.*(dd[\\.\\-\\s]?5[\\.\\-\\s]?1|dd[p\\+][\\.\\-\\s]?5[\\.\\-\\s]?1|(he\-)?aac([\\.\\-\\s]?((v\\d+)|lc))?[\\.\\-\\s]?5[\\.\\-\\s]1|e?[\\.\\-\\s]?ac[\\.\\-\\s]?3[\\.\\-\\s]?5[\\.\\-\\s]1|opus[\\.\\-\\s]?5[\\.\\-\\s]1|flac[\\.\\-\\s]?5[\\.\\-\\s]1|l?pcm[\\.\\-\\s]?5[\\.\\-\\s]1)).*5[\\.\\-\\s]1'],
-    '6.1': ['^(?!.*(dd[\\.\\-\\s]?6[\\.\\-\\s]?1|dd[p\\+][\\.\\-\\s]?6[\\.\\-\\s]?1|(he\-)?aac([\\.\\-\\s]?((v\\d+)|lc))?[\\.\\-\\s]?6[\\.\\-\\s]1|e?[\\.\\-\\s]?ac[\\.\\-\\s]?3[\\.\\-\\s]?6[\\.\\-\\s]1|opus[\\.\\-\\s]?6[\\.\\-\\s]1|flac[\\.\\-\\s]?6[\\.\\-\\s]1|l?pcm[\\.\\-\\s]?6[\\.\\-\\s]1)).*6[\\.\\-\\s]1'],
-    '7.1': ['^(?!.*(dd[\\.\\-\\s]?7[\\.\\-\\s]?1|dd[p\\+][\\.\\-\\s]?7[\\.\\-\\s]?1|(he\-)?aac([\\.\\-\\s]?((v\\d+)|lc))?[\\.\\-\\s]?7[\\.\\-\\s]1|e?[\\.\\-\\s]?ac[\\.\\-\\s]?3[\\.\\-\\s]?7[\\.\\-\\s]1|opus[\\.\\-\\s]?7[\\.\\-\\s]1|flac[\\.\\-\\s]?7[\\.\\-\\s]1|l?pcm[\\.\\-\\s]?7[\\.\\-\\s]1)).*7[\\.\\-\\s]1'],
-    'LD': ['ld', 'licro[\\-]?dubbed'],
-    'MD': ['md', 'micro[\\-]?dubbed'],
-    'MONO': ['mono'],
-    'STEREO': ['stereo'],
-    'READNFO': ['read[\\.\\-]?nfo'],
-    'DiRFiX': ['dir[\\.\\-]?fix'],
-    'FiXED': ['fixed'],
-    'CRITERION': ['crit(erion)?([\\.\\-\\s]?edition)?([\\.\\-\\s]?collection)?'],
-    'iMAX': ['imax'],
-    '3D': ['3d'],
-  },
-  erase: ['\\[.*?torrent.*?\\]'],
-}
-
-const DUB_RELATED_FLAGS = ['DOLBY-VISION', 'DD1.0', 'DD2.0', 'DD5.1', 'DD7.1', 'DDP2.0', 'DDP5.1', 'DDP7.1', 'DTS-HD', 'DTS-MA', 'DTS-HDMA', 'DTS', 'Dolby', 'Atmos', 'TrueHD', 'AVC', 'DV']
-
-const UPPERCASE_WORDS = [
-  '3D', 'XXL', 'USA', 'UK', 'NATO', 'OTAN', 'FBI', 'CIA', 'SWAT', 'NYPD', 'UFO', 'OVNI', 'OK', 'TV',
-  'NASA', 'WWII', 'WWI', 'VIP', 'ASAP', 'DIY', 'FAQ', 'SOS', 'RIP', 'AKA', 'POV', 'PS', 'AM', 'PM',
-  'BC', 'IQ', 'QI', 'CEO', 'HR', 'PR', 'RSVP', 'ETA', 'FYI', 'ID', 'PIN', 'ATM', 'GPS', 'ADN',
-  'DNA', 'LGBT', 'LGBTQ', 'LGBTQIA', 'PDG', 'RH', 'RP', 'VHS', 'LOL', 'MDR', 'JFK', 'JCVD', 'BDE', 'WWE',
-  'HLM', 'H2G2', 'UFC', 'LSD', 'MDMA', 'MMA', 'RPG', 'R2D2', 'C3PO', 'BB8', 'TBA', 'TBC', 'BBC', 'TNT', 'VOD',
-  'BFG', 'BFF', 'NIMH'
-]
-
-const AMBIGUOUS_FLAGS = [
-  'AD', 'DOC', 'DUAL', 'FESTiVAL', 'FiNAL', 'LiMiTED', 'FiXED', 'MONO', 'STEREO', 'UNTOUCHED', 'COMPLETE', 'THEATRiCAL', 'BONUS', 'CHRONO'
-]
-
-const AMBIGUOUS_PATTERNS = [
-  'english', 'francais', 'français', 'cambodian', 'chinese', 'danish', 'dutch', 'estonian', 'filipino', 'finnish', 'flemish', 'german', 'greek',
-  'hebrew', 'indonesian', 'irish', 'italian', 'japanese', 'korean', 'laotian', 'latvian', 'lithuanian', 'malay', 'malaysian', 'maori', 'norwegian',
-  'pashto', 'polish', 'portuguese', 'romanian', 'russian', 'spanish', 'swahili', 'swedish', 'swiss', 'tagalog', 'tajik', 'thai', 'turkish', 'ukrainian',
-  'vietnamese', 'welsh', 'it', 'ru', 'ge', 'en', 'no', 'ro', 'pt', 'po', 'fr', 'jp', 'kor', 'zh', 'ch', 'fi', 'da', 'nl', 'et', 'tl', 'ms', 'ml', 'ja', 'chi'
-]
-
-const AFTER_TITLE_FLAGS = [
-  '3D',
-  'HSBS',
-  'HOU',
-  'COLLECTION',
-]
-
-const AFTER_YEAR_FLAGS = [
-  'FiNAL',
-  'UNTOUCHED',
-  'RESTORED',
-  'READNFO',
-  'DiRFiX',
-  'FiXED',
-  
-  'CRITERION',
-  
-  'VC',
-  'SC',
-  'DC',
-  'EXTENDED',
-  'THEATRiCAL',
-  'BONUS',
-
-  'DKSUBS',
-  'PPV',
-  'PROPER',
-  'REPACK',
-  'RERiP',
-  'CUSTOM',
-  'LiMiTED',
-
-  'DOC',
-  'NB',
-
-  'DUAL',
-  'COMPLETE',
-
-  'FASTSUB',
-  'FANSUB',
-
-  'UNRATED',
-  'iNTERNAL',
-  'FESTiVAL',
-  'STV',
-  'REMASTERED',
-  'RATED',
-  'UNCUT',
-  'UNCENSORED',
-]
-
-const AFTER_LANGUAGE_FLAGS = [
-  'AD',
-  'LD',
-  'MD',
-  'DL',
-
-  'SUBFORCED',
-  'SUBBED',
-
-  'WORKPRiNT',
-  'iMAX',
-]
-
-const AFTER_RESOLUTION_FLAGS = [
-  'NETFLIX',
-  'AMZN',
-  'ATVP',
-  'DSNP',
-  'HMAX',
-  'HBO',
-  'HULU',
-  'iTN',
-  'ARTE',
-  'PCOK',
-
-  '10bit',
-  '8bit',
-  'UHD',
-  'HC',
-  'NTSC',
-  'PAL',
-  'QEBS5',
-]
-
-const AFTER_SOURCE_FLAGS = [
-  'REMUX',
-  'CEE',
-  'SBS',
-  'HDR',
-  'mHD',
-
-  '2CH',
-  '3CH',
-  '4CH',
-  '5CH',
-  '6CH',
-
-  ...DUB_RELATED_FLAGS,
-
-  (payload) => DUB_RELATED_FLAGS.some(flag => payload.flags.includes(flag)) && payload.flags.includes('1.0') && '1.0',
-  (payload) => DUB_RELATED_FLAGS.some(flag => payload.flags.includes(flag)) && payload.flags.includes('3.0') && '3.0',
-  (payload) => DUB_RELATED_FLAGS.some(flag => payload.flags.includes(flag)) && payload.flags.includes('2.0') && '2.0',
-  (payload) => DUB_RELATED_FLAGS.some(flag => payload.flags.includes(flag)) && payload.flags.includes('6.1') && '6.1',
-  (payload) => DUB_RELATED_FLAGS.some(flag => payload.flags.includes(flag)) && payload.flags.includes('5.1') && '5.1',
-  (payload) => DUB_RELATED_FLAGS.some(flag => payload.flags.includes(flag)) && payload.flags.includes('7.1') && '7.1',
-]
-
-const AFTER_ENCODING_FLAGS = [
-  'HEVC',
-  'AV1',
-]
-
-const AFTER_DUB_FLAGS = [
-  'DDP',
-  'MONO',
-  (payload) => !DUB_RELATED_FLAGS.some(flag => payload.flags.includes(flag)) && payload.flags.includes('1.0') && '1.0',
-  (payload) => !DUB_RELATED_FLAGS.some(flag => payload.flags.includes(flag)) && payload.flags.includes('3.0') && '3.0',
-  (payload) => !DUB_RELATED_FLAGS.some(flag => payload.flags.includes(flag)) && payload.flags.includes('2.0') && '2.0',
-  (payload) => !DUB_RELATED_FLAGS.some(flag => payload.flags.includes(flag)) && payload.flags.includes('6.1') && '6.1',
-  (payload) => !DUB_RELATED_FLAGS.some(flag => payload.flags.includes(flag)) && payload.flags.includes('5.1') && '5.1',
-  (payload) => !DUB_RELATED_FLAGS.some(flag => payload.flags.includes(flag)) && payload.flags.includes('7.1') && '7.1',
-]
+const rules = { source, encoding, resolution, dub, language, flags, erase }
 
 // A rule is a pattern, or { pattern, notAfter } when the match must not follow notAfter: it stands in for a lookbehind.
 const find = (string, before, rule, after) => {
@@ -450,13 +30,16 @@ const find = (string, before, rule, after) => {
   return null
 }
 
+// A dub channel flag like 5.1 goes after the source when the release has a dub related flag, after the dub otherwise.
+const place = (entry, payload) => entry.dubRelated === order.dubRelated.some(flag => payload.flags.includes(flag)) && payload.flags.includes(entry.flag) && entry.flag
+
 const stringify = (payload, options = {}) => {
   const { flagged = true } = options
 
   const output = [
     payload.title.replace(/\s+/g, '.'),
     // ...(payload.alternativeTitle ? [`(${payload.alternativeTitle.replace(/\s+/g, '.')})`] : []),
-    ...(flagged ? AFTER_TITLE_FLAGS : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : flag(payload)) || ''),
+    ...(flagged ? order.afterTitle : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : place(flag, payload)) || ''),
     ...(payload.year ? [payload.year] : []),
     ...((payload.season || (payload.episodes && payload.episodes.length)) ? [
       [
@@ -464,25 +47,25 @@ const stringify = (payload, options = {}) => {
         ...(payload.episodes && payload.episodes.length ? [`${payload.episodes.every(e => /^\d+$/.test(e)) ? 'E' : ''}${payload.episodes.map(episode => `${episode}`.padStart(2, '0')).join(payload.episodes.every(e => /^\d+$/.test(e)) ? '-E' : '-')}`] : []),
       ].join(''),
     ] : []),
-    ...(flagged ? AFTER_YEAR_FLAGS : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : flag(payload)) || ''),
+    ...(flagged ? order.afterYear : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : place(flag, payload)) || ''),
     ...(payload.language ? [payload.language] : []),
-    ...(flagged ? AFTER_LANGUAGE_FLAGS : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : flag(payload)) || ''),
+    ...(flagged ? order.afterLanguage : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : place(flag, payload)) || ''),
     ...(payload.resolution && payload.resolution !== 'SD' ? [payload.resolution] : []),
-    ...(flagged ? AFTER_RESOLUTION_FLAGS : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : flag(payload)) || ''),
+    ...(flagged ? order.afterResolution : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : place(flag, payload)) || ''),
     ...((payload.source && !(['HDRip'].includes(payload.source) && payload.flags.includes('mHD'))) ? [payload.source] : []),
-    ...(flagged ? AFTER_SOURCE_FLAGS : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : flag(payload)) || ''),
+    ...(flagged ? order.afterSource : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : place(flag, payload)) || ''),
     ...(payload.encoding ? [payload.encoding] : []),
-    ...(flagged ? AFTER_ENCODING_FLAGS : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : flag(payload)) || ''),
+    ...(flagged ? order.afterEncoding : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : place(flag, payload)) || ''),
     ...(payload.dub ? [payload.dub] : []),
-    ...(flagged ? AFTER_DUB_FLAGS : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : flag(payload)) || ''),
+    ...(flagged ? order.afterDub : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : place(flag, payload)) || ''),
     ...(flagged ? payload.flags : []).filter(flag => ![
-      ...AFTER_TITLE_FLAGS.map(flag => typeof flag === 'string' ? flag : flag(payload)),
-      ...AFTER_YEAR_FLAGS.map(flag => typeof flag === 'string' ? flag : flag(payload)),
-      ...AFTER_LANGUAGE_FLAGS.map(flag => typeof flag === 'string' ? flag : flag(payload)),
-      ...AFTER_RESOLUTION_FLAGS.map(flag => typeof flag === 'string' ? flag : flag(payload)),
-      ...AFTER_SOURCE_FLAGS.map(flag => typeof flag === 'string' ? flag : flag(payload)),
-      ...AFTER_ENCODING_FLAGS.map(flag => typeof flag === 'string' ? flag : flag(payload)),
-      ...AFTER_DUB_FLAGS.map(flag => typeof flag === 'string' ? flag : flag(payload)),
+      ...order.afterTitle.map(flag => typeof flag === 'string' ? flag : place(flag, payload)),
+      ...order.afterYear.map(flag => typeof flag === 'string' ? flag : place(flag, payload)),
+      ...order.afterLanguage.map(flag => typeof flag === 'string' ? flag : place(flag, payload)),
+      ...order.afterResolution.map(flag => typeof flag === 'string' ? flag : place(flag, payload)),
+      ...order.afterSource.map(flag => typeof flag === 'string' ? flag : place(flag, payload)),
+      ...order.afterEncoding.map(flag => typeof flag === 'string' ? flag : place(flag, payload)),
+      ...order.afterDub.map(flag => typeof flag === 'string' ? flag : place(flag, payload)),
     ].includes(flag)),
   ].filter(p => !!p).join('.').concat('-' + (payload.group || 'NOTEAM'))
 
@@ -493,7 +76,7 @@ const parse = (raw = '', options = {}) => {
   const { strict = false, flagged = true, erase = [], defaults = {} } = options
   const input = [...(erase || []), ...rules.erase]
     .reduce((input, regexp) => input.replace(new RegExp(`[\.\-]*?${typeof regexp === 'string' ? regexp.replace(/\\\\/g, '\\') : regexp.source}[\.\-]*?`, 'ig' + (typeof regexp === 'string' ? '' : regexp.flags.replace(/[igy]/g, ''))), ''), raw)
-    .replace(/\.(avi|mp4|mpeg4|mkv|ts|m2ts|mov|wmv|flv|webm|m4v)(\W.*)?$/i, '')
+    .replace(new RegExp('\\.(' + extensions.join('|') + ')(\\W.*)?$', 'i'), '')
     .trim()
 
   const payload = {
@@ -604,7 +187,7 @@ const parse = (raw = '', options = {}) => {
 
   // payload.flags
   for ([key, patterns] of Object.entries(rules.flags)) {
-    if (AMBIGUOUS_FLAGS.includes(key)) {
+    if (ambiguous.flags.includes(key)) {
       continue
     }
 
@@ -624,7 +207,7 @@ const parse = (raw = '', options = {}) => {
           }
   
           break
-        } else if (['COLLECTION', 'VC'].includes(key) && (match = find(input, '^', pattern, '([_\\W]|$)'))) {
+        } else if (title.leadingFlags.includes(key) && (match = find(input, '^', pattern, '([_\\W]|$)'))) {
           if (!payload.flags.includes(key)) {
             payload.flags.push(key)
           }
@@ -656,7 +239,7 @@ const parse = (raw = '', options = {}) => {
     for ([key, patterns] of Object.entries(rules.language)) {
       for (pattern of patterns) {
         if (match = find(input, '[_\\W]', pattern, '([_\\W]|$)')) {
-          if (AMBIGUOUS_PATTERNS.includes(pattern) && (match.index + match[0].length) < titleEndPosition) {
+          if (ambiguous.patterns.includes(pattern) && (match.index + match[0].length) < titleEndPosition) {
             break
           }
 
@@ -678,7 +261,7 @@ const parse = (raw = '', options = {}) => {
 
   // payload.flags (ambiguous)
   for ([key, patterns] of Object.entries(rules.flags)) {
-    if (!AMBIGUOUS_FLAGS.includes(key)) {
+    if (!ambiguous.flags.includes(key)) {
       continue
     }
 
@@ -707,7 +290,7 @@ const parse = (raw = '', options = {}) => {
           }
   
           break
-        } else if (['COLLECTION', 'VC'].includes(key) && (match = find(input, '^', pattern, '([_\\W]|$)'))) {
+        } else if (title.leadingFlags.includes(key) && (match = find(input, '^', pattern, '([_\\W]|$)'))) {
           if (!payload.flags.includes(key)) {
             payload.flags.push(key)
           }
@@ -868,7 +451,7 @@ const parse = (raw = '', options = {}) => {
     .trim()
     .toLowerCase()
     .split(' ')
-    .map(s => UPPERCASE_WORDS.includes(s.toUpperCase()) ? s.toUpperCase() : s)
+    .map(s => title.uppercase.includes(s.toUpperCase()) ? s.toUpperCase() : s)
     .join(' ')
     .replace(/(^([a-zA-Z]))|([ -][a-zA-Z])/g, s => s.toUpperCase())
     .replace(/\W([ivx]+)(\W|$)/ig, s => s.toUpperCase()) // Roman number (XVI)
@@ -882,7 +465,7 @@ const parse = (raw = '', options = {}) => {
       .trim()
       .toLowerCase()
       .split(' ')
-      .map(s => UPPERCASE_WORDS.includes(s.toUpperCase()) ? s.toUpperCase() : s)
+      .map(s => title.uppercase.includes(s.toUpperCase()) ? s.toUpperCase() : s)
       .join(' ')
       .replace(/(^([a-zA-Z]))|([ -][a-zA-Z])/g, s => s.toUpperCase())
       .replace(/\W([ivx]+)(\W|$)/ig, s => s.toUpperCase()) // Roman number (XVI)
@@ -906,20 +489,17 @@ const parse = (raw = '', options = {}) => {
     delete payload.alternativeTitle
   }
 
-  if ([
-    'Hitchcock',
-    'James Bond 007',
-    '007',
-    'James Bond',
-  ].includes(payload.title) && payload.alternativeTitle) {
+  if (title.franchises.includes(payload.title) && payload.alternativeTitle) {
     payload.title = payload.alternativeTitle
     delete payload.alternativeTitle
   }
 
   // Year at the beginning of the title ("2002 - The Movie" for example)
   if (!payload.year && (match = payload.title.match(/^(\d{4})\W?(.+$)/))) {
-    if (match[1] === '2001' && match[2].toLowerCase().includes('a space odyssey')) {
-      payload.year = '1968'
+    const exception = title.leadingYears.find(({ year, contains }) => match[1] === year && match[2].toLowerCase().includes(contains))
+
+    if (exception) {
+      payload.year = exception.release
     } else {
       payload.year = match[1]
       payload.title = match[2]
