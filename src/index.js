@@ -572,7 +572,7 @@ const guess = (input, options) => {
   }
 
   if (!payload.resolution) {
-    if (['UHD'].includes(payload.flags)) {
+    if (payload.flags.includes('UHD')) {
       payload.resolution = '2160p'
     } else if (['BDSCR', 'BLURAY'].includes(payload.source)) {
       payload.resolution = '1080p'
