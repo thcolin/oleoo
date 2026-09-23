@@ -1,6 +1,8 @@
 # Oleoo
 
 [![npm version](https://img.shields.io/npm/v/oleoo.svg)](https://www.npmjs.com/package/oleoo)
+[![Go Reference](https://pkg.go.dev/badge/github.com/thcolin/oleoo/packages/go/v3.svg)](https://pkg.go.dev/github.com/thcolin/oleoo/packages/go/v3)
+[![Fixtures](https://img.shields.io/badge/fixtures-6697%20releases-blue.svg)](./tests/fixtures/releases.txt)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE.md)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/thcolin/oleoo)
 
@@ -21,7 +23,15 @@
 🏴‍☠️✨🎟 - Named after an old French warez forum <a href="http://www.01net.com/actualites/oleoo-ferme-sa-section-illegale-de-telechargement-de-films-382090.html">closed in 2008</a>
 </div>
 
-Oleoo is a robust Javascript zero-dependency library for parsing media release names (like movies and TV shows from scene/P2P sources) to extract structured metadata. It intelligently identifies components like title, year, quality, language, and more, handling many common (and uncommon) naming conventions.
+Oleoo parses media release names (movies and TV shows from scene/P2P sources) and extracts structured metadata: title, year, quality, language, and more, across many common (and uncommon) naming conventions.
+
+It exists in **JavaScript**, **Go** and **Rust**. The three packages read the same [`rules.json`](./rules.json), follow the same [`SPEC.md`](./SPEC.md), and give the same result on the 6697 releases of [`tests/fixtures/`](./tests/fixtures). They share one version number and are released together.
+
+| Language | Package | Directory | Regex engine |
+|---|---|---|---|
+| JavaScript | [`oleoo`](https://www.npmjs.com/package/oleoo) on npm, zero dependency | [`packages/js`](./packages/js) (reference) | built-in `RegExp` |
+| Go | [`github.com/thcolin/oleoo/packages/go/v3`](https://pkg.go.dev/github.com/thcolin/oleoo/packages/go/v3) | [`packages/go`](./packages/go) | [`dlclark/regexp2`](https://github.com/dlclark/regexp2) |
+| Rust | `oleoo` crate, from git until published on crates.io | [`packages/rust`](./packages/rust) | [`fancy-regex`](https://github.com/fancy-regex/fancy-regex) |
 
 ## Features
 
@@ -48,12 +58,19 @@ Oleoo is a robust Javascript zero-dependency library for parsing media release n
 ## Installation
 
 ```bash
-yarn add oleoo
-# or
-npm install oleoo
+# JavaScript
+yarn add oleoo   # or: npm install oleoo
+
+# Go (1.26 or later)
+go get github.com/thcolin/oleoo/packages/go/v3
+
+# Rust
+cargo add oleoo --git https://github.com/thcolin/oleoo
 ```
 
 ## Basic Usage
+
+### JavaScript
 
 ```javascript
 import oleoo from 'oleoo'
@@ -129,7 +146,68 @@ try {
 }
 ```
 
+### Go
+
+Options are functions, `Parse` and `Guess` return an `error` instead of throwing, and a `null` field is a `nil` pointer. A `Release` marshals to the same JSON as the JavaScript result.
+
+```go
+import "github.com/thcolin/oleoo/packages/go/v3"
+
+release, err := oleoo.Parse("Mr.Robot.S01.PROPER.VOSTFR.720p.WEB-DL.DD5.1.H264-ARK01")
+if err != nil {
+	log.Fatal(err)
+}
+
+fmt.Println(release.Title, *release.Season, *release.Language, *release.Resolution)
+// Mr Robot 1 VOSTFR 720p
+fmt.Println(release.Generated)
+// Mr.Robot.S01.PROPER.VOSTFR.720p.WEB-DL.DD5.1.h264-ARK01
+
+language := "ENGLiSH"
+guessed, _ := oleoo.Guess("My Movie (2023)", oleoo.Defaults(oleoo.Release{Language: &language}))
+fmt.Println(guessed.Generated)
+// My.Movie.2023.ENGLiSH-NOTEAM
+
+_, err = oleoo.Parse("Not.a.Movie-v28.1-macOS", oleoo.Strict(true))
+fmt.Println(err)
+// "Not.a.Movie-v28.1-macOS" does't follow scene release naming rules
+```
+
+The options are `Strict(bool)`, `Flagged(bool)`, `Erase(patterns ...string)`, `Defaults(Release)` and `CurrentYear(int)`.
+
+### Rust
+
+`parse` and `guess` take an `Options` and return a `Result`. `Release` implements `serde::Serialize` and serializes to the same JSON as the JavaScript result.
+
+```rust
+use oleoo::{guess, parse, Defaults, Options};
+
+let release = parse("Mr.Robot.S01.PROPER.VOSTFR.720p.WEB-DL.DD5.1.H264-ARK01", &Options::default())?;
+
+println!("{} {:?} {:?} {:?}", release.title, release.season, release.language, release.resolution);
+// Mr Robot Some(1) Some("VOSTFR") Some("720p")
+println!("{}", release.generated);
+// Mr.Robot.S01.PROPER.VOSTFR.720p.WEB-DL.DD5.1.h264-ARK01
+
+let options = Options {
+    defaults: Defaults { language: Some("ENGLiSH".into()), ..Defaults::default() },
+    ..Options::default()
+};
+println!("{}", guess("My Movie (2023)", &options)?.generated);
+// My.Movie.2023.ENGLiSH-NOTEAM
+
+let strict = Options { strict: true, ..Options::default() };
+if let Err(error) = parse("Not.a.Movie-v28.1-macOS", &strict) {
+    println!("{error}");
+    // "Not.a.Movie-v28.1-macOS" does't follow scene release naming rules
+}
+```
+
+`Options` holds `strict`, `flagged`, `erase`, `defaults` and `current_year`.
+
 ## API Reference
+
+The reference below is the JavaScript one. Go and Rust take the same options under their own names, and return the same fields.
 
 ### `oleoo.parse(name, [options])`
 
@@ -186,6 +264,8 @@ While Oleoo aims for broad compatibility, some release name patterns can be chal
 * **Group Detection:** Can sometimes be confused by tags, alternative titles in parentheses, or multiple hyphenated parts near the end of the filename.
 * **Title Boundaries:** Occasionally, tags (especially language tags) might be incorrectly included in the extracted title if the structure is unusual. Filenames without clear separators are difficult.
 * **Complex Structures:** Very unconventional filenames, heavy use of nested brackets/parentheses, or ambiguous terms might lead to partial or incorrect parsing.
+* **Bounds:** a name longer than 1024 characters, or an episode range of more than 9999 episodes (`E1-E10000`), is refused with an error. The longest release of the fixtures holds 205 characters.
+* **Characters above U+FFFF** (emoji): the JavaScript and Go packages count them as two UTF-16 code units, the Rust package as one character, so results can differ on such names. See [`SPEC.md`](./SPEC.md#strings-and-positions).
 
 ## Help Improve Oleoo! ❤️
 
@@ -193,7 +273,7 @@ The real world has countless release name variations! Help make Oleoo more robus
 
 Contributing test cases is easy:
 
-1.  **Get Ready:** Clone the repo (`git clone https://github.com/thcolin/oleoo.git`) and install dependencies (`cd oleoo && yarn install`).
+1.  **Get Ready:** Clone the repo (`git clone https://github.com/thcolin/oleoo.git`) and install dependencies (`cd oleoo && yarn install`). The JavaScript package is the reference: fixtures are reviewed against it.
 
 2.  **Add Your Filenames:** Append your movie/TV show filenames (one per line) to the `./tests/fixtures/releases.txt` file.
 
@@ -215,7 +295,7 @@ Contributing test cases is easy:
         * `./tests/fixtures/releases.txt`
         * `./tests/fixtures/accepted.json`
         * `./tests/fixtures/refused.json`
-    * If you were also able to **fix any parsing issues** you found in `rules.json` or `packages/js/src/index.js`, include those changes in the same PR! **Important:** Modifying the rules (`rules.json`) or the parsing logic (`packages/js/src/index.js`) can easily introduce regressions (breaking previously correct parses). **This is the main challenge!** Run `yarn test` to list every changed entry, then `yarn fixtures` to review them one by one and confirm that your changes only fix the intended issue and do not negatively affect other entries in `accepted.json`.
+    * If you were also able to **fix any parsing issues** you found in `rules.json` or `packages/js/src/index.js`, include those changes in the same PR! **Important:** Modifying the rules (`rules.json`) or the parsing logic (`packages/js/src/index.js`) can easily introduce regressions (breaking previously correct parses). **This is the main challenge!** Run `yarn test` to list every changed entry, then `yarn fixtures` to review them one by one and confirm that your changes only fix the intended issue and do not negatively affect other entries in `accepted.json`. A change to `rules.json` or to the algorithm applies to the three packages: run `go test ./...` in `packages/go` and `cargo test` in `packages/rust` too, and fix [`SPEC.md`](./SPEC.md) when the algorithm changes.
 
 **Reporting Issues without a PR:**
 
@@ -233,7 +313,7 @@ Even just providing the problematic filename is helpful, but more detail makes d
 
 ## Porting Oleoo
 
-Oleoo can be written again in another language. Every pattern and list lives in [`rules.json`](./rules.json), written in a regex dialect that other engines can read, and [`SPEC.md`](./SPEC.md) describes the algorithm step by step. A port is conformant when it gives the results of `tests/fixtures/accepted.json` and `tests/fixtures/refused.json` for every release of `tests/fixtures/releases.txt`.
+The Go and Rust packages were written from [`SPEC.md`](./SPEC.md) and [`rules.json`](./rules.json) alone, and another language can follow the same path. Every pattern and list lives in `rules.json`, written in a regex dialect that other engines can read, and `SPEC.md` describes the algorithm step by step, with notes on the engines already used. A port is conformant when it gives the results of `tests/fixtures/accepted.json` and `tests/fixtures/refused.json` for every release of `tests/fixtures/releases.txt`, with `currentYear` set to 2026.
 
 ## License
 
