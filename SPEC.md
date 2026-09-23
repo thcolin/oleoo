@@ -47,14 +47,14 @@ A `Rule` is either a pattern string, or `{ "pattern": string, "notAfter": string
 
 ## Regex dialect
 
-Every pattern of `rules.json`, and every regex this document writes, stays in a subset meant for PCRE2, Oniguruma, `fancy-regex` (Rust) and `std::regex` in ECMAScript mode (C++). `tests/check.js` fails when a pattern of `rules.json` leaves it. Every pattern of `rules.json`, wrapped as [Matching a rule](#matching-a-rule) does, has been compiled with PCRE2 and with `std::regex`; Oniguruma and `fancy-regex` have not been tried yet.
+Every pattern of `rules.json`, and every regex this document writes, stays in a subset meant for PCRE2, Oniguruma, `fancy-regex` (Rust) and `std::regex` in ECMAScript mode (C++). `tests/check.js` fails when a pattern of `rules.json` holds an escape, a group opening or a possessive quantifier outside the list below.
 
 Allowed:
 
 - literals, `.`, `^`, `$`, alternation `|`;
 - classes `[...]` and `[^...]`, ranges `a-z`;
 - groups `(...)`, `(?:...)`, lookaheads `(?=...)` and `(?!...)`;
-- quantifiers `?`, `*`, `+`, `{n}`, `{n,}`, `{n,m}`, and their lazy form `??`, `*?`, `+?`;
+- quantifiers `?`, `*`, `+`, `{n}`, `{n,}`, `{n,m}`, and their lazy form `??`, `*?`, `+?`, `{n,m}?`;
 - escapes of a metacharacter: `\.`, `\-`, `\+`, `\*`, `\?`, `\(`, `\)`, `\[`, `\]`, `\{`, `\}`, `\|`, `\^`, `\$`, `\/`, `\\`;
 - the classes `\d`, `\w`, `\W`, `\s`, with the meaning below.
 
@@ -74,15 +74,23 @@ In C++, `std::regex` works on bytes: `[ée]` would not match `é` in UTF-8. Use 
 
 Rust's `regex` and `fancy-regex` read these classes as Unicode ones, and PCRE2's `\s` without `PCRE2_UCP` leaves out U+00A0, as Rust's `(?-u:\s)` does. The safe way is to expand the classes before compiling: `\d` into `[0-9]`, `\w` into `[A-Za-z0-9_]`, `\W` into `[^A-Za-z0-9_]`, `\s` into the list above. `\W` only appears inside a class as `[_\W]`, which is `[^A-Za-z0-9]`, and as `[\W\s]` or `[\W\-]`, which are `[^A-Za-z0-9_]`.
 
-**Case.** Every pattern of `rules.json` is matched case-insensitively. A few patterns hold non-ASCII letters (`français`, `int[ée]grale?`, `restaur[ée]e?`): the engine must fold case on Unicode letters too, `É` matching `é`. The regexes of this document say when they are case-insensitive, with an `i` after them.
+**Case.** Every pattern of `rules.json` is matched case-insensitively. A few patterns hold non-ASCII letters (`français`, `int[ée]grale?`, `restaur[ée]e?`): the engine must fold case on Unicode letters too, `É` matching `é`. The regexes of this document say when they are case-insensitive, in words.
+
+JavaScript folds case by upper-casing each character, so `ſ` does not match `s`, nor the Kelvin sign `K` match `k`. PCRE2 and Rust fold these too: a port may match a little more than the reference on such characters, none of which appear in the fixtures.
+
+**End of input.** `$` matches at the end of the string only. PCRE2 also matches it before a final `\n` unless compiled with `PCRE2_DOLLAR_ENDONLY`.
 
 ## Strings and positions
 
-The input is a string of Unicode characters. A position is an offset into that string, in whatever unit the port's strings and regex engine use (UTF-16 code units in JavaScript, bytes in Rust): a port only compares positions with each other and slices with them, so any unit works as long as the engine returns offsets in the same one.
+The input is a string of Unicode characters. **A position counts characters.** JavaScript counts UTF-16 code units, which are the same thing for every character below U+10000; the algorithm compares positions with each other but also adds 1 to them ([Matching a rule](#matching-a-rule), [Ambiguous flags](#8-ambiguous-flags)), so a port that counts bytes gives other results as soon as the input holds a non-ASCII character. In Rust, map byte offsets to character offsets, or match on a `Vec<char>`.
+
+`s[a .. b]` is the part of `s` from position `a` included to `b` excluded, and is empty when `a >= b`. `s[a ..]` runs to the end.
 
 `lowercase` and `uppercase` are the full Unicode mappings (JavaScript `toLowerCase` and `toUpperCase`: `ß` becomes `SS`). `NFD` is Unicode canonical decomposition.
 
-"Replace" replaces every occurrence, "replace the first" only the first, and "remove" replaces with nothing.
+"Replace" replaces every occurrence, "replace the first" only the first, and "remove" replaces with nothing. "Trim" removes the characters of `\s` at both ends.
+
+**Present.** A value is present when it is not null, not the empty string and not the number `0`; an array is present when it is not empty. "When there is a `season`", "when there is an `alternativeTitle`" and the like all mean present: a season `0` or a group `""` count as none. "Drop" a key removes it, so that it is not present any more.
 
 ## Matching a rule
 
@@ -113,9 +121,9 @@ It fills a payload, then returns part of it. The steps run in this order, each o
 
 ### 1. Input
 
-1. For each pattern of `options.erase`, then each pattern of `rules.erase`: remove every match of `[.\-]*?` + pattern + `[.\-]*?`, case-insensitive, from the name.
+1. For each pattern of `options.erase`, then each pattern of `rules.erase`: remove every match of `[.\-]*?` + pattern + `[.\-]*?`, case-insensitive, from the name. A pattern given as a string first has every `\\` (two backslashes) replaced by `\`. The JavaScript API also takes a `RegExp` in `options.erase`, compiled with its own `m`, `s` and `u` flags; a port takes strings.
 2. Remove the first match of `\.(` + `extensions` joined by `|` + `)(\W.*)?$`, case-insensitive.
-3. Trim the whitespace at both ends. The result is `input`, returned as `original`.
+3. Trim. The result is `input`, returned as `original`.
 
 ### 2. Payload
 
@@ -124,7 +132,7 @@ type, year, source, encoding, resolution, dub, language, season, episode, group:
 languages, episodes, flags: []
 ```
 
-then the keys of `options.defaults` over these, then `score = 0`, `valid = false`.
+then the keys of `options.defaults` over these, arrays copied, then `score = 0`, `valid = false`.
 
 Three positions follow the parsing: `titleStart = 0`, `titleEnd = length(input)`, `groupStart = 0`. Unless a step says otherwise, **"move the positions to a match"** means: `titleEnd = min(titleEnd, index)` and `groupStart = max(groupStart, end)`.
 
@@ -182,7 +190,7 @@ A rule that is not a valid regex is skipped (the JavaScript code logs a warning)
 
 ### 8. Ambiguous flags
 
-Same loop as [Flags](#6-flags), on the keys that **are** in `ambiguous.flags`, with one more test when step 1 matches: when the rule does not start with `^`, `index < titleEnd`, `end <= titleEnd + 1`, and the match text does not contain `key` as is (case-sensitive), the match is a word of the title: go to the next key without pushing anything.
+Same loop as [Flags](#6-flags), on the keys that **are** in `ambiguous.flags`, with one more test when step 1 matches: when the rule does not start with `^`, `index < titleEnd`, `end <= titleEnd + 1`, and the match text does not contain `key` (a case-sensitive search: the code compiles `key` as a regex, and no key of `ambiguous.flags` holds a metacharacter), the match is a word of the title: go to the next key without pushing anything.
 
 ### 9. Score and language
 
@@ -197,7 +205,7 @@ Only when `type = "tvshow"`. `pad2(n)` writes `n` in decimal on at least two dig
 
 1. **Season.** First match of `\WS(?:eason[_\W]?)?(\d{1,3})[e\.\-\s]`, case-insensitive: `season = group1` as a number, `groupStart = max(groupStart, end)`.
 2. **Episodes**, the first of these that matches, each case-insensitive:
-   1. First match of `EP?(\d+)\-(\d+)`: `episodes` = every number from group 1 to group 2, `groupStart = max(groupStart, end)`.
+   1. First match of `EP?(\d+)\-(\d+)`: `episodes` = every number from group 1 to group 2, none when group 2 is lower (then `episode` is `""`), `groupStart = max(groupStart, end)`.
    2. Every match of `EP?(\d+)`: `episodes` = the group 1 of each, as numbers; `groupStart = max(groupStart, end of the last one)`.
    3. Every match of `\W?(?:(\d{1,2})x(\d{1,3}))+(\W)?`: `season` = group 1 of the first one, `episodes` = the group 2 of each; `groupStart` as above.
    4. First match of `\W(\d{4})[_\W](\d{2}[_\W]\d{2})[_\W]?`, only acted on when `year` is null or equals group 1: `episode` = group 2 with every non-digit replaced by `.` and every run of `.` by one `.`, `episodes = [episode]`, `score += 1` if `year` was null, `year = group1`, `groupStart = max(groupStart, end)`.
@@ -289,7 +297,7 @@ The parts, in order; when `flagged` is false, every `after*` group and the last 
 1. `title` with every run of `\s` replaced by `.`;
 2. `afterTitle`;
 3. `year`, when there is one;
-4. when there is a `season` or some `episodes`: `S` + `pad2(season)` when there is a season, then, when there are episodes, `E` + the episodes in `pad2` joined by `-E` if they are all made of digits, or joined by `-` otherwise; one part, with no separator inside;
+4. when there is a `season` or some `episodes`: `S` + `pad2(season)` when there is a season, then, when there are episodes, the episodes written with `pad2`: when they are all made of digits, `E` before them and `-E` between them (`E01-E02`); otherwise no prefix and `-` between them (`04.02`). One part, with no separator inside;
 5. `afterYear`;
 6. `language`;
 7. `afterLanguage`;
