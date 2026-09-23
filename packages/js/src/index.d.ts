@@ -427,6 +427,7 @@ export interface Oleoo {
    * @param options - Optional configuration for parsing.
    * @returns An object containing the parsed metadata.
    * @throws Will throw an error if `options.strict` is true and essential tags are not found.
+   * @throws RangeError if the name is longer than 1024 characters, or holds an episode range of more than 9999 episodes.
    */
   parse: (name: string, options?: OleooOptions) => OleooResult
 

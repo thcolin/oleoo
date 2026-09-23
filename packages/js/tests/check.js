@@ -116,6 +116,21 @@ const defaults = { languages: ['ENGLiSH'] }
 oleoo.parse('Foo.2010.1080p.BluRay.x264.FRENCH-GRP', { ...options, defaults })
 defaults.languages.length === 1 || failures.push('[options] parse writes into the defaults it is given')
 
+for (const [name, message] of [
+  ['Show.S01E1-10000.720p', 'episodes 1 to 10000: more than 9999 episodes'],
+  ['a'.repeat(1025), 'name of 1025 characters: more than 1024 characters'],
+]) {
+  try {
+    oleoo.parse(name, options)
+    failures.push(`[bounds] ${name.slice(0, 40)} parses instead of throwing`)
+  } catch (e) {
+    e instanceof RangeError && e.message === message || failures.push(`[bounds] ${name.slice(0, 40)} throws ${e.name}: ${e.message}`)
+  }
+}
+
+oleoo.parse('Show.S01E1-9999.720p', options).episodes.length === 9999 || failures.push('[bounds] an episode range of 9999 episodes does not parse')
+oleoo.parse('a'.repeat(1024), options)
+
 try {
   oleoo.parse('Foo.2010.1080p.BluRay.x264-GRP', { currentYear: 'soon' })
   failures.push('[options] currentYear accepts what is not a number')

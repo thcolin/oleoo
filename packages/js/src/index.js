@@ -66,6 +66,10 @@ const stringify = (payload, options = {}) => {
 
 const parse = (raw = '', options = {}) => {
   const { strict = false, flagged = true, erase = [], defaults = {} } = options
+
+  if (raw.length > 1024) {
+    throw new RangeError(`name of ${raw.length} characters: more than 1024 characters`)
+  }
   const currentYear = Number(options.currentYear ?? new Date().getFullYear())
 
   if (Number.isNaN(currentYear)) {
@@ -335,6 +339,10 @@ const parse = (raw = '', options = {}) => {
     }
   
     if (match = input.match(/EP?(\d+)\-(\d+)/i)) {
+      if (Number(match[2]) - Number(match[1]) >= 9999) {
+        throw new RangeError(`episodes ${match[1]} to ${match[2]}: more than 9999 episodes`)
+      }
+
       payload.episodes = Array.from({ length: Number(match[2]) - Number(match[1]) + 1 }, (_, i) => Number(match[1]) + i)
       payload.episode = payload.episodes.map(episode => `${episode}`.padStart(2, '0')).join('-')
 
