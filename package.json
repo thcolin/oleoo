@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "test": "node ./tests/index.js",
+    "test": "node ./tests/check.js",
+    "fixtures": "node ./tests/index.js",
     "debug": "node ./tests/debug.js"
   },
   "repository": {
