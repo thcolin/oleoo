@@ -53,6 +53,24 @@ if (oleoo.parse('Foo.2031.1080p.BluRay.x264-GRP', options).year !== null || oleo
   failures.push('[options] currentYear does not bound the accepted years')
 }
 
+// rules.json stays in the regex dialect SPEC.md describes, which PCRE2, fancy-regex and std::regex all read.
+const rules = JSON.parse(readFileSync(join(__dirname, '..', 'rules.json'), 'utf-8'))
+const patterns = [
+  ...['source', 'encoding', 'resolution', 'dub', 'language', 'flags']
+    .flatMap(property => Object.values(rules[property]).flat())
+    .flatMap(rule => typeof rule === 'string' ? [rule] : [rule.pattern, rule.notAfter]),
+  ...rules.erase,
+]
+
+for (const pattern of patterns) {
+  const escapes = [...pattern.matchAll(/\\(.)/g)].map(match => match[1]).filter(escape => !'dswW.-+*?()[]{}|^$/\\'.includes(escape))
+  const groups = [...pattern.matchAll(/\((\?.?)?/g)].filter(match => pattern[match.index - 1] !== '\\' && match[1] && !['?:', '?=', '?!'].includes(match[1]))
+
+  if (escapes.length || groups.length) {
+    failures.push(`[dialect] ${pattern}\n    ${[...escapes.map(escape => `\\${escape}`), ...groups.map(group => `(${group[1]}`)].join(', ')} outside the dialect`)
+  }
+}
+
 failures.forEach(failure => console.log(failure + '\n'))
 console.log(`${process.argv[2] || 'src/index.js'}: ${names.length} releases, ${Object.keys(accepted).length} accepted, ${Object.keys(refused).length} refused, ${failures.length} to review`)
 process.exit(failures.length ? 1 : 0)
