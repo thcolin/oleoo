@@ -359,7 +359,11 @@ var (
 func Parse(raw string, opts ...Option) (Release, error) {
 	o := newOptions(opts)
 
-	if n := len(utf16.Encode([]rune(raw))); n > 1024 {
+	n := 0
+	for _, r := range raw {
+		n += max(utf16.RuneLen(r), 1)
+	}
+	if n > 1024 {
 		return Release{}, fmt.Errorf("name of %d characters: more than 1024 characters", n)
 	}
 
