@@ -132,3 +132,45 @@ fn guess_fills_the_year_and_the_resolution() {
         (Some("1080p"), "Movie.Title.2026.1080p.BLURAY.x264-NOTEAM")
     );
 }
+
+#[test]
+fn an_alternative_title_emptied_by_the_capitalization_still_moves_the_year() {
+    for name in ["2010 - -", "2010.-.-"] {
+        assert_eq!(
+            value(parse(name, &options()).unwrap()),
+            json!({"original":name,"language":null,"languages":[],"source":null,"encoding":null,"resolution":null,"dub":null,"year":"2010","flags":[],"season":null,"episode":null,"episodes":[],"type":"movie","group":null,"title":"","generated":"2010-NOTEAM","score":0})
+        );
+    }
+}
+
+#[test]
+fn an_episode_range_longer_than_an_array_fails() {
+    for name in [
+        "Show.E1-99999999999.720p",
+        "Show.E1-99999999999999999999.720p",
+    ] {
+        assert!(matches!(
+            parse(name, &options()),
+            Err(Error::EpisodeRange(..))
+        ));
+    }
+    assert_eq!(
+        value(parse("Show.E1-3.720p", &options()).unwrap().episodes),
+        json!([1, 2, 3])
+    );
+}
+
+#[test]
+fn current_year_does_not_overflow() {
+    let options = Options {
+        current_year: Some(i32::MAX),
+        ..options()
+    };
+    assert_eq!(
+        parse("Foo.2031.1080p.BluRay.x264-GRP", &options)
+            .unwrap()
+            .year
+            .as_deref(),
+        Some("2031")
+    );
+}

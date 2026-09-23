@@ -115,10 +115,13 @@ impl Default for Options {
 }
 
 #[derive(Debug)]
+#[non_exhaustive]
 pub enum Error {
     Regex(fancy_regex::Error),
     /// `strict` is set and the name has no source, encoding, resolution nor dub.
     Strict(String),
+    /// An episode range longer than an ECMAScript array can be, which the reference implementation rejects too.
+    EpisodeRange(u64, u64),
 }
 
 impl fmt::Display for Error {
@@ -127,6 +130,9 @@ impl fmt::Display for Error {
             Error::Regex(error) => error.fmt(f),
             Error::Strict(input) => {
                 write!(f, "\"{input}\" does't follow scene release naming rules")
+            }
+            Error::EpisodeRange(from, to) => {
+                write!(f, "episodes {from} to {to}: invalid array length")
             }
         }
     }
@@ -223,7 +229,7 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
 
     let accepted = |year: &str| {
         year.parse::<i32>()
-            .is_ok_and(|year| year > 1900 && year < current_year + 5)
+            .is_ok_and(|year| year > 1900 && year < current_year.saturating_add(5))
     };
     let range = regex(r"[_\W]((\d{4})[\.\s]?-[\.\s]?(\d{4}))", false)?.captures(input)?;
 
@@ -276,7 +282,7 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
         }
     }
 
-    flags(input, false, &mut release.flags, &mut at);
+    flags(input, false, &mut release.flags, &mut at)?;
 
     let offset = if at.title_end == input.len() {
         0
@@ -312,7 +318,7 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
         }
     }
 
-    flags(input, true, &mut release.flags, &mut at);
+    flags(input, true, &mut release.flags, &mut at)?;
 
     if !release.flags.is_empty() {
         release.score += 1;
@@ -346,9 +352,13 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
             .collect::<Result<Vec<_>, _>>()?;
 
         if let Some(range) = regex(r"EP?(\d+)\-(\d+)", true)?.captures(input)? {
-            release.episodes = (number(group(&range, 1))..=number(group(&range, 2)))
-                .map(Episode::Number)
-                .collect();
+            let (from, to) = (number(group(&range, 1)), number(group(&range, 2)));
+
+            if to >= from && to - from >= u64::from(u32::MAX) {
+                return Err(Error::EpisodeRange(from, to));
+            }
+
+            release.episodes = (from..=to).map(Episode::Number).collect();
             release.episode = Some(join(&release.episodes));
             at.reach(range.get(0).unwrap().end());
         } else if let Some(last) = episodes.last() {
@@ -462,7 +472,6 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
         .filter(|alternative| !alternative.is_empty())
         .map(|alternative| capitalize(&alternative))
         .transpose()?;
-    alternative = alternative.filter(|alternative| !alternative.is_empty());
 
     if let Some(alternate) = alternative.clone() {
         if is_digits(&alternate) && alternate.len() == 4 {
@@ -476,6 +485,8 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
             alternative = None;
         }
     }
+
+    alternative = alternative.filter(|alternative| !alternative.is_empty());
 
     if title.is_empty() && alternative.is_some() {
         title = alternative.take().unwrap();
@@ -680,14 +691,14 @@ fn find(
 
     while let Some(found) = pattern.captures_from_pos(string, from)? {
         let (index, end) = (found.get(0).unwrap().start(), found.get(0).unwrap().end());
-        let before = found
+        let before_len = found
             .get(1)
             .map_or(0, |before| before.end() - before.start());
 
         match rule.not_after() {
             Some(not_after)
                 if regex(&format!("(?:{not_after})$"), true)?
-                    .is_match(&string[..index + before])? => {}
+                    .is_match(&string[..index + before_len])? => {}
             _ => return Ok(Some((index, end))),
         }
 
@@ -701,7 +712,12 @@ fn find(
     Ok(None)
 }
 
-fn flags(input: &str, ambiguous: bool, flags: &mut Vec<String>, at: &mut Positions) {
+fn flags(
+    input: &str,
+    ambiguous: bool,
+    flags: &mut Vec<String>,
+    at: &mut Positions,
+) -> Result<(), Error> {
     for (key, rules) in RULES
         .flags
         .iter()
@@ -710,8 +726,13 @@ fn flags(input: &str, ambiguous: bool, flags: &mut Vec<String>, at: &mut Positio
         for rule in rules {
             let anchored = rule.anchored();
 
-            // A rule that is not a valid regex is skipped.
-            let Ok(found) = find(input, if anchored { "" } else { r"[_\W]" }, rule, AFTER) else {
+            let Some(found) = compiled(find(
+                input,
+                if anchored { "" } else { r"[_\W]" },
+                rule,
+                AFTER,
+            ))?
+            else {
                 continue;
             };
 
@@ -742,7 +763,7 @@ fn flags(input: &str, ambiguous: bool, flags: &mut Vec<String>, at: &mut Positio
                 at.reach(end);
                 break;
             } else if RULES.title.leading_flags.contains(key)
-                && let Ok(Some((_, end))) = find(input, "^", rule, AFTER)
+                && let Some(Some((_, end))) = compiled(find(input, "^", rule, AFTER))?
             {
                 if !flags.contains(key) {
                     flags.push(key.clone());
@@ -751,6 +772,19 @@ fn flags(input: &str, ambiguous: bool, flags: &mut Vec<String>, at: &mut Positio
                 at.title_start = end;
             }
         }
+    }
+
+    Ok(())
+}
+
+// A flag rule that is not a valid regex is skipped, as the reference implementation does; an error while matching is not.
+fn compiled<T>(result: Result<T, Error>) -> Result<Option<T>, Error> {
+    match result {
+        Ok(value) => Ok(Some(value)),
+        Err(Error::Regex(
+            fancy_regex::Error::ParseError(..) | fancy_regex::Error::CompileError(_),
+        )) => Ok(None),
+        Err(error) => Err(error),
     }
 }
 
