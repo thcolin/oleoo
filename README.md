@@ -104,7 +104,7 @@ oleoo.guess('My Movie (2023)', { defaults: { language: 'ENGLiSH', resolution: 'S
 // {
 //   "original": "My Movie (2023)",
 //   "language": "ENGLiSH",
-//   "languages": ["ENGLiSH"],
+//   "languages": [],
 //   "source": null,
 //   "encoding": null,
 //   "resolution": "SD",
@@ -117,7 +117,7 @@ oleoo.guess('My Movie (2023)', { defaults: { language: 'ENGLiSH', resolution: 'S
 //   "type": "movie",
 //   "group": null,
 //   "title": "My Movie",
-//   "generated": "My.Movie.ENGLiSH.2023-NOTEAM",
+//   "generated": "My.Movie.2023.ENGLiSH-NOTEAM",
 //   "score": 1
 // }
 
@@ -145,8 +145,9 @@ Parses the release `name` string and returns an object with extracted metadata.
 ### `oleoo.guess(name, [options])`
 
 Similar to `parse`, but always uses `strict: false` and attempts to infer missing details:
-* If `year` is missing, defaults to the current system year (2025).
+* If `year` is missing, defaults to the current system year, as a string like `parse` returns it.
 * If `resolution` is missing, infers based on source (e.g., BluRay -> 1080p) or flags (e.g., UHD -> 2160p), otherwise defaults to `SD`.
+* Rebuilds `generated` with the guessed `year` and `resolution`.
 * Accepts the same `options` object as `parse` (though `strict` is ignored).
 
 ### Return Value (Object)
@@ -163,10 +164,10 @@ Both `parse` and `guess` return an object with the following structure:
   resolution: string | null,    // Standardized resolution tag (e.g., "1080p", "720p", "2160p", "SD")
   dub: string | null,           // Primary detected audio tag (e.g., "AC3", "DTS", "AAC-5.1") - *See Limitations*
   year: string | null,          // Detected year or year range (e.g., "2023", "2001-2003")
-  flags: Array<string> | null,  // Array of detected flags (e.g., ["EXTENDED", "PROPER"]), null if none
+  flags: Array<string>,         // Array of detected flags (e.g., ["EXTENDED", "PROPER"]), empty if none
   season: number | null,        // Detected season number for TV shows
   episode: string | null,       // Formatted episode number(s) for TV shows (e.g., "01", "01-03")
-  episodes: Array<number>,      // Array of detected episode numbers (e.g., [1], [1, 2, 3])
+  episodes: Array<number|string>, // Array of detected episode numbers (e.g., [1], [1, 2, 3]), or strings for dated episodes (e.g., ["04.02"])
   type: 'movie' | 'tvshow',     // Detected media type
   group: string | null,         // Detected release group
   title: string | null,         // Cleaned and formatted title
