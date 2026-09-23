@@ -120,7 +120,7 @@ pub enum Error {
     Regex(fancy_regex::Error),
     /// `strict` is set and the name has no source, encoding, resolution nor dub.
     Strict(String),
-    /// An episode range longer than an ECMAScript array can be, which the reference implementation rejects too.
+    /// An episode range of more than 9 999 episodes.
     EpisodeRange(u64, u64),
 }
 
@@ -132,7 +132,7 @@ impl fmt::Display for Error {
                 write!(f, "\"{input}\" does't follow scene release naming rules")
             }
             Error::EpisodeRange(from, to) => {
-                write!(f, "episodes {from} to {to}: invalid array length")
+                write!(f, "episodes {from} to {to}: more than 9999 episodes")
             }
         }
     }
@@ -354,7 +354,7 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
         if let Some(range) = regex(r"EP?(\d+)\-(\d+)", true)?.captures(input)? {
             let (from, to) = (number(group(&range, 1)), number(group(&range, 2)));
 
-            if to >= from && to - from >= u64::from(u32::MAX) {
+            if to >= from && to - from >= 9_999 {
                 return Err(Error::EpisodeRange(from, to));
             }
 

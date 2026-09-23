@@ -144,11 +144,8 @@ fn an_alternative_title_emptied_by_the_capitalization_still_moves_the_year() {
 }
 
 #[test]
-fn an_episode_range_longer_than_an_array_fails() {
-    for name in [
-        "Show.E1-99999999999.720p",
-        "Show.E1-99999999999999999999.720p",
-    ] {
+fn an_episode_range_of_more_than_9999_episodes_fails() {
+    for name in ["Show.S01E1-10000.720p", "Show.E1-99999999999999999999.720p"] {
         assert!(matches!(
             parse(name, &options()),
             Err(Error::EpisodeRange(..))
@@ -157,6 +154,13 @@ fn an_episode_range_longer_than_an_array_fails() {
     assert_eq!(
         value(parse("Show.E1-3.720p", &options()).unwrap().episodes),
         json!([1, 2, 3])
+    );
+    assert_eq!(
+        parse("Show.S01E1-9999.720p", &options())
+            .unwrap()
+            .episodes
+            .len(),
+        9999
     );
 }
 
