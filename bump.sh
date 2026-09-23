@@ -14,6 +14,7 @@ command -v cargo >/dev/null || PATH="$(dirname "$(rustup which cargo)"):$PATH"
 yarn test
 (cd packages/go && go test ./...)
 (cd packages/rust && cargo test --release)
+(cd packages/rust && cargo publish --dry-run --quiet)
 
 trap 'git checkout HEAD -- packages/js/package.json packages/rust/Cargo.toml packages/rust/Cargo.lock' ERR
 (cd packages/js && npm --no-git-tag-version version $1)
@@ -28,3 +29,4 @@ git tag packages/go/v$1
 git push --tags
 git push
 (cd packages/js && npm publish)
+(cd packages/rust && cargo publish)
