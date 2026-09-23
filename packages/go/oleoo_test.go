@@ -148,8 +148,20 @@ func TestOptions(t *testing.T) {
 		t.Errorf("parse writes into the defaults it is given: %q", defaults.Flags)
 	}
 
-	if _, err := Parse("Show.E1-99999999999999999999.720p.HDTV.x264-GRP"); err == nil || err.Error() != "invalid array length" {
-		t.Errorf("an episode range past 2^32 gives %v", err)
+	for _, name := range []string{"Show.S01E1-10000.720p", "Show.E1-99999999999999999999.720p"} {
+		if _, err := Parse(name, CurrentYear(2026)); err == nil || !strings.HasSuffix(err.Error(), "more than 9999 episodes") {
+			t.Errorf("%s gives %v", name, err)
+		}
+	}
+	if r, err := Parse("Show.S01E1-9999.720p", CurrentYear(2026)); err != nil || len(r.Episodes) != 9999 {
+		t.Errorf("an episode range of 9999 episodes gives %v", err)
+	}
+
+	if _, err := Parse(strings.Repeat("a", 1025)); err == nil || err.Error() != "name of 1025 characters: more than 1024 characters" {
+		t.Errorf("a name of 1025 characters gives %v", err)
+	}
+	if _, err := Parse(strings.Repeat("a", 1024), CurrentYear(2026)); err != nil {
+		t.Errorf("a name of 1024 characters gives %v", err)
 	}
 
 	if _, err := Parse("Foo Bar", Strict(true)); err == nil || err.Error() != `"Foo Bar" does't follow scene release naming rules` {

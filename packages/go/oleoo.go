@@ -4,7 +4,6 @@ package oleoo
 import (
 	"errors"
 	"fmt"
-	"math"
 	"slices"
 	"strconv"
 	"strings"
@@ -360,6 +359,10 @@ var (
 func Parse(raw string, opts ...Option) (Release, error) {
 	o := newOptions(opts)
 
+	if n := len(utf16.Encode([]rune(raw))); n > 1024 {
+		return Release{}, fmt.Errorf("name of %d characters: more than 1024 characters", n)
+	}
+
 	s := raw
 	for i, pattern := range append(slices.Clone(o.erase), rules.Erase...) {
 		pattern = `[.\-]*?` + strings.ReplaceAll(pattern, `\\`, `\`) + `[.\-]*?`
@@ -603,8 +606,8 @@ func Parse(raw string, opts ...Option) (Release, error) {
 		if m := input.first(episodeRange); m != nil {
 			from, _ := strconv.Atoi(input.group(m, 1))
 			to, err := strconv.Atoi(input.group(m, 2))
-			if err != nil || to-from >= math.MaxUint32 {
-				return Release{}, errors.New("invalid array length")
+			if err != nil || (to >= from && to-from >= 9999) {
+				return Release{}, fmt.Errorf("episodes %s to %s: more than 9999 episodes", input.group(m, 1), input.group(m, 2))
 			}
 			r.Episodes = []any{}
 			for n := from; n <= to; n++ {
