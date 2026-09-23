@@ -1,4 +1,4 @@
-import data from '../rules.json' with { type: 'json' }
+import data from '../../../rules.json' with { type: 'json' }
 
 const { source, encoding, resolution, dub, language, flags, erase, ambiguous, title, stringify: order, extensions } = data
 
