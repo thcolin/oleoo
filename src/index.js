@@ -402,8 +402,8 @@ const parse = (raw = '', options = {}) => {
     .replace(/[\u003a-\u003f]/g, ' ') // Punctuation chars, ex: : ; < = > ?
     .replace(/[\u005c\u005e-\u0060]/g, ' ') // Punctuation chars, ex: \ ^ _ `
     .replace(/[\u007b-\u007f]/g, ' ') // Punctuation chars, ex: { | } ~ DEL
-    .replace('Œ', 'OE')
-    .replace('œ', 'oe')
+    .replace(/Œ/g, 'OE')
+    .replace(/œ/g, 'oe')
 
   if (match = payload.title.match(/[\.\s]aka[\.\s](.*?)$/i)) {
     payload.title = payload.title.replace(match[0], '')
