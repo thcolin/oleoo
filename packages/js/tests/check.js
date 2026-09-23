@@ -123,6 +123,7 @@ defaults.languages.length === 1 || failures.push('[options] parse writes into th
 
 for (const [name, message] of [
   ['Show.S01E1-10000.720p', 'episodes 1 to 10000: more than 9999 episodes'],
+  ['Show.S01E001-10000.720p', 'episodes 001 to 10000: more than 9999 episodes'],
   ['a'.repeat(1025), 'name of 1025 characters: more than 1024 characters'],
 ]) {
   try {
