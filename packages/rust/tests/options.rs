@@ -152,6 +152,12 @@ fn an_episode_range_of_more_than_9999_episodes_fails() {
         ));
     }
     assert_eq!(
+        parse("Show.S01E001-10000.720p", &options())
+            .unwrap_err()
+            .to_string(),
+        "episodes 001 to 10000: more than 9999 episodes"
+    );
+    assert_eq!(
         value(parse("Show.E1-3.720p", &options()).unwrap().episodes),
         json!([1, 2, 3])
     );
