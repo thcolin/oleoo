@@ -141,11 +141,12 @@ Parses the release `name` string and returns an object with extracted metadata.
     * `flagged` (Boolean, default: `true`): If `true`, includes detected flags (like `EXTENDED`, `DC`, `PROPER`, etc.) in the `generated` output string, placed according to standard conventions. If `false`, these flags are omitted from the `generated` string (but still present in the `flags` array of the result).
     * `erase` (Array<String|RegExp>, default: `[]`): An array of additional regular expression patterns (as strings or RegExp objects) to remove from the input `name` *before* parsing begins. Useful for removing recurring junk specific to your source.
     * `defaults` (Object, default: `{}`): An object to provide fallback values for specific fields if they cannot be parsed. Supported keys: `language`, `resolution`, `year`.
+    * `currentYear` (Number, default: the current system year): The year a release is parsed in. A year is accepted between 1901 and `currentYear + 4`, and `guess` falls back to it. Set it to get the same result on any date.
 
 ### `oleoo.guess(name, [options])`
 
 Similar to `parse`, but always uses `strict: false` and attempts to infer missing details:
-* If `year` is missing, defaults to the current system year, as a string like `parse` returns it.
+* If `year` is missing, defaults to `currentYear`, the current system year unless set, as a string like `parse` returns it.
 * If `resolution` is missing, infers based on source (e.g., BluRay -> 1080p) or flags (e.g., UHD -> 2160p), otherwise defaults to `SD`.
 * Rebuilds `generated` with the guessed `year` and `resolution`.
 * Accepts the same `options` object as `parse` (though `strict` is ignored).
