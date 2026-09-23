@@ -145080,5 +145080,26 @@
     "title": "Complot De Famille",
     "generated": "Complot.De.Famille.1976.MULTi.1080p.x264.AC3-mHDgz",
     "score": 6
+  },
+  "Chassé-Croisé.à.Manhattan.2005.FRENCH.1080.BluRay.VC-1.AAC-NoTag": {
+    "original": "Chassé-Croisé.à.Manhattan.2005.FRENCH.1080.BluRay.VC-1.AAC-NoTag",
+    "language": "FRENCH",
+    "languages": [
+      "FRENCH"
+    ],
+    "source": "BLURAY",
+    "encoding": "VC1",
+    "resolution": "1080p",
+    "dub": "AAC",
+    "year": "2005",
+    "flags": [],
+    "season": null,
+    "episode": null,
+    "episodes": [],
+    "type": "movie",
+    "group": "NoTag",
+    "title": "Chasse-Croise A Manhattan",
+    "generated": "Chasse-Croise.A.Manhattan.2005.FRENCH.1080p.BLURAY.VC1.AAC-NoTag",
+    "score": 7
   }
 }

@@ -237,7 +237,7 @@ const rules = {
     'HMAX': ['hmax'],
     'HBO': ['hbo'],
     'iTN': ['itunes', 'itn'],
-    'VC': ['vc(?![\\.\\-\\s]\?d)'],
+    'VC': ['vc(?![\\.\\-\\s]?\\d)'],
     'SC': ['sc'],
     'AVC': ['avc[\\.\\s]?(x26[45])?'],
     'QEBS5': ['qebs5'],
