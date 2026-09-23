@@ -75,7 +75,6 @@ pub struct Release {
     pub score: u32,
 }
 
-/// Starting values of the payload, before the parsing fills it.
 #[derive(Debug, Clone, Default)]
 pub struct Defaults {
     pub year: Option<String>,
@@ -94,11 +93,9 @@ pub struct Defaults {
 
 #[derive(Debug, Clone)]
 pub struct Options {
-    /// Fail when no source, encoding, resolution nor dub is found.
     pub strict: bool,
     /// Place the flags in `generated`.
     pub flagged: bool,
-    /// More patterns to remove from the input.
     pub erase: Vec<String>,
     pub defaults: Defaults,
     /// A year is accepted up to `current_year + 4`, and `guess` falls back to it. Defaults to the current UTC year.
@@ -209,7 +206,6 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
         group_start: 0,
     };
 
-    // release.kind
     for pattern in [
         r"\WS(eason[_\W])?\d{1,3}\W?(?:-?EP?\d+)*[e\.\-\s]",
         r"\W(?:-?EP?\d+)+(\W)?",
@@ -225,7 +221,6 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
         }
     }
 
-    // release.year
     let accepted = |year: &str| {
         year.parse::<i32>()
             .is_ok_and(|year| year > 1900 && year < current_year + 5)
@@ -260,7 +255,6 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
         }
     }
 
-    // release.source, release.encoding, release.resolution, release.dub
     let after_dub = format!(r"([\.\-\s]?@?\d+(kbps)?)?{AFTER}");
 
     for (keys, property, after) in [
@@ -282,10 +276,8 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
         }
     }
 
-    // release.flags
     flags(input, false, &mut release.flags, &mut at);
 
-    // release.languages
     let offset = if at.title_end == input.len() {
         0
     } else {
@@ -320,7 +312,6 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
         }
     }
 
-    // release.flags (ambiguous)
     flags(input, true, &mut release.flags, &mut at);
 
     if !release.flags.is_empty() {
@@ -339,7 +330,6 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
         });
     }
 
-    // release.season, release.episodes, release.episode
     if release.kind == Kind::Tvshow {
         if let Some(season) =
             regex(r"\WS(?:eason[_\W]?)?(\d{1,3})[e\.\-\s]", true)?.captures(input)?
@@ -399,7 +389,6 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
         }
     }
 
-    // release.group
     if let Some(found) = regex(r"(?:by[\W\-])?([\w\.]+)", true)?
         .captures(&input[at.group_start.max(at.title_end)..])?
     {
@@ -421,7 +410,6 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
         release.score += 1;
     }
 
-    // release.title
     let title = collapse(
         input.get(at.title_start..at.title_end).unwrap_or(""),
         |c| c == '.',
@@ -563,7 +551,6 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
     Ok(release)
 }
 
-/// `parse` with `strict` off, then the year and the resolution a release most likely has.
 pub fn guess(name: &str, options: &Options) -> Result<Release, Error> {
     let mut release = parse(
         name,
@@ -594,7 +581,6 @@ pub fn guess(name: &str, options: &Options) -> Result<Release, Error> {
     Ok(release)
 }
 
-/// Writes a release name back.
 pub fn stringify(release: &Release, flagged: bool) -> String {
     let order = &RULES.stringify;
     let has = |flag: &str| release.flags.iter().any(|f| f == flag);
@@ -768,7 +754,6 @@ fn flags(input: &str, ambiguous: bool, flags: &mut Vec<String>, at: &mut Positio
     }
 }
 
-// A date episode, "2019.12.25" or "12.25.2019", read only when it agrees with the year found before.
 fn dated(release: &mut Release, year: &str, day: &str, end: usize, at: &mut Positions) {
     if present(&release.year).is_some_and(|found| found != year) {
         return;
@@ -833,7 +818,7 @@ fn join(episodes: &[Episode]) -> String {
         .join("-")
 }
 
-// \d+ matches, but may not fit.
+// Saturates: \d+ may not fit in a u64.
 fn number(digits: &str) -> u64 {
     digits.parse().unwrap_or(u64::MAX)
 }
@@ -851,7 +836,6 @@ fn trim(string: &str) -> &str {
     string.trim_matches(is_space)
 }
 
-// Replaces every run of the characters matched by run with one replacement.
 fn collapse(string: &str, run: impl Fn(char) -> bool, replacement: &str) -> String {
     let mut output = String::with_capacity(string.len());
     let mut inside = false;
@@ -871,7 +855,6 @@ fn collapse(string: &str, run: impl Fn(char) -> bool, replacement: &str) -> Stri
     output
 }
 
-// Replaces the first 's with s, 'S too when insensitive.
 fn apostrophe_s(string: &str, insensitive: bool) -> String {
     let lower = string.find("'s");
     let found = if insensitive {
