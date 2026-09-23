@@ -66,6 +66,7 @@ const patterns = [
 const outside = (pattern) => {
   const found = []
   let inClass = false
+  let depth = 0
 
   for (let i = 0; i < pattern.length; i++) {
     const char = pattern[i]
@@ -81,6 +82,10 @@ const outside = (pattern) => {
       inClass = true
     } else if (char === '(' && pattern[i + 1] === '?' && !':=!'.includes(pattern[i + 2])) {
       found.push('(?' + pattern[i + 2])
+    } else if (char === '(' || char === ')') {
+      depth += char === '(' ? 1 : -1
+    } else if (char === '|' && depth === 0) {
+      found.push('|')
     } else if ('+*?}'.includes(char) && pattern[i + 1] === '+') {
       found.push(char + '+')
     }
@@ -94,7 +99,7 @@ for (const pattern of patterns) {
   found.length && failures.push(`[dialect] ${pattern}\n    ${found.join(', ')} outside the dialect`)
 }
 
-for (const [pattern, expected] of [['(?<!x)a\\b', ['(?<', '\\b']], ['\\\\(?<=a)', ['(?<']], ['a++', ['++']], ['x{2}+', ['}+']], ['[(?<+]a+?', []]]) {
+for (const [pattern, expected] of [['(?<!x)a\\b', ['(?<', '\\b']], ['\\\\(?<=a)', ['(?<']], ['a++', ['++']], ['x{2}+', ['}+']], ['[(?<+]a+?', []], ['a|b', ['|']], ['(a|b)[|]', []]]) {
   if (JSON.stringify(outside(pattern)) !== JSON.stringify(expected)) {
     failures.push(`[dialect] the check reads ${pattern} as ${JSON.stringify(outside(pattern))}, not ${JSON.stringify(expected)}`)
   }
