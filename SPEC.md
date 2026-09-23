@@ -58,7 +58,9 @@ Allowed:
 - escapes of a metacharacter: `\.`, `\-`, `\+`, `\*`, `\?`, `\(`, `\)`, `\[`, `\]`, `\{`, `\}`, `\|`, `\^`, `\$`, `\/`, `\\`;
 - the classes `\d`, `\w`, `\W`, `\s`, with the meaning below.
 
-Not allowed: lookbehinds, named groups, backreferences, `\b`, `\p{…}`, inline flags like `(?i)`, atomic groups, possessive quantifiers.
+Not allowed: lookbehinds, named groups, backreferences, `\b`, `\p{…}`, inline flags like `(?i)`, atomic groups, possessive quantifiers, and an alternation `|` at the top level of a pattern (wrap it in a group: [Matching a rule](#matching-a-rule) puts the pattern after a group, and `a|b` would leave that group out of the second branch).
+
+A rule of `flags` that does not compile is skipped by the reference. None does today.
 
 The classes have their ECMAScript meaning **without** the `u` flag, which is not the default of every engine:
 
@@ -74,6 +76,11 @@ In C++, `std::regex` works on bytes: `[ée]` would not match `é` in UTF-8. Use 
 
 Rust's `regex` and `fancy-regex` read these classes as Unicode ones, and PCRE2's `\s` without `PCRE2_UCP` leaves out U+00A0, as Rust's `(?-u:\s)` does. The safe way is to expand the classes before compiling: `\d` into `[0-9]`, `\w` into `[A-Za-z0-9_]`, `\W` into `[^A-Za-z0-9_]`, `\s` into the list above. `\W` only appears inside a class as `[_\W]`, which is `[^A-Za-z0-9]`, and as `[\W\s]` or `[\W\-]`, which are `[^A-Za-z0-9_]`.
 
+**Engine notes**, found while writing the ports:
+
+- **Go, `dlclark/regexp2`** with `ECMAScript | IgnoreCase`: `\W` inside a class accepts `i` and `I` (it lowers the ranges of `\W`, and U+0130 lowers to `i`), so write `[_\W]` as `(?:\W|_)`. It also lowers U+0130 and U+212A before testing them, so `\W` misses them; and its `.` matches U+2028 and U+2029. The Go port rewrites each of these (`packages/go/oleoo.go`, `dialect`).
+- **Rust, `fancy-regex`**: keep `\w` and `\W` out of case folding with `(?-i:…)`. It is the ECMAScript meaning (`/^\W$/i.test('ſ')` is true), and an expanded class under `(?i)` costs about 20 times more to compile. Its backtrack limit makes a match fail past about 250 000 characters, well above the bound of [Input](#1-input).
+
 **Case.** Every pattern of `rules.json` is matched case-insensitively. A few patterns hold non-ASCII letters (`français`, `int[ée]grale?`, `restaur[ée]e?`): the engine must fold case on Unicode letters too, `É` matching `é`. The regexes of this document say when they are case-insensitive, in words.
 
 JavaScript folds case by upper-casing each character, so `ſ` does not match `s`, nor the Kelvin sign `K` match `k`. PCRE2 and Rust fold these too: a port may match a little more than the reference on such characters, none of which appear in the fixtures.
@@ -82,7 +89,9 @@ JavaScript folds case by upper-casing each character, so `ſ` does not match `s`
 
 ## Strings and positions
 
-The input is a string of Unicode characters. **A position counts characters.** JavaScript counts UTF-16 code units, which are the same thing for every character below U+10000; the algorithm compares positions with each other but also adds 1 to them ([Matching a rule](#matching-a-rule), [Ambiguous flags](#8-ambiguous-flags)), so a port that counts bytes gives other results as soon as the input holds a non-ASCII character. In Rust, map byte offsets to character offsets, or match on a `Vec<char>`.
+The input is a string of Unicode characters. **A position counts UTF-16 code units**, as JavaScript does: one per character below U+10000, two above. The algorithm compares positions with each other but also adds 1 to them ([Matching a rule](#matching-a-rule), [Ambiguous flags](#8-ambiguous-flags)), so a port that counts bytes gives other results as soon as the input holds a non-ASCII character.
+
+Above U+FFFF, the reference also matches `[_\W]` and `.` on each half of a surrogate pair, and may return half a pair in a field. `Les anarchistes 2015 10🎬80p FR X264 AC3 m.HDgz.mkv` has the year `2015` in JavaScript. A port that matches on UTF-16 code units (the Go port) follows it, except that a lone half comes out as U+FFFD. A port that matches on characters (the Rust port) gives other results on such names. No fixture holds a character above U+FFFF.
 
 `s[a .. b]` is the part of `s` from position `a` included to `b` excluded, and is empty when `a >= b`. `s[a ..]` runs to the end.
 
@@ -115,12 +124,13 @@ The match gives three values: `index`, `end` (`index` + the length of the whole 
 | `flagged` | `true` | place the flags in `generated` |
 | `erase` | `[]` | more patterns to remove from the input |
 | `defaults` | `{}` | starting values of the payload |
-| `currentYear` | the current year of the host | bounds the accepted years |
+| `currentYear` | the current year of the host, in local time (a port may take UTC) | bounds the accepted years |
 
 It fills a payload, then returns part of it. The steps run in this order, each one reading what the ones before it wrote.
 
 ### 1. Input
 
+0. When the name is longer than 1024 UTF-16 code units, fail with `name of <n> characters: more than 1024 characters`. The longest release of the fixtures holds 205; the bound keeps the cost of the patterns below, some of which grow with the square or the cube of the length, under a few milliseconds.
 1. For each pattern of `options.erase`, then each pattern of `rules.erase`: remove every match of `[.\-]*?` + pattern + `[.\-]*?`, case-insensitive, from the name. A pattern given as a string first has every `\\` (two backslashes) replaced by `\`. The JavaScript API also takes a `RegExp` in `options.erase`, compiled with its own `m`, `s` and `u` flags; a port takes strings.
 2. Remove the first match of `\.(` + `extensions` joined by `|` + `)(\W.*)?$`, case-insensitive.
 3. Trim. The result is `input`, returned as `original`.
@@ -132,7 +142,7 @@ type, year, source, encoding, resolution, dub, language, season, episode, group:
 languages, episodes, flags: []
 ```
 
-then the keys of `options.defaults` over these, arrays copied, then `score = 0`, `valid = false`.
+then the keys of `options.defaults` over these, arrays copied, then `score = 0`, `valid = false`. A `type` given in `defaults` is always overwritten by [Type](#3-type).
 
 Three positions follow the parsing: `titleStart = 0`, `titleEnd = length(input)`, `groupStart = 0`. Unless a step says otherwise, **"move the positions to a match"** means: `titleEnd = min(titleEnd, index)` and `groupStart = max(groupStart, end)`.
 
@@ -205,7 +215,7 @@ Only when `type = "tvshow"`. `pad2(n)` writes `n` in decimal on at least two dig
 
 1. **Season.** First match of `\WS(?:eason[_\W]?)?(\d{1,3})[e\.\-\s]`, case-insensitive: `season = group1` as a number, `groupStart = max(groupStart, end)`.
 2. **Episodes**, the first of these that matches, each case-insensitive:
-   1. First match of `EP?(\d+)\-(\d+)`: `episodes` = every number from group 1 to group 2, none when group 2 is lower (then `episode` is `""`), `groupStart = max(groupStart, end)`.
+   1. First match of `EP?(\d+)\-(\d+)`: when group 2 minus group 1 is 9999 or more, fail with `episodes <group1> to <group2>: more than 9999 episodes`; otherwise `episodes` = every number from group 1 to group 2, none when group 2 is lower (then `episode` is `""`), `groupStart = max(groupStart, end)`.
    2. Every match of `EP?(\d+)`: `episodes` = the group 1 of each, as numbers; `groupStart = max(groupStart, end of the last one)`.
    3. Every match of `\W?(?:(\d{1,2})x(\d{1,3}))+(\W)?`: `season` = group 1 of the first one, `episodes` = the group 2 of each; `groupStart` as above.
    4. First match of `\W(\d{4})[_\W](\d{2}[_\W]\d{2})[_\W]?`, only acted on when `year` is null or equals group 1: `episode` = group 2 with every non-digit replaced by `.` and every run of `.` by one `.`, `episodes = [episode]`, `score += 1` if `year` was null, `year = group1`, `groupStart = max(groupStart, end)`.
@@ -258,7 +268,7 @@ Applied to `title`, then to `alternativeTitle` when there is one:
 
 In order:
 
-1. When there is an `alternativeTitle`:
+1. When there was an `alternativeTitle` before [Capitalization](#14-capitalization), even if capitalization left it empty (`2010 - -` gives `year: "2010"` and an empty `title`):
    - it matches `^\d{4}$`: `year = alternativeTitle`, drop `alternativeTitle`;
    - else `year` is null and `title` matches `^\d{4}$`: `year = title`, `title = alternativeTitle`, drop `alternativeTitle`;
    - else `title` matches `^\d+$`: `title = alternativeTitle`, drop `alternativeTitle`.
@@ -283,7 +293,7 @@ season, episode, episodes, type, group, title, [alternativeTitle, completeTitle,
 
 `alternativeTitle` and `completeTitle` are there only when there is an alternative title; `completeTitle` is `title + " (" + alternativeTitle + ")"`.
 
-`season` is a number or null. `episodes` holds numbers, or one string for a date (`"12.25"`) or a manga episode (`"123"`). `episode` is a string or null.
+`season` is a number or null. An episode number above 2^53 − 1 is outside this specification: JavaScript turns it into an imprecise number. `episodes` holds numbers, or one string for a date (`"12.25"`) or a manga episode (`"123"`). `episode` is a string or null.
 
 ## stringify
 
@@ -309,7 +319,7 @@ The parts, in order; when `flagged` is false, every `after*` group and the last 
 13. `afterEncoding`;
 14. `dub`;
 15. `afterDub`;
-16. every flag of `release.flags`, in its order, that no `after*` entry names (for an object entry, its `flag`).
+16. every flag of `release.flags`, in its order, that no `after*` entry names: a string entry names itself, an object entry names its `flag` only when the rule above writes it. Every object flag of `rules.json` is listed with both values of `dubRelated`, so each one is always named.
 
 Drop the empty parts, join with `.`, and append `-` + `group`, or `-NOTEAM` when there is none.
 
@@ -335,9 +345,18 @@ Both files hold what the reference implementation returns **today**: a port matc
 
 A port is conformant when, for every unique name of `releases.txt`, `parse(name, { currentYear: 2026 })` gives the result of `accepted.json` or `refused.json`, key for key, `null` and empty arrays included. The order of the keys is only checked by the JavaScript harness.
 
-`packages/js/tests/check.js` is the harness of the reference implementation (`yarn test`). It also checks that:
+Each package replays them:
+
+| Package | Command | Harness |
+|---|---|---|
+| `packages/js`, the reference | `yarn test` | `packages/js/tests/check.js`, on `src/` then on `dist/` |
+| `packages/go` | `go test ./...` | `packages/go/oleoo_test.go` |
+| `packages/rust` | `cargo test` | `packages/rust/tests/fixtures.rs`, `packages/rust/tests/options.rs` |
+
+`packages/js/tests/check.js` also checks that:
 
 - `parse(name, { currentYear: 2026, strict: false })` equals `parse(name, { currentYear: 2026 })` for every name;
 - an `erase` pattern removes its match;
 - `currentYear` bounds the accepted years;
+- a name past 1024 characters and a range past 9999 episodes fail;
 - `rules.json` stays in the [dialect](#regex-dialect).
