@@ -1,7 +1,4 @@
-use std::{
-    collections::HashMap,
-    sync::{Arc, LazyLock, Mutex},
-};
+use std::{cell::RefCell, collections::HashMap, rc::Rc};
 
 use fancy_regex::Regex;
 
@@ -11,26 +8,28 @@ use crate::Error;
 const SPACE: &str =
     r"\t-\r \x{A0}\x{1680}\x{2000}-\x{200A}\x{2028}\x{2029}\x{202F}\x{205F}\x{3000}\x{FEFF}";
 
-static CACHE: LazyLock<Mutex<HashMap<String, Arc<Regex>>>> = LazyLock::new(Default::default);
+// Per thread: a parse looks up hundreds of patterns, a shared lock would serialize the threads.
+thread_local! {
+    static CACHE: RefCell<HashMap<String, Rc<Regex>>> = RefCell::default();
+}
 
 pub fn is_space(c: char) -> bool {
     matches!(c, '\t'..='\r' | ' ' | '\u{A0}' | '\u{1680}' | '\u{2000}'..='\u{200A}' | '\u{2028}' | '\u{2029}' | '\u{202F}' | '\u{205F}' | '\u{3000}' | '\u{FEFF}')
 }
 
-pub fn regex(pattern: &str, insensitive: bool) -> Result<Arc<Regex>, Error> {
+pub fn regex(pattern: &str, insensitive: bool) -> Result<Rc<Regex>, Error> {
     let source = if insensitive {
         format!("(?i){}", translate(pattern))
     } else {
         translate(pattern)
     };
-    let mut cache = CACHE.lock().unwrap();
 
-    if let Some(regex) = cache.get(&source) {
-        return Ok(regex.clone());
+    if let Some(regex) = CACHE.with_borrow(|cache| cache.get(&source).cloned()) {
+        return Ok(regex);
     }
 
-    let regex = Arc::new(Regex::new(&source)?);
-    cache.insert(source, regex.clone());
+    let regex = Rc::new(Regex::new(&source)?);
+    CACHE.with_borrow_mut(|cache| cache.insert(source, regex.clone()));
     Ok(regex)
 }
 
