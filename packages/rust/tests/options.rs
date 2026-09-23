@@ -165,6 +165,15 @@ fn an_episode_range_of_more_than_9999_episodes_fails() {
 }
 
 #[test]
+fn a_name_of_more_than_1024_characters_fails() {
+    assert!(matches!(
+        parse(&"a".repeat(1025), &options()),
+        Err(Error::InputLength(1025))
+    ));
+    assert!(parse(&"a".repeat(1024), &options()).is_ok());
+}
+
+#[test]
 fn current_year_does_not_overflow() {
     let options = Options {
         current_year: Some(i32::MAX),

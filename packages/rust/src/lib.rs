@@ -122,6 +122,8 @@ pub enum Error {
     Strict(String),
     /// An episode range of more than 9 999 episodes.
     EpisodeRange(u64, u64),
+    /// A name longer than 1024 characters, counted in UTF-16 code units.
+    InputLength(usize),
 }
 
 impl fmt::Display for Error {
@@ -133,6 +135,9 @@ impl fmt::Display for Error {
             }
             Error::EpisodeRange(from, to) => {
                 write!(f, "episodes {from} to {to}: more than 9999 episodes")
+            }
+            Error::InputLength(length) => {
+                write!(f, "name of {length} characters: more than 1024 characters")
             }
         }
     }
@@ -165,6 +170,12 @@ impl Positions {
 }
 
 pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
+    let length = raw.encode_utf16().count();
+
+    if length > 1024 {
+        return Err(Error::InputLength(length));
+    }
+
     let current_year = options.current_year.unwrap_or_else(host_year);
     let mut input = raw.to_owned();
 
