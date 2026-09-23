@@ -925,9 +925,9 @@ const parse = (raw = '', options = {}) => {
   }
 
   if (payload.type === 'tvshow' && payload.flags.includes('COLLECTION')) {
-    delete payload.flags[payload.flags.indexOf('COLLECTION')]
+    payload.flags = payload.flags.filter(flag => flag !== 'COLLECTION')
   } else if (payload.type === 'tvshow' && payload.flags.includes('COMPLETE')) {
-    delete payload.flags[payload.flags.indexOf('COMPLETE')]
+    payload.flags = payload.flags.filter(flag => flag !== 'COMPLETE')
   }
 
   if (payload.year === '0') {
