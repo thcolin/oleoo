@@ -6924,7 +6924,7 @@
     "source": "BLURAY",
     "encoding": "x264",
     "resolution": "1080p",
-    "dub": "DUBBED",
+    "dub": "AC3",
     "year": null,
     "flags": [
       "DL"
@@ -6935,7 +6935,7 @@
     "type": "movie",
     "group": "Pleaders",
     "title": "The Purge Anarchy",
-    "generated": "The.Purge.Anarchy.GERMAN.DL.1080p.BLURAY.x264.DUBBED-Pleaders",
+    "generated": "The.Purge.Anarchy.GERMAN.DL.1080p.BLURAY.x264.AC3-Pleaders",
     "score": 7
   },
   "22.Jump.Street.GERMAN.DL.AC3.Dubbed.1080p.BluRay.x264-SOV": {
@@ -6947,7 +6947,7 @@
     "source": "BLURAY",
     "encoding": "x264",
     "resolution": "1080p",
-    "dub": "DUBBED",
+    "dub": "AC3",
     "year": null,
     "flags": [
       "DL"
@@ -6958,7 +6958,7 @@
     "type": "movie",
     "group": "SOV",
     "title": "22 Jump Street",
-    "generated": "22.Jump.Street.GERMAN.DL.1080p.BLURAY.x264.DUBBED-SOV",
+    "generated": "22.Jump.Street.GERMAN.DL.1080p.BLURAY.x264.AC3-SOV",
     "score": 7
   },
   "Tammy.Voll.abgefahren.German.DL.AC3.Dubbed.720p.WebHD.h264-PsO": {
@@ -6970,7 +6970,7 @@
     "source": "WEB-DL",
     "encoding": "h264",
     "resolution": "720p",
-    "dub": "DUBBED",
+    "dub": "AC3",
     "year": null,
     "flags": [
       "DL"
@@ -6981,7 +6981,7 @@
     "type": "movie",
     "group": "PsO",
     "title": "Tammy Voll Abgefahren",
-    "generated": "Tammy.Voll.Abgefahren.GERMAN.DL.720p.WEB-DL.h264.DUBBED-PsO",
+    "generated": "Tammy.Voll.Abgefahren.GERMAN.DL.720p.WEB-DL.h264.AC3-PsO",
     "score": 7
   },
   "Faster, Pussycat ! Kill ! Kill !. 1965.Russ Meyer.VOSTFR.Blu-Ray 720p.Liosaa (RU) / Popo": {
@@ -38962,7 +38962,7 @@
     ],
     "source": "BLURAY",
     "encoding": "x265",
-    "resolution": "2160p",
+    "resolution": "1080p",
     "dub": null,
     "year": "1998",
     "flags": [
@@ -38975,7 +38975,7 @@
     "type": "movie",
     "group": "AZAZE",
     "title": "Ronin",
-    "generated": "Ronin.1998.REMASTERED.MULTi.2160p.BLURAY.DTS-HDMA.x265-AZAZE",
+    "generated": "Ronin.1998.REMASTERED.MULTi.1080p.BLURAY.DTS-HDMA.x265-AZAZE",
     "score": 7
   },
   "Romeo Must Die (2000)": {
@@ -60643,7 +60643,7 @@
     "languages": [
       "FRENCH"
     ],
-    "source": "TVRip",
+    "source": "WEB-DL",
     "encoding": "h264",
     "resolution": "1080p",
     "dub": "AAC-LC",
@@ -60657,7 +60657,7 @@
     "type": "movie",
     "group": null,
     "title": "Madame Bovary",
-    "generated": "Madame.Bovary.1991.FRENCH.AD.1080p.TVRip.h264.AAC-LC-NOTEAM",
+    "generated": "Madame.Bovary.1991.FRENCH.AD.1080p.WEB-DL.h264.AAC-LC-NOTEAM",
     "score": 7
   },
   "Madagascar Trilogie (2005-2012) MULTi VFF AC3 1080p HDLight x264.GHT": {
@@ -124455,7 +124455,7 @@
     "languages": [
       "FRENCH"
     ],
-    "source": "TVRip",
+    "source": "WEB-DL",
     "encoding": null,
     "resolution": null,
     "dub": null,
@@ -124467,7 +124467,7 @@
     "type": "movie",
     "group": null,
     "title": "Anais S En Va-T-En Guerre",
-    "generated": "Anais.S.En.Va-T-En.Guerre.2014.FRENCH.TVRip-NOTEAM",
+    "generated": "Anais.S.En.Va-T-En.Guerre.2014.FRENCH.WEB-DL-NOTEAM",
     "score": 3
   },
   "Amsterdam.2022.MULTI.1080p.WEB.H264-LOST": {
@@ -133855,7 +133855,7 @@
     "languages": [],
     "source": "BLURAY",
     "encoding": "x264",
-    "resolution": "2160p",
+    "resolution": "720p",
     "dub": null,
     "year": "1987",
     "flags": [
@@ -133869,7 +133869,7 @@
     "type": "movie",
     "group": "WiNNy",
     "title": "Robocop",
-    "generated": "Robocop.1987.DC.REMASTERED.2160p.BLURAY.CEE.x264-WiNNy",
+    "generated": "Robocop.1987.DC.REMASTERED.720p.BLURAY.CEE.x264-WiNNy",
     "score": 6
   },
   "Red.2.2013.720p.BDRIP.x264.AAC-WiNNy": {

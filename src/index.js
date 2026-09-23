@@ -1,5 +1,7 @@
+// When several keys of source, encoding, resolution or dub match, the last declared one wins: generic keys go first.
 const rules = {
   source: {
+    'TVRip': ['tv[\\.\\-\\s]?(r(ip)?)?'],
     'CAM': ['cam[\\.\\-\\s]?r?(ip)?', '(hd)?cam', 'ts', 'telesync', 'pdvd'],
     'TC': ['tc', 'telecine'],
     'SCREENER': ['screener', 'scr', 'ddc'],
@@ -18,7 +20,6 @@ const rules = {
     'SDTV': ['sdtv', 'dsr', 'ds[\\.\\-\\s]?r?(ip)?', 'sat[\\.\\-\\s]?r?(ip)?', 'dth[\\.\\-\\s]?r?(ip)?', 'dvb[\\.\\-\\s]?r?(ip)?'],
     'HDTV': ['hdtv[\\.\\-\\s]?r?(ip)?', 'hdtv', 'tvriphd'],
     'UHDTV': ['uhdtv[\\.\\-\\s]?r?(ip)?', 'uhdtv'],
-    'TVRip': ['tv[\\.\\-\\s]?(r(ip)?)?'],
   },
   encoding: {
     'MPEG2': ['mpeg[\\.\\-\\s]?2'],
@@ -36,10 +37,11 @@ const rules = {
     'SD': ['sd', '480[pi]'],
     '720p': ['(br)?720p', '1280x720'],
     '1080p': ['(br)?1080[pi]?'],
-    '2160p': ['2160p', '4k', 'uhd(r10)?'],
+    '2160p': ['2160p', '4k(?![\\.\\-\\s]remaster)', 'uhd(r10)?'],
   },
   // Should I keep "2.0", "5.1" and "7.1" only as flags to simplify dub ?
   dub: {
+    'DUBBED': ['dubbed'],
     'MP3': ['mp3'],
     'ACC': ['acc'],
     'AAC': ['aac'],
@@ -88,7 +90,6 @@ const rules = {
     'FLAC-2.0': ['flac[\\.\\-\\s]?2[\\.\\-\\s]0'],
     'FLAC-5.1': ['flac[\\.\\-\\s]?5[\\.\\-\\s]1'],
     'FLAC-7.1': ['flac[\\.\\-\\s]?7[\\.\\-\\s]1'],
-    'DUBBED': ['dubbed'],
   },
   language: {
     'SiLENT': ['muet', 'silent'],
