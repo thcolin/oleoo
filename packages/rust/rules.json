@@ -1,0 +1,1291 @@
+{
+  "source": {
+    "TVRip": [
+      "tv[\\.\\-\\s]?(r(ip)?)?"
+    ],
+    "CAM": [
+      "cam[\\.\\-\\s]?r?(ip)?",
+      "(hd)?cam",
+      "ts",
+      "telesync",
+      "pdvd"
+    ],
+    "TC": [
+      "tc",
+      "telecine"
+    ],
+    "SCREENER": [
+      "screener",
+      "scr",
+      "ddc"
+    ],
+    "DVDSCr": [
+      "dvd[\\.\\-\\s]?scr",
+      "dvdscreener"
+    ],
+    "R5": [
+      "r5"
+    ],
+    "R6": [
+      "r6"
+    ],
+    "HDRip": [
+      "hd[\\.\\-\\s]?rip",
+      "hd[\\.\\-\\s]?l(ight)?",
+      "mhd(?!$)",
+      "hd(web)?",
+      "hddvdrip"
+    ],
+    "BRRip": [
+      "br[\\.\\-\\s]?r?(ip)?"
+    ],
+    "BDRip": [
+      "bd[\\.\\-\\s]?r?(ip)?"
+    ],
+    "DVD-R": [
+      "dvd[\\.\\-\\s]?r",
+      "dvd[\\.\\-\\s]?5",
+      "dvd[\\.\\-\\s]?9",
+      "r6[\\.\\-\\s]?dvd",
+      "dvd"
+    ],
+    "DVDRip": [
+      "dvd[\\.\\-\\s]?rip",
+      "480p"
+    ],
+    "WEB-DL": [
+      "web[\\.\\-\\s]?tv",
+      "web[\\.\\-\\s]?dl",
+      "web[\\.\\-\\s]?r?(ip)?",
+      "amazonhd",
+      "netflixhd",
+      "webhd",
+      "web",
+      "weblight"
+    ],
+    "BLURAY": [
+      "blu[\\.\\-\\s]?ray",
+      "br(1080|720)p?",
+      "br"
+    ],
+    "BDSCR": [
+      "bluray\\-scr",
+      "bdscr"
+    ],
+    "PDTV": [
+      "pdtv"
+    ],
+    "SDTV": [
+      "sdtv",
+      "dsr",
+      "ds[\\.\\-\\s]?r?(ip)?",
+      "sat[\\.\\-\\s]?r?(ip)?",
+      "dth[\\.\\-\\s]?r?(ip)?",
+      "dvb[\\.\\-\\s]?r?(ip)?"
+    ],
+    "HDTV": [
+      "hdtv[\\.\\-\\s]?r?(ip)?",
+      "hdtv",
+      "tvriphd"
+    ],
+    "UHDTV": [
+      "uhdtv[\\.\\-\\s]?r?(ip)?",
+      "uhdtv"
+    ]
+  },
+  "encoding": {
+    "MPEG2": [
+      "mpeg[\\.\\-\\s]?2"
+    ],
+    "MPEG4": [
+      "mp(eg)?[\\.\\-\\s]?4"
+    ],
+    "DivX": [
+      "divx"
+    ],
+    "XviD": [
+      "xvid(hd)?"
+    ],
+    "h264": [
+      "h?[\\.\\-\\s]?264"
+    ],
+    "h265": [
+      "h?[\\.\\-\\s]?265",
+      "hevc"
+    ],
+    "x264": [
+      "(avc)?x[\\.\\-\\s]?264"
+    ],
+    "x265": [
+      "(avc)?x[\\.\\-\\s]?265"
+    ],
+    "VP9": [
+      "vp9"
+    ],
+    "VC1": [
+      "vc[\\.\\-\\s]?1"
+    ]
+  },
+  "resolution": {
+    "SD": [
+      "sd",
+      "480[pi]"
+    ],
+    "720p": [
+      "(br)?720p",
+      "1280x720"
+    ],
+    "1080p": [
+      "(br)?1080[pi]?"
+    ],
+    "2160p": [
+      "2160p",
+      "4k(?![\\.\\-\\s]remaster)",
+      "uhd(r10)?"
+    ]
+  },
+  "dub": {
+    "DUBBED": [
+      "dubbed"
+    ],
+    "MP3": [
+      "mp3"
+    ],
+    "ACC": [
+      "acc"
+    ],
+    "AAC": [
+      "aac"
+    ],
+    "AAC-LC": [
+      "aac[\\.\\-\\s]?lc"
+    ],
+    "AAC-LC-1.0": [
+      "aac[\\.\\-\\s]?lc[\\.\\-\\s]?1[\\.\\-\\s]0"
+    ],
+    "AAC-LC-2.0": [
+      "aac[\\.\\-\\s]?lc[\\.\\-\\s]?2[\\.\\-\\s]0"
+    ],
+    "AAC-LC-5.1": [
+      "aac[\\.\\-\\s]?lc[\\.\\-\\s]?5[\\.\\-\\s]1"
+    ],
+    "AAC-LC-7.1": [
+      "aac[\\.\\-\\s]?lc[\\.\\-\\s]?7[\\.\\-\\s]1"
+    ],
+    "AAC-1.0": [
+      "aac([\\.\\-\\s]?v\\d+)?[\\.\\-\\s]?1[\\.\\-\\s]0"
+    ],
+    "AAC-2.0": [
+      "aac([\\.\\-\\s]?v\\d+)?[\\.\\-\\s]?2[\\.\\-\\s]0"
+    ],
+    "AAC-5.1": [
+      "aac([\\.\\-\\s]?v\\d+)?[\\.\\-\\s]?5[\\.\\-\\s]1"
+    ],
+    "AAC-7.1": [
+      "aac([\\.\\-\\s]?v\\d+)?[\\.\\-\\s]?7[\\.\\-\\s]1"
+    ],
+    "HE-AAC": [
+      "he[\\.\\-\\s]aac"
+    ],
+    "HE-AAC-1.0": [
+      "he[\\.\\-\\s]aac([\\.\\-\\s]?v\\d+)?[\\.\\-\\s]?1[\\.\\-\\s]0"
+    ],
+    "HE-AAC-2.0": [
+      "he[\\.\\-\\s]aac([\\.\\-\\s]?v\\d+)?[\\.\\-\\s]?2[\\.\\-\\s]0"
+    ],
+    "HE-AAC-5.1": [
+      "he[\\.\\-\\s]aac([\\.\\-\\s]?v\\d+)?[\\.\\-\\s]?5[\\.\\-\\s]1"
+    ],
+    "HE-AAC-7.1": [
+      "he[\\.\\-\\s]aac([\\.\\-\\s]?v\\d+)?[\\.\\-\\s]?7[\\.\\-\\s]1"
+    ],
+    "AC3": [
+      "ac[\\.\\-\\s]?3(\\.dubbed)?"
+    ],
+    "AC3-1.0": [
+      "ac[\\.\\-\\s]?3[\\.\\-\\s]?1[\\.\\-\\s]0"
+    ],
+    "AC3-2.0": [
+      "ac[\\.\\-\\s]?3[\\.\\-\\s]?2[\\.\\-\\s]0"
+    ],
+    "AC3-5.1": [
+      "ac[\\.\\-\\s]?3[\\.\\-\\s]?5[\\.\\-\\s]1"
+    ],
+    "AC3-7.1": [
+      "ac[\\.\\-\\s]?3[\\.\\-\\s]?7[\\.\\-\\s]1"
+    ],
+    "PCM": [
+      "pcm(\\.dubbed)?"
+    ],
+    "PCM-1.0": [
+      "pcm[\\.\\-\\s]?1[\\.\\-\\s]0"
+    ],
+    "PCM-2.0": [
+      "pcm[\\.\\-\\s]?2[\\.\\-\\s]0"
+    ],
+    "PCM-5.1": [
+      "pcm[\\.\\-\\s]?5[\\.\\-\\s]1"
+    ],
+    "PCM-7.1": [
+      "pcm[\\.\\-\\s]?7[\\.\\-\\s]1"
+    ],
+    "LPCM": [
+      "lpcm(\\.dubbed)?"
+    ],
+    "LPCM-1.0": [
+      "lpcm[\\.\\-\\s]?1[\\.\\-\\s]0"
+    ],
+    "LPCM-2.0": [
+      "lpcm[\\.\\-\\s]?2[\\.\\-\\s]0"
+    ],
+    "LPCM-5.1": [
+      "lpcm[\\.\\-\\s]?5[\\.\\-\\s]1"
+    ],
+    "LPCM-7.1": [
+      "lpcm[\\.\\-\\s]?7[\\.\\-\\s]1"
+    ],
+    "EAC3": [
+      "e[\\.\\-\\s]?ac[\\.\\-\\s]?3"
+    ],
+    "EAC3-1.0": [
+      "e[\\.\\-\\s]?ac[\\.\\-\\s]?3[\\.\\-\\s]?1[\\.\\-\\s]0"
+    ],
+    "EAC3-2.0": [
+      "e[\\.\\-\\s]?ac[\\.\\-\\s]?3[\\.\\-\\s]?2[\\.\\-\\s]0"
+    ],
+    "EAC3-5.1": [
+      "e[\\.\\-\\s]?ac[\\.\\-\\s]?3[\\.\\-\\s]?5[\\.\\-\\s]1"
+    ],
+    "EAC3-7.1": [
+      "e[\\.\\-\\s]?ac[\\.\\-\\s]?3[\\.\\-\\s]?7[\\.\\-\\s]1"
+    ],
+    "OPUS": [
+      "opus"
+    ],
+    "OPUS-1.0": [
+      "opus[\\.\\-\\s]?1[\\.\\-\\s]0"
+    ],
+    "OPUS-2.0": [
+      "opus[\\.\\-\\s]?2[\\.\\-\\s]0"
+    ],
+    "OPUS-5.1": [
+      "opus[\\.\\-\\s]?5[\\.\\-\\s]1"
+    ],
+    "OPUS-7.1": [
+      "opus[\\.\\-\\s]?7[\\.\\-\\s]1"
+    ],
+    "FLAC": [
+      "flac"
+    ],
+    "FLAC-1.0": [
+      "flac[\\.\\-\\s]?1[\\.\\-\\s]0"
+    ],
+    "FLAC-2.0": [
+      "flac[\\.\\-\\s]?2[\\.\\-\\s]0"
+    ],
+    "FLAC-5.1": [
+      "flac[\\.\\-\\s]?5[\\.\\-\\s]1"
+    ],
+    "FLAC-7.1": [
+      "flac[\\.\\-\\s]?7[\\.\\-\\s]1"
+    ]
+  },
+  "language": {
+    "SiLENT": [
+      "muet",
+      "silent"
+    ],
+    "MULTi": [
+      "multi?(\\d+)?",
+      "vf2",
+      "fr[\\.\\-\\s]en",
+      "en[\\.\\-\\s]fr",
+      "mlv",
+      "(dual|2)[\\.\\-\\s]?audio",
+      "multilang"
+    ],
+    "VFQ": [
+      "vfq",
+      "vq",
+      "ca"
+    ],
+    "TRUEFRENCH": [
+      "truefrench",
+      "(french[\\.\\-\\s]?)?vff",
+      "vf2",
+      "vof"
+    ],
+    "FRENCH": [
+      {
+        "pattern": "french(?![\\.\\-\\s](vof|vff))",
+        "notAfter": "(vof|true|sub|vff)[\\.\\-\\s]?"
+      },
+      "francais",
+      "français",
+      {
+        "pattern": "fra?(?![\\.\\-\\s]s(tr|rt)|vff)",
+        "notAfter": "(s(rt|tr?)|vo|sub|vff)[\\.\\-\\s]?"
+      },
+      "vf(?!f)",
+      "vfi",
+      "vf2",
+      "vof(st(fr)?)"
+    ],
+    "VOSTFR": [
+      "s(rt|tr?)[\\.\\-\\s]?fr",
+      "fr[\\.\\-\\s]?s(rt|tr?)",
+      "vo(?!f)(\\w*)stfr",
+      "vo(?!f)(\\w*)str",
+      "vo(?!f)(\\w*)stf",
+      "vo(?!f)(\\w*)st",
+      "stfr",
+      "subfr(ench)?"
+    ],
+    "VOSTA": [
+      "vo(?!f)(\\w*)sta",
+      "vo(?!f)(\\w*)sten",
+      "e[\\.\\-\\s]?subs?"
+    ],
+    "VOST": [
+      "multi(\\d+)?[\\.\\-\\s]?subs?"
+    ],
+    "PERSiAN": [
+      "persian"
+    ],
+    "AMHARiC": [
+      "amharic"
+    ],
+    "ARABiC": [
+      "arabic"
+    ],
+    "CAMBODiAN": [
+      "cambodian"
+    ],
+    "CHiNESE": [
+      "chinese",
+      {
+        "pattern": "ch[\\.\\-\\s]",
+        "notAfter": "\\d[\\.\\-\\s]?"
+      },
+      "ci",
+      "chi",
+      "chs",
+      "mandarin"
+    ],
+    "CREOLE": [
+      "creole"
+    ],
+    "DANiSH": [
+      "danish"
+    ],
+    "DUTCH": [
+      "dutch",
+      "nl(subs?)?"
+    ],
+    "ENGLiSH": [
+      "english",
+      "eng",
+      "en",
+      "voa"
+    ],
+    "ESTONiAN": [
+      "estonian"
+    ],
+    "FiLiPiNO": [
+      "filipino"
+    ],
+    "FiNNiSH": [
+      "finnish"
+    ],
+    "FLEMiSH": [
+      "flemish"
+    ],
+    "GERMAN": [
+      "german",
+      "ge"
+    ],
+    "GREEK": [
+      "greek"
+    ],
+    "HEBREW": [
+      "hebrew"
+    ],
+    "HiNDi": [
+      "hindi"
+    ],
+    "iNDONESiAN": [
+      "indonesian"
+    ],
+    "iRiSH": [
+      "irish"
+    ],
+    "iTALiAN": [
+      "italian",
+      "ita",
+      "it"
+    ],
+    "JAPANESE": [
+      "japanese",
+      "ja?p"
+    ],
+    "KOREAN": [
+      "korean",
+      "kor?(sub)?"
+    ],
+    "LAOTiAN": [
+      "laotian"
+    ],
+    "LATViAN": [
+      "latvian"
+    ],
+    "LiTHUANiAN": [
+      "lithuanian"
+    ],
+    "MALAY": [
+      "malay"
+    ],
+    "MALAYSiAN": [
+      "malaysian"
+    ],
+    "MAORi": [
+      "maori"
+    ],
+    "NORDiC": [
+      "nordic"
+    ],
+    "NORWEGiAN": [
+      "norwegian",
+      "no"
+    ],
+    "PASHTO": [
+      "pashto",
+      "pa"
+    ],
+    "POLiSH": [
+      "polish",
+      "po"
+    ],
+    "PORTUGUESE": [
+      "portuguese",
+      "pt"
+    ],
+    "ROMANiAN": [
+      "romanian",
+      "ro"
+    ],
+    "RUSSiAN": [
+      "russian",
+      "rus?"
+    ],
+    "SPANiSH": [
+      "spanish",
+      "e?sp",
+      "spa"
+    ],
+    "SWAHiLi": [
+      "swahili"
+    ],
+    "SLOVENiAN": [
+      "slovenian",
+      "slo(subs?)?"
+    ],
+    "SWEDiSH": [
+      "swedish",
+      "swe"
+    ],
+    "SWiSS": [
+      "swiss"
+    ],
+    "TAGALOG": [
+      "tagalog"
+    ],
+    "TAJiK": [
+      "tajik"
+    ],
+    "THAi": [
+      "thai"
+    ],
+    "TURKiSH": [
+      "turkish"
+    ],
+    "UKRAiNiAN": [
+      "ukrainian"
+    ],
+    "ViETNAMESE": [
+      "vietnamese"
+    ],
+    "WELSH": [
+      "welsh"
+    ],
+    "VO": [
+      "vo"
+    ]
+  },
+  "flags": {
+    "Atmos": [
+      "atmos"
+    ],
+    "8bit": [
+      "8[\\.\\-\\s]?b(its?)?",
+      "u?hdr8"
+    ],
+    "10bit": [
+      "10[\\.\\-\\s]?b(its?)?",
+      "u?hdr10"
+    ],
+    "2CH": [
+      "2[\\.\\-\\s]?ch"
+    ],
+    "3CH": [
+      "3[\\.\\-\\s]?ch"
+    ],
+    "4CH": [
+      "4[\\.\\-\\s]?ch"
+    ],
+    "5CH": [
+      "5[\\.\\-\\s]?ch"
+    ],
+    "6CH": [
+      "6[\\.\\-\\s]?ch"
+    ],
+    "HEVC": [
+      "hevc"
+    ],
+    "AV1": [
+      "av1"
+    ],
+    "HD1": [
+      "hd1"
+    ],
+    "PROPER": [
+      "proper"
+    ],
+    "COLLECTION": [
+      {
+        "pattern": "(la[\\.\\-\\s])?(the[\\.\\-\\s])?collec?tion",
+        "notAfter": "criterion[\\.\\-\\s]?"
+      },
+      "(la[\\.\\-\\s]saga|complete[\\.\\-\\s]saga|saga[\\.\\-\\s]complete)",
+      "coffret",
+      "(l')?int[ée]grale?",
+      "duologie",
+      "duology",
+      "trilogie",
+      "trilogy",
+      "quadrilogie",
+      "quadrilogy",
+      "pentalogie",
+      "pentalogy",
+      "hexalogie",
+      "hexalogy",
+      "octalogie",
+      "octalogy",
+      "heptalogie",
+      "heptalogy",
+      "nonalogie",
+      "nonalogy",
+      "decalogie",
+      "decalogy"
+    ],
+    "FASTSUB": [
+      "fastsub"
+    ],
+    "SUBFORCED": [
+      "subforced"
+    ],
+    "SUBBED": [
+      "subbed"
+    ],
+    "LiMiTED": [
+      "limited"
+    ],
+    "EXTENDED": [
+      "ex-?tended([\\.\\-\\s](edition|cut))?",
+      "ext",
+      "version[\\.\\-\\s]longue",
+      "vl",
+      "sp[ée]ciale?([\\.\\-\\s]\\w+)?[\\.\\-\\s](edition|cut)"
+    ],
+    "DC": [
+      "director[\\W\\s]?s?([\\.\\-\\s]Cut)?",
+      "(version[\\.\\-\\s])?d[\\.\\-\\s]?c",
+      "(alternate|alternative)[\\.\\-\\s]cut",
+      "final[\\.\\-\\s]cut"
+    ],
+    "THEATRiCAL": [
+      "theatrical"
+    ],
+    "WORKPRiNT": [
+      "workprint",
+      "wp"
+    ],
+    "BONUS": [
+      "bonus"
+    ],
+    "FANSUB": [
+      "fansub"
+    ],
+    "REPACK": [
+      "repack"
+    ],
+    "UNRATED": [
+      "unrated"
+    ],
+    "NFOFiX": [
+      "nfofix"
+    ],
+    "NTSC": [
+      "ntsc"
+    ],
+    "PAL": [
+      "pal"
+    ],
+    "iNTERNAL": [
+      "internal",
+      "int"
+    ],
+    "FESTiVAL": [
+      "festival"
+    ],
+    "STV": [
+      "stv"
+    ],
+    "RETAiL": [
+      "retails?"
+    ],
+    "REMASTERED": [
+      "remastered",
+      "remasteris[eé]e?",
+      "rm"
+    ],
+    "RATED": [
+      "rated"
+    ],
+    "CHRONO": [
+      "chrono"
+    ],
+    "UNCUT": [
+      "uncut"
+    ],
+    "UNCENSORED": [
+      "uncensored",
+      "(version[\\.\\-\\s])?non[\\.\\-\\s]censur[ée]e"
+    ],
+    "CUSTOM": [
+      "custom"
+    ],
+    "COMPLETE": [
+      "complete"
+    ],
+    "UNTOUCHED": [
+      "untouched"
+    ],
+    "AD": [
+      "ad",
+      "stsm",
+      "s[&\\.\\-\\s]m",
+      "sourds?[\\.\\-\\s](et)?[\\.\\-\\s]?malentendants?"
+    ],
+    "HDR": [
+      "hdr"
+    ],
+    "mHD": [
+      "mhd(?!$)",
+      "(hd|ultra)[\\.\\-\\s]?l(ight)?"
+    ],
+    "REMUX": [
+      "remux"
+    ],
+    "DUAL": [
+      "dual(?![\\.\\-\\s]audio)"
+    ],
+    "DKSUBS": [
+      "dksubs"
+    ],
+    "FiNAL": [
+      {
+        "pattern": "final(?![\\.\\-\\s]?(cut|edition))",
+        "notAfter": "version[\\.\\-\\s]"
+      }
+    ],
+    "COLORiZED": [
+      "colorized"
+    ],
+    "NB": [
+      "nb"
+    ],
+    "RESTORED": [
+      "restored",
+      "restaur[ée]e?"
+    ],
+    "WS": [
+      "ws"
+    ],
+    "DL": [
+      {
+        "pattern": "dl",
+        "notAfter": "web[\\.\\-\\s]?"
+      }
+    ],
+    "DOLBY-DIGITAL": [
+      "dolby[\\.\\s]?digital"
+    ],
+    "DOLBY-VISION": [
+      "dolby[\\.\\s]?vision"
+    ],
+    "Dolby": [
+      "dolby(?![\\.\\s]?(vision|digital))"
+    ],
+    "NETFLIX": [
+      "nf",
+      "netflix",
+      "netflixhd"
+    ],
+    "PCOK": [
+      "pcok"
+    ],
+    "ARTE": [
+      "arte"
+    ],
+    "AMZN": [
+      "amzn",
+      "amazon"
+    ],
+    "ATVP": [
+      "atvp"
+    ],
+    "DSNP": [
+      "dsnp",
+      "disney\\+"
+    ],
+    "HULU": [
+      "hulu"
+    ],
+    "HMAX": [
+      "hmax"
+    ],
+    "HBO": [
+      "hbo"
+    ],
+    "iTN": [
+      "itunes",
+      "itn"
+    ],
+    "VC": [
+      "vc(?![\\.\\-\\s]?\\d)"
+    ],
+    "SC": [
+      "sc"
+    ],
+    "AVC": [
+      "avc[\\.\\s]?(x26[45])?"
+    ],
+    "QEBS5": [
+      "qebs5"
+    ],
+    "DV": [
+      "dv"
+    ],
+    "DXVA": [
+      "dxva"
+    ],
+    "CEE": [
+      "cee"
+    ],
+    "DTS-HD": [
+      "dts[\\.\\-\\s]hd(?![\\.\\-\\s]?ma)"
+    ],
+    "DTS-MA": [
+      "dts[\\.\\-\\s]ma"
+    ],
+    "DTS-HDMA": [
+      "dts[\\.\\-\\s]hd[\\.\\-\\s]?ma"
+    ],
+    "DTS": [
+      "^(?!.*(dts[\\.\\-\\s]hd(?!china)|dts[\\.\\-\\s]ma|dts[\\.\\-\\s]hd[\\.\\-\\s]?ma)).*dts"
+    ],
+    "TrueHD": [
+      "true[\\.\\-\\s]?hd"
+    ],
+    "HSBS": [
+      "hsbs",
+      "half[\\.\\-\\s]?sbs"
+    ],
+    "HOU": [
+      "hou"
+    ],
+    "SDH": [
+      "SDH"
+    ],
+    "SBS": [
+      {
+        "pattern": "SBS",
+        "notAfter": "h(alf)?[\\.\\-\\s]?"
+      }
+    ],
+    "UHD": [
+      "UHD"
+    ],
+    "HC": [
+      "HC"
+    ],
+    "DOC": [
+      "doc"
+    ],
+    "PPV": [
+      "ppv"
+    ],
+    "RERiP": [
+      "re[\\-]?rip"
+    ],
+    "DD1.0": [
+      "dd[\\.\\-\\s]?1[\\.\\-\\s]?0"
+    ],
+    "DD2.0": [
+      "dd[\\.\\-\\s]?2[\\.\\-\\s]?0"
+    ],
+    "DD5.1": [
+      "dd[\\.\\-\\s]?5[\\.\\-\\s]?1"
+    ],
+    "DD7.1": [
+      "dd[\\.\\-\\s]?7[\\.\\-\\s]?1"
+    ],
+    "DDP1.0": [
+      "dd[p\\+][\\.\\-\\s]?1[\\.\\-\\s]?0"
+    ],
+    "DDP2.0": [
+      "dd[p\\+][\\.\\-\\s]?2[\\.\\-\\s]?0"
+    ],
+    "DDP5.1": [
+      "dd[p\\+][\\.\\-\\s]?5[\\.\\-\\s]?1"
+    ],
+    "DDP7.1": [
+      "dd[p\\+][\\.\\-\\s]?7[\\.\\-\\s]?1"
+    ],
+    "DDP": [
+      "^(?!.*(dd[p\\+][\\.\\-\\s]?5[\\.\\-\\s]?1|dd[p\\+][\\.\\-\\s]?2[\\.\\-\\s]?0|dd[p\\+][\\.\\-\\s]?1[\\.\\-\\s]?0)).*dd[p\\+]"
+    ],
+    "1.0": [
+      "^(?!.*(dd[\\.\\-\\s]?1[\\.\\-\\s]?0|dd[p\\+][\\.\\-\\s]?1[\\.\\-\\s]?0|(he-)?aac([\\.\\-\\s]?((v\\d+)|lc))?[\\.\\-\\s]?1[\\.\\-\\s]0|e?[\\.\\-\\s]?ac[\\.\\-\\s]?3[\\.\\-\\s]?1[\\.\\-\\s]0|opus[\\.\\-\\s]?1[\\.\\-\\s]0|flac[\\.\\-\\s]?1[\\.\\-\\s]0|l?pcm[\\.\\-\\s]?1[\\.\\-\\s]0)).*1[\\.\\-\\s]0"
+    ],
+    "2.0": [
+      "^(?!.*(dd[\\.\\-\\s]?2[\\.\\-\\s]?0|dd[p\\+][\\.\\-\\s]?2[\\.\\-\\s]?0|(he-)?aac([\\.\\-\\s]?((v\\d+)|lc))?[\\.\\-\\s]?2[\\.\\-\\s]0|e?[\\.\\-\\s]?ac[\\.\\-\\s]?3[\\.\\-\\s]?2[\\.\\-\\s]0|opus[\\.\\-\\s]?2[\\.\\-\\s]0|flac[\\.\\-\\s]?2[\\.\\-\\s]0|l?pcm[\\.\\-\\s]?2[\\.\\-\\s]0)).*2[\\.\\-\\s]0"
+    ],
+    "3.0": [
+      "^(?!.*(dd[\\.\\-\\s]?3[\\.\\-\\s]?0|dd[p\\+][\\.\\-\\s]?3[\\.\\-\\s]?0|(he-)?aac([\\.\\-\\s]?((v\\d+)|lc))?[\\.\\-\\s]?3[\\.\\-\\s]0|e?[\\.\\-\\s]?ac[\\.\\-\\s]?3[\\.\\-\\s]?3[\\.\\-\\s]0|opus[\\.\\-\\s]?3[\\.\\-\\s]0|flac[\\.\\-\\s]?3[\\.\\-\\s]0|l?pcm[\\.\\-\\s]?3[\\.\\-\\s]0)).*3[\\.\\-\\s]0"
+    ],
+    "5.1": [
+      "^(?!.*(dd[\\.\\-\\s]?5[\\.\\-\\s]?1|dd[p\\+][\\.\\-\\s]?5[\\.\\-\\s]?1|(he-)?aac([\\.\\-\\s]?((v\\d+)|lc))?[\\.\\-\\s]?5[\\.\\-\\s]1|e?[\\.\\-\\s]?ac[\\.\\-\\s]?3[\\.\\-\\s]?5[\\.\\-\\s]1|opus[\\.\\-\\s]?5[\\.\\-\\s]1|flac[\\.\\-\\s]?5[\\.\\-\\s]1|l?pcm[\\.\\-\\s]?5[\\.\\-\\s]1)).*5[\\.\\-\\s]1"
+    ],
+    "6.1": [
+      "^(?!.*(dd[\\.\\-\\s]?6[\\.\\-\\s]?1|dd[p\\+][\\.\\-\\s]?6[\\.\\-\\s]?1|(he-)?aac([\\.\\-\\s]?((v\\d+)|lc))?[\\.\\-\\s]?6[\\.\\-\\s]1|e?[\\.\\-\\s]?ac[\\.\\-\\s]?3[\\.\\-\\s]?6[\\.\\-\\s]1|opus[\\.\\-\\s]?6[\\.\\-\\s]1|flac[\\.\\-\\s]?6[\\.\\-\\s]1|l?pcm[\\.\\-\\s]?6[\\.\\-\\s]1)).*6[\\.\\-\\s]1"
+    ],
+    "7.1": [
+      "^(?!.*(dd[\\.\\-\\s]?7[\\.\\-\\s]?1|dd[p\\+][\\.\\-\\s]?7[\\.\\-\\s]?1|(he-)?aac([\\.\\-\\s]?((v\\d+)|lc))?[\\.\\-\\s]?7[\\.\\-\\s]1|e?[\\.\\-\\s]?ac[\\.\\-\\s]?3[\\.\\-\\s]?7[\\.\\-\\s]1|opus[\\.\\-\\s]?7[\\.\\-\\s]1|flac[\\.\\-\\s]?7[\\.\\-\\s]1|l?pcm[\\.\\-\\s]?7[\\.\\-\\s]1)).*7[\\.\\-\\s]1"
+    ],
+    "LD": [
+      "ld",
+      "licro[\\-]?dubbed"
+    ],
+    "MD": [
+      "md",
+      "micro[\\-]?dubbed"
+    ],
+    "MONO": [
+      "mono"
+    ],
+    "STEREO": [
+      "stereo"
+    ],
+    "READNFO": [
+      "read[\\.\\-]?nfo"
+    ],
+    "DiRFiX": [
+      "dir[\\.\\-]?fix"
+    ],
+    "FiXED": [
+      "fixed"
+    ],
+    "CRITERION": [
+      "crit(erion)?([\\.\\-\\s]?edition)?([\\.\\-\\s]?collection)?"
+    ],
+    "iMAX": [
+      "imax"
+    ],
+    "3D": [
+      "3d"
+    ]
+  },
+  "erase": [
+    "\\[.*?torrent.*?\\]"
+  ],
+  "ambiguous": {
+    "flags": [
+      "AD",
+      "DOC",
+      "DUAL",
+      "FESTiVAL",
+      "FiNAL",
+      "LiMiTED",
+      "FiXED",
+      "MONO",
+      "STEREO",
+      "UNTOUCHED",
+      "COMPLETE",
+      "THEATRiCAL",
+      "BONUS",
+      "CHRONO"
+    ],
+    "patterns": [
+      "english",
+      "francais",
+      "français",
+      "cambodian",
+      "chinese",
+      "danish",
+      "dutch",
+      "estonian",
+      "filipino",
+      "finnish",
+      "flemish",
+      "german",
+      "greek",
+      "hebrew",
+      "indonesian",
+      "irish",
+      "italian",
+      "japanese",
+      "korean",
+      "laotian",
+      "latvian",
+      "lithuanian",
+      "malay",
+      "malaysian",
+      "maori",
+      "norwegian",
+      "pashto",
+      "polish",
+      "portuguese",
+      "romanian",
+      "russian",
+      "spanish",
+      "swahili",
+      "swedish",
+      "swiss",
+      "tagalog",
+      "tajik",
+      "thai",
+      "turkish",
+      "ukrainian",
+      "vietnamese",
+      "welsh",
+      "it",
+      "ru",
+      "ge",
+      "en",
+      "no",
+      "ro",
+      "pt",
+      "po",
+      "fr",
+      "jp",
+      "kor",
+      "zh",
+      "ch",
+      "fi",
+      "da",
+      "nl",
+      "et",
+      "tl",
+      "ms",
+      "ml",
+      "ja",
+      "chi"
+    ]
+  },
+  "title": {
+    "uppercase": [
+      "3D",
+      "XXL",
+      "USA",
+      "UK",
+      "NATO",
+      "OTAN",
+      "FBI",
+      "CIA",
+      "SWAT",
+      "NYPD",
+      "UFO",
+      "OVNI",
+      "OK",
+      "TV",
+      "NASA",
+      "WWII",
+      "WWI",
+      "VIP",
+      "ASAP",
+      "DIY",
+      "FAQ",
+      "SOS",
+      "RIP",
+      "AKA",
+      "POV",
+      "PS",
+      "AM",
+      "PM",
+      "BC",
+      "IQ",
+      "QI",
+      "CEO",
+      "HR",
+      "PR",
+      "RSVP",
+      "ETA",
+      "FYI",
+      "ID",
+      "PIN",
+      "ATM",
+      "GPS",
+      "ADN",
+      "DNA",
+      "LGBT",
+      "LGBTQ",
+      "LGBTQIA",
+      "PDG",
+      "RH",
+      "RP",
+      "VHS",
+      "LOL",
+      "MDR",
+      "JFK",
+      "JCVD",
+      "BDE",
+      "WWE",
+      "HLM",
+      "H2G2",
+      "UFC",
+      "LSD",
+      "MDMA",
+      "MMA",
+      "RPG",
+      "R2D2",
+      "C3PO",
+      "BB8",
+      "TBA",
+      "TBC",
+      "BBC",
+      "TNT",
+      "VOD",
+      "BFG",
+      "BFF",
+      "NIMH"
+    ],
+    "leadingFlags": [
+      "COLLECTION",
+      "VC"
+    ],
+    "franchises": [
+      "Hitchcock",
+      "James Bond 007",
+      "007",
+      "James Bond"
+    ],
+    "leadingYears": [
+      {
+        "year": "2001",
+        "contains": "a space odyssey",
+        "release": "1968"
+      }
+    ]
+  },
+  "stringify": {
+    "dubRelated": [
+      "DOLBY-VISION",
+      "DD1.0",
+      "DD2.0",
+      "DD5.1",
+      "DD7.1",
+      "DDP2.0",
+      "DDP5.1",
+      "DDP7.1",
+      "DTS-HD",
+      "DTS-MA",
+      "DTS-HDMA",
+      "DTS",
+      "Dolby",
+      "Atmos",
+      "TrueHD",
+      "AVC",
+      "DV"
+    ],
+    "afterTitle": [
+      "3D",
+      "HSBS",
+      "HOU",
+      "COLLECTION"
+    ],
+    "afterYear": [
+      "FiNAL",
+      "UNTOUCHED",
+      "RESTORED",
+      "READNFO",
+      "DiRFiX",
+      "FiXED",
+      "CRITERION",
+      "VC",
+      "SC",
+      "DC",
+      "EXTENDED",
+      "THEATRiCAL",
+      "BONUS",
+      "DKSUBS",
+      "PPV",
+      "PROPER",
+      "REPACK",
+      "RERiP",
+      "CUSTOM",
+      "LiMiTED",
+      "DOC",
+      "NB",
+      "DUAL",
+      "COMPLETE",
+      "FASTSUB",
+      "FANSUB",
+      "UNRATED",
+      "iNTERNAL",
+      "FESTiVAL",
+      "STV",
+      "REMASTERED",
+      "RATED",
+      "UNCUT",
+      "UNCENSORED"
+    ],
+    "afterLanguage": [
+      "AD",
+      "LD",
+      "MD",
+      "DL",
+      "SUBFORCED",
+      "SUBBED",
+      "WORKPRiNT",
+      "iMAX"
+    ],
+    "afterResolution": [
+      "NETFLIX",
+      "AMZN",
+      "ATVP",
+      "DSNP",
+      "HMAX",
+      "HBO",
+      "HULU",
+      "iTN",
+      "ARTE",
+      "PCOK",
+      "10bit",
+      "8bit",
+      "UHD",
+      "HC",
+      "NTSC",
+      "PAL",
+      "QEBS5"
+    ],
+    "afterSource": [
+      "REMUX",
+      "CEE",
+      "SBS",
+      "HDR",
+      "mHD",
+      "2CH",
+      "3CH",
+      "4CH",
+      "5CH",
+      "6CH",
+      "DOLBY-VISION",
+      "DD1.0",
+      "DD2.0",
+      "DD5.1",
+      "DD7.1",
+      "DDP2.0",
+      "DDP5.1",
+      "DDP7.1",
+      "DTS-HD",
+      "DTS-MA",
+      "DTS-HDMA",
+      "DTS",
+      "Dolby",
+      "Atmos",
+      "TrueHD",
+      "AVC",
+      "DV",
+      {
+        "flag": "1.0",
+        "dubRelated": true
+      },
+      {
+        "flag": "3.0",
+        "dubRelated": true
+      },
+      {
+        "flag": "2.0",
+        "dubRelated": true
+      },
+      {
+        "flag": "6.1",
+        "dubRelated": true
+      },
+      {
+        "flag": "5.1",
+        "dubRelated": true
+      },
+      {
+        "flag": "7.1",
+        "dubRelated": true
+      }
+    ],
+    "afterEncoding": [
+      "HEVC",
+      "AV1"
+    ],
+    "afterDub": [
+      "DDP",
+      "MONO",
+      {
+        "flag": "1.0",
+        "dubRelated": false
+      },
+      {
+        "flag": "3.0",
+        "dubRelated": false
+      },
+      {
+        "flag": "2.0",
+        "dubRelated": false
+      },
+      {
+        "flag": "6.1",
+        "dubRelated": false
+      },
+      {
+        "flag": "5.1",
+        "dubRelated": false
+      },
+      {
+        "flag": "7.1",
+        "dubRelated": false
+      }
+    ]
+  },
+  "extensions": [
+    "avi",
+    "mp4",
+    "mpeg4",
+    "mkv",
+    "ts",
+    "m2ts",
+    "mov",
+    "wmv",
+    "flv",
+    "webm",
+    "m4v"
+  ]
+}
