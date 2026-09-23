@@ -433,7 +433,7 @@ export interface Oleoo {
    * @param options - Optional configuration, primarily the `flagged` option to control flag inclusion.
    * @returns A standardized filename string.
    */
-  stringify: (payload: OleooPayload, options?: Pick<OleooOptions, 'flagged'>) => string
+  stringify: (payload: OleooResult | OleooPayload, options?: Pick<OleooOptions, 'flagged'>) => string
 
   /**
    * The rules object containing all patterns used for parsing.
