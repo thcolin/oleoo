@@ -121,7 +121,8 @@ pub enum Error {
     /// `strict` is set and the name has no source, encoding, resolution nor dub.
     Strict(String),
     /// An episode range of more than 9 999 episodes.
-    EpisodeRange(u64, u64),
+    /// The first and last episodes as the name writes them.
+    EpisodeRange(String, String),
     /// A name longer than 1024 characters, counted in UTF-16 code units.
     InputLength(usize),
 }
@@ -366,7 +367,10 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
             let (from, to) = (number(group(&range, 1)), number(group(&range, 2)));
 
             if to >= from && to - from >= 9_999 {
-                return Err(Error::EpisodeRange(from, to));
+                return Err(Error::EpisodeRange(
+                    group(&range, 1).to_owned(),
+                    group(&range, 2).to_owned(),
+                ));
             }
 
             release.episodes = (from..=to).map(Episode::Number).collect();
