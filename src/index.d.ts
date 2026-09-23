@@ -263,17 +263,13 @@ export type FlagType =
   | 'iMAX'
 
 /** Structure defining the patterns for a specific rule category (like source, encoding, etc.). */
-export interface RulePatterns<T> {
+export type RulePatterns<T extends string> = {
   /** A map where keys are the standardized type names (e.g., "BLURAY") and values are arrays of regex patterns (as strings). */
   [key in T]: string[]
 }
 
 /** Structure defining the patterns for flags. */
-export interface FlagPatterns {
-  /** A map where keys are the standardized flag names (e.g., "PROPER") and values are arrays of regex patterns (as strings). */
-  // [key: string]: string[] // Use string index signature for broader compatibility in .d.ts
-  [key in FlagType]: string[]
-}
+export type FlagPatterns = RulePatterns<FlagType>
 
 /** Structure defining the patterns for erasing parts of the filename. */
 export type ErasePatterns = string[]
