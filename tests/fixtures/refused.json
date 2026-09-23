@@ -660,35 +660,6 @@
     "score": 6,
     "comment": "MA tag should be parsed"
   },
-  "Furiosa.A.Mad.Max.Saga.2024.MULTI.VF2.1080p.10bit.WEBRip.6CH.x265.HEVC-SERQPH.mkv": {
-    "original": "Furiosa.A.Mad.Max.Saga.2024.MULTI.VF2.1080p.10bit.WEBRip.6CH.x265.HEVC-SERQPH",
-    "language": "MULTi-VF2",
-    "languages": [
-      "MULTi",
-      "TRUEFRENCH",
-      "FRENCH"
-    ],
-    "source": "WEB-DL",
-    "encoding": "x265",
-    "resolution": "1080p",
-    "dub": null,
-    "year": "2024",
-    "flags": [
-      "10bit",
-      "6CH",
-      "HEVC",
-      "COLLECTION"
-    ],
-    "season": null,
-    "episode": null,
-    "episodes": [],
-    "type": "movie",
-    "group": "SERQPH",
-    "title": "Furiosa A Mad Max",
-    "generated": "Furiosa.A.Mad.Max.COLLECTION.2024.MULTi-VF2.1080p.10bit.WEB-DL.6CH.x265.HEVC-SERQPH",
-    "score": 7,
-    "comment": "Saga wrongly parsed as a tag while it's in the title"
-  },
   "Frontiere(s) UNCUT (2007) TrueFrench AC3 BluRay 1080p x264.GHT.mkv": {
     "original": "Frontiere(s) UNCUT (2007) TrueFrench AC3 BluRay 1080p x264.GHT",
     "language": "TRUEFRENCH",
@@ -788,31 +759,6 @@
     "generated": "Fete.De.Famille.2019.TRUEFRENCH.1080p.WEB-DL.x264.AC3-5.1-k0r7o",
     "score": 7,
     "comment": "Dub should be parsed as an array"
-  },
-  "F9.The.Fast.Saga.2021.DIRFIX.MULTi.1080p.WEB.H264-LOST.mkv": {
-    "original": "F9.The.Fast.Saga.2021.DIRFIX.MULTi.1080p.WEB.H264-LOST",
-    "language": "MULTi",
-    "languages": [
-      "MULTi"
-    ],
-    "source": "WEB-DL",
-    "encoding": "h264",
-    "resolution": "1080p",
-    "dub": null,
-    "year": "2021",
-    "flags": [
-      "COLLECTION",
-      "DiRFiX"
-    ],
-    "season": null,
-    "episode": null,
-    "episodes": [],
-    "type": "movie",
-    "group": "LOST",
-    "title": "F9 The Fast",
-    "generated": "F9.The.Fast.COLLECTION.2021.DiRFiX.MULTi.1080p.WEB-DL.h264-LOST",
-    "score": 7,
-    "comment": "Saga parsed while it should stay in title"
   },
   "Dr. Strangelove-Dr. Folamour.1964.Multi.1080p.mHD.Subs.x264.AC3 5.1-touriste.mkv": {
     "original": "Dr. Strangelove-Dr. Folamour.1964.Multi.1080p.mHD.Subs.x264.AC3 5.1-touriste",
