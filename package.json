@@ -10,6 +10,7 @@
   "type": "module",
   "scripts": {
     "build": "esbuild src/index.js --bundle --format=esm --platform=neutral --outfile=dist/index.js && cp src/index.d.ts dist/index.d.ts",
+    "prepack": "npm run build",
     "test": "node ./tests/check.js && npm run build && node ./tests/check.js ./dist/index.js",
     "fixtures": "node ./tests/index.js",
     "debug": "node ./tests/debug.js"
