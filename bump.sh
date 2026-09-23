@@ -1,4 +1,4 @@
-#!env bash
+#!/usr/bin/env bash
 set -e
 
 [[ '' == $1 ]] && echo "Please provide version argument: x.x.x" && exit 1
