@@ -132525,9 +132525,7 @@
     "resolution": "720p",
     "dub": null,
     "year": null,
-    "flags": [
-      null
-    ],
+    "flags": [],
     "season": 2,
     "episode": null,
     "episodes": [],
@@ -132680,8 +132678,7 @@
     "year": "2018",
     "flags": [
       "NETFLIX",
-      "DDP5.1",
-      null
+      "DDP5.1"
     ],
     "season": 1,
     "episode": null,
@@ -132702,8 +132699,7 @@
     "dub": null,
     "year": null,
     "flags": [
-      "AMZN",
-      null
+      "AMZN"
     ],
     "season": 2,
     "episode": null,
@@ -132939,9 +132935,7 @@
     "resolution": null,
     "dub": null,
     "year": null,
-    "flags": [
-      null
-    ],
+    "flags": [],
     "season": 2,
     "episode": null,
     "episodes": [],
@@ -132960,9 +132954,7 @@
     "resolution": "720p",
     "dub": null,
     "year": null,
-    "flags": [
-      null
-    ],
+    "flags": [],
     "season": 17,
     "episode": null,
     "episodes": [],
@@ -144744,9 +144736,7 @@
     "resolution": null,
     "dub": null,
     "year": null,
-    "flags": [
-      null
-    ],
+    "flags": [],
     "season": 1,
     "episode": null,
     "episodes": [],
@@ -144808,8 +144798,7 @@
     "dub": null,
     "year": null,
     "flags": [
-      "AMZN",
-      null
+      "AMZN"
     ],
     "season": 23,
     "episode": null,
