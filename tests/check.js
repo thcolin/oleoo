@@ -10,9 +10,17 @@ const names = [...new Set(fixture('releases.txt').split(/\r?\n/).filter(Boolean)
 const accepted = JSON.parse(fixture('accepted.json'))
 const refused = JSON.parse(fixture('refused.json'))
 
-const fields = (expected, actual) => [...new Set([...Object.keys(expected), ...Object.keys(actual)])]
-  .filter(key => JSON.stringify(expected[key]) !== JSON.stringify(actual[key]))
-  .map(key => `    ${key}: ${JSON.stringify(expected[key])} -> ${JSON.stringify(actual[key])}`)
+const fields = (expected, actual) => {
+  if (JSON.stringify(expected) === JSON.stringify(actual)) {
+    return []
+  }
+
+  const lines = [...new Set([...Object.keys(expected), ...Object.keys(actual)])]
+    .filter(key => JSON.stringify(expected[key]) !== JSON.stringify(actual[key]))
+    .map(key => `    ${key}: ${JSON.stringify(expected[key])} -> ${JSON.stringify(actual[key])}`)
+
+  return lines.length ? lines : ['    key order changed']
+}
 
 const failures = []
 
@@ -32,5 +40,5 @@ for (const name of names) {
 }
 
 failures.forEach(failure => console.log(failure + '\n'))
-console.log(`${names.length} releases, ${Object.keys(accepted).length} accepted, ${Object.keys(refused).length} refused, ${failures.length} changed`)
+console.log(`${names.length} releases, ${Object.keys(accepted).length} accepted, ${Object.keys(refused).length} refused, ${failures.length} to review`)
 process.exit(failures.length ? 1 : 0)
