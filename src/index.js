@@ -476,7 +476,7 @@ const stringify = (payload, options = {}) => {
 const parse = (raw = '', options = {}) => {
   const { strict = false, flagged = true, erase = [], defaults = {} } = options
   const input = [...(erase || []), ...rules.erase]
-    .reduce((input, regexp) => input.replace(new RegExp(`[\.\-]*?${regexp.replace(/\\\\/g, '\\')}[\.\-]*?`, 'ig'), ''), raw)
+    .reduce((input, regexp) => input.replace(new RegExp(`[\.\-]*?${typeof regexp === 'string' ? regexp.replace(/\\\\/g, '\\') : regexp.source}[\.\-]*?`, 'ig' + (typeof regexp === 'string' ? '' : regexp.flags.replace(/[igy]/g, ''))), ''), raw)
     .replace(/\.(avi|mp4|mpeg4|mkv|ts|m2ts|mov|wmv|flv|webm|m4v)(\W.*)?$/i, '')
     .trim()
 
