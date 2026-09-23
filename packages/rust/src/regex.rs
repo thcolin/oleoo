@@ -17,7 +17,6 @@ pub fn is_space(c: char) -> bool {
     matches!(c, '\t'..='\r' | ' ' | '\u{A0}' | '\u{1680}' | '\u{2000}'..='\u{200A}' | '\u{2028}' | '\u{2029}' | '\u{202F}' | '\u{205F}' | '\u{3000}' | '\u{FEFF}')
 }
 
-/// Compiles a pattern of the dialect SPEC.md describes, once.
 pub fn regex(pattern: &str, insensitive: bool) -> Result<Arc<Regex>, Error> {
     let source = if insensitive {
         format!("(?i){}", translate(pattern))
