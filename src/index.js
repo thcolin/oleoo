@@ -95,7 +95,7 @@ const rules = {
     'MULTi': ['multi?(\\d+)?', 'vf2', 'fr[\\.\\-\\s]en', 'en[\\.\\-\\s]fr', 'mlv', '(dual|2)[\\.\\-\\s]?audio', 'multilang'],
     'VFQ': ['vfq', 'vq', 'ca'],
     'TRUEFRENCH': ['truefrench', '(french[\\.\\-\\s]?)?vff', 'vf2', 'vof'],
-    'FRENCH': ['(?<!(vof|true|sub|vff)[\\.\\-\\s]?)french(?![\\.\\-\\s](vof|vff))', 'francais', 'français', '(?<!(s(rt|tr?)|vo|sub|vff)[\\.\\-\\s]?)fra?(?![\\.\\-\\s]s(tr|rt)|vff)', 'vf(?!f)', 'vfi', 'vf2', 'vof(st(fr)?)'],
+    'FRENCH': [{ pattern: 'french(?![\\.\\-\\s](vof|vff))', notAfter: '(vof|true|sub|vff)[\\.\\-\\s]?' }, 'francais', 'français', { pattern: 'fra?(?![\\.\\-\\s]s(tr|rt)|vff)', notAfter: '(s(rt|tr?)|vo|sub|vff)[\\.\\-\\s]?' }, 'vf(?!f)', 'vfi', 'vf2', 'vof(st(fr)?)'],
     'VOSTFR': ['s(rt|tr?)[\\.\\-\\s]?fr', 'fr[\\.\\-\\s]?s(rt|tr?)', 'vo(?!f)(\\w*)stfr', 'vo(?!f)(\\w*)str', 'vo(?!f)(\\w*)stf', 'vo(?!f)(\\w*)st', 'stfr', 'subfr(ench)?'],
     'VOSTA': ['vo(?!f)(\\w*)sta', 'vo(?!f)(\\w*)sten', 'e[\\.\\-\\s]?subs?'],
     'VOST': ['multi(\\d+)?[\\.\\-\\s]?subs?'],
@@ -103,7 +103,7 @@ const rules = {
     'AMHARiC': ['amharic'],
     'ARABiC': ['arabic'],
     'CAMBODiAN': ['cambodian'],
-    'CHiNESE': ['chinese', '(?<!\\d[\\.\\-\\s]?)ch[\\.\\-\\s]', 'ci', 'chi', 'chs', 'mandarin'],
+    'CHiNESE': ['chinese', { pattern: 'ch[\\.\\-\\s]', notAfter: '\\d[\\.\\-\\s]?' }, 'ci', 'chi', 'chs', 'mandarin'],
     'CREOLE': ['creole'],
     'DANiSH': ['danish'],
     'DUTCH': ['dutch', 'nl(subs?)?'],
@@ -162,7 +162,7 @@ const rules = {
     'HD1': ['hd1'],
     'PROPER': ['proper'],
     'COLLECTION': [
-      '(?<!criterion[\\.\\-\\s]?)(la[\\.\\-\\s])?(the[\\.\\-\\s])?collec?tion',
+      { pattern: '(la[\\.\\-\\s])?(the[\\.\\-\\s])?collec?tion', notAfter: 'criterion[\\.\\-\\s]?' },
       '(la[\\.\\-\\s]saga|complete[\\.\\-\\s]saga|saga[\\.\\-\\s]complete)',
       'coffret',
       '(l\')?int[ée]grale?',
@@ -218,12 +218,12 @@ const rules = {
     'REMUX': ['remux'],
     'DUAL': ['dual(?![\\.\\-\\s]audio)'],
     'DKSUBS': ['dksubs'],
-    'FiNAL': ['(?<!version[\\.\\-\\s])final(?![\\.\\-\\s]?(cut|edition))'],
+    'FiNAL': [{ pattern: 'final(?![\\.\\-\\s]?(cut|edition))', notAfter: 'version[\\.\\-\\s]' }],
     'COLORiZED': ['colorized'],
     'NB': ['nb'], // Noir et Blanc
     'RESTORED': ['restored', 'restaur[ée]e?'],
     'WS': ['ws'],
-    'DL': ['(?<!web[\\.\\-\\s]?)dl'],
+    'DL': [{ pattern: 'dl', notAfter: 'web[\\.\\-\\s]?' }],
     'DOLBY-DIGITAL': ['dolby[\\.\\s]?digital'],
     'DOLBY-VISION': ['dolby[\\.\\s]?vision'],
     'Dolby': ['dolby(?![\\.\\s]?(vision|digital))'],
@@ -252,7 +252,7 @@ const rules = {
     'HSBS': ['hsbs', 'half[\\.\\-\\s]?sbs'],
     'HOU': ['hou'],
     'SDH': ['SDH'],
-    'SBS': ['(?<!h(alf)?[\\.\\-\\s]?)SBS'],
+    'SBS': [{ pattern: 'SBS', notAfter: 'h(alf)?[\\.\\-\\s]?' }],
     'UHD': ['UHD'],
     'HC': ['HC'],
     'DOC': ['doc'],
@@ -433,6 +433,23 @@ const AFTER_DUB_FLAGS = [
   (payload) => !DUB_RELATED_FLAGS.some(flag => payload.flags.includes(flag)) && payload.flags.includes('7.1') && '7.1',
 ]
 
+// A rule is a pattern, or { pattern, notAfter } when the match must not follow notAfter: it stands in for a lookbehind.
+const find = (string, before, rule, after) => {
+  const { pattern, notAfter } = typeof rule === 'string' ? { pattern: rule } : rule
+  const regexp = new RegExp('(' + before + ')' + pattern + after, 'ig')
+  let match
+
+  while (match = regexp.exec(string)) {
+    if (!notAfter || !new RegExp('(?:' + notAfter + ')$', 'i').test(string.slice(0, match.index + match[1].length))) {
+      return match
+    }
+
+    regexp.lastIndex = match.index + 1
+  }
+
+  return null
+}
+
 const stringify = (payload, options = {}) => {
   const { flagged = true } = options
 
@@ -548,7 +565,7 @@ const parse = (raw = '', options = {}) => {
     if ((match.index + match[0].length) > groupStartPosition) {
       groupStartPosition = match.index + match[0].length
     }
-  } else if ((matches = [...input.matchAll(/(?<!\d{2}[_\W]\d{2})[_\W](\d{4})(?![_\W]\d{2}[_\W]\d{2})/g)].filter(y => Number(y[1]) > 1900 && Number(y[1]) < (new Date().getFullYear() + 5))).length) {
+  } else if ((matches = [...input.matchAll(/[_\W](\d{4})(?![_\W]\d{2}[_\W]\d{2})/g)].filter(y => !/\d{2}[_\W]\d{2}$/.test(input.slice(0, y.index)) && Number(y[1]) > 1900 && Number(y[1]) < (new Date().getFullYear() + 5))).length) {
     const match = matches.pop()
     payload.year = match[1]
     payload.score += 1
@@ -566,7 +583,7 @@ const parse = (raw = '', options = {}) => {
   for (property of ['source', 'encoding', 'resolution', 'dub']) {
     for ([key, patterns] of Object.entries(rules[property])) {
       for (pattern of patterns) {
-        if (match = input.match(new RegExp('[_\\W]' + pattern + (property === 'dub' ? '([\\.\\-\\s]?\\@?\\d+(kbps)?)?' : '') + '([_\\W]|$)', 'i'))) {
+        if (match = find(input, '[_\\W]', pattern, (property === 'dub' ? '([\\.\\-\\s]?\\@?\\d+(kbps)?)?' : '') + '([_\\W]|$)')) {
           payload.score += payload[property] ? 0 : 1
           payload[property] = key
           payload.valid = true
@@ -593,12 +610,12 @@ const parse = (raw = '', options = {}) => {
 
     for (pattern of patterns) {
       try {
-        if (match = input.match(new RegExp((pattern.startsWith('^') ? pattern : '[_\\W]' + pattern) + '([_\\W]|$)', 'i'))) {
+        if (match = find(input, typeof pattern === 'string' && pattern.startsWith('^') ? '' : '[_\\W]', pattern, '([_\\W]|$)')) {
           if (!payload.flags.includes(key)) {
             payload.flags.push(key)
           }
   
-          if (!pattern.startsWith('^') && match.index < titleEndPosition) {
+          if (!(typeof pattern === 'string' && pattern.startsWith('^')) && match.index < titleEndPosition) {
             titleEndPosition = match.index
           }
   
@@ -607,7 +624,7 @@ const parse = (raw = '', options = {}) => {
           }
   
           break
-        } else if (['COLLECTION', 'VC'].includes(key) && (match = input.match(new RegExp('^' + pattern + '([_\\W]|$)', 'i')))) {
+        } else if (['COLLECTION', 'VC'].includes(key) && (match = find(input, '^', pattern, '([_\\W]|$)'))) {
           if (!payload.flags.includes(key)) {
             payload.flags.push(key)
           }
@@ -623,7 +640,7 @@ const parse = (raw = '', options = {}) => {
   // payload.languages
   for ([key, patterns] of Object.entries(rules.language)) {
     for (pattern of patterns) {
-      if (match = input.slice(titleEndPosition === input.length ? 0 : titleEndPosition).match(new RegExp('[_\\W]' + pattern + '([_\\W]|$)', 'i'))) {
+      if (match = find(input.slice(titleEndPosition === input.length ? 0 : titleEndPosition), '[_\\W]', pattern, '([_\\W]|$)')) {
         payload.languages.push(key)
 
         if ((titleEndPosition + match.index + match[0].length) > groupStartPosition) {
@@ -638,7 +655,7 @@ const parse = (raw = '', options = {}) => {
   if (!payload.languages.length) {
     for ([key, patterns] of Object.entries(rules.language)) {
       for (pattern of patterns) {
-        if (match = input.match(new RegExp('[_\\W]' + pattern + '([_\\W]|$)', 'i'))) {
+        if (match = find(input, '[_\\W]', pattern, '([_\\W]|$)')) {
           if (AMBIGUOUS_PATTERNS.includes(pattern) && (match.index + match[0].length) < titleEndPosition) {
             break
           }
@@ -667,9 +684,9 @@ const parse = (raw = '', options = {}) => {
 
     for (pattern of patterns) {
       try {
-        if (match = input.match(new RegExp((pattern.startsWith('^') ? pattern : '[_\\W]' + pattern) + '([_\\W]|$)', 'i'))) {
+        if (match = find(input, typeof pattern === 'string' && pattern.startsWith('^') ? '' : '[_\\W]', pattern, '([_\\W]|$)')) {
           if (
-            !pattern.startsWith('^') &&
+            !(typeof pattern === 'string' && pattern.startsWith('^')) &&
             match.index < titleEndPosition &&
             (match.index + match[0].length) <= (titleEndPosition + 1) &&
             !(new RegExp(key).test(match[0]))
@@ -681,7 +698,7 @@ const parse = (raw = '', options = {}) => {
             payload.flags.push(key)
           }
   
-          if (!pattern.startsWith('^') && match.index < titleEndPosition) {
+          if (!(typeof pattern === 'string' && pattern.startsWith('^')) && match.index < titleEndPosition) {
             titleEndPosition = match.index
           }
   
@@ -690,7 +707,7 @@ const parse = (raw = '', options = {}) => {
           }
   
           break
-        } else if (['COLLECTION', 'VC'].includes(key) && (match = input.match(new RegExp('^' + pattern + '([_\\W]|$)', 'i')))) {
+        } else if (['COLLECTION', 'VC'].includes(key) && (match = find(input, '^', pattern, '([_\\W]|$)'))) {
           if (!payload.flags.includes(key)) {
             payload.flags.push(key)
           }

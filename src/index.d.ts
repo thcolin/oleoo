@@ -262,10 +262,16 @@ export type FlagType =
   | 'CRITERION'
   | 'iMAX'
 
+/**
+ * A regex pattern (as a string), or a pattern whose match must not follow `notAfter`.
+ * `notAfter` stands in for a lookbehind, which the rules do not use so that other regex engines can read them.
+ */
+export type RulePattern = string | { pattern: string; notAfter: string }
+
 /** Structure defining the patterns for a specific rule category (like source, encoding, etc.). */
 export type RulePatterns<T extends string> = {
-  /** A map where keys are the standardized type names (e.g., "BLURAY") and values are arrays of regex patterns (as strings). */
-  [key in T]: string[]
+  /** A map where keys are the standardized type names (e.g., "BLURAY") and values are arrays of regex patterns. */
+  [key in T]: RulePattern[]
 }
 
 /** Structure defining the patterns for flags. */
