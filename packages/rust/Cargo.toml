@@ -6,7 +6,8 @@ description = "Scene/P2P/Warez release name parser"
 license = "MIT"
 repository = "https://github.com/thcolin/oleoo"
 readme = "../../README.md"
-publish = false
+keywords = ["release", "scene", "parser", "torrent", "warez"]
+categories = ["parser-implementations"]
 
 [dependencies]
 fancy-regex = "0.19.2"
