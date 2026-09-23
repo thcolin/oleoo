@@ -160,6 +160,12 @@ func TestOptions(t *testing.T) {
 	if _, err := Parse(strings.Repeat("a", 1025)); err == nil || err.Error() != "name of 1025 characters: more than 1024 characters" {
 		t.Errorf("a name of 1025 characters gives %v", err)
 	}
+	if _, err := Parse("Show.S01E001-10000.720p", CurrentYear(2026)); err == nil || err.Error() != "episodes 001 to 10000: more than 9999 episodes" {
+		t.Errorf("an episode range of 10000 episodes gives %v", err)
+	}
+	if _, err := Parse(strings.Repeat("🎬", 512) + "a"); err == nil || err.Error() != "name of 1025 characters: more than 1024 characters" {
+		t.Errorf("a name of 1025 UTF-16 code units gives %v", err)
+	}
 	if _, err := Parse(strings.Repeat("a", 1024), CurrentYear(2026)); err != nil {
 		t.Errorf("a name of 1024 characters gives %v", err)
 	}
