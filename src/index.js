@@ -433,11 +433,13 @@ const AFTER_DUB_FLAGS = [
   (payload) => !DUB_RELATED_FLAGS.some(flag => payload.flags.includes(flag)) && payload.flags.includes('7.1') && '7.1',
 ]
 
-const stringify = (payload, options) => {
+const stringify = (payload, options = {}) => {
+  const { flagged = true } = options
+
   const output = [
     payload.title.replace(/\s+/g, '.'),
     // ...(payload.alternativeTitle ? [`(${payload.alternativeTitle.replace(/\s+/g, '.')})`] : []),
-    ...(options.flagged ? AFTER_TITLE_FLAGS : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : flag(payload)) || ''),
+    ...(flagged ? AFTER_TITLE_FLAGS : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : flag(payload)) || ''),
     ...(payload.year ? [payload.year] : []),
     ...((payload.season || (payload.episodes && payload.episodes.length)) ? [
       [
@@ -445,18 +447,18 @@ const stringify = (payload, options) => {
         ...(payload.episodes && payload.episodes.length ? [`${payload.episodes.every(e => /^\d+$/.test(e)) ? 'E' : ''}${payload.episodes.map(episode => `${episode}`.padStart(2, '0')).join(payload.episodes.every(e => /^\d+$/.test(e)) ? '-E' : '-')}`] : []),
       ].join(''),
     ] : []),
-    ...(options.flagged ? AFTER_YEAR_FLAGS : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : flag(payload)) || ''),
+    ...(flagged ? AFTER_YEAR_FLAGS : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : flag(payload)) || ''),
     ...(payload.language ? [payload.language] : []),
-    ...(options.flagged ? AFTER_LANGUAGE_FLAGS : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : flag(payload)) || ''),
+    ...(flagged ? AFTER_LANGUAGE_FLAGS : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : flag(payload)) || ''),
     ...(payload.resolution && payload.resolution !== 'SD' ? [payload.resolution] : []),
-    ...(options.flagged ? AFTER_RESOLUTION_FLAGS : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : flag(payload)) || ''),
+    ...(flagged ? AFTER_RESOLUTION_FLAGS : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : flag(payload)) || ''),
     ...((payload.source && !(['HDRip'].includes(payload.source) && payload.flags.includes('mHD'))) ? [payload.source] : []),
-    ...(options.flagged ? AFTER_SOURCE_FLAGS : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : flag(payload)) || ''),
+    ...(flagged ? AFTER_SOURCE_FLAGS : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : flag(payload)) || ''),
     ...(payload.encoding ? [payload.encoding] : []),
-    ...(options.flagged ? AFTER_ENCODING_FLAGS : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : flag(payload)) || ''),
+    ...(flagged ? AFTER_ENCODING_FLAGS : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : flag(payload)) || ''),
     ...(payload.dub ? [payload.dub] : []),
-    ...(options.flagged ? AFTER_DUB_FLAGS : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : flag(payload)) || ''),
-    ...(options.flagged ? payload.flags : []).filter(flag => ![
+    ...(flagged ? AFTER_DUB_FLAGS : []).map(flag => (typeof flag === 'string' ? (payload.flags.includes(flag) && flag) : flag(payload)) || ''),
+    ...(flagged ? payload.flags : []).filter(flag => ![
       ...AFTER_TITLE_FLAGS.map(flag => typeof flag === 'string' ? flag : flag(payload)),
       ...AFTER_YEAR_FLAGS.map(flag => typeof flag === 'string' ? flag : flag(payload)),
       ...AFTER_LANGUAGE_FLAGS.map(flag => typeof flag === 'string' ? flag : flag(payload)),
@@ -470,8 +472,9 @@ const stringify = (payload, options) => {
   return output
 }
 
-const parse = (raw = '', options = { strict: false, flagged: true, erase: [], defaults: {} }) => {
-  const input = [...(options.erase || []), ...rules.erase]
+const parse = (raw = '', options = {}) => {
+  const { strict = false, flagged = true, erase = [], defaults = {} } = options
+  const input = [...(erase || []), ...rules.erase]
     .reduce((input, regexp) => input.replace(new RegExp(`[\.\-]*?${regexp.replace(/\\\\/g, '\\')}[\.\-]*?`, 'ig'), ''), raw)
     .replace(/\.(avi|mp4|mpeg4|mkv|ts|m2ts|mov|wmv|flv|webm|m4v)(\W.*)?$/i, '')
     .trim()
@@ -490,7 +493,7 @@ const parse = (raw = '', options = { strict: false, flagged: true, erase: [], de
     episodes: [],
     group: null,
     flags: [],
-    ...options.defaults,
+    ...defaults,
     input: input,
     score: 0,
     valid: false,
@@ -931,9 +934,9 @@ const parse = (raw = '', options = { strict: false, flagged: true, erase: [], de
   }
 
   // payload.output
-  payload.output = stringify(payload, options)
+  payload.output = stringify(payload, { flagged })
 
-  if (options.strict && !payload.valid) {
+  if (strict && !payload.valid) {
     throw new Error('"' + payload.input + '" does\'t follow scene release naming rules')
   }
 
