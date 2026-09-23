@@ -3,6 +3,10 @@
   "version": "2.0.4",
   "description": "🏴‍☠️✨🎟 Oleoo - Scene/P2P/Warez release name parser ",
   "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "files": [
+    "src"
+  ],
   "type": "module",
   "scripts": {
     "test": "node ./tests/check.js",
@@ -21,7 +25,7 @@
     "warez"
   ],
   "author": "thcolin",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/thcolin/oleoo/issues"
   },
