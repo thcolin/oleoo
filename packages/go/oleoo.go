@@ -4,6 +4,7 @@ package oleoo
 import (
 	"errors"
 	"fmt"
+	"math"
 	"slices"
 	"strconv"
 	"strings"
@@ -58,7 +59,8 @@ func Strict(strict bool) Option { return func(o *options) { o.strict = strict } 
 // Flagged places the flags in Generated, true by default.
 func Flagged(flagged bool) Option { return func(o *options) { o.flagged = flagged } }
 
-// Erase adds patterns to remove from the input, before those of rules.json.
+// Erase adds patterns to remove from the input, before those of rules.json. They run with no timeout: pass
+// only trusted ones.
 func Erase(patterns ...string) Option {
 	return func(o *options) { o.erase = append(o.erase, patterns...) }
 }
@@ -194,6 +196,7 @@ func (t text) slice(a, b int) string {
 	return decode(t.units[a:b])
 }
 
+// regexp2 returns an error only past MatchTimeout, which is never set.
 func (t text) first(re *regexp2.Regexp) *regexp2.Match {
 	m, _ := re.FindRunesMatch(t.probe)
 	return m
@@ -254,7 +257,7 @@ func find(t text, before string, r rule, after string) (*regexp2.Match, error) {
 
 	var guard *regexp2.Regexp
 	if r.notAfter != "" {
-		if guard, err = compile("(?:"+r.notAfter+")$", ci); err != nil {
+		if guard, err = compile("(?:"+r.notAfter+")$", ci|regexp2.RightToLeft); err != nil {
 			return nil, err
 		}
 	}
@@ -320,7 +323,7 @@ var (
 
 	yearRange  = must(`[_\W]((\d{4})[\.\s]?-[\.\s]?(\d{4}))`, regexp2.ECMAScript)
 	yearSingle = must(`[_\W](\d{4})(?![_\W]\d{2}[_\W]\d{2})`, regexp2.ECMAScript)
-	endsInDate = must(`\d{2}[_\W]\d{2}$`, regexp2.ECMAScript)
+	endsInDate = must(`\d{2}[_\W]\d{2}$`, regexp2.ECMAScript|regexp2.RightToLeft)
 
 	season        = must(`\WS(?:eason[_\W]?)?(\d{1,3})[e\.\-\s]`, ci)
 	episodeRange  = must(`EP?(\d+)\-(\d+)`, ci)
@@ -358,8 +361,16 @@ func Parse(raw string, opts ...Option) (Release, error) {
 	o := newOptions(opts)
 
 	s := raw
-	for _, pattern := range append(slices.Clone(o.erase), rules.Erase...) {
-		re, err := compile(`[.\-]*?`+strings.ReplaceAll(pattern, `\\`, `\`)+`[.\-]*?`, ci)
+	for i, pattern := range append(slices.Clone(o.erase), rules.Erase...) {
+		pattern = `[.\-]*?` + strings.ReplaceAll(pattern, `\\`, `\`) + `[.\-]*?`
+		var re *regexp2.Regexp
+		var err error
+		if i < len(o.erase) {
+			// Not cached: a caller that builds its patterns would grow the cache without bound.
+			re, err = regexp2.Compile(dialect(pattern), ci)
+		} else {
+			re, err = compile(pattern, ci)
+		}
 		if err != nil {
 			return Release{}, err
 		}
@@ -591,7 +602,10 @@ func Parse(raw string, opts ...Option) (Release, error) {
 
 		if m := input.first(episodeRange); m != nil {
 			from, _ := strconv.Atoi(input.group(m, 1))
-			to, _ := strconv.Atoi(input.group(m, 2))
+			to, err := strconv.Atoi(input.group(m, 2))
+			if err != nil || to-from >= math.MaxUint32 {
+				return Release{}, errors.New("invalid array length")
+			}
 			r.Episodes = []any{}
 			for n := from; n <= to; n++ {
 				r.Episodes = append(r.Episodes, n)

@@ -148,6 +148,10 @@ func TestOptions(t *testing.T) {
 		t.Errorf("parse writes into the defaults it is given: %q", defaults.Flags)
 	}
 
+	if _, err := Parse("Show.E1-99999999999999999999.720p.HDTV.x264-GRP"); err == nil || err.Error() != "invalid array length" {
+		t.Errorf("an episode range past 2^32 gives %v", err)
+	}
+
 	if _, err := Parse("Foo Bar", Strict(true)); err == nil || err.Error() != `"Foo Bar" does't follow scene release naming rules` {
 		t.Errorf("strict gives %v", err)
 	}
