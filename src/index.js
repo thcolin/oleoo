@@ -163,7 +163,7 @@ const rules = {
     'PROPER': ['proper'],
     'COLLECTION': [
       '(?<!criterion[\\.\\-\\s]?)(la[\\.\\-\\s])?(the[\\.\\-\\s])?collec?tion',
-      '(la[\\.\\-\\s])?(the[\\.\\-\\s])?(complete[\\.\\-\\s])?saga([\\.\\-\\s]complete)?',
+      '(la[\\.\\-\\s]saga|complete[\\.\\-\\s]saga|saga[\\.\\-\\s]complete)',
       'coffret',
       '(l\')?int[ée]grale?',
       'duologie',

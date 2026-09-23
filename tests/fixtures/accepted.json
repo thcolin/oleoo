@@ -100673,17 +100673,15 @@
     "resolution": "1080p",
     "dub": null,
     "year": null,
-    "flags": [
-      "COLLECTION"
-    ],
+    "flags": [],
     "season": null,
     "episode": null,
     "episodes": [],
     "type": "movie",
     "group": "CiELOS",
-    "title": "Eurovision Song Contest The Story Of Fire",
-    "generated": "Eurovision.Song.Contest.The.Story.Of.Fire.COLLECTION.MULTi.1080p.WEB-DL.x264-CiELOS",
-    "score": 6
+    "title": "Eurovision Song Contest The Story Of Fire Saga",
+    "generated": "Eurovision.Song.Contest.The.Story.Of.Fire.Saga.MULTi.1080p.WEB-DL.x264-CiELOS",
+    "score": 5
   },
   "Eurotrip.2004.MULTI.1080p.BDRip.AC3.khrone.mkv": {
     "original": "Eurotrip.2004.MULTI.1080p.BDRip.AC3.khrone",
@@ -145160,5 +145158,55 @@
     "title": "The Adventures Of Tintin",
     "generated": "The.Adventures.Of.Tintin.2011.720p.BLURAY.x264-MHD",
     "score": 5
+  },
+  "F9.The.Fast.Saga.2021.DIRFIX.MULTi.1080p.WEB.H264-LOST.mkv": {
+    "original": "F9.The.Fast.Saga.2021.DIRFIX.MULTi.1080p.WEB.H264-LOST",
+    "language": "MULTi",
+    "languages": [
+      "MULTi"
+    ],
+    "source": "WEB-DL",
+    "encoding": "h264",
+    "resolution": "1080p",
+    "dub": null,
+    "year": "2021",
+    "flags": [
+      "DiRFiX"
+    ],
+    "season": null,
+    "episode": null,
+    "episodes": [],
+    "type": "movie",
+    "group": "LOST",
+    "title": "F9 The Fast Saga",
+    "generated": "F9.The.Fast.Saga.2021.DiRFiX.MULTi.1080p.WEB-DL.h264-LOST",
+    "score": 7
+  },
+  "Furiosa.A.Mad.Max.Saga.2024.MULTI.VF2.1080p.10bit.WEBRip.6CH.x265.HEVC-SERQPH.mkv": {
+    "original": "Furiosa.A.Mad.Max.Saga.2024.MULTI.VF2.1080p.10bit.WEBRip.6CH.x265.HEVC-SERQPH",
+    "language": "MULTi-VF2",
+    "languages": [
+      "MULTi",
+      "TRUEFRENCH",
+      "FRENCH"
+    ],
+    "source": "WEB-DL",
+    "encoding": "x265",
+    "resolution": "1080p",
+    "dub": null,
+    "year": "2024",
+    "flags": [
+      "10bit",
+      "6CH",
+      "HEVC"
+    ],
+    "season": null,
+    "episode": null,
+    "episodes": [],
+    "type": "movie",
+    "group": "SERQPH",
+    "title": "Furiosa A Mad Max Saga",
+    "generated": "Furiosa.A.Mad.Max.Saga.2024.MULTi-VF2.1080p.10bit.WEB-DL.6CH.x265.HEVC-SERQPH",
+    "score": 7
   }
 }
