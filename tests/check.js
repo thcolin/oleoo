@@ -112,6 +112,10 @@ for (const [name, key, expected] of [
   }
 }
 
+const defaults = { languages: ['ENGLiSH'] }
+oleoo.parse('Foo.2010.1080p.BluRay.x264.FRENCH-GRP', { ...options, defaults })
+defaults.languages.length === 1 || failures.push('[options] parse writes into the defaults it is given')
+
 try {
   oleoo.parse('Foo.2010.1080p.BluRay.x264-GRP', { currentYear: 'soon' })
   failures.push('[options] currentYear accepts what is not a number')
