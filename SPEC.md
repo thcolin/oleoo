@@ -8,7 +8,7 @@ A port is made of three parts:
 - the algorithm below, written in the port's language;
 - the fixtures of `tests/fixtures/`, replayed as described in [Conformance](#conformance).
 
-`src/index.js` is the reference implementation. When this document and the code disagree, the code and the fixtures win, and this document is fixed.
+`packages/js/src/index.js` is the reference implementation. When this document and the code disagree, the code and the fixtures win, and this document is fixed.
 
 ## Contents
 
@@ -47,7 +47,7 @@ A `Rule` is either a pattern string, or `{ "pattern": string, "notAfter": string
 
 ## Regex dialect
 
-Every pattern of `rules.json`, and every regex this document writes, stays in a subset meant for PCRE2, Oniguruma, `fancy-regex` (Rust) and `std::regex` in ECMAScript mode (C++). `tests/check.js` fails when a pattern of `rules.json` holds an escape, a group opening or a possessive quantifier outside the list below.
+Every pattern of `rules.json`, and every regex this document writes, stays in a subset meant for PCRE2, Oniguruma, `fancy-regex` (Rust) and `std::regex` in ECMAScript mode (C++). `packages/js/tests/check.js` fails when a pattern of `rules.json` holds an escape, a group opening or a possessive quantifier outside the list below.
 
 Allowed:
 
@@ -335,7 +335,7 @@ Both files hold what the reference implementation returns **today**: a port matc
 
 A port is conformant when, for every unique name of `releases.txt`, `parse(name, { currentYear: 2026 })` gives the result of `accepted.json` or `refused.json`, key for key, `null` and empty arrays included. The order of the keys is only checked by the JavaScript harness.
 
-`tests/check.js` is the harness of the reference implementation (`yarn test`). It also checks that:
+`packages/js/tests/check.js` is the harness of the reference implementation (`yarn test`). It also checks that:
 
 - `parse(name, { currentYear: 2026, strict: false })` equals `parse(name, { currentYear: 2026 })` for every name;
 - an `erase` pattern removes its match;

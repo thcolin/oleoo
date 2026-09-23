@@ -4,7 +4,7 @@ import * as url from 'url'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 const { default: oleoo } = await import(url.pathToFileURL(process.argv[2] ? resolve(process.argv[2]) : join(__dirname, '../src/index.js')))
-const fixture = (file) => readFileSync(join(__dirname, 'fixtures', file), 'utf-8')
+const fixture = (file) => readFileSync(join(__dirname, '../../../tests/fixtures', file), 'utf-8')
 
 const names = [...new Set(fixture('releases.txt').split(/\r?\n/).filter(Boolean))]
 const accepted = JSON.parse(fixture('accepted.json'))
@@ -54,7 +54,7 @@ if (oleoo.parse('Foo.2031.1080p.BluRay.x264-GRP', options).year !== null || oleo
 }
 
 // rules.json stays in the regex dialect SPEC.md describes, so that other regex engines can read it.
-const rules = JSON.parse(readFileSync(join(__dirname, '..', 'rules.json'), 'utf-8'))
+const rules = JSON.parse(readFileSync(join(__dirname, '../../../rules.json'), 'utf-8'))
 const patterns = [
   ...['source', 'encoding', 'resolution', 'dub', 'language', 'flags']
     .flatMap(property => Object.values(rules[property]).flat())

@@ -215,7 +215,7 @@ Contributing test cases is easy:
         * `./tests/fixtures/releases.txt`
         * `./tests/fixtures/accepted.json`
         * `./tests/fixtures/refused.json`
-    * If you were also able to **fix any parsing issues** you found in `rules.json` or `src/index.js`, include those changes in the same PR! **Important:** Modifying the rules (`rules.json`) or the parsing logic (`src/index.js`) can easily introduce regressions (breaking previously correct parses). **This is the main challenge!** Run `yarn test` to list every changed entry, then `yarn fixtures` to review them one by one and confirm that your changes only fix the intended issue and do not negatively affect other entries in `accepted.json`.
+    * If you were also able to **fix any parsing issues** you found in `rules.json` or `packages/js/src/index.js`, include those changes in the same PR! **Important:** Modifying the rules (`rules.json`) or the parsing logic (`packages/js/src/index.js`) can easily introduce regressions (breaking previously correct parses). **This is the main challenge!** Run `yarn test` to list every changed entry, then `yarn fixtures` to review them one by one and confirm that your changes only fix the intended issue and do not negatively affect other entries in `accepted.json`.
 
 **Reporting Issues without a PR:**
 

@@ -1,0 +1,42 @@
+{
+  "name": "oleoo",
+  "version": "2.1.0",
+  "description": "🏴‍☠️✨🎟 Oleoo - Scene/P2P/Warez release name parser ",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --format=esm --platform=neutral --outfile=dist/index.js && cp src/index.d.ts dist/index.d.ts",
+    "prepack": "npm run build && cp ../../README.md ../../LICENSE.md .",
+    "test": "node ./tests/check.js && npm run build && node ./tests/check.js ./dist/index.js",
+    "fixtures": "node ./tests/index.js",
+    "debug": "node ./tests/debug.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thcolin/oleoo.git",
+    "directory": "packages/js"
+  },
+  "keywords": [
+    "torrent",
+    "p2p",
+    "scene",
+    "release",
+    "warez"
+  ],
+  "author": "thcolin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thcolin/oleoo/issues"
+  },
+  "homepage": "https://github.com/thcolin/oleoo#readme",
+  "devDependencies": {
+    "@inquirer/prompts": "^7.4.0",
+    "chalk": "^5.4.1",
+    "cli-diff": "^1.0.0",
+    "esbuild": "^0.28.2"
+  }
+}

@@ -8,6 +8,7 @@ import oleoo from '../src/index.js'
 import { logo } from '../cli.js'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
+const fixtures = join(__dirname, '../../../tests/fixtures')
 
 let cache = null
 
@@ -20,10 +21,10 @@ const progress = (total, accepted, refused) => {
 }
 
 const main = async () => {
-  const names = readFileSync(join(__dirname, 'fixtures', 'releases.txt'), 'utf-8').split(/\r?\n/).slice(0, -1)
+  const names = readFileSync(join(fixtures, 'releases.txt'), 'utf-8').split(/\r?\n/).slice(0, -1)
   const total = names.length
-  const accepted = existsSync(join(__dirname, 'fixtures', 'accepted.json')) ? JSON.parse(readFileSync(join(__dirname, 'fixtures', 'accepted.json'), 'utf-8')) : {}
-  const refused = existsSync(join(__dirname, 'fixtures', 'refused.json')) ? JSON.parse(readFileSync(join(__dirname, 'fixtures', 'refused.json'), 'utf-8')) : {}
+  const accepted = existsSync(join(fixtures, 'accepted.json')) ? JSON.parse(readFileSync(join(fixtures, 'accepted.json'), 'utf-8')) : {}
+  const refused = existsSync(join(fixtures, 'refused.json')) ? JSON.parse(readFileSync(join(fixtures, 'refused.json'), 'utf-8')) : {}
   let name
 
   logo()
@@ -51,14 +52,14 @@ const main = async () => {
 
       if (answer) {
         accepted[name] = release
-        writeFileSync(join(__dirname, 'fixtures', 'accepted.json'), JSON.stringify(accepted, null, 2))
+        writeFileSync(join(fixtures, 'accepted.json'), JSON.stringify(accepted, null, 2))
         continue
       } else {
         release.comment = await input({ message: "What's wrong ?" })
         refused[name] = release
-        writeFileSync(join(__dirname, 'fixtures', 'refused.json'), JSON.stringify(refused, null, 2))
+        writeFileSync(join(fixtures, 'refused.json'), JSON.stringify(refused, null, 2))
         delete accepted[name]
-        writeFileSync(join(__dirname, 'fixtures', 'accepted.json'), JSON.stringify(accepted, null, 2))
+        writeFileSync(join(fixtures, 'accepted.json'), JSON.stringify(accepted, null, 2))
         continue
       }
     }
@@ -76,14 +77,14 @@ const main = async () => {
 
       if (answer) {
         accepted[name] = release
-        writeFileSync(join(__dirname, 'fixtures', 'accepted.json'), JSON.stringify(accepted, null, 2))
+        writeFileSync(join(fixtures, 'accepted.json'), JSON.stringify(accepted, null, 2))
         delete refused[name]
-        writeFileSync(join(__dirname, 'fixtures', 'refused.json'), JSON.stringify(refused, null, 2))
+        writeFileSync(join(fixtures, 'refused.json'), JSON.stringify(refused, null, 2))
         continue
       } else {
         release.comment = await input({ message: "What's wrong ?", default: refused[name].comment })
         refused[name] = release
-        writeFileSync(join(__dirname, 'fixtures', 'refused.json'), JSON.stringify(refused, null, 2))
+        writeFileSync(join(fixtures, 'refused.json'), JSON.stringify(refused, null, 2))
         continue
       }
     }
@@ -92,12 +93,12 @@ const main = async () => {
   
     if (await confirm({ message: 'Correct parsing ?', default: true })) {
       accepted[name] = release
-      writeFileSync(join(__dirname, 'fixtures', 'accepted.json'), JSON.stringify(accepted, null, 2))
+      writeFileSync(join(fixtures, 'accepted.json'), JSON.stringify(accepted, null, 2))
     } else {
       console.log(JSON.stringify(release, null, 2))
       release.comment = await input({ message: "What's wrong ?" })
       refused[name] = release
-      writeFileSync(join(__dirname, 'fixtures', 'refused.json'), JSON.stringify(refused, null, 2))
+      writeFileSync(join(fixtures, 'refused.json'), JSON.stringify(refused, null, 2))
     }
   }
 }
