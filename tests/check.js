@@ -37,6 +37,14 @@ for (const name of names) {
   } else {
     failures.push(`[unknown] ${name}\n    neither accepted nor refused, run \`yarn fixtures\``)
   }
+
+  if (JSON.stringify(oleoo.parse(name, { strict: false })) !== JSON.stringify(release)) {
+    failures.push(`[options] ${name}\n    parse with { strict: false } differs from parse with no options`)
+  }
+}
+
+if (oleoo.parse('Foo.2010.1080p.BluRay.x264-GRP.[www.site.com]', { erase: [/\[www.*?\]/] }).original !== 'Foo.2010.1080p.BluRay.x264-GRP') {
+  failures.push('[options] erase with a RegExp does not remove its match')
 }
 
 failures.forEach(failure => console.log(failure + '\n'))
