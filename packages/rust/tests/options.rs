@@ -120,7 +120,7 @@ fn strict_fails_without_source_encoding_resolution_nor_dub() {
 fn guess_fills_the_year_and_the_resolution() {
     assert_eq!(
         value(guess("Some.Show.S02E03.FRENCH.UHD.x265.DTS.5.1", &options()).unwrap()),
-        json!({"original":"Some.Show.S02E03.FRENCH.UHD.x265.DTS.5.1","language":"FRENCH","languages":["FRENCH"],"source":null,"encoding":"x265","resolution":"2160p","dub":null,"year":"2026","flags":["DTS","UHD","5.1"],"season":2,"episode":"03","episodes":[3],"type":"tvshow","group":null,"title":"Some Show","generated":"Some.Show.2026.S02E03.FRENCH.2160p.UHD.DTS.5.1.x265-NOTEAM","score":4})
+        json!({"original":"Some.Show.S02E03.FRENCH.UHD.x265.DTS.5.1","language":"FRENCH","languages":["FRENCH"],"source":null,"encoding":"x265","resolution":"2160p","dub":null,"year":"2026","flags":["DTS","UHD","5.1"],"season":2,"seasons":[2],"episode":"03","episodes":[3],"type":"tvshow","group":null,"title":"Some Show","generated":"Some.Show.2026.S02E03.FRENCH.2160p.UHD.DTS.5.1.x265-NOTEAM","score":4})
     );
     let options = Options {
         flagged: false,
@@ -138,7 +138,7 @@ fn an_alternative_title_emptied_by_the_capitalization_still_moves_the_year() {
     for name in ["2010 - -", "2010.-.-"] {
         assert_eq!(
             value(parse(name, &options()).unwrap()),
-            json!({"original":name,"language":null,"languages":[],"source":null,"encoding":null,"resolution":null,"dub":null,"year":"2010","flags":[],"season":null,"episode":null,"episodes":[],"type":"movie","group":null,"title":"","generated":"2010-NOTEAM","score":0})
+            json!({"original":name,"language":null,"languages":[],"source":null,"encoding":null,"resolution":null,"dub":null,"year":"2010","flags":[],"season":null,"seasons":[],"episode":null,"episodes":[],"type":"movie","group":null,"title":"","generated":"2010-NOTEAM","score":0})
         );
     }
 }

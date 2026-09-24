@@ -61,6 +61,7 @@ pub struct Release {
     pub year: Option<String>,
     pub flags: Vec<String>,
     pub season: Option<u32>,
+    pub seasons: Vec<u32>,
     pub episode: Option<String>,
     pub episodes: Vec<Episode>,
     #[serde(rename = "type")]
@@ -87,6 +88,7 @@ pub struct Defaults {
     pub episode: Option<String>,
     pub group: Option<String>,
     pub languages: Vec<String>,
+    pub seasons: Vec<u32>,
     pub episodes: Vec<Episode>,
     pub flags: Vec<String>,
 }
@@ -207,6 +209,7 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
         year: defaults.year.clone(),
         flags: defaults.flags.clone(),
         season: defaults.season,
+        seasons: defaults.seasons.clone(),
         episode: defaults.episode.clone(),
         episodes: defaults.episodes.clone(),
         kind: Kind::Movie,
@@ -225,7 +228,7 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
     };
 
     for pattern in [
-        r"\WS(eason[_\W])?\d{1,3}\W?(?:-?EP?\d+)*[e\.\-\s]",
+        r"\WS(?:(?:eason|aison)s?[_\W])?\d{1,3}\W?(?:-?EP?\d+)*[e\.\-\s]",
         r"\W(?:-?EP?\d+)+(\W)?",
         r"\W(\d{4}[_\W]\d{2}[_\W]\d{2}[_\W])(\W)?",
         r"\W(\d{2}[_\W]\d{2}[_\W]\d{4}[_\W])(\W)?",
@@ -237,6 +240,16 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
             release.kind = Kind::Tvshow;
             break;
         }
+    }
+
+    if let Some(found) = regex(
+        r"[_\W](?:(?:the[_\W])?complete[_\W](?:series|seasons?)(?=[_\W]|$)|complete(?=[_\W]S\d{1,3}[_\W]))",
+        true,
+    )?
+    .find(input)?
+    {
+        release.kind = Kind::Tvshow;
+        at.move_to(found.start(), found.end());
     }
 
     let accepted = |year: &str| {
@@ -350,10 +363,28 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
 
     if release.kind == Kind::Tvshow {
         if let Some(season) =
-            regex(r"\WS(?:eason[_\W]?)?(\d{1,3})[e\.\-\s]", true)?.captures(input)?
+            regex(r"\WS(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})[e\.\-\s]", true)?.captures(input)?
         {
-            release.season = Some(group(&season, 1).parse().unwrap());
+            let (start, from) = (
+                season.get(0).unwrap().start(),
+                group(&season, 1).parse().unwrap(),
+            );
+            release.season = Some(from);
             at.reach(season.get(0).unwrap().end());
+
+            if let Some(range) = regex(
+                r"^\WS(?:(?:eason|aison)s?[_\W]?)?\d{1,3}(?:-S?|[\.\s]-[\.\s]?S|[\.\s](?:à|a|to)[\.\s]S?)(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})(?=[_\W]|$)",
+                true,
+            )?
+            .captures(&input[start..])?
+            {
+                let to: u32 = group(&range, 1).parse().unwrap();
+
+                if to > from {
+                    release.seasons = (from..=to).collect();
+                    at.reach(start + range.get(0).unwrap().end());
+                }
+            }
         }
 
         let episodes = regex(r"EP?(\d+)", true)?
@@ -412,6 +443,10 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
                 &mut at,
             );
         }
+    }
+
+    if release.seasons.is_empty() {
+        release.seasons.extend(release.season);
     }
 
     if let Some(found) = regex(r"(?:by[\W\-])?([\w\.]+)", true)?
@@ -551,11 +586,13 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
 
     if release.kind == Kind::Tvshow {
         let dropped = if release.flags.iter().any(|flag| flag == "COLLECTION") {
-            "COLLECTION"
+            Some("COLLECTION")
+        } else if !release.seasons.is_empty() {
+            Some("COMPLETE")
         } else {
-            "COMPLETE"
+            None
         };
-        release.flags.retain(|flag| flag != dropped);
+        release.flags.retain(|flag| Some(flag.as_str()) != dropped);
     }
 
     if release.year.as_deref() == Some("0") {
