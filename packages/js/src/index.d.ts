@@ -315,6 +315,7 @@ export interface OleooPayload {
   languages: LanguageType[] // Array of all detected languages before combination
   language: string | null // Combined language string (e.g., "FRENCH", "MULTi-VFF") or null
   season: number | null
+  seasons: number[] // Every season a pack covers, [season] for one season, empty without a season
   episode: string | null // Formatted episode string (e.g., "01", "01-03") or null
   episodes: (number | string)[] // Array of episode numbers, or strings for dated episodes (e.g., "04.02")
   group: string | null
@@ -392,6 +393,8 @@ export interface OleooResult {
   flags: FlagType[]
   /** Detected season number for TV shows. */
   season: number | null
+  /** Every season covered by the release (e.g., [1, 2, 3] for "S01-S03"), [season] for a single season, empty without a season. A tvshow with no season and the COMPLETE flag is a whole series. */
+  seasons: number[]
   /** Formatted episode number(s) string for TV shows (e.g., "01", "01-03"). */
   episode: string | null
   /** Array of detected episode numbers (e.g., [1], [1, 2, 3]), or strings for dated episodes (e.g., ["04.02"]). */

@@ -90,6 +90,7 @@ const parse = (raw = '', options = {}) => {
     languages: [],
     language: null,
     season: null,
+    seasons: [],
     episode: null,
     episodes: [],
     group: null,
@@ -107,7 +108,7 @@ const parse = (raw = '', options = {}) => {
   let match, matches, property, key, patterns, pattern
 
   // payload.type
-  if (match = input.match(/\WS(eason[_\W])?\d{1,3}\W?(?:-?EP?\d+)*[e\.\-\s]/i)) {
+  if (match = input.match(/\WS(?:(?:eason|aison)s?[_\W])?\d{1,3}\W?(?:-?EP?\d+)*[e\.\-\s]/i)) {
     titleEndPosition = match.index
     groupStartPosition = match.index + match[0].length
     payload.type = 'tvshow'
@@ -129,6 +130,19 @@ const parse = (raw = '', options = {}) => {
     payload.type = 'tvshow'
   } else {
     payload.type = 'movie'
+  }
+
+  // A whole series ("Complete Series"), or COMPLETE right before its seasons ("Complete.S01-S09")
+  if (match = input.match(/[_\W](?:(?:the[_\W])?complete[_\W](?:series|seasons?)(?=[_\W]|$)|complete(?=[_\W]S\d{1,3}[_\W]))/i)) {
+    payload.type = 'tvshow'
+
+    if (match.index < titleEndPosition) {
+      titleEndPosition = match.index
+    }
+
+    if ((match.index + match[0].length) > groupStartPosition) {
+      groupStartPosition = match.index + match[0].length
+    }
   }
   
   // payload.year
@@ -330,11 +344,20 @@ const parse = (raw = '', options = {}) => {
 
   // payload.season, payload.episodes, payload.episode
   if (payload.type === 'tvshow') {
-    if (match = input.match(/\WS(?:eason[_\W]?)?(\d{1,3})[e\.\-\s]/i)) {
+    if (match = input.match(/\WS(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})[e\.\-\s]/i)) {
       payload.season = Number(match[1])
 
       if ((match.index + match[0].length) > groupStartPosition) {
         groupStartPosition = match.index + match[0].length
+      }
+
+      // A range of seasons ("S01-S10", "S01-10", "Saison 1 à 5")
+      if ((matches = input.slice(match.index).match(/^\WS(?:(?:eason|aison)s?[_\W]?)?\d{1,3}(?:-S?|[\.\s]-[\.\s]?S|[\.\s](?:à|a|to)[\.\s]S?)(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})(?=[_\W]|$)/i)) && Number(matches[1]) > payload.season) {
+        payload.seasons = Array.from({ length: Number(matches[1]) - payload.season + 1 }, (_, i) => payload.season + i)
+
+        if ((match.index + matches[0].length) > groupStartPosition) {
+          groupStartPosition = match.index + matches[0].length
+        }
       }
     }
   
@@ -387,6 +410,10 @@ const parse = (raw = '', options = {}) => {
         }
       }
     }
+  }
+
+  if (!payload.seasons.length && payload.season !== null) {
+    payload.seasons = [payload.season]
   }
 
   // payload.group
@@ -533,7 +560,7 @@ const parse = (raw = '', options = {}) => {
 
   if (payload.type === 'tvshow' && payload.flags.includes('COLLECTION')) {
     payload.flags = payload.flags.filter(flag => flag !== 'COLLECTION')
-  } else if (payload.type === 'tvshow' && payload.flags.includes('COMPLETE')) {
+  } else if (payload.type === 'tvshow' && payload.seasons.length && payload.flags.includes('COMPLETE')) {
     payload.flags = payload.flags.filter(flag => flag !== 'COMPLETE')
   }
 
@@ -565,6 +592,7 @@ const parse = (raw = '', options = {}) => {
     } : {}),
     flags: payload.flags,
     season: payload.season,
+    seasons: payload.seasons,
     episode: payload.episode,
     episodes: payload.episodes,
     type: payload.type,
