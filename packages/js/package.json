@@ -1,6 +1,6 @@
 {
   "name": "oleoo",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "🏴‍☠️✨🎟 Oleoo - Scene/P2P/Warez release name parser ",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
