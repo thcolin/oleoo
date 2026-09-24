@@ -139,7 +139,7 @@ It fills a payload, then returns part of it. The steps run in this order, each o
 
 ```
 type, year, source, encoding, resolution, dub, language, season, episode, group: null
-languages, episodes, flags: []
+languages, seasons, episodes, flags: []
 ```
 
 then the keys of `options.defaults` over these, arrays copied, then `score = 0`, `valid = false`. A `type` given in `defaults` is always overwritten by [Type](#3-type).
@@ -150,13 +150,15 @@ Three positions follow the parsing: `titleStart = 0`, `titleEnd = length(input)`
 
 Test these regexes on `input` in order, each case-insensitive; the first that matches sets `titleEnd = index`, `groupStart = end` (both assigned, not compared) and `type = "tvshow"`:
 
-1. `\WS(eason[_\W])?\d{1,3}\W?(?:-?EP?\d+)*[e\.\-\s]`
+1. `\WS(?:(?:eason|aison)s?[_\W])?\d{1,3}\W?(?:-?EP?\d+)*[e\.\-\s]`
 2. `\W(?:-?EP?\d+)+(\W)?`
 3. `\W(\d{4}[_\W]\d{2}[_\W]\d{2}[_\W])(\W)?`
 4. `\W(\d{2}[_\W]\d{2}[_\W]\d{4}[_\W])(\W)?`
 5. `\W(?:(?:\d{1,2})x(?:\d{1,3}))+(\W)?`
 
 None matches: `type = "movie"`.
+
+Then, whatever the type, the first match of `[_\W](?:(?:the[_\W])?complete[_\W](?:series|seasons?)(?=[_\W]|$)|complete(?=[_\W]S\d{1,3}[_\W]))`, case-insensitive, is a whole series (`Complete.Series`) or the `COMPLETE` of a season pack (`Complete.S01-S09`): `type = "tvshow"`, and move the positions to the match. A `COMPLETE` alone, without a season, stays a flag: it also names a complete disc of a movie (`COMPLETE.BLURAY`).
 
 ### 4. Year
 
@@ -213,7 +215,7 @@ Same loop as [Flags](#6-flags), on the keys that **are** in `ambiguous.flags`, w
 
 Only when `type = "tvshow"`. `pad2(n)` writes `n` in decimal on at least two digits.
 
-1. **Season.** First match of `\WS(?:eason[_\W]?)?(\d{1,3})[e\.\-\s]`, case-insensitive: `season = group1` as a number, `groupStart = max(groupStart, end)`.
+1. **Season.** First match of `\WS(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})[e\.\-\s]`, case-insensitive: `season = group1` as a number, `groupStart = max(groupStart, end)`. Then **a range of seasons**: test `^\WS(?:(?:eason|aison)s?[_\W]?)?\d{1,3}(?:-S?|[\.\s]-[\.\s]?S|[\.\s](?:à|a|to)[\.\s]S?)(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})(?=[_\W]|$)`, case-insensitive, on `input[index ..]`, `index` being the one of the season match. When it matches and its group 1 is greater than `season`: `seasons` = every number from `season` to group 1, `groupStart = max(groupStart, index + end)`. `S01-S10`, `S01-10`, `S01 - S13`, `S01 to S28`, `Season.1-4` and `Saison 1 à 5` are ranges; `S01 - 12` is not, the number after spaced dash may be an episode.
 2. **Episodes**, the first of these that matches, each case-insensitive:
    1. First match of `EP?(\d+)\-(\d+)`: when group 2 minus group 1 is 9999 or more, fail with `episodes <group1> to <group2>: more than 9999 episodes`; otherwise `episodes` = every number from group 1 to group 2, none when group 2 is lower (then `episode` is `""`), `groupStart = max(groupStart, end)`.
    2. Every match of `EP?(\d+)`: `episodes` = the group 1 of each, as numbers; `groupStart = max(groupStart, end of the last one)`.
@@ -222,6 +224,8 @@ Only when `type = "tvshow"`. `pad2(n)` writes `n` in decimal on at least two dig
    5. First match of `\W(\d{2}[_\W]\d{2})[_\W](\d{4})[_\W]?`: the same, with the year in group 2 and the day in group 1.
 
    In 1, 2 and 3, `episode` = `episodes` written with `pad2` and joined by `-`.
+
+3. **Seasons.** Whatever the type: when `seasons` is empty and `season` is not null, `seasons = [season]`. A season `0` gives `[0]`: `seasons` is the list of the seasons the release holds, and the specials are one.
 
 ### 11. Group
 
@@ -277,7 +281,7 @@ In order:
 4. `year` is null and `title` matches `^(\d{4})\W?(.+$)`: when an entry of `title.leadingYears` has `year` = group 1 and group 2, `lowercase`, contains its `contains`, `year` = its `release` and `title` stays; otherwise `year` = group 1 and `title` = group 2.
 5. `type = "movie"` and `alternativeTitle` matches `^(\d{3,}$)`: `type = "tvshow"`, `episode = group1`, `episodes = [group1]` (a string), drop `alternativeTitle`.
 6. `type = "movie"` and `title` matches `^(.+)(\d[, \-]\s?){2,}\d$`: push `COLLECTION` to `flags`, `title` = group 1, trimmed.
-7. `type = "tvshow"`: remove `COLLECTION` from `flags` when it is there, otherwise remove `COMPLETE`.
+7. `type = "tvshow"`: remove `COLLECTION` from `flags` when it is there, otherwise remove `COMPLETE` when `seasons` is not empty. A tvshow with no season that keeps `COMPLETE` is a whole series.
 8. `year = "0"`: `year` = null.
 
 ### 16. Result
@@ -288,12 +292,12 @@ The result has these keys, in this order:
 
 ```
 original, language, languages, source, encoding, resolution, dub, year, flags,
-season, episode, episodes, type, group, title, [alternativeTitle, completeTitle,] generated, score
+season, seasons, episode, episodes, type, group, title, [alternativeTitle, completeTitle,] generated, score
 ```
 
 `alternativeTitle` and `completeTitle` are there only when there is an alternative title; `completeTitle` is `title + " (" + alternativeTitle + ")"`.
 
-`season` is a number or null. An episode number above 2^53 − 1 is outside this specification: JavaScript turns it into an imprecise number. `episodes` holds numbers, or one string for a date (`"12.25"`) or a manga episode (`"123"`). `episode` is a string or null.
+`season` is a number or null, `seasons` an array of numbers. An episode number above 2^53 − 1 is outside this specification: JavaScript turns it into an imprecise number. `episodes` holds numbers, or one string for a date (`"12.25"`) or a manga episode (`"123"`). `episode` is a string or null.
 
 ## stringify
 
@@ -337,7 +341,7 @@ Drop the empty parts, join with `.`, and append `-` + `group`, or `-NOTEAM` when
 
 | File | Content |
 |---|---|
-| `releases.txt` | one release name per line, 6801 lines of which 6697 are unique |
+| `releases.txt` | one release name per line, 6812 lines of which 6708 are unique |
 | `accepted.json` | `{ [name]: result }`, the results judged right |
 | `refused.json` | `{ [name]: result + comment }`, the results judged wrong, with what is wrong in `comment` |
 

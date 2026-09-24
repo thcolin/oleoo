@@ -88,6 +88,7 @@ oleoo.parse('Mr.Robot.S01.PROPER.VOSTFR.720p.WEB-DL.DD5.1.H264-ARK01')
 //   "year": null,
 //   "flags": ["PROPER", "DD5.1"],
 //   "season": 1,
+//   "seasons": [1],
 //   "episode": null,
 //   "episodes": [],
 //   "type": "tvshow",
@@ -109,6 +110,7 @@ oleoo.parse('Zero Dark Thirty (2012) [1080p BluRay HDR] [FR(VFF)-EN] [x265 10-bi
 //   "year": "2012",
 //   "flags": ["10bit", "HDR"],
 //   "season": null,
+//   "seasons": [],
 //   "episode": null,
 //   "episodes": [],
 //   "type": "movie",
@@ -130,6 +132,7 @@ oleoo.guess('My Movie (2023)', { defaults: { language: 'ENGLiSH', resolution: 'S
 //   "year": "2023",
 //   "flags": [],
 //   "season": null,
+//   "seasons": [],
 //   "episode": null,
 //   "episodes": [],
 //   "type": "movie",
@@ -246,6 +249,7 @@ Both `parse` and `guess` return an object with the following structure:
   year: string | null,          // Detected year or year range (e.g., "2023", "2001-2003")
   flags: Array<string>,         // Array of detected flags (e.g., ["EXTENDED", "PROPER"]), empty if none
   season: number | null,        // Detected season number for TV shows
+  seasons: Array<number>,       // Every season a pack covers (e.g., [1, 2, 3] for "S01-S03"), [season] for one season, empty without a season
   episode: string | null,       // Formatted episode number(s) for TV shows (e.g., "01", "01-03")
   episodes: Array<number|string>, // Array of detected episode numbers (e.g., [1], [1, 2, 3]), or strings for dated episodes (e.g., ["04.02"])
   type: 'movie' | 'tvshow',     // Detected media type
