@@ -30,6 +30,7 @@ type Release struct {
 	Year             *string  `json:"year"`
 	Flags            []string `json:"flags"`
 	Season           *int     `json:"season"`
+	Seasons          []int    `json:"seasons"`
 	Episode          *string  `json:"episode"`
 	Episodes         []any    `json:"episodes"`
 	Type             string   `json:"type"`
@@ -313,18 +314,20 @@ var (
 	extensions = must(`\.(`+strings.Join(rules.Extensions, "|")+`)(\W.*)?$`, ci)
 
 	tvshow = []*regexp2.Regexp{
-		must(`\WS(eason[_\W])?\d{1,3}\W?(?:-?EP?\d+)*[e\.\-\s]`, ci),
+		must(`\WS(?:(?:eason|aison)s?[_\W])?\d{1,3}\W?(?:-?EP?\d+)*[e\.\-\s]`, ci),
 		must(`\W(?:-?EP?\d+)+(\W)?`, ci),
 		must(`\W(\d{4}[_\W]\d{2}[_\W]\d{2}[_\W])(\W)?`, ci),
 		must(`\W(\d{2}[_\W]\d{2}[_\W]\d{4}[_\W])(\W)?`, ci),
 		must(`\W(?:(?:\d{1,2})x(?:\d{1,3}))+(\W)?`, ci),
 	}
+	complete = must(`[_\W](?:(?:the[_\W])?complete[_\W](?:series|seasons?)(?=[_\W]|$)|complete(?=[_\W]S\d{1,3}[_\W]))`, ci)
 
 	yearRange  = must(`[_\W]((\d{4})[\.\s]?-[\.\s]?(\d{4}))`, regexp2.ECMAScript)
 	yearSingle = must(`[_\W](\d{4})(?![_\W]\d{2}[_\W]\d{2})`, regexp2.ECMAScript)
 	endsInDate = must(`\d{2}[_\W]\d{2}$`, regexp2.ECMAScript|regexp2.RightToLeft)
 
-	season        = must(`\WS(?:eason[_\W]?)?(\d{1,3})[e\.\-\s]`, ci)
+	season        = must(`\WS(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})[e\.\-\s]`, ci)
+	seasonRange   = must(`^\WS(?:(?:eason|aison)s?[_\W]?)?\d{1,3}(?:-S?|[\.\s]-[\.\s]?S|[\.\s](?:à|a|to)[\.\s]S?)(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})(?=[_\W]|$)`, ci)
 	episodeRange  = must(`EP?(\d+)\-(\d+)`, ci)
 	episodeSingle = must(`EP?(\d+)`, ci)
 	episodeCross  = must(`\W?(?:(\d{1,2})x(\d{1,3}))+(\W)?`, ci)
@@ -386,7 +389,7 @@ func Parse(raw string, opts ...Option) (Release, error) {
 	s = trim(replace(extensions, s, "", 1))
 	input := newText(s)
 
-	r := Release{Languages: []string{}, Flags: []string{}, Episodes: []any{}}
+	r := Release{Languages: []string{}, Flags: []string{}, Seasons: []int{}, Episodes: []any{}}
 	if d := o.defaults; d != nil {
 		r.Year, r.Source, r.Encoding, r.Resolution, r.Dub = d.Year, d.Source, d.Encoding, d.Resolution, d.Dub
 		r.Language, r.Season, r.Episode, r.Group = d.Language, d.Season, d.Episode, d.Group
@@ -396,6 +399,9 @@ func Parse(raw string, opts ...Option) (Release, error) {
 		}
 		if d.Flags != nil {
 			r.Flags = slices.Clone(d.Flags)
+		}
+		if d.Seasons != nil {
+			r.Seasons = slices.Clone(d.Seasons)
 		}
 		if d.Episodes != nil {
 			r.Episodes = slices.Clone(d.Episodes)
@@ -421,6 +427,10 @@ func Parse(raw string, opts ...Option) (Release, error) {
 			r.Type = "tvshow"
 			break
 		}
+	}
+	if m := input.first(complete); m != nil {
+		r.Type = "tvshow"
+		move(m)
 	}
 
 	accepted := func(year string) bool {
@@ -605,6 +615,17 @@ func Parse(raw string, opts ...Option) (Release, error) {
 			n, _ := strconv.Atoi(input.group(m, 1))
 			r.Season = ptr(n)
 			groupStart = max(groupStart, end(m))
+
+			rest := input.from(m.Index)
+			if s := rest.first(seasonRange); s != nil {
+				if to, _ := strconv.Atoi(rest.group(s, 1)); to > n {
+					r.Seasons = []int{}
+					for i := n; i <= to; i++ {
+						r.Seasons = append(r.Seasons, i)
+					}
+					groupStart = max(groupStart, m.Index+end(s))
+				}
+			}
 		}
 
 		if m := input.first(episodeRange); m != nil {
@@ -642,6 +663,10 @@ func Parse(raw string, opts ...Option) (Release, error) {
 		} else if m := input.first(episodeDMY); m != nil {
 			date(m, input.group(m, 2), input.group(m, 1))
 		}
+	}
+
+	if len(r.Seasons) == 0 && r.Season != nil {
+		r.Seasons = []int{*r.Season}
 	}
 
 	rest := input.from(min(max(groupStart, titleEnd), len(input.units)))
@@ -751,7 +776,7 @@ func Parse(raw string, opts ...Option) (Release, error) {
 	if r.Type == "tvshow" {
 		if slices.Contains(r.Flags, "COLLECTION") {
 			r.Flags = slices.DeleteFunc(r.Flags, func(f string) bool { return f == "COLLECTION" })
-		} else if slices.Contains(r.Flags, "COMPLETE") {
+		} else if len(r.Seasons) > 0 && slices.Contains(r.Flags, "COMPLETE") {
 			r.Flags = slices.DeleteFunc(r.Flags, func(f string) bool { return f == "COMPLETE" })
 		}
 	}
