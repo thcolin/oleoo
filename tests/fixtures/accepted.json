@@ -152514,5 +152514,155 @@
     "title": "Kaamelott",
     "generated": "Kaamelott.S01.FRENCH.1080p.BLURAY.x264-GRP",
     "score": 5
+  },
+  "the_wire_s01-s05_1080p_bluray_x264": {
+    "original": "the_wire_s01-s05_1080p_bluray_x264",
+    "language": null,
+    "languages": [],
+    "source": "BLURAY",
+    "encoding": "x264",
+    "resolution": "1080p",
+    "dub": null,
+    "year": null,
+    "flags": [],
+    "season": 1,
+    "seasons": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "episode": null,
+    "episodes": [],
+    "type": "tvshow",
+    "group": null,
+    "title": "The Wire",
+    "generated": "The.Wire.S01.1080p.BLURAY.x264-NOTEAM",
+    "score": 3
+  },
+  "kaamelott_saison_2_FRENCH_1080p_BluRay_x264-GRP": {
+    "original": "kaamelott_saison_2_FRENCH_1080p_BluRay_x264-GRP",
+    "language": "FRENCH",
+    "languages": [
+      "FRENCH"
+    ],
+    "source": "BLURAY",
+    "encoding": "x264",
+    "resolution": "1080p",
+    "dub": null,
+    "year": null,
+    "flags": [],
+    "season": 2,
+    "seasons": [
+      2
+    ],
+    "episode": null,
+    "episodes": [],
+    "type": "tvshow",
+    "group": "GRP",
+    "title": "Kaamelott",
+    "generated": "Kaamelott.S02.FRENCH.1080p.BLURAY.x264-GRP",
+    "score": 5
+  },
+  "breaking_bad_s01e01_720p_bluray_x264-demand": {
+    "original": "breaking_bad_s01e01_720p_bluray_x264-demand",
+    "language": null,
+    "languages": [],
+    "source": "BLURAY",
+    "encoding": "x264",
+    "resolution": "720p",
+    "dub": null,
+    "year": null,
+    "flags": [],
+    "season": 1,
+    "seasons": [
+      1
+    ],
+    "episode": "01",
+    "episodes": [
+      1
+    ],
+    "type": "tvshow",
+    "group": "demand",
+    "title": "Breaking Bad",
+    "generated": "Breaking.Bad.S01E01.720p.BLURAY.x264-demand",
+    "score": 4
+  },
+  "the_office_us_s02_1080p_WEB_x264": {
+    "original": "the_office_us_s02_1080p_WEB_x264",
+    "language": null,
+    "languages": [],
+    "source": "WEB-DL",
+    "encoding": "x264",
+    "resolution": "1080p",
+    "dub": null,
+    "year": null,
+    "flags": [],
+    "season": 2,
+    "seasons": [
+      2
+    ],
+    "episode": null,
+    "episodes": [],
+    "type": "tvshow",
+    "group": null,
+    "title": "The Office Us",
+    "generated": "The.Office.Us.S02.1080p.WEB-DL.x264-NOTEAM",
+    "score": 3
+  },
+  "the_office_us_s04e01e02": {
+    "original": "the_office_us_s04e01e02",
+    "language": null,
+    "languages": [],
+    "source": null,
+    "encoding": null,
+    "resolution": null,
+    "dub": null,
+    "year": null,
+    "flags": [],
+    "season": 4,
+    "seasons": [
+      4
+    ],
+    "episode": "01-02",
+    "episodes": [
+      1,
+      2
+    ],
+    "type": "tvshow",
+    "group": null,
+    "title": "The Office Us",
+    "generated": "The.Office.Us.S04E01-E02-NOTEAM",
+    "score": 0
+  },
+  "the_office_us_s04e01-02_VOST-FR-EN_x265_720p": {
+    "original": "the_office_us_s04e01-02_VOST-FR-EN_x265_720p",
+    "language": "MULTi",
+    "languages": [
+      "MULTi",
+      "VOSTFR",
+      "ENGLiSH"
+    ],
+    "source": null,
+    "encoding": "x265",
+    "resolution": "720p",
+    "dub": null,
+    "year": null,
+    "flags": [],
+    "season": 4,
+    "seasons": [
+      4
+    ],
+    "episode": "01-02",
+    "episodes": [
+      1,
+      2
+    ],
+    "type": "tvshow",
+    "group": null,
+    "title": "The Office Us",
+    "generated": "The.Office.Us.S04E01-E02.MULTi.720p.x265-NOTEAM",
+    "score": 3
   }
 }

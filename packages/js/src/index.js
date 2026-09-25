@@ -108,7 +108,7 @@ const parse = (raw = '', options = {}) => {
   let match, matches, property, key, patterns, pattern
 
   // payload.type
-  if (match = input.match(/\WS(?:(?:eason|aison)s?[_\W])?\d{1,3}\W?(?:-?EP?\d+)*[e\.\-\s]/i)) {
+  if (match = input.match(/[_\W]S(?:(?:eason|aison)s?[_\W])?\d{1,3}\W?(?:-?EP?\d+)*[_e\.\-\s]/i)) {
     titleEndPosition = match.index
     groupStartPosition = match.index + match[0].length
     payload.type = 'tvshow'
@@ -344,7 +344,7 @@ const parse = (raw = '', options = {}) => {
 
   // payload.season, payload.episodes, payload.episode
   if (payload.type === 'tvshow') {
-    if (match = input.match(/\WS(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})[e\.\-\s]/i)) {
+    if (match = input.match(/[_\W]S(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})[_e\.\-\s]/i)) {
       payload.season = Number(match[1])
 
       if ((match.index + match[0].length) > groupStartPosition) {
@@ -352,7 +352,7 @@ const parse = (raw = '', options = {}) => {
       }
 
       // A range of seasons ("S01-S10", "S01-10", "Saison 1 à 5")
-      if ((matches = input.slice(match.index).match(/^\WS(?:(?:eason|aison)s?[_\W]?)?\d{1,3}(?:-S?|[\.\s]-[\.\s]?S|[\.\s](?:à|a|to)[\.\s]S?)(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})(?=[_\W]|$)/i)) && Number(matches[1]) > payload.season) {
+      if ((matches = input.slice(match.index).match(/^[_\W]S(?:(?:eason|aison)s?[_\W]?)?\d{1,3}(?:-S?|[\.\s]-[\.\s]?S|[\.\s](?:à|a|to)[\.\s]S?)(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})(?=[_\W]|$)/i)) && Number(matches[1]) > payload.season) {
         payload.seasons = Array.from({ length: Number(matches[1]) - payload.season + 1 }, (_, i) => payload.season + i)
 
         if ((match.index + matches[0].length) > groupStartPosition) {
