@@ -150,11 +150,13 @@ Three positions follow the parsing: `titleStart = 0`, `titleEnd = length(input)`
 
 Test these regexes on `input` in order, each case-insensitive; the first that matches sets `titleEnd = index`, `groupStart = end` (both assigned, not compared) and `type = "tvshow"`:
 
-1. `\WS(?:(?:eason|aison)s?[_\W])?\d{1,3}\W?(?:-?EP?\d+)*[e\.\-\s]`
+1. `[_\W]S(?:(?:eason|aison)s?[_\W])?\d{1,3}\W?(?:-?EP?\d+)*[_e\.\-\s]`
 2. `\W(?:-?EP?\d+)+(\W)?`
 3. `\W(\d{4}[_\W]\d{2}[_\W]\d{2}[_\W])(\W)?`
 4. `\W(\d{2}[_\W]\d{2}[_\W]\d{4}[_\W])(\W)?`
 5. `\W(?:(?:\d{1,2})x(?:\d{1,3}))+(\W)?`
+
+The first one takes `_` as a separator around the season: `the_office_us_s04e01-02` reads as `The.Office.US.S04E01-02`.
 
 None matches: `type = "movie"`.
 
@@ -215,7 +217,7 @@ Same loop as [Flags](#6-flags), on the keys that **are** in `ambiguous.flags`, w
 
 Only when `type = "tvshow"`. `pad2(n)` writes `n` in decimal on at least two digits.
 
-1. **Season.** First match of `\WS(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})[e\.\-\s]`, case-insensitive: `season = group1` as a number, `groupStart = max(groupStart, end)`. Then **a range of seasons**: test `^\WS(?:(?:eason|aison)s?[_\W]?)?\d{1,3}(?:-S?|[\.\s]-[\.\s]?S|[\.\s](?:à|a|to)[\.\s]S?)(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})(?=[_\W]|$)`, case-insensitive, on `input[index ..]`, `index` being the one of the season match. When it matches and its group 1 is greater than `season`: `seasons` = every number from `season` to group 1, `groupStart = max(groupStart, index + end)`. `S01-S10`, `S01-10`, `S01 - S13`, `S01 to S28`, `Season.1-4` and `Saison 1 à 5` are ranges; `S01 - 12` is not, the number after spaced dash may be an episode.
+1. **Season.** First match of `[_\W]S(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})[_e\.\-\s]`, case-insensitive: `season = group1` as a number, `groupStart = max(groupStart, end)`. Then **a range of seasons**: test `^[_\W]S(?:(?:eason|aison)s?[_\W]?)?\d{1,3}(?:-S?|[\.\s]-[\.\s]?S|[\.\s](?:à|a|to)[\.\s]S?)(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})(?=[_\W]|$)`, case-insensitive, on `input[index ..]`, `index` being the one of the season match. When it matches and its group 1 is greater than `season`: `seasons` = every number from `season` to group 1, `groupStart = max(groupStart, index + end)`. `S01-S10`, `S01-10`, `S01 - S13`, `S01 to S28`, `Season.1-4` and `Saison 1 à 5` are ranges; `S01 - 12` is not, the number after spaced dash may be an episode.
 2. **Episodes**, the first of these that matches, each case-insensitive:
    1. First match of `EP?(\d+)\-(\d+)`: when group 2 minus group 1 is 9999 or more, fail with `episodes <group1> to <group2>: more than 9999 episodes`; otherwise `episodes` = every number from group 1 to group 2, none when group 2 is lower (then `episode` is `""`), `groupStart = max(groupStart, end)`.
    2. Every match of `EP?(\d+)`: `episodes` = the group 1 of each, as numbers; `groupStart = max(groupStart, end of the last one)`.
@@ -341,7 +343,7 @@ Drop the empty parts, join with `.`, and append `-` + `group`, or `-NOTEAM` when
 
 | File | Content |
 |---|---|
-| `releases.txt` | one release name per line, 6812 lines of which 6708 are unique |
+| `releases.txt` | one release name per line, 6818 lines of which 6714 are unique |
 | `accepted.json` | `{ [name]: result }`, the results judged right |
 | `refused.json` | `{ [name]: result + comment }`, the results judged wrong, with what is wrong in `comment` |
 
