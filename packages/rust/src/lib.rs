@@ -228,7 +228,7 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
     };
 
     for pattern in [
-        r"\WS(?:(?:eason|aison)s?[_\W])?\d{1,3}\W?(?:-?EP?\d+)*[e\.\-\s]",
+        r"[_\W]S(?:(?:eason|aison)s?[_\W])?\d{1,3}\W?(?:-?EP?\d+)*[_e\.\-\s]",
         r"\W(?:-?EP?\d+)+(\W)?",
         r"\W(\d{4}[_\W]\d{2}[_\W]\d{2}[_\W])(\W)?",
         r"\W(\d{2}[_\W]\d{2}[_\W]\d{4}[_\W])(\W)?",
@@ -363,7 +363,7 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
 
     if release.kind == Kind::Tvshow {
         if let Some(season) =
-            regex(r"\WS(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})[e\.\-\s]", true)?.captures(input)?
+            regex(r"[_\W]S(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})[_e\.\-\s]", true)?.captures(input)?
         {
             let (start, from) = (
                 season.get(0).unwrap().start(),
@@ -373,7 +373,7 @@ pub fn parse(raw: &str, options: &Options) -> Result<Release, Error> {
             at.reach(season.get(0).unwrap().end());
 
             if let Some(range) = regex(
-                r"^\WS(?:(?:eason|aison)s?[_\W]?)?\d{1,3}(?:-S?|[\.\s]-[\.\s]?S|[\.\s](?:à|a|to)[\.\s]S?)(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})(?=[_\W]|$)",
+                r"^[_\W]S(?:(?:eason|aison)s?[_\W]?)?\d{1,3}(?:-S?|[\.\s]-[\.\s]?S|[\.\s](?:à|a|to)[\.\s]S?)(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})(?=[_\W]|$)",
                 true,
             )?
             .captures(&input[start..])?
