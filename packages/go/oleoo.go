@@ -314,7 +314,7 @@ var (
 	extensions = must(`\.(`+strings.Join(rules.Extensions, "|")+`)(\W.*)?$`, ci)
 
 	tvshow = []*regexp2.Regexp{
-		must(`\WS(?:(?:eason|aison)s?[_\W])?\d{1,3}\W?(?:-?EP?\d+)*[e\.\-\s]`, ci),
+		must(`[_\W]S(?:(?:eason|aison)s?[_\W])?\d{1,3}\W?(?:-?EP?\d+)*[_e\.\-\s]`, ci),
 		must(`\W(?:-?EP?\d+)+(\W)?`, ci),
 		must(`\W(\d{4}[_\W]\d{2}[_\W]\d{2}[_\W])(\W)?`, ci),
 		must(`\W(\d{2}[_\W]\d{2}[_\W]\d{4}[_\W])(\W)?`, ci),
@@ -326,8 +326,8 @@ var (
 	yearSingle = must(`[_\W](\d{4})(?![_\W]\d{2}[_\W]\d{2})`, regexp2.ECMAScript)
 	endsInDate = must(`\d{2}[_\W]\d{2}$`, regexp2.ECMAScript|regexp2.RightToLeft)
 
-	season        = must(`\WS(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})[e\.\-\s]`, ci)
-	seasonRange   = must(`^\WS(?:(?:eason|aison)s?[_\W]?)?\d{1,3}(?:-S?|[\.\s]-[\.\s]?S|[\.\s](?:à|a|to)[\.\s]S?)(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})(?=[_\W]|$)`, ci)
+	season        = must(`[_\W]S(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})[_e\.\-\s]`, ci)
+	seasonRange   = must(`^[_\W]S(?:(?:eason|aison)s?[_\W]?)?\d{1,3}(?:-S?|[\.\s]-[\.\s]?S|[\.\s](?:à|a|to)[\.\s]S?)(?:(?:eason|aison)s?[_\W]?)?(\d{1,3})(?=[_\W]|$)`, ci)
 	episodeRange  = must(`EP?(\d+)\-(\d+)`, ci)
 	episodeSingle = must(`EP?(\d+)`, ci)
 	episodeCross  = must(`\W?(?:(\d{1,2})x(\d{1,3}))+(\W)?`, ci)
